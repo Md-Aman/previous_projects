@@ -1,0 +1,277 @@
+<div class="flex-table">
+	<div class="custom-slider">
+		<ng-template #prevTemplate>
+		<span class="tab-left"></span>
+		</ng-template>
+		<ng-template #nextTemplate>
+		<span class="tab-right"></span>
+		</ng-template>
+	
+		<div class="tabbed"
+		ng2-carouselamos
+		[items]="listOfItems"
+		[$item]="itemTemplate"
+		[$prev]="prevTemplate"
+		[$next]="nextTemplate"
+		(onSelectedItem)="$event.item; $event.index"></div>
+		<!-- (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index" -->
+		<ng-template let-item let-i="index" #itemTemplate>
+			<p [ngClass]="{ active : bookingType == item.info }" (click)="showIt(item.info)">{{item.name}}</p>
+		</ng-template>
+	<!-- <ul class="tabbed subSet">
+		<li [ngClass]="{ active : bookingType == 'bookingInformation' }" (click)="showIt('bookingInformation')">Booking Information</li>
+		<li [ngClass]="{ active : bookingType == 'companyInformation' }" (click)="showIt('companyInformation')">Company Information</li>
+		<li [ngClass]="{ active : bookingType == 'destination' }" (click)="showIt('destination')">Destination</li>
+		<li [ngClass]="{ active : bookingType == 'cargoInformation' }" (click)="showIt('cargoInformation')">Cargo Information</li>
+		<li [ngClass]="{ active : bookingType == 'documenttationSubmission' }" (click)="showIt('documenttationSubmission')">Documentation Submission Tracking</li>
+		<li [ngClass]="{ active : bookingType == 'custom' }" (click)="showIt('custom')">Custom</li>
+		<li [ngClass]="{ active : bookingType == 'status' }" (click)="showIt('status')">Status</li>
+	</ul> -->
+	</div>
+	<table width="100%" onload="fixedcol()" [mfData]="tableList" #mf="mfDataTable" [mfRowsOnPage]="3">
+		<thead>
+			<tr>
+				<th><input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll($event);"></th>
+				<th>Order ID</th>
+				<ng-container *ngIf="bookingType == 'bookingInformation'">
+					<th>Booking Date</th>
+					<th>Time of Booking Confirmation</th>
+					<th>Container</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'companyInformation'">
+					<th>Company Name</th>
+					<th>Email</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'destination'">
+					<th>ETD</th>
+					<th>ETA</th>
+					<th>Departure Port/Terminal</th>
+					<th>Arrival Port/Terminal</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'cargoInformation'">
+					<th>Cargo Packed</th>
+					<th>Weight</th>
+					<th>CBM</th>
+					<th>Tracking Number</th>
+					<th>HS Code</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'documenttationSubmission'">
+					<th>Declaration Form</th>
+					<th>Buyer Document</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'custom'">
+					<th>Merchant Value</th>
+					<th>Commercial Invoice Value</th>
+					<th>Duties & Taxes ($)</th>
+					<th>Status</th>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'status'">
+					<th>Cargo Status</th>
+					<th>Custom Status</th>
+					<th>Payment Status</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<!-- (click)="updateSelection(index, rawJsonOrdersDetails);" -->
+		<tbody *ngIf="hasBooking">
+			<tr *ngFor="let orders of rawJsonOrdersDetails; let index = index">
+				<td header-class="ng-table-fixedcolumn">
+					<input type="checkbox" 
+					[disabled]="isChecked"
+					[(ngModel)]="orders.checked" 
+					(click)="updateSelection(index, rawJsonOrdersDetails);"
+					(click)="getOrderIdAndButtonCode($event,orders.order_id,orders.cargo_status_code,orders.button_code);">
+				</td>
+				<td header-class="ng-table-fixedcolumn">{{orders.order_id}}</td>
+				<ng-container *ngIf="bookingType == 'bookingInformation'">				
+					<td>{{orders.bookingDate}}</td>
+					<td>{{orders.confirmDate}}</td>
+					<td header-class="ng-table-fixedcolumn">
+						<span *ngIf="orders.container_no > 0">{{orders.container_no}}</span>
+					</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'companyInformation'">
+					<td header-class="ng-table-fixedcolumn">{{orders.consignor_company_name}}</td>
+					<td header-class="ng-table-fixedcolumn">{{orders.consignor_email}}</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'destination'">
+					<td>{{orders.ETD}}</td>
+					<td>{{orders.ETA}}</td>
+					<td>{{orders.portFrom}}</td>
+					<td>{{orders.portTo}}</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'cargoInformation'">
+					<td>&nbsp;</td>
+					<td>{{orders.weight}}</td>
+					<td>{{orders.cbm}}</td>
+					<td>{{orders.tracking_number}}</td>
+					<td>{{orders.hs_code}}</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'documenttationSubmission'">
+					<td>
+						<select><option value="0">Action</option></select>
+					</td>
+					<td>
+						<select><option value="0">Action</option></select>
+					</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'custom'">
+					<td>{{orders.merchant_value}}</td>
+					<td>{{orders.commercial_value}}</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</ng-container>
+				<ng-container *ngIf="bookingType == 'status'">
+					<td>{{orders.cargo_status_description}}</td>
+					<td>{{orders.custom_status_description}}</td>
+					<td>{{orders.payment_status_description}}</td>
+				</ng-container>
+			</tr>
+		</tbody>
+		<tbody *ngIf="!hasBooking">
+            <tr header-class="ng-table-fixedcolumn" nowrap>
+				<td colspan="7">{{failure_message}}</td>
+			</tr>
+        </tbody>
+	</table>
+</div>
+
+
+<!-- <div class="row pos-rel">
+	<div class="col-md-12" class="table-style">
+		<div>
+			<div class="ng-table-scrollcontainer">
+				<table onload="fixedcol()" class="table table-striped table-hover table-bordered " [mfData]="tableList" #mf="mfDataTable"
+				 [mfRowsOnPage]="3">
+				 <thead>
+						<tr>
+							<th class="booking-information" colspan="6">Booking Information</th>
+							<th class="booking" colspan="2"></th>
+							<th class="destination" colspan="5">Destination</th>
+							<th class="information" colspan="4" nowrap>Cargo Information </th>
+							<th class="declaration" colspan="2" nowrap>Declaration of Cargo Value </th>
+							<th class="status" colspan="3" nowrap> Status </th>
+							<th class="documentation" colspan="2" nowrap> Documentation Submission Tracking </th>
+							<th class="custom" colspan="2" nowrap> Custom </th>
+						</tr>
+						<tr>
+							<th class="ng-table-fixedcolumn1">
+							</th>
+							<th class="ng-table-fixedcolumn" by="name" nowrap>
+								Company Name
+							</th>
+							<th class="ng-table-fixedcolumn2" by="email">
+								Email
+							</th>
+							<th class="ng-table-fixedcolumn3" by="order" nowrap>
+								Order ID
+							</th>
+							<th class="ng-table-fixedcolumn4" by="container">
+								Container
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="b_date">Booking Date</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="confirm">Time of Booking Confirmation</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="etd">ETD</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="eta">ETA</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="depart">Departure Port/Terminal</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="arrive">Arrival Port/Terminal</mfDefaultSorter>
+							</th>
+							<th colspan="1">
+								<mfDefaultSorter by="hs">HS Code</mfDefaultSorter>
+							</th>
+
+							<th nowrap>
+								Cargo Packed
+							</th>
+							<th>
+								Weight
+							</th>
+							<th>
+								CBM
+							</th>
+							<th nowrap>
+								Tracking Number
+							</th>
+							<th nowrap>
+								Merchant Value
+							</th>
+							<th nowrap>
+								Commercial Invoice Value
+							</th>
+							<th nowrap>
+								Booking Status
+							</th>
+							<th nowrap>
+								Cargo Tracking Status
+							</th>
+							<th nowrap>
+								Final Payment Amount
+							</th>
+							<th nowrap>
+								Declaration Form
+							</th>
+							<th nowrap>
+								Buyer Document
+							</th>
+							<th nowrap>
+								Duties & Taxes ($)
+							</th>
+							<th nowrap>
+								Status
+							</th>
+
+					</thead>
+					<tbody *ngIf="hasBooking">
+						<tr *ngFor="let orders of rawJsonOrdersDetails; let index = index">
+							<td class="ng-table-fixedcolumn1" header-class="ng-table-fixedcolumn">
+								<input type="checkbox" style="margin-top: 2px;" [(ngModel)]="orders.checked" (click)="updateSelection(index, rawJsonOrdersDetails);" (click)="getOrderIdAndButtonCode($event,orders.order_id,orders.cargo_status_code,orders.button_code, orders.container_id);">
+							</td>
+							<td class="ng-table-fixedcolumn" header-class="ng-table-fixedcolumn" nowrap>{{orders.consignor_company_name}} </td>
+							<td class="ng-table-fixedcolumn2" header-class="ng-table-fixedcolumn">{{orders.consignor_email}} </td>
+							<td class="ng-table-fixedcolumn3" header-class="ng-table-fixedcolumn">{{orders.order_id}}</td>
+							<td class="ng-table-fixedcolumn4" header-class="ng-table-fixedcolumn">{{orders.container_no}} </td>
+							<td>{{orders.bookingDate}}</td>
+							<td>{{orders.confirmDate}}</td>
+							<td>{{orders.ETD}}</td>
+							<td>{{orders.ETA}}</td>
+							<td nowrap>{{orders.portFrom}}</td>
+							<td nowrap>{{orders.portTo}}</td>
+							<td>{{orders.hs_code}}</td>
+							<td>Lorem</td>
+							<td>{{orders.weight}}</td>
+							<td>{{orders.cbm}}</td>
+							<td>{{orders.tracking_number}}</td>
+							<td>{{orders.merchant_value}}</td>
+							<td>{{orders.commercial_value}}</td>
+							<td nowrap>{{orders.status_description}}</td>
+							<td></td>
+							<td></td>
+							<td><select>
+								<option value="0">Action</option>
+							</select></td>
+							<td><select>
+								<option value="0">Action</option>
+							</select></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+					<tbody *ngIf="!hasBooking">
+                <tr style="font-size: 14px; border: none; background: none;" class="ng-table-fixedcolumn" header-class="ng-table-fixedcolumn" nowrap>{{failure_message}}</tr>
+            </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div> -->

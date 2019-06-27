@@ -1,0 +1,51 @@
+<div class="centeredLayout" [ngClass]="{'material-popup': updateProfile} ">
+
+<form [formGroup]="userFormGroup" (submit)="submit(userFormGroup.value)">
+  <div class="accord relative">
+    <span>User Information</span>
+    <i class="arrowUp"></i>
+    
+    <!-- <div class="upload-btn-wrapper pull-right">
+      <img class="img" *ngIf="!userDetails.image" src="https://image.flaticon.com/icons/png/128/126/126477.png"/>
+      <img class="img" *ngIf="userDetails.image" [src]="userDetails.image"/>
+      <input formControlName="image"
+         type="file"
+         accept="image/*"
+         (change)="fileChange($event)">
+    </div> -->
+  </div>
+  <div class="accord-content">
+    <div class="row">
+        <div class="form-group col-md-4">
+          <label>First Name</label>
+          <input type="text" formControlName="firstname" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastname" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+          <label>Mobile</label>
+            <int-phone-prefix [defaultCountry]="'gb'" formControlName="mobile_number"></int-phone-prefix>
+        </div>
+        <div class="form-group col-md-4" *ngIf="passwordField">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control">
+        </div>
+    </div>
+  </div>
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <a class="prev" routerLink="/secure/user/rpstaff">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+</form>
+</div>
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>

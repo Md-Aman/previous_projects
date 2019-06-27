@@ -1,0 +1,125 @@
+.dashboard-layout { background: #fff;}
+.dashboard-layout h2 { padding: 30px; color: #333333; font-size: 20px; font-weight: 400; margin: 0; text-transform: capitalize;}
+.dashboard-layout .content-area { background: #F8F9FC; padding: 30px;}
+.dashboard-layout .search-area { margin-bottom: 20px;}
+.dashboard-layout .search-area span { font-size: 14px; color: #333333; font-weight: 400; margin-right: 5px;}
+.dashboard-layout .search-area .btn-search { display: inline-block; text-align: center; background: #F58220; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #ffffff; cursor: pointer; margin-left: 5px; border: 1px solid #F58220; padding: 0 10px; }
+.dashboard-layout .content-area .material-table { border: 1px solid #E1E1E1; }
+
+.mat-header-row {
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(224,224,225,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e1', GradientType=0 );}
+
+:host >>> .mat-form-field-wrapper { border: 1px solid #E1E1E1; padding: 0; background: #fff; top: 1px; height: 38px;}
+:host >>> .mat-form-field-subscript-wrapper { display: none; }
+:host >>> .mat-form-field-underline { display: none; }
+:host >>> .mat-form-field-label-wrapper { display: none; }
+:host >>> .mat-form-field-infix { padding: 0; }
+:host >>> input.mat-input-element { margin: 0; padding: 0 10px; }
+:host >>> .mat-sort-header-button { font-size: 14px; color: #333; font-weight: 400; }
+
+.mat-row { border: 0; }
+.mat-cell, .mat-header-cell { padding: 10px; }
+.mat-row.ng-star-inserted:nth-child(even) { background: #eaf1f8; }
+
+
+.mat-column-hs_code_header {
+
+    flex: 0 0 100px;
+}
+.mat-column-gst_percentage {
+
+    flex: 0 0 60px;
+}
+.mat-column-description {
+
+    flex: 0 0 450px;
+}
+
+.ng-table-scrollcontainer {   
+    overflow-x:scroll; 
+    margin-left:60%; 
+    overflow-y:visible;
+}
+.booking-information{
+    position:absolute;
+    background-color: #97BD87;
+    color: white;
+    left:1em;
+    width: 59.4%;
+    text-align: center;
+}
+.booking {
+    background-color: #97BD87;
+    color: white;
+}
+.destination {
+    background-color: #8792BD;
+    color: white;
+    height: 43%;
+    text-align: center;
+
+}
+.table-style{
+    font-size: 12px;
+    font-family:  sans-serif;
+} 
+.information {
+    background-color: #BD8787;
+    color: white;
+    text-align: center;
+}
+.declaration{
+    background-color: grey;
+    color: white;
+    text-align: center;
+}
+
+.status{
+    background-color: #BD8787;
+    color: white;
+    text-align: center;
+}
+.documentation{
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+.ng-table-fixedcolumn {
+    position:absolute; 
+    width:11.6%; 
+    left:4%;
+    top:auto;
+    height: auto;
+}
+.ng-table-fixedcolumn1 {
+    position:absolute; 
+    width: 2.9%;
+    height: 15.75%;
+    left:1em;
+    top:auto;
+}
+.ng-table-fixedcolumn2 {
+    position:absolute; 
+    width:15%; 
+    left:15.5%;
+    top:auto;
+}
+.ng-table-fixedcolumn3 {
+    position:absolute; 
+    width:20.5%; 
+    left:30.5%;
+    top:auto;
+}
+.ng-table-fixedcolumn4 {
+    position:absolute; 
+    width:9.6%; 
+    left:50.9%;
+    top:auto;
+}

@@ -1,0 +1,176 @@
+<ul class="menu left">
+  <!-- <li *ngIf="checkSecurity('mytravel', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'mytravel' }" (click)="getToggleSubMenus('mytravel')">
+    <a>My Travel</a>
+  </li> -->
+  <!-- <li *ngIf="checkSecurity('trackmanage', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'trackmanage' }" (click)="getToggleSubMenus('trackmanage')">
+    <a>Track & Connect</a>
+  </li> -->
+  <li *ngIf="checkSecurity('manageclient', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'manage_client' }" (click)="getToggleSubMenus('manage_client')">
+      <a>Manage Clients</a>
+    </li>
+  <li *ngIf="checkSecurity('userinformation', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'user_information' }" (click)="getToggleSubMenus('user_information')">
+    <a>User Information</a>
+  </li>
+  <!-- <li *ngIf="checkSecurity('managesystem', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'customise' }" (click)="getToggleSubMenus('customise')">
+    <a>Customise</a>
+  </li> -->
+
+  <li *ngIf="checkSecurity('managesystem', 'parentId') || checkSecurity('mytravel', 'parentId')" [ngClass]="{'active': toggleSubMenus == 'manage_riskpal' }"
+    (click)="getToggleSubMenus('manage_riskpal')">
+    <a>Manage RiskPal</a>
+  </li>
+  <!-- <li *ngIf="checkSecurity('managesystem', 'csuppliers') || checkSecurity('mytravel', 'suppliers')" [ngClass]="{'active': toggleSubMenus == 'suppliers' }"
+          (click)="getToggleSubMenus('suppliers')"><a >Suppliers</a></li> -->
+  <!-- <li><a href="#">Accidents/Incidents</a></li>
+      <li><a href="#">Analaytics</a></li>
+      <li><a href="#">Faq's</a></li> -->
+</ul>
+<ul class="left" [ngClass]="{'subMenu': toggleSubMenus }">
+
+
+  <ng-container *ngIf="toggleSubMenus == 'trackmanage'">
+    <!-- <li *ngIf="checkSecurity('trackmanage', 'currenttravel')"
+                  [ngClass]="{'active': toggleChildSubMenu == 'childlivera' }"
+                  (click)="getToggleSubMenus('trackmanage', 'childlivera');parentToggleMenu(false);" >Live Risk Assessments</li> -->
+    <li *ngIf="checkSecurity('trackmanage', 'riskassessments')" [ngClass]="{'active': toggleChildSubMenu == 'childpendingra' }"
+      (click)="getToggleSubMenus('trackmanage', 'childpendingra');parentToggleMenu(false);" routerLink="/secure/ra/pending">Pending Risk Assessments</li>
+    <!-- <li *ngIf="checkSecurity('trackmanage', 'riskassessmentsoverride')"
+                  [ngClass]="{'active': toggleChildSubMenu == 'childoverridera' }"
+                  (click)="getToggleSubMenus('trackmanage', 'childoverridera');parentToggleMenu(false);" >Override Risk Assessments</li> -->
+  </ng-container>
+  <ng-container *ngIf="toggleSubMenus == 'mytravel'">
+    <li *ngIf="checkSecurity('mytravel', 'riskassessment')" [ngClass]="{'active': toggleChildSubMenu == 'childra' }" (click)="getToggleSubMenus('mytravel', 'childra')">Risk Assessments</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleSubMenus == 'user_information'">
+    <li *ngIf="checkSecurity('userinformation', 'createeditusers')" [ngClass]="{'active': toggleChildSubMenu == 'childUser' }"
+      (click)="getToggleSubMenus('user_information', 'childUser')">Manage Users</li>
+    <li *ngIf="checkSecurity('userinformation', 'editusergroup')" [ngClass]="{'active': toggleChildSubMenu == 'childUserGroup' }"
+      (click)="getToggleSubMenus('user_information', 'childUserGroup')">User Groups</li>
+    <li *ngIf="checkSecurity('userinformation', 'rpstaff')" [ngClass]="{'active': toggleChildSubMenu == 'childrpstaff' }" (click)="getToggleSubMenus('user_information', 'childrpstaff')">RPStaff</li>
+  </ng-container>
+
+  <!-- <ng-container *ngIf="toggleSubMenus == 'customise'">
+              <li *ngIf="checkSecurity('managesystem', 'riskassessmenttemplates')"
+                  [ngClass]="{'active': toggleChildSubMenu == 'childRaTemplate' }"
+                  (click)="getToggleSubMenus('customise', 'childRaTemplate')">
+                  <a >Manage Risk Assessments Template</a>
+              </li>
+        </ng-container> -->
+
+  <ng-container *ngIf="toggleSubMenus == 'manage_client'">
+    <li *ngIf="checkSecurity('manageclient', 'createclient')" [ngClass]="{'active': toggleChildSubMenu == 'childClientNew' }"
+      (click)="parentToggleMenu(false);getToggleSubMenus('manage_client', 'childClientNew')" routerLink="/secure/client/create">Create New Client</li>
+    <li *ngIf="checkSecurity('manageclient', 'listclient')" [ngClass]="{'active': toggleChildSubMenu == 'childClient' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_client', 'childClient')"
+      routerLink="/secure/client">Client List</li>
+    <li *ngIf="checkSecurity('managesystem', 'departments')" [ngClass]="{'active': toggleChildSubMenu == 'childDepartment' }"
+      (click)="getToggleSubMenus('manage_client', 'childDepartment')">Departments</li>
+    <li *ngIf="checkSecurity('managesystem', 'managesector')" [ngClass]="{'active': toggleChildSubMenu == 'childSector' }" (click)="getToggleSubMenus('manage_client', 'childSector')">Sectors</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleSubMenus == 'manage_riskpal'">
+    <li *ngIf="checkSecurity('mytravel', 'countrylist') || checkSecurity('managesystem', 'countryinfo')" [ngClass]="{'active': toggleChildSubMenu == 'childCountry' }"
+      (click)="getToggleSubMenus('manage_riskpal', 'childCountry')">
+      Country Information</li>
+    <li *ngIf="checkSecurity('managesystem', 'riskassessmenttemplates')" [ngClass]="{'active': toggleChildSubMenu == 'childRaTemplate' }"
+      (click)="getToggleSubMenus('manage_riskpal', 'childRaTemplate')">
+      Risk Assessment Templates
+    </li>
+    <li *ngIf="checkSecurity('managesystem', 'risklabels')" [ngClass]="{'active': toggleChildSubMenu == 'childRiskLabel' }" (click)="getToggleSubMenus('manage_riskpal', 'childRiskLabel')">Risk Labels/Questions</li>
+    <!-- <li
+                  *ngIf="checkSecurity('managesystem', 'risklabels')"
+                  [ngClass]="{'active': toggleChildSubMenu == 'childRiskQuestion' }"
+                  (click)="getToggleSubMenus('manage_riskpal', 'childRiskQuestion')" >Manage Risk Questions</li> -->
+    <li *ngIf="checkSecurity('managesystem', 'csuppliers') || checkSecurity('mytravel', 'suppliers')" [ngClass]="{'active': toggleChildSubMenu == 'childSuppliers' }"
+      (click)="getToggleSubMenus('manage_riskpal', 'childSuppliers')">Suppliers</li>
+    <li *ngIf="currentUser.super_admin" [ngClass]="{'active': toggleChildSubMenu == 'childemail-template' }" (click)="getToggleSubMenus('manage_riskpal', 'childemail-template')">
+      Content</li>
+  </ng-container>
+
+
+</ul>
+<ul class=" left" [ngClass]="{'subMenu': toggleChildSubMenu }">
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childra'">
+    <li *ngIf="checkSecurity('mytravel', 'riskassessment')" [ngClass]="{'active': toggleChildSubMenuSelected == 'raCreate' }"
+      (click)="parentToggleMenu(false);getToggleSubMenus('mytravel', 'childra', 'raCreate');createRiskAssessment()" routerLink="/secure/ra/create/ra-details">Create Risk Assessment</li>
+    <li *ngIf="checkSecurity('mytravel', 'riskassessment')" [ngClass]="{'active': toggleChildSubMenuSelected == 'raList' }" (click)="parentToggleMenu(false);getToggleSubMenus('mytravel', 'childra', 'raList')"
+      routerLink="/secure/ra/list">View Risk Assessment</li>
+  </ng-container>
+
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childCountry'">
+    <li *ngIf="checkSecurity('managesystem', 'countryinfo') || checkSecurity('mytravel', 'countrylist')" [ngClass]="{'active': toggleChildSubMenuSelected == 'countryList' }"
+      (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childCountry', 'countryList')" routerLink="/secure/manage-riskpal/country/list">Country List</li>
+    <li *ngIf="checkSecurity('managesystem', 'countrythreatcategories')" [ngClass]="{'active': toggleChildSubMenuSelected == 'categoryList' }"
+      (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childCountry', 'categoryList')" routerLink="/secure/manage-riskpal/category/list">Threat Categories</li>
+  </ng-container>
+  <ng-container *ngIf="toggleChildSubMenu == 'childemail-template'">
+
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'email-templateList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childemail-template', 'email-templateList')"
+      routerLink="/secure/manage-riskpal/email-template/list">Email Templates</li>
+  </ng-container>
+  <!-- <ng-container *ngIf="toggleChildSubMenu == 'childRiskQuestion'">
+          <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createRiskQuestion' }"
+               (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskQuestion', 'createRiskQuestion')"
+               routerLink="/secure/manage-riskpal/question/create/true">Create new Risk Question</li>
+          <li [ngClass]="{'active': toggleChildSubMenuSelected == 'riskQuestionList' }"
+              (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskQuestion', 'riskQuestionList')"
+              routerLink="/secure/manage-riskpal/question/list">Risk Question list</li>
+      </ng-container> -->
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childRiskLabel'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createRiskLabel' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskLabel', 'createRiskLabel')"
+      routerLink="/secure/manage-riskpal/risk-label/create/true">Create New Risk Label</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'riskLabelList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskLabel', 'riskLabelList')"
+      routerLink="/secure/manage-riskpal/risk-label/list">Risk Label List</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createRiskQuestion' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskLabel', 'createRiskQuestion')"
+      routerLink="/secure/manage-riskpal/question/create/true">Create New Risk Question</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'riskQuestionList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childRiskLabel', 'riskQuestionList')"
+      routerLink="/secure/manage-riskpal/question/list">Question List</li>
+  </ng-container>
+  <ng-container *ngIf="toggleChildSubMenu == 'childSuppliers'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createSupplier' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childSuppliers', 'createSupplier'); createSupplier()">Create New Supplier</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'supplierList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_riskpal', 'childSuppliers', 'supplierList') "
+      routerLink="/secure/supplier/list">Supplier List</li>
+  </ng-container>
+  <ng-container *ngIf="toggleChildSubMenu == 'childSector'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createSector' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_client', 'childSector', 'createSector')"
+      routerLink="/secure/manage-riskpal/sector/create">Create New Sector</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'sectorList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_client', 'childSector', 'sectorList')"
+      routerLink="/secure/manage-riskpal/sector/list">Sector List</li>
+  </ng-container>
+  
+  <ng-container *ngIf="toggleChildSubMenu == 'childUser'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createUser' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childUser', 'createUser')"
+      routerLink="/secure/user/create">Create New User</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'userList' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childUser', 'userList')"
+      routerLink="/secure/user">User List</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childUserGroup'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createUserGroup' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childUserGroup', 'createUserGroup')"
+      routerLink="/secure/user/group/create/true">Create New User Group</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'userGroupList' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childUserGroup', 'userGroupList')"
+      routerLink="/secure/user/group">User Group List</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childrpstaff'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'createrpstaff' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childrpstaff', 'createrpstaff')"
+      routerLink="/secure/user/rpstaff/create">Create New RPStaff</li>
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'rpstaffList' }" (click)="parentToggleMenu(false);getToggleSubMenus('user_information', 'childrpstaff', 'rpstaffList')"
+      routerLink="/secure/user/rpstaff">RPStaff List</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childDepartment'">
+    <li [ngClass]="{'active': toggleChildSubMenuSelected == 'departmentList' }" (click)="parentToggleMenu(false);getToggleSubMenus('manage_client', 'childDepartment', 'departmentList')"
+      routerLink="/secure/department">Manage Departments</li>
+  </ng-container>
+
+  <ng-container *ngIf="toggleChildSubMenu == 'childRaTemplate'">
+    <li (click)="parentToggleMenu(false); createRATemplate();getToggleSubMenus('manage_riskpal', 'childRaTemplate', 'raTemplateCreate')"
+      [ngClass]="{'active': toggleChildSubMenuSelected == 'raTemplateCreate' }" routerLink="/secure/ra-template/create/template-details">Create New Template</li>
+    <li (click)="parentToggleMenu(false); getToggleSubMenus('manage_riskpal', 'childRaTemplate', 'raTemplateList')" [ngClass]="{'active': toggleChildSubMenuSelected == 'raTemplateList' }"
+      routerLink="/secure/ra-template/list">Template List</li>
+  </ng-container>
+</ul>

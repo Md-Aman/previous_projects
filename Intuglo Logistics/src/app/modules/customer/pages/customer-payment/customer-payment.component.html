@@ -1,0 +1,17 @@
+<!-- This is header / nav bar  -->
+<customer-dashboard-navbar (controlSideBar)="receiveDataFromHeader($event)"></customer-dashboard-navbar>
+
+<!-- Container for sidebar(s) + page content -->
+<ng-sidebar-container class="ng-container bg-color">
+    <!-- A sidebar -->
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <customer-left-menu [sideBar]="isSideBarOpen" [fromPayment]='isOpen'></customer-left-menu>
+    </ng-sidebar>
+
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>Payment</h2>
+        <div class="content-area">
+            <customer-payment-template></customer-payment-template>
+        </div>
+    </div>
+</ng-sidebar-container>

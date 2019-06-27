@@ -1,0 +1,36 @@
+.tabs {
+  position: relative;
+top: 14px;
+  .tab {
+    &._m-country {
+      font-size: 12px;
+      margin: 0px 20px 0px 0;
+    }
+  }
+}
+.filterBy {
+  > * {
+    height: 27px;
+  }
+  grid-template-columns: 1fr 222px;
+  ._search {
+    padding: 9px 64px 9px 20px;
+  }
+}
+
+.filterBy 
+{
+  .relative {
+    .icon-position{
+      background: url(/assets/images/icon-search.svg) right 15px center no-repeat #fff;
+      background-size: 15px;
+      width: 32px;
+      height: 25px;
+      position: absolute;
+      top: 5px;
+      right: 2px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
+}

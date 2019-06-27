@@ -1,0 +1,191 @@
+<!-- local numbers -->
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<form [formGroup]="communicationForm" (submit)="submitForm(communicationForm.value)">
+  <div class="accord relative">
+    <span>Team Contacts</span>
+    <i class="arrowUp"></i>
+  </div>
+  <div class="accord-content" formArrayName="localNumber">
+
+    <ng-container *ngFor="let local of communicationForm.get('localNumber')['controls']; let i=index">
+      <ng-container [formGroupName]="i">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>Name</label>
+            <input type="text" formControlName="localName" class="form-control">
+          </div>
+          <div class="form-group col-md-3" [customErrorMessages]="customErrorMessages">
+            <label>Local Telephone</label>
+            <int-phone-prefix *ngIf="!isLocalTelephone" [defaultCountry]="country" formControlName="localTelephone"></int-phone-prefix>
+            <int-phone-prefix *ngIf="isLocalTelephone" formControlName="localTelephone"></int-phone-prefix>
+          </div>
+          <div class="form-group col-md-4">
+            <label>IMEI</label>
+            <input type="number" class="form-control" formControlName="imei">
+          </div>
+          <div class="form-group col-md-1">
+            <label></label>
+            <button *ngIf="communicationForm.get('localNumber')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin pull-right"
+              (click)="deleteLocalNumberRow(i)">
+              <i class="fa fa-remove" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </ng-container>
+    </ng-container>
+
+    <div class="row col-md-12">
+      <div class="_table no-border-margin" *ngIf="!maxLocalNumberLimitReached">
+        <div class="createNew" (click)="addLocalNumber()">
+          <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+          <div class="left desc">
+            <span>ADD LOCAL NUMBER</span>
+          </div>
+        </div>
+      </div>
+      <span *ngIf="maxLocalNumberLimitReached">Max Local Number Limit Reached.</span>
+    </div>
+  </div>
+
+  <!-- local emergency contacts -->
+  <div class="accord relative">
+    <span>local emergency contacts</span>
+    <i class="arrowUp"></i>
+  </div>
+  <div class="accord-content" formArrayName="localEmergencyContact">
+    <ng-container *ngFor="let local of communicationForm.get('localEmergencyContact')['controls']; let j=index">
+      <ng-container [formGroupName]="j">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>Name</label>
+            <input type="text" formControlName="emgName" class="form-control">
+          </div>
+          <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+            <label>Local Telephone</label>
+            <int-phone-prefix *ngIf="!emgTelephone"  [defaultCountry]="country" formControlName="emgTelephone"></int-phone-prefix>
+            <int-phone-prefix *ngIf="emgTelephone"  formControlName="emgTelephone"></int-phone-prefix>
+          </div>
+          <div class="form-group col-md-4">
+            <label>IMEI</label>
+            <input type="number" formControlName="emgImei" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>Email</label>
+            <input type="text" formControlName="emgEmail" class="form-control">
+          </div>
+          <div class="form-group col-md-7">
+            <label>Other Information</label>
+            <input type="text" formControlName="emgOtherInfo" class="form-control">
+          </div>
+          <div class="form-group col-md-1">
+            <label></label>
+            <button *ngIf="communicationForm.get('localEmergencyContact')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin pull-right"
+              (click)="deleteLocalEmergencyContactRow(j)">
+              <i class="fa fa-remove" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+
+    <div class="row col-md-12">
+      <div class="_table no-border-margin" *ngIf="!maxLocalEmergencyLimitReached">
+        <div class="createNew" (click)="addlocalEmergencyContact()">
+          <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+          <div class="left desc">
+            <span>ADD LOCAL EMERGENCY CONTACT</span>
+          </div>
+        </div>
+      </div>
+      <span *ngIf="maxLocalEmergencyLimitReached">Max Local Emergency Limit Reached.</span>
+    </div>
+  </div>
+
+  <!-- local emergency contacts -->
+  <div class="accord relative">
+    <span>check-in schedule</span>
+    <i class="arrowUp"></i>
+  </div>
+  <div class="accord-content">
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Number of Check-Ins</label>
+        <ng-select [items]="numberOfCheckInArray" [clearable]="false" [searchable]="false" placeholder="Select" [multiple]="false" [closeOnSelect]="true" bindLabel="number" (change)="selected($event.number)"
+          formControlName="checkInNumber" bindValue="number">
+        </ng-select>
+      </div>
+      <div class="form-group col-md-4" *ngIf="callInTime.length >0">
+        <label>Timezone for Check-In </label>
+        <ng-select [items]="timezoneArray" [multiple]="false" [searchable]="false" placeholder="Select Your Time Zone" [closeOnSelect]="true" bindLabel="name" formControlName="timeZone">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="callInTime.length >0">
+      <div class="form-group col-md-2 margin-bottom">
+        <label> Check-In Times </label>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="callInTime.length >0">
+      <div class="form-group col-md-2" *ngFor="let time of callInTime;">
+        <input type="number" [ngModel]="time.call_in_time" class="form-control" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Point of Contact</label>
+        <input type="text" formControlName="pointOfContact" class="form-control">
+      </div>
+      <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+        <label>Telephone</label>
+        <int-phone-prefix *ngIf="!isCheckInTelephone" [defaultCountry]="country" formControlName="checkInTelephone"></int-phone-prefix>
+        <int-phone-prefix *ngIf="isCheckInTelephone" formControlName="checkInTelephone"></int-phone-prefix>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Email</label>
+        <input type="text" formControlName="checkInemail" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>OVERDUE PROCEDURE
+          <span class="text-lowercase text-gray"> (minutes/hours before concern; telephone cascade plan/system)</span>
+        </label>
+        <textarea class="form-control" formControlName="overdue" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- <div class="checkboxArea mg-top-20">
+      <div class="checkboxBlock">
+        <p>Share this Information with Other Traveller</p>
+        <div class="relative">
+          <input class="_customCheckbox" type="checkbox" [(ngModel)]="isShareInfo" [ngModelOptions]="{standalone: true}">
+          <label></label>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+
+  <div class="subSet">
+    <div class="right _btn fixed">
+      <a class="prev" (click)="communication('previous', false)">Previous</a>
+      <button type="submit" class="cont">
+          <span *ngIf="raId !== null">
+              Save + Continue
+          </span>
+          <span *ngIf="raId === null">
+              Continue
+          </span>
+      </button>
+    </div>
+  </div>
+</form>

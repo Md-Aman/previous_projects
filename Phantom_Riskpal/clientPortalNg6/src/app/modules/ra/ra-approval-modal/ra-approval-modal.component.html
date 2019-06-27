@@ -1,0 +1,107 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<!-- Approve and share section -->
+<div *ngIf="isApproveAndShare">
+  <p class="title">
+    Approving Risk Assessment
+  </p>
+  <hr>
+  <div class="row" *ngIf="isShareWithOther">
+    <div class="form-group col-md-12">
+      <label>Share With Other Managers</label>
+      <ng-select [items]="approvingManagers" [(ngModel)]="otherManager" [multiple]="true" [closeOnSelect]="false" bindLabel="name">
+      </ng-select>
+    </div>
+  </div>
+
+  <p class="font-12">Please enter any comments for the Risk Assessment Author and travellers to see here</p>
+  <textarea cols="67" rows="10" class="form-control mg-top-20" [(ngModel)]="feedback" placeholder="Type your feedback here"></textarea>
+
+  <hr class="mg-top-20">
+  <div class="text-center _btn">
+    <button class="cont" *ngIf="!isShareWithOther" (click)="approveAndComplete()">Approve & Complete</button> &nbsp;
+    <button class="cont" *ngIf="!isShareWithOther" (click)="approveAndShareWithOthers()">Approve & Share with Others</button> &nbsp;
+    <button class="cont" *ngIf="isShareWithOther" (click)="shareWithOther()">Ok</button> &nbsp;
+    <button class="cont request" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>
+<!-- Approve and share section ends -->
+
+
+<!-- Request more info -->
+<div *ngIf="isRequestMoreInfo">
+  <p class="title">
+    Want More Info About Risk Assessment
+  </p>
+  <hr>
+  <p>Missing Data</p>
+  <div class="row checkboxArea">
+        <div class="col-md-6 ">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test1" [(ngModel)]="raDetails" type="checkbox" >
+                <label for="test1"><span>RA Details</span></label>
+              </span>
+        </div>
+        <div class="col-md-6 ">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test2"  [(ngModel)]="questions" type="checkbox"> 
+                <label for="test2"><span>Questionnaires</span></label>
+            </span>
+        </div>
+        <div class="col-md-6">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test3" [(ngModel)]="supplier" type="checkbox"> 
+                <label for="test3"><span>Supplier Details</span></label>
+            </span>
+        </div>
+        <div class="col-md-6 ">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test4"  [(ngModel)]="communication" type="checkbox"> 
+                <label for="test4"><span>Communication Details</span></label>
+            </span>
+        </div>
+        <div class="col-md-6 ">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test5"  [(ngModel)]="contingency" type="checkbox"> 
+                <label for="test5"><span>Contingency Details</span></label>
+            </span>
+        </div>
+        <div class="col-md-6 ">
+            <span class="checkboxBlock">
+                <input class="_customCheckbox" id="test6"  [(ngModel)]="other" type="checkbox"> 
+                <label for="test6"><span>Any Other Information</span></label>
+            </span>
+        </div>
+  </div>
+  
+
+
+  <textarea cols="67" rows="10" [(ngModel)]="feedback" class="form-control mg-top-20" placeholder="Actions required on behalf of travellers to complete RA to satisfaction"></textarea>
+  <hr class="mg-top-20">
+  <div class="text-center _btn">
+    <button class="cont" (click)="wantMoreInfo()">Ok</button> &nbsp;
+    <button class="cont request" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>
+<!-- Request more info ends-->
+
+<!-- Forward to other managers -->
+<div *ngIf="isForwardToRaManagers">
+  <p class="title">
+    Want To Forward Risk Assessment
+  </p>
+  <hr>
+  <p>Forward to Other Managers</p>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <ng-select [items]="approvingManagers" [(ngModel)]="forwardToManager" [multiple]="false" [closeOnSelect]="true" bindValue="_id" bindLabel="name">
+      </ng-select>
+    </div>
+  </div>
+  <textarea class="form-control" [(ngModel)]="feedback" cols="67" rows="10" placeholder="Description here..."></textarea>
+  <hr class="mg-top-20">
+  <div class="text-center _btn">
+    <button class="cont" (click)="forwardRisk()">Ok</button> &nbsp;
+    <button class="cont request" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>
+<!-- Forward to other managers ends-->

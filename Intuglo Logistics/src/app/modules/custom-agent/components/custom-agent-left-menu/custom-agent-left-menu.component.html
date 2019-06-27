@@ -1,0 +1,21 @@
+<div class="side-menu">
+  <ul class="menu-content">
+    <li class="menu-item"><span class="dashboard">Dashboard</span></li>
+    <li class="menu-item" tabindex="step = 'one'" [ngClass]="{selectedmenu : fromDashboard}" (click)="customAgentBooking()">Booking / Order</li>
+    <li class="menu-item" tabindex="step = 'two'" [ngClass]="{selectedmenu : fromCD}"  (click)="customAgentDeclaration()">Custom Declaration</li>
+
+    <li class="menu-item"><span class="customer">Customer Support</span></li>
+    <li class="menu-item" tabindex="step = 'three'" [ngClass]="{selectedmenu : fromHSwiki}" (click)="HSCodeWiki()">HS Code Wiki</li>
+    <li class="menu-item" tabindex="step = 'four'" [ngClass]="{selectedmenu : stepFour}">Live Chat</li>
+    <li class="menu-item" tabindex="step = 'five'" [ngClass]="{selectedmenu : stepFive}">Ticket</li>
+
+    <li class="menu-item"><span class="report"><b>Report</b></span></li>
+    <li class="menu-item" tabindex="step = 'six'"  [ngClass]="{selectedmenu : stepSix}">Bookings</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sixone'" [ngClass]="{selectedmenu : stepSixOne}">Transaction Report</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sixtwo'" [ngClass]="{selectedmenu : stepSixTwo}">Booking Form</li>
+    <li class="menu-item" tabindex="step = 'Seven'" [ngClass]="{selectedmenu : stepSeven}">Payments</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sevenone'" [ngClass]="{selectedmenu : stepSevenOne}">Payment List</li>
+    <li class="menu-item" tabindex="step = 'eight'" [ngClass]="{selectedmenu : stepEight}">Cargo</li>
+    <li class="menu-item sub-menu" tabindex="step = 'eightone'" [ngClass]="{selectedmenu : stepEightOne}">Packing List</li>
+  </ul>
+</div>

@@ -1,0 +1,26 @@
+@import "styles.scss";
+
+._table { padding-bottom: 30px; margin: 0 50px 10px 30px; border-bottom: 1px solid #DBE2E5;
+    .createNew { background: #fff; cursor: pointer; height: 54px; width: 270px; border: 1px dashed #B3B6B9; @include border-radius(5px);
+        img { margin: 11px 10px 0 20px;}
+        .desc { margin-top: 22px;
+            span {color: $secondryColor; font-size: 12px; font-family: $roboto; display: block; margin-bottom: 4px;
+                &._b { font-weight: 800; text-transform: uppercase;}
+            }
+        }
+    }
+}
+.accord-content{
+    padding: 20px 20px 20px 0px;
+}
+.margin{
+    margin: 44% 0 0 0;
+}
+.no-border-margin{
+    border-bottom: 0;
+    margin: 0;
+}
+
+.margin-bottom{
+    margin-bottom: 0;
+}

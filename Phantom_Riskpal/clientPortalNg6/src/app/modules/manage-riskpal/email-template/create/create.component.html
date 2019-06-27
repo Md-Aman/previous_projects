@@ -1,0 +1,63 @@
+<span class="_close-mat" routerLink="/secure/manage-riskpal/email-template" (click)="closeModal();"></span>
+
+<div class="centeredLayout material-popup">
+    <div class="subSet ">
+  
+        <h2>Email Template</h2>
+        <p>Fill out Email Template details below:</p>
+    </div>
+  
+    <form [formGroup]="formGroup" (submit)="submit(formGroup.value)">
+      <!-- <div class="accord relative ">
+        <span>Question Information</span>
+        <i class="arrowUp"></i>
+      </div> -->
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Keyword (Read-only)</label>
+              <input class="form-control" type="text" formControlName="unique_keyword" readonly />
+            </div>
+        </div>
+      </div>
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Title</label>
+              <input class="form-control" type="text" formControlName="title" />
+            </div>
+        </div>
+      </div>
+
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Subject</label>
+              <input class="form-control" type="text" formControlName="subject" />
+            </div>
+        </div>
+      </div>
+      
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Description</label>
+              <ck-editor name="editor1"  formControlName="description" skin="moono-lisa" 
+              language="en" [(ngModel)]="email.description"></ck-editor>
+              <!-- <textarea class="form-control" cols="95" rows="10" formControlName="best_practice_advice"></textarea> -->
+            </div>
+        </div>
+      </div>
+    
+    
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <a class="prev" (click)="closeModal();" routerLink="/secure/manage-riskpal/email-template">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

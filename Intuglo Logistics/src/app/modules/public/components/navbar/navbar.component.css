@@ -1,0 +1,81 @@
+/* 
+Owner: M Irfan Qureshi
+Author: M Irfan Qureshi
+Modified: 4 September 2018
+Application: Intuglo
+Language: CSS Written by author - M Irfan Qureshi - aka iQ
+*/
+
+/* CSS iQ */
+.header-section { height: 60px; background: rgba(255, 255, 255, 0.95); position: fixed; top: 0; left: 0; width: 100%; z-index: 12;}
+.main-navigation { padding-top: 10px;}
+.main-navigation .product-logo { margin-top: 2px;}
+.main-navigation .product-logo img { width: 160px; cursor: pointer;}
+.main-navigation .nav { margin-top: 6px;}
+.main-navigation .nav.nav-font { margin-top: 0;} 
+.main-navigation .nav ul { margin: 0 0 0 50px; padding: 0;}
+.main-navigation .nav li { float: left; list-style: none; padding: 0 30px 0 0; cursor: pointer;}
+.main-navigation .nav li a { text-decoration: none; color: #23376D; font-size: 14px; padding: 5px 0; display: block; font-weight: 600;}
+.main-navigation .nav li ul.subNav { box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.35); position: absolute; top: 46px; padding: 10px; left: 0; background: #fff; margin: 0; min-width: 220px;}
+.main-navigation .nav li ul.subNav:after { bottom: 100%; left: 15%;	border: solid transparent; content: " "; height: 0;	width: 0;	position: absolute;	pointer-events: none;	border-color: rgba(255, 255, 255, 0);	border-bottom-color: #fff; border-width: 10px; margin-left: -10px;}
+.main-navigation .nav li ul.subNav li { float: none; padding: 0;}
+.main-navigation .nav li ul.subNav li a { display: block; font-weight: 400; padding: 10px;}
+.main-navigation .nav li ul.subNav li a:hover { background: rgba(68, 85, 130, 0.06);transition: cubic-bezier(0.86, 0, 0.07, 1) .5s all;}
+/* .main-navigation .nav li.relative:hover ul.subNav { display: block;} */
+.main-navigation .logon { margin-top: 2px; position: relative;}
+.main-navigation .logon a { background:#23376D; color: #fff; font-size:14px; display: block; min-width: 80px; text-align: center; line-height: 36px; font-weight: 100; text-transform: uppercase;}
+.main-navigation .logon a:hover { text-decoration: none;}
+.main-navigation .logon .logon-modal { min-width: 620px; position: absolute; right: 0; top: 50px; background: #fff; box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.35); z-index: 101;}
+.main-navigation .logon .logon-modal:after { bottom: 100%; left: 95%;	border: solid transparent; content: " "; height: 0;	width: 0;	position: absolute;	pointer-events: none;	border-color: rgba(255, 255, 255, 0);	border-bottom-color: #fff; border-width: 10px; margin-left: -10px;}
+.sprt { width: 1px; background: #dadada; height: 90%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; display: block;}
+.main-navigation .nav.nav-font li { padding: 0; }
+.main-navigation .nav li .avatar { cursor: pointer;}
+.main-navigation .nav li .avatar label { font-size: 14px; font-weight: 100; margin: 0 0 0 10px; position: relative; cursor: pointer;}
+.main-navigation .nav li .avatar .img-circle { width: 40px; height: 40px; }
+.main-navigation .nav li .avatar .dropdown-content { display: block; font-weight: 500; position: absolute; background: #fff; min-width: 115px; z-index: 1; top: 50px; box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.35);}
+.main-navigation .nav li .avatar .dropdown-content ul { margin: 0; }
+.main-navigation .nav li .avatar .dropdown-content li { list-style: none; float: none;}
+.main-navigation .nav li .avatar .dropdown-content li a { color: black; padding: 6px 10px; text-align: left; text-decoration: none; display: block; font-weight: 100; cursor: pointer;}
+.main-navigation .nav li .avatar .dropdown-content li:hover { background-color: #f1f1f1; }
+
+.logon-modal-slidein { animation: slide-in-logon 0.5s forwards, fade-in-logon 0.5s forwards;
+  -webkit-animation: slide-in-logon 0.5s forwards, fade-in-logon 0.5s forwards;
+  -moz-animation: slide-in-logon 0.5s forwards, fade-in-logon 0.5s forwards;
+  -o-animation: slide-in-logon 0.5s forwards, fade-in-logon 0.5s forwards; }
+
+
+.menu-section { min-width: 620px; position: absolute; left: 140px; top: 46px; background: #fff; box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.35); z-index: 101; }
+.menu-section:after { bottom: 100%; left: 5%;	border: solid transparent; content: " "; height: 0;	width: 0;	position: absolute;	pointer-events: none;	border-color: rgba(255, 255, 255, 0);	border-bottom-color: #fff; border-width: 10px; margin-left: -10px;}
+.menu-section.grid { padding: 10px; display: grid; grid-template-rows: repeat(2,140px); grid-template-columns: repeat(4,1fr); }
+.menu-section .menu-grid { text-align: center; background: #fff;}
+.menu-section .menu-grid:focus { outline:none;} 
+.menu-section .menu-grid img { width: 42px; height: 42px; margin-top: 30px; margin-bottom: 20px;}
+.menu-section .menu-grid p { text-align: center; margin: 0; font-size: 14px; color: #333;}
+.menu-section .menu-grid:hover { background: rgba(68, 85, 130, 0.06); cursor: pointer; transition: cubic-bezier(0.86, 0, 0.07, 1) .5s all;}
+  
+/* Keyframe animation */
+@keyframes slide-in-logon {
+  0% { transform: translateY(-100%);
+      -webkit-transform: translateY(-100%);
+      -moz-transform: translateY(-100%);
+      -o-transform: translateY(-100%);
+      -ms-transform: translateY(-100%); opacity: 0;}
+  50% { transform: translateY(0%);
+      -webkit-transform: translateY(0%);
+      -moz-transform: translateY(0%);
+      -o-transform: translateY(0%);
+      -ms-transform: translateY(0%); opacity: 0.5;}
+  100% { transform: translateY(0%);
+      -webkit-transform: translateY(0%);
+      -moz-transform: translateY(0%);
+      -o-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+      opacity: 1;}
+}
+@keyframes fade-in-logon {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* Keyframe animation */
+
+/* CSS iQ */

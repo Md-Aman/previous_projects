@@ -1,0 +1,168 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+
+<div class="centeredLayout material-popup">
+  <form [formGroup]="supplierForm" class="accord-content"  (submit)="createNewSupplier(supplierForm.value)">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Service Provided</label>
+      <ng-select 
+        [items]="serviceProvidedList" 
+        [multiple]="false" 
+        [closeOnSelect]="true" 
+        bindLabel="name"
+        bindValue="name"
+        groupBy="category" 
+        formControlName="serviceProvided">
+      </ng-select>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Supplier Name</label>
+        <input type="text" formControlName="supplierName" class="form-control">
+      </div>
+    </div>
+
+    <div class="row" *ngIf="supplierForm.value.serviceProvided === 'Other - please specify'">
+      <div class="form-group col-md-12">
+        <label>Details</label>
+        <input type="text" formControlName="otherServiceProvider" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Email</label>
+        <input type="email" formControlName="email" class="form-control">
+      </div>
+      <div class="form-group col-md-4" [customErrorMessages]="customErrorMessagesforMobileNo">
+        <label>Contact Number</label>
+        <int-phone-prefix *ngIf="!isUpdate" [defaultCountry]="'gb'" formControlName="mobileNumber"></int-phone-prefix>
+        <int-phone-prefix *ngIf="isUpdate" formControlName="mobileNumber"></int-phone-prefix>
+        <!-- <input type="text" formControlName="mobileNumber" class="form-control"> -->
+      </div>
+      <div class="form-group col-md-4">
+        <label>Website</label>
+        <input type="text" formControlName="website" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages2000">
+        <label>Address</label>
+        <input type="text" formControlName="address" class="form-control">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Country</label>
+        <ng-select 
+          [items]="countryList" 
+          [multiple]="false" 
+          [virtualScroll]="true" 
+          [closeOnSelect]="true" 
+          bindLabel="name"
+          bindValue="name" 
+          [searchFn]="customSearchFn"
+          formControlName="country">
+        </ng-select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>City/Area/Location</label>
+        <input type="text" formControlName="cityAreaLocation" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Currency</label>
+        <ng-select 
+        [items]="currencyList" 
+        [multiple]="false" 
+        [virtualScroll]="true" 
+        [closeOnSelect]="true" 
+        bindLabel="currency" 
+        bindValue="abbreviation"
+        formControlName="currency">
+        </ng-select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Daily Rate</label>
+        <input type="number" formControlName="dialyRate" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12" [customErrorMessages]="customErrorMessages2000">
+        <label for="comment">Description</label>
+        <textarea class="form-control" formControlName="description" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Sourced By</label>
+        <input type="text" formControlName="sourcedBy" class="form-control">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Priority Status</label>
+        <ng-select 
+        [items]="priorityStatus" 
+        [multiple]="false" 
+        [virtualScroll]="true" 
+        [closeOnSelect]="true" 
+        bindLabel="name" 
+        bindValue="name"
+        formControlName="priorityStatus">
+        </ng-select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Star Rating </label>
+        <span class="text-gray"> (Optional)</span>
+        <div class="outline-none">
+            <rating [(ngModel)]="rate" [customTemplate]="tt" [ngModelOptions]="{standalone: true}"></rating>
+           
+            <ng-template #tt let-i="index" let-v="value">
+                
+              <span class="btn btn-{{i < v ? 'star' : 'star-default'}}">
+                  <span class="fa fa-star"></span>
+              </span>
+            </ng-template>
+          </div>
+        <!-- <input type="text" class="form-control"> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-5 _btn-upload">
+        <label>Attachments</label>
+        <span class="text-gray"> (Optional)</span>
+
+        <div class="upload-btn-wrapper">
+            <button class="btn">Choose Files</button>
+            <input type="file" name="myfile" #file (change)="getFile($event)" accept=".pdf, image/gif, image/jpeg"/>
+            <span>{{file.value ? file.value : "No file Chosen"}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="attachment" class="form-group col-md-12 _btn-upload">
+        <p class="btn btn-group file">
+          {{attachment}}
+          <!-- {{file.docName}} <span *ngIf="file.fullName" class="x-icon" (click)="deleteFile(file.fullName, i)">x</span> -->
+        </p>
+      </div>
+    </div>
+    
+    <div class="subSet mg-top-20">
+        <div class="right _btn">
+          <!-- <a class="prev" (click)="">Previous</a> -->
+          <button type="submit" class="cont">
+            <ng-container *ngIf="isUpdate == false">
+              Add 
+            </ng-container>
+            <ng-container *ngIf="isUpdate == true">
+                Update 
+            </ng-container>
+              New Supplier
+          </button>
+        </div>
+      </div>
+  </form>
+</div>

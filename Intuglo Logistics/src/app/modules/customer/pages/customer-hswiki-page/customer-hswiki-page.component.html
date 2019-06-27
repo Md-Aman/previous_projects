@@ -1,0 +1,12 @@
+<customer-dashboard-navbar (controlSideBar)="receiveDataFromHeader($event)"></customer-dashboard-navbar>
+<ng-sidebar-container class="ng-container bg-color">
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <customer-left-menu [sideBar]="isSideBarOpen" [fromHSwiki]='isOpen'></customer-left-menu>
+    </ng-sidebar>
+
+    <div  ng-sidebar-content>
+        <div class="padding-left-right-0">
+            <customer-hswiki-list></customer-hswiki-list>
+        </div>
+    </div>
+</ng-sidebar-container>

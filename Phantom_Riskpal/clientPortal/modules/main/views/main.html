@@ -1,0 +1,1542 @@
+<header class="header header-fixed-set">
+  <a class="logo">
+    <!-- Add the class icon to your logo image or logo icon to add the margining -->
+    <span ng-if="superAdminUserData.super_admin == true">RPSTAFF</span>
+    <span ng-if="superAdminUserData.super_admin == false">{{roledetails.group_name}}</span>
+  </a>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li class="dropdown user user-menu">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+                <img ng-src="{{superAdminUserData.profile_pic || './images/avatar3.png'}}" class="img-circle border-radius" alt="User Image" />
+                <span>{{superAdminUserData.firstname}} {{superAdminUserData.lastname}} <i class="caret"></i>
+                        </span>
+            </a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header bg-light-blue" >
+              <img ng-src="{{superAdminUserData.profile_pic || './images/avatar3.png'}}" class="img-circle" alt="User Image" />
+              <p>
+                {{superAdminUserData.firstname}} {{superAdminUserData.lastname}} {{superAdmintoken}}
+                <!-- <small>Member since Nov. 2012</small> -->
+              </p>
+            </li>
+            <li class="user-footer">
+              <div class="pull-left">
+                <a ui-sref="main.myprofile" class="btn btn-default btn-flat">Profile</a>
+              </div>
+              <div class="pull-right">
+                <a ng-controller="LoginCtrl" ng-click="superAdminLogout();" class="btn btn-default btn-flat">Sign out</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="left-side sidebar-offcanvas">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img ng-src="{{superAdminUserData.profile_pic || './images/avatar3.png'}}" class="img-circle" alt="User Image" />
+        </div>
+        <div class="pull-left info">
+          <p>Hello, {{superAdminUserData.firstname}} {{superAdminUserData.lastname}}</p>
+          <i class="fa fa-circle text-success"></i> Online
+        </div>
+      </div>
+      <ul class="sidebar-menu" ng-controller="LoginCtrl" ng-if="superAdminUserData.super_admin == true">
+        <li ng-class="{ active: isActive('/main/dashboard')}">
+          <a ui-sref="main.dashboard" >
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard  </span>
+                    </a>
+        </li>
+        <li class="treeview " ng-class="{ active: isActive('/main/add/client') || isActive('/main/list/client')}">
+          <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>Manage Clients</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li  ng-class="{ active: isActive('/main/add/client')}"><a ui-sref="main.add_news_agencies"><i class="fa fa-angle-double-right"></i>Add new Client</a>
+            </li>
+            <li ng-class="{ active: isActive('/main/list/client')}"><a ui-sref="main.list_news_agencies"><i class="fa fa-angle-double-right"></i>Client list</a>
+            </li>
+            <li class="treeview" >
+              <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>Manage User Group</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+                <li ng-class="{ active: isActive('/main/add/usergroup')}"><a ui-sref="main.add_usergroup"><i class="fa fa-angle-double-right"></i>Create new user group</a>
+                </li>
+                <li ng-class="{ active: isActive('/main/list/usergroup')}"><a ui-sref="main.list_usergroup"><i class="fa fa-angle-double-right"></i>View user group list</a>
+                </li></ul>
+                </li>
+            </li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Manage Users</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li ng-class="{ active: isActive('/main/user/add')}"><a ui-sref="main.add_user"><i class="fa fa-users"></i>Create new user</a>
+            </li>
+            <li ng-class="{ active: isActive('/main/user/list')}"><a ui-sref="main.user_list"><i class="fa fa-users"></i>User List</a>
+            </li>
+            <li ><a ui-sref="#"><i class="fa fa-users"></i>Bulk Upload</a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Create New RPStaff</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li ng-class="{ active: isActive('/main/add/rpstaff')}"><a ui-sref="main.create_rpstaff"><i class="fa fa-users"></i>Add new </a>
+                </li>
+                <li ng-class="{ active: isActive('/main/list/rpstaff')}">
+                  <a ui-sref="main.list_rpstaff">
+                                        <i class="fa fa-users"></i>
+                                        <span>View all RPStaff</span>
+                                    </a>
+                </li>
+              </ul>
+            </li>
+            <li><a ui-sref="#"><i class="fa fa-users"></i>White label clients</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+                        <i class="fa fa-list"></i>
+                        <span>Manage RiskPal</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+         
+                    <ul class="treeview-menu">
+                        <li class="treeview" >
+                            <a href="#">
+                                              <i class="fa fa-flag"></i>
+                                              <span>Departments</span>
+                                              <i class="fa fa-angle-left pull-right"></i>
+                                          </a>
+                            <ul class="treeview-menu">
+                              <li><a ui-sref="main.add_department"><i class="fa fa-flag"></i>Add new</a>
+                              </li>
+                              <li><a ui-sref="main.list_department"><i class="fa fa-flag"></i>View List</a>
+                              </li>
+                              
+                            </ul>
+                          </li>
+                        <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+                        </li>
+                        <li><a ui-sref="main.country_matrix_logs"><i class="fa fa-flag"></i>Country Matrix Logs</a>
+                        </li>
+
+                          <li class="treeview">
+                              <a href="#">
+                                                <i class="fa fa-flag"></i>
+                                                <span>Edit Country Information</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                              <ul class="treeview-menu">
+                                <li><a ui-sref="#"><i class="fa fa-flag"></i>Content</a>
+                                </li>
+                                <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+                                </li>
+                           
+                               
+                              </ul>
+                            </li>
+        
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-flag"></i>
+                                <span>Edit Threat Fields</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="main.country_risk_level"><i class="fa fa-flag"></i>Country Threat Rating</a>
+                </li>
+                <li><a ui-sref="main.country_threat_matrix"><i class="fa fa-flag"></i>Country Threat Matrix</a>
+                </li>
+               
+                <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-flag"></i>View & Edit Threat Categories</a>
+                </li>
+              </ul>
+            </li>
+           
+         
+        
+            <!-- <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Country Threat Categories</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="main.add_risk_associated_categories"><i class="fa fa-users"></i>Create new</a>
+                </li>
+                <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-users"></i>View Categories</a>
+                </li>
+               
+              </ul>
+            </li> -->
+         
+<!--         
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Activity Type</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="#"><i class="fa fa-users"></i>Add new</a>
+                </li>
+               
+              </ul>
+            </li> -->
+           
+        
+        
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span>Risk Assessment templates</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="add_risk_assessment.step1"><i class="fa fa-list"></i>Create New template</a>
+                </li>
+                <li><a ui-sref="main.list_risk_assessment"><i class="fa fa-list"></i>Template list</a>
+                </li>
+                <li><a ui-sref="main.list_under_construction_type_of_ra"><i class="fa fa-list"></i>Incomplete templates</a>
+                </li>
+                <li><a ui-sref="#"><i class="fa fa-list"></i>Risk Assessment Timer</a>
+                </li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Risk Labels / Questions</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li class="active">
+                  <a ui-sref="main.list_categories">
+                                    <i class="fa fa-list"></i>
+                                    <span>Risk Labels</span>
+                                </a>
+                </li>
+                <li class="active">
+                  <a ui-sref="main.list_questionnaire">
+                                    <i class="fa fa-tags"></i>
+                                    <span>Question</span>
+                                </a>
+                </li>
+              </ul>
+            </li>
+         
+            <li class="treeview">
+                <a href="#">
+                                  <i class="fa fa-users"></i>
+                                  <span>Suppliers</span>
+                                  <i class="fa fa-angle-left pull-right"></i>
+                              </a>
+                <ul class="treeview-menu">
+                  <li><a ui-sref="main.add_supplier"><i class="fa fa-users"></i>Add new</a>
+                  </li>
+                  <li><a ui-sref="main.list_supplier"><i class="fa fa-users"></i>Supplier List</a>
+                  </li>
+                 
+                </ul>
+              </li>
+        
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Sectors</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="main.add_sector"><i class="fa fa-users"></i>Add new</a>
+                </li>
+                <li><a ui-sref="main.list_sector"><i class="fa fa-users"></i>View all</a>
+                </li>
+               
+              </ul>
+            </li>
+           
+         
+        
+           
+           
+          
+        
+            <li class="treeview">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Manage Content</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                <li><a ui-sref="#"><i class="fa fa-users"></i>Edit Lists</a>
+                </li>
+               
+              </ul>
+            </li>
+           
+          </ul>
+
+          
+
+
+        </li>
+
+        <li class="treeview" >
+            <a href="#">
+                          <i class="fa fa-users"></i>
+                          <span>Communicate</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </a>
+            <ul class="treeview-menu">
+              <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Contact</a>
+              </li>
+              <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Email Templates</a>
+              </li>
+              
+            
+            </ul>
+          </li>
+
+        <li class="treeview">
+            <a href="#">
+                              <i class="fa fa-users"></i>
+                              <span>Resouring library</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+            <ul class="treeview-menu">
+                <li class="treeview">
+                    <a href="#">
+                                  <i class="fa fa-user"></i>
+                                  <span>View Content</span>
+                                  <i class="fa fa-angle-left pull-right"></i>
+                              </a>
+                    <ul class="treeview-menu">
+                      <li><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Add Content</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Edit Content</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Organise</a>
+                      </li>
+                    </ul>
+                  </li>
+             
+            </ul>
+          </li>
+          <li class="treeview" >
+              <a href="#" >
+                            <i class="fa fa-list"></i>
+                            <span>Analytics</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+             
+                        <ul class="treeview-menu">
+          
+            
+                              <li>
+                                  <a ui-sref="#">
+                                                    <i class="fa fa-flag"></i>
+                                                    <span> Travel data</span>
+                                                    
+                                                </a>
+                              
+                                </li>
+          
+                                <li>
+                                    <a ui-sref="#">
+                                                      <i class="fa fa-flag"></i>
+                                                      <span> Supplier data</span>
+                                                      
+                                                  </a>
+                                
+                                  </li>
+                                  <li>
+                                      <a ui-sref="#">
+                                                        <i class="fa fa-flag"></i>
+                                                        <span> Accident data</span>
+                                                        
+                                                    </a>
+                                  
+                                    </li>
+          
+                                    <li class="treeview" >
+                                        <a href="#">
+                                                          <i class="fa fa-users"></i>
+                                                          <span>Management data</span>
+                                                          <i class="fa fa-angle-left pull-right"></i>
+                                                      </a>
+                                        <ul class="treeview-menu">
+                                            <li><a ui-sref="#"><i class="fa fa-users"></i>Communications </a>
+                                            </li>
+                                          <li><a ui-sref="#"><i class="fa fa-users"></i>Activity Records</a>
+                                          </li>
+                                         
+                                        </ul>
+                                      </li>
+          
+                                      <li>
+                                          <a ui-sref="#">
+                                                            <i class="fa fa-flag"></i>
+                                                            <span> Resource Library</span>
+                                                            
+                                                        </a>
+                                      
+                                        </li>
+          
+                                        <li>
+                                            <a ui-sref="#">
+                                                              <i class="fa fa-flag"></i>
+                                                              <span>Training & Medical</span>
+                                                              
+                                                          </a>
+                                        
+                                          </li>
+          
+                                          <li>
+                                              <a ui-sref="#">
+                                                                <i class="fa fa-flag"></i>
+                                                                <span>App usage</span>
+                                                                
+                                                            </a>
+                                          
+                                            </li>
+                                            <li>
+                                                <a ui-sref="#">
+                                                                  <i class="fa fa-flag"></i>
+                                                                  <span>User data</span>
+                                                                  
+                                                              </a>
+                                            
+                                              </li>
+
+                                              <li class="treeview" >
+                                                  <a href="#">
+                                                                    <i class="fa fa-users"></i>
+                                                                    <span>Billables</span>
+                                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                                </a>
+                                                  <ul class="treeview-menu">
+                                                      <li><a ui-sref="main.authy"><i class="fa fa-users"></i>Authy </a>
+                                                      </li>
+                                                    <li><a ui-sref="#"><i class="fa fa-users"></i>API clicks</a>
+                                                    </li>
+                                                   
+                                                  </ul>
+                                                </li>
+
+                                                <li class="treeview" >
+                                                    <a href="#">
+                                                                      <i class="fa fa-users"></i>
+                                                                      <span>Export</span>
+                                                                      <i class="fa fa-angle-left pull-right"></i>
+                                                                  </a>
+                                                    <ul class="treeview-menu">
+                                                        <li><a ui-sref="#"><i class="fa fa-users"></i>User List </a>
+                                                        </li>
+                                                      <li><a ui-sref="#"><i class="fa fa-users"></i>Country Threat Matrix</a>
+                                                      </li>
+                                                      <li><a ui-sref="#"><i class="fa fa-users"></i>Supplier lists</a>
+                                                      </li>
+                                                     
+                                                     
+                                                    </ul>
+                                                  </li>
+              
+            
+              </ul>
+            </li>
+       
+       
+
+
+        <li class="treeview">
+          <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>My Profile</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="main.myprofile"><i class="fa fa-angle-double-right"></i>Personal Details</a>
+            </li>
+            <li><a ui-sref="main.password"><i class="fa fa-angle-double-right"></i>Change Password</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <ul class="sidebar-menu" ng-controller="LoginCtrl" ng-if="superAdminUserData.super_admin == false">
+        <li ng-class="{ active: isActive('/main/dashboard')}">
+          <a ui-sref="main.dashboard" >
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard  </span>
+                    </a>
+        </li>
+        <li class="treeview" ng-if="roledetails.mytravel.parentId == 1 ">
+            <a href="#">
+                          <i class="fa fa-users"></i>
+                          <span>My travel</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </a>
+            <ul class="treeview-menu">
+              
+
+              <li class="treeview" ng-if="roledetails.mytravel.riskassessment == 1">
+                  <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Risk Assessments</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                  <ul class="treeview-menu">
+                    <li>
+                      <a href="" ui-sref="main.new_templates">
+                                        <i class="fa fa-tags"></i>
+                                        <span>Create Risk Assessment(s)</span>
+                                    </a>
+                    </li>
+                    <li>
+                      <a href="" ui-sref="main.news_ra_list">
+                                        <i class="fa fa-tags"></i>
+                                        <span>List Risk Assessment(s)</span>
+                                    </a>
+                    </li>
+
+
+                  
+                 
+                  
+                  </ul>
+                </li>
+              <li ng-if="roledetails.mytravel.checkinlog == 1"><a ui-sref="#"><i class="fa fa-users"></i>Check In</a>
+              </li>
+              <li ng-if="roledetails.mytravel.contact == 1"><a ui-sref="#"><i class="fa fa-users"></i>Contact</a>
+              </li>
+             
+              <li class="treeview" ng-if="roledetails.mytravel.accidents == 1">
+                  <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Accidents/Incidents</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                  <ul class="treeview-menu">
+                    <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Log</a>
+                    </li>
+                    <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>List</a>
+                    </li>
+                    
+                  
+                 
+                  
+                  </ul>
+                </li>
+              <li ng-if="roledetails.mytravel.countrylist == 1"><a ui-sref="main.country_list"><i class="fa fa-users"></i>Country List</a>
+              </li>
+             
+              <li class="treeview" ng-if="roledetails.mytravel.suppliers == 1">
+                  <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Suppliers</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                  <ul class="treeview-menu">
+                      <li><a ui-sref="main.add_supplier"><i class="fa fa-users"></i>Add new</a>
+                      </li>
+                      <li><a ui-sref="main.list_supplier"><i class="fa fa-users"></i>Supplier List</a>
+                      </li>
+                   
+                  
+                 
+                  
+                  </ul>
+                </li>
+
+             
+              <li class="treeview" ng-if="roledetails.mytravel.reports == 1">
+                  <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Reports</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                  <ul class="treeview-menu">
+                    <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Risk Assessments</a>
+                    </li>
+                    <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Country Visits</a>
+                    </li>
+                    <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Suppliers Add</a>
+                    </li>
+                  
+                 
+                  
+                  </ul>
+                </li>
+            
+            </ul>
+          </li>
+
+          <li class="treeview" ng-if="roledetails.mytravel.riskassessment == 1 && roledetails.mytravel.parentId == 0">
+              <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Risk Assessments</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+                <li ng-class="#"> <a href="#" ui-sref="main.new_templates">
+                  <i class="fa fa-tags"></i>Create a Risk Assesment</a>
+                </li>
+                <li ng-class="#">  <a ui-sref="main.news_ra_list">
+                  <i class="fa fa-tags"></i>List my Risk Assesments</a>
+                </li>
+               
+              
+             
+              
+              </ul>
+            </li>
+          <li ng-if="roledetails.mytravel.checkinlog == 1 && roledetails.mytravel.parentId == 0"><a ui-sref="#"><i class="fa fa-users"></i>Check In</a>
+          </li>
+          <li ng-if="roledetails.mytravel.contact == 1 && roledetails.mytravel.parentId == 0"><a ui-sref="#"><i class="fa fa-users"></i>Contact</a>
+          </li>
+         
+          <li class="treeview" ng-if="roledetails.mytravel.accidents == 1 && roledetails.mytravel.parentId == 0">
+              <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Accidents/Incidents</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+                <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Log</a>
+                </li>
+                <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>List</a>
+                </li>
+                
+              
+             
+              
+              </ul>
+            </li>
+          <li ng-if="roledetails.mytravel.countrylist == 1 && roledetails.mytravel.parentId == 0"><a ui-sref="main.country_list"><i class="fa fa-users"></i>Country List</a>
+          </li>
+         
+          <li class="treeview" ng-if="roledetails.mytravel.suppliers == 1 && roledetails.mytravel.parentId == 0">
+              <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Suppliers</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+                  <li><a ui-sref="main.add_supplier"><i class="fa fa-users"></i>Add new</a>
+                  </li>
+                  <li><a ui-sref="main.list_supplier"><i class="fa fa-users"></i>Supplier List</a>
+                  </li>
+               
+              
+             
+              
+              </ul>
+            </li>
+
+         
+          <li class="treeview" ng-if="roledetails.mytravel.reports == 1 && roledetails.mytravel.parentId == 0">
+              <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Reports</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+                <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Risk Assessments</a>
+                </li>
+                <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Country Visits</a>
+                </li>
+                <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Suppliers Add</a>
+                </li>
+              
+             
+              
+              </ul>
+            </li>
+        
+
+        <li class="treeview" ng-if="roledetails.trackmanage.parentId == 1 ">
+          <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Track & Connect</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+              <li ng-if="roledetails.trackmanage.currenttravel == 1"><a ui-sref="#"><i class="fa fa-users"></i>View Live Travel</a>
+              </li>
+            
+              <li ng-if="roledetails.trackmanage.riskassessments == 1"><a ui-sref="main.list_news_ra"><i class="fa fa-users"></i>Pending Risk Assessments</a>
+              </li>
+            
+              <li ng-if="roledetails.trackmanage.riskassessmentsoverride == 1"><a ui-sref="main.list_news_raall"><i class="fa fa-users"></i>Risk Assessments Override</a>
+              </li>
+            
+            <li class="treeview" ng-if="roledetails.trackmanage.communicate ">
+                <a href="#">
+                              <i class="fa fa-users"></i>
+                              <span>Communicate</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                <ul class="treeview-menu">
+                  <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>User List</a>
+                  </li>
+                  <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Sent Emails</a>
+                  </li>
+                  <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Situation Reports</a>
+                  </li>
+                
+                </ul>
+              </li>
+
+              <li class="treeview" ng-if="roledetails.trackmanage.taccidents">
+                <a href="#">
+                              <i class="fa fa-users"></i>
+                              <span>Accidents/Incidents</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                <ul class="treeview-menu">
+                  <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Create</a>
+                  </li>
+                  <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>List</a>
+                  </li>
+                  
+                
+               
+                
+                </ul>
+              </li>
+            <li ng-if="roledetails.trackmanage.medicalinfo == 1"><a ui-sref="#"><i class="fa fa-users"></i>Medical Info Requests</a>
+            </li>
+          
+          
+          </ul>
+        </li>
+        <li ng-if="roledetails.trackmanage.currenttravel == 1 && roledetails.trackmanage.parentId == 0"><a ui-sref="#"><i class="fa fa-users"></i>View Live Travel</a>
+        </li>
+      
+        <li ng-if="roledetails.trackmanage.riskassessments == 1 && roledetails.trackmanage.parentId == 0"><a ui-sref="main.list_news_ra"><i class="fa fa-users"></i>Pending Risk Assessments</a>
+        </li>
+      
+        <li ng-if="roledetails.trackmanage.riskassessmentsoverride == 1 && roledetails.trackmanage.parentId == 0"><a ui-sref="main.list_news_raall"><i class="fa fa-users"></i>Risk Assessments Override</a>
+        </li>
+      
+      <li class="treeview" ng-if="roledetails.trackmanage.communicate == 1  && roledetails.trackmanage.parentId == 0">
+          <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Communicate</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>User List</a>
+            </li>
+            <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Sent Emails</a>
+            </li>
+            <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Situation Reports</a>
+            </li>
+          
+          </ul>
+        </li>
+
+        <li class="treeview" ng-if="roledetails.trackmanage.taccidents == 1 && roledetails.trackmanage.parentId == 0">
+          <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Accidents/Incidents</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>Create</a>
+            </li>
+            <li ng-class=""><a ui-sref="#"><i class="fa fa-users"></i>List</a>
+            </li>
+            
+          
+         
+          
+          </ul>
+        </li>
+      <li ng-if="roledetails.trackmanage.medicalinfo == 1 && roledetails.trackmanage.parentId == 0"><a ui-sref="#"><i class="fa fa-users"></i>Medical Info Requests</a>
+      </li>
+    
+          <li class="treeview" ng-if="roledetails.userinformation.parentId == 1 ">
+              <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>User Information</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+              <ul class="treeview-menu">
+              
+
+                <li class="treeview" ng-if="roledetails.userinformation.createeditusers == 1">
+                    <a href="#">
+                                  <i class="fa fa-users"></i>
+                                  <span>Manage Users</span>
+                                  <i class="fa fa-angle-left pull-right"></i>
+                              </a>
+                    <ul class="treeview-menu">
+                      <li ng-class="{ active: isActive('/main/user/add')}"><a ui-sref="main.add_user"><i class="fa fa-users"></i>Create new user</a>
+                      </li>
+                      <li ng-class="{ active: isActive('/main/user/list')}"><a ui-sref="main.user_list"><i class="fa fa-users"></i>User List</a>
+                      </li>
+                    
+                   
+                    
+                    </ul>
+                  </li>
+
+
+
+
+
+
+
+                
+                <li ng-if="roledetails.userinformation.editusergroup == 1"><a ui-sref="main.list_usergroup"><i class="fa fa-users"></i>User group List</a>
+                </li>
+                <li ng-if="roledetails.userinformation.bulkupload == 1"><a ui-sref="#"><i class="fa fa-users"></i>Bulk Upload</a>
+                </li>
+              
+              </ul>
+            </li>
+
+         
+            <li class="treeview" ng-if="roledetails.userinformation.createeditusers == 1 && roledetails.userinformation.parentId == 0">
+                <a href="#">
+                              <i class="fa fa-users"></i>
+                              <span>Manage Users</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                <ul class="treeview-menu">
+                  <li ng-class="{ active: isActive('/main/user/add')}"><a ui-sref="main.add_user"><i class="fa fa-users"></i>Create new user</a>
+                  </li>
+                  <li ng-class="{ active: isActive('/main/user/list')}"><a ui-sref="main.user_list"><i class="fa fa-users"></i>User List</a>
+                  </li>
+                
+               
+                
+                </ul>
+              </li>
+
+
+
+            <li ng-if="roledetails.userinformation.editusergroup == 1 && roledetails.userinformation.parentId == 0"><a ui-sref="main.list_usergroup"><i class="fa fa-users"></i>User group List</a>
+            </li>
+            <li ng-if="roledetails.userinformation.bulkupload == 1 && roledetails.userinformation.parentId == 0"><a ui-sref="#"><i class="fa fa-users"></i>Bulk Upload</a>
+            </li>
+
+            <li class="treeview" ng-if="roledetails.managesystem.parentId == 1 ">
+                <a href="#" >
+                              <i class="fa fa-list"></i>
+                              <span>Customise</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+               
+                          <ul class="treeview-menu">
+
+              
+                                <li class="treeview" ng-if="roledetails.managesystem.departments == 1 ">
+                                    <a href="#">
+                                                      <i class="fa fa-flag"></i>
+                                                      <span>Departments</span>
+                                                      <i class="fa fa-angle-left pull-right"></i>
+                                                  </a>
+                                    <ul class="treeview-menu">
+                                      <li><a ui-sref="main.add_department"><i class="fa fa-flag"></i>Add new</a>
+                                      </li>
+                                      <li><a ui-sref="main.list_department"><i class="fa fa-flag"></i>View List</a>
+                                      </li>
+                                      
+                                    </ul>
+                                  </li>
+              
+                  
+               
+              
+                  <!-- <li class="treeview" ng-if="roledetails.managesystem.countrythreatcategories == 1 ">
+                    <a href="#">
+                                      <i class="fa fa-users"></i>
+                                      <span>Country Threat Categories</span>
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                  </a>
+                    <ul class="treeview-menu">
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>Create new</a>
+                      </li>
+                      <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-users"></i>View Categories</a>
+                      </li>
+                     
+                    </ul>
+                  </li>
+               
+               -->
+                  <!-- <li class="treeview" ng-if="roledetails.managesystem.activitytype == 1 ">
+                    <a href="#">
+                                      <i class="fa fa-users"></i>
+                                      <span>Activity Type</span>
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                  </a>
+                    <ul class="treeview-menu">
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>Add new</a>
+                      </li>
+                     
+                    </ul>
+                  </li>
+                  -->
+              
+              
+                  <li class="treeview" ng-if="roledetails.managesystem.riskassessmenttemplates == 1 ">
+                    <a href="#">
+                                      <i class="fa fa-list"></i>
+                                      <span>Risk Assessment templates</span>
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                  </a>
+                    <ul class="treeview-menu">
+                      <li><a ui-sref="add_risk_assessment.step1"><i class="fa fa-list"></i>Create New template</a>
+                      </li>
+                      <li><a ui-sref="main.list_risk_assessment"><i class="fa fa-list"></i>Template list</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-list"></i>Incomplete templates</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-list"></i>Risk Assessment Timer</a>
+                      </li>
+                    </ul>
+                  </li>
+                 
+               
+              
+                 
+               
+              
+                  <!-- <li class="treeview" ng-if="roledetails.managesystem.resourcelib == 1 ">
+                    <a href="#">
+                                      <i class="fa fa-users"></i>
+                                      <span>Resouring library</span>
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                  </a>
+                    <ul class="treeview-menu">
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>View content</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>Add / Edit content</a>
+                      </li>
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>Organise</a>
+                      </li>
+                     
+                    </ul>
+                  </li> -->
+                  <li class="treeview" ng-if="roledetails.managesystem.risklabels == 1 ">
+                      <a href="#">
+                                    <i class="fa fa-tag"></i>
+                                    <span>Risk Labels</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                      <ul class="treeview-menu">
+                        <li><a ui-sref="main.list_categories"><i class="fa fa-angle-double-right"></i>Risk Labels</a>
+                        </li>
+                        <li><a ui-sref="main.list_questionnaire"><i class="fa fa-angle-double-right"></i>Risk Questions</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="treeview" ng-if="roledetails.managesystem.countryinfo == 1">
+                        <a href="#">
+                                          <i class="fa fa-flag"></i>
+                                          <span>Edit Country Information</span>
+                                          <i class="fa fa-angle-left pull-right"></i>
+                                      </a>
+                        <ul class="treeview-menu">
+                          <li><a ui-sref="#"><i class="fa fa-flag"></i>Content</a>
+                          </li>
+                          <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+                          </li>
+                          <!-- <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+                          </li>
+                          <li><a ui-sref="main.add_information"><i class="fa fa-flag"></i>Edit country Information</a>
+                          </li> -->
+                        </ul>
+                      </li>
+
+                      <li class="treeview" ng-if="roledetails.managesystem.countrythreatcategories == 1 ">
+                          <a href="#">
+                                            <i class="fa fa-users"></i>
+                                            <span>Edit Country Threat Fields</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                          <ul class="treeview-menu">
+                            <li><a ui-sref="main.country_risk_level"><i class="fa fa-users"></i>Country Threat Rating </a>
+                            </li>
+                            <li><a ui-sref="main.country_threat_matrix"><i class="fa fa-users"></i>Country Threat Matrix </a>
+                            </li>
+                            <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-users"></i>View & Edit Threat Categories </a>
+                            </li>
+                          </ul>
+                        </li>
+
+                        <li class="treeview" ng-if="roledetails.managesystem.csuppliers == 1 ">
+                            <a href="#">
+                                          <i class="fa fa-users"></i>
+                                          <span>Suppliers</span>
+                                          <i class="fa fa-angle-left pull-right"></i>
+                                      </a>
+                            <ul class="treeview-menu">
+                                <li><a ui-sref="main.add_supplier"><i class="fa fa-users"></i>Add new</a>
+                                </li>
+                                <li><a ui-sref="main.list_supplier"><i class="fa fa-users"></i>Supplier List</a>
+                                </li>
+                             
+                            
+                           
+                            
+                            </ul>
+                          </li>
+              
+                      
+                      
+              
+                  <li class="treeview" ng-if="roledetails.managesystem.editcontent == 1 ">
+                    <a href="#">
+                                      <i class="fa fa-users"></i>
+                                      <span>Edit Site Content</span>
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                  </a>
+                    <ul class="treeview-menu">
+                        <li ng-show="roledetails.managesystem.emailtemplates == 1 "><a ui-sref="#"><i class="fa fa-users"></i>Email Templates </a>
+                        </li>
+                      <li><a ui-sref="#"><i class="fa fa-users"></i>Profile fields</a>
+                      </li>
+                     
+                    </ul>
+                  </li>
+
+
+                 
+                   
+
+                   
+
+                     
+                 
+                </ul>
+      
+                
+      
+      
+              </li>
+
+              <!--seperate links for all sub menus based on permission  -->
+
+              <li class="treeview" ng-if="roledetails.managesystem.departments == 1 && roledetails.managesystem.parentId == 0">
+                  <a href="#">
+                                    <i class="fa fa-flag"></i>
+                                    <span>Departments</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                  <ul class="treeview-menu">
+                    <li><a ui-sref="main.add_department"><i class="fa fa-flag"></i>Add new</a>
+                    </li>
+                    <li><a ui-sref="main.list_department"><i class="fa fa-flag"></i>View List</a>
+                    </li>
+                    
+                  </ul>
+                </li>
+
+
+
+
+<!-- <li class="treeview" ng-if="roledetails.managesystem.countrythreatcategories == 1 ">
+  <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Country Threat Categories</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+  <ul class="treeview-menu">
+    <li><a ui-sref="#"><i class="fa fa-users"></i>Create new</a>
+    </li>
+    <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-users"></i>View Categories</a>
+    </li>
+   
+  </ul>
+</li>
+
+-->
+<!-- <li class="treeview" ng-if="roledetails.managesystem.activitytype == 1 ">
+  <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Activity Type</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+  <ul class="treeview-menu">
+    <li><a ui-sref="#"><i class="fa fa-users"></i>Add new</a>
+    </li>
+   
+  </ul>
+</li>
+-->
+
+
+<li class="treeview" ng-if="roledetails.managesystem.riskassessmenttemplates == 1 && roledetails.managesystem.parentId == 0">
+  <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>Risk Assessment templates</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+  <ul class="treeview-menu">
+    <li><a ui-sref="add_risk_assessment.step1"><i class="fa fa-list"></i>Create New template</a>
+    </li>
+    <li><a ui-sref="main.list_risk_assessment"><i class="fa fa-list"></i>Template list</a>
+    </li>
+    <li><a ui-sref="#"><i class="fa fa-list"></i>Incomplete templates</a>
+    </li>
+    <li><a ui-sref="#"><i class="fa fa-list"></i>Risk Assessment Timer</a>
+    </li>
+  </ul>
+</li>
+
+
+
+
+
+
+<!-- <li class="treeview" ng-if="roledetails.managesystem.resourcelib == 1 ">
+  <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Resouring library</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+  <ul class="treeview-menu">
+    <li><a ui-sref="#"><i class="fa fa-users"></i>View content</a>
+    </li>
+    <li><a ui-sref="#"><i class="fa fa-users"></i>Add / Edit content</a>
+    </li>
+    <li><a ui-sref="#"><i class="fa fa-users"></i>Organise</a>
+    </li>
+   
+  </ul>
+</li> -->
+<li class="treeview" ng-if="roledetails.managesystem.risklabels == 1 && roledetails.managesystem.parentId == 0">
+    <a href="#">
+                  <i class="fa fa-tag"></i>
+                  <span>Risk Labels</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+              </a>
+    <ul class="treeview-menu">
+      <li><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Risk Labels</a>
+      </li>
+      <li><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Risk Questions</a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="treeview" ng-if="roledetails.managesystem.countryinfo == 1 &&  roledetails.managesystem.parentId == 0 ">
+      <a href="#">
+                        <i class="fa fa-flag"></i>
+                        <span>Edit Country Information</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+      <ul class="treeview-menu">
+        <li><a ui-sref="#"><i class="fa fa-flag"></i>Content</a>
+        </li>
+        <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+        </li>
+        <!-- <li><a ui-sref="main.country_list"><i class="fa fa-flag"></i>Country List</a>
+        </li>
+        <li><a ui-sref="main.add_information"><i class="fa fa-flag"></i>Edit country Information</a>
+        </li> -->
+      </ul>
+    </li>
+
+    <li class="treeview" ng-if="roledetails.managesystem.countrythreatcategories == 1 && roledetails.managesystem.parentId == 0">
+        <a href="#">
+                          <i class="fa fa-users"></i>
+                          <span>Edit Country Threat Fields</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </a>
+        <ul class="treeview-menu">
+          <li><a ui-sref="main.country_risk_level"><i class="fa fa-users"></i>Country Threat Rating </a>
+          </li>
+          <li><a ui-sref="main.country_threat_matrix"><i class="fa fa-users"></i>Country Threat Matrix </a>
+          </li>
+          <li><a ui-sref="main.list_risk_associated_categories"><i class="fa fa-users"></i>View & Edit Threat Categories </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="treeview" ng-if="roledetails.managesystem.csuppliers == 1 && roledetails.managesystem.parentId == 0">
+          <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Suppliers</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+              <li><a ui-sref="main.add_supplier"><i class="fa fa-users"></i>Add new</a>
+              </li>
+              <li><a ui-sref="main.list_supplier"><i class="fa fa-users"></i>Supplier List</a>
+              </li>
+           
+          
+         
+          
+          </ul>
+        </li>
+
+    
+    
+
+<li class="treeview" ng-if="roledetails.managesystem.editcontent == 1 && roledetails.managesystem.parentId == 0">
+  <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Edit Site Content</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+  <ul class="treeview-menu">
+      <li ng-show="roledetails.managesystem.emailtemplates == 1 "><a ui-sref="#"><i class="fa fa-users"></i>Email Templates </a>
+      </li>
+    <li><a ui-sref="#"><i class="fa fa-users"></i>Profile fields</a>
+    </li>
+   
+  </ul>
+</li>
+
+
+<!--Analytics menu start -->
+<li class="treeview" ng-if="roledetails.analytics.parentId == 1 ">
+    <a href="#" >
+                  <i class="fa fa-list"></i>
+                  <span>Analytics</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+              </a>
+   
+              <ul class="treeview-menu">
+
+  
+                    <li  ng-if="roledetails.analytics.traveldata == 1 ">
+                        <a ui-sref="#">
+                                          <i class="fa fa-flag"></i>
+                                          <span> Travel data</span>
+                                          
+                                      </a>
+                    
+                      </li>
+
+                      <li  ng-if="roledetails.analytics.supplierdata == 1 ">
+                          <a ui-sref="#">
+                                            <i class="fa fa-flag"></i>
+                                            <span> Supplier data</span>
+                                            
+                                        </a>
+                      
+                        </li>
+                        <li  ng-if="roledetails.analytics.accidentdata == 1 ">
+                            <a ui-sref="#">
+                                              <i class="fa fa-flag"></i>
+                                              <span> Accident data</span>
+                                              
+                                          </a>
+                        
+                          </li>
+
+                          <li class="treeview" ng-if="roledetails.analytics.managementdata == 1 ">
+                              <a href="#">
+                                                <i class="fa fa-users"></i>
+                                                <span>Management data</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                              <ul class="treeview-menu">
+                                  <li><a ui-sref="#"><i class="fa fa-users"></i>Communications </a>
+                                  </li>
+                                <li><a ui-sref="#"><i class="fa fa-users"></i>Activity Records</a>
+                                </li>
+                               
+                              </ul>
+                            </li>
+
+                            <li  ng-if="roledetails.analytics.analyticsresoucre == 1 ">
+                                <a ui-sref="#">
+                                                  <i class="fa fa-flag"></i>
+                                                  <span> Resource Library</span>
+                                                  
+                                              </a>
+                            
+                              </li>
+
+                              <li  ng-if="roledetails.analytics.training == 1 ">
+                                  <a ui-sref="#">
+                                                    <i class="fa fa-flag"></i>
+                                                    <span>Training & Medical</span>
+                                                    
+                                                </a>
+                              
+                                </li>
+
+                                <li  ng-if="roledetails.analytics.appusage == 1 ">
+                                    <a ui-sref="#">
+                                                      <i class="fa fa-flag"></i>
+                                                      <span>App usage</span>
+                                                      
+                                                  </a>
+                                
+                                  </li>
+                                  <li  ng-if="roledetails.analytics.userdata == 1 ">
+                                      <a ui-sref="#">
+                                                        <i class="fa fa-flag"></i>
+                                                        <span>User data</span>
+                                                        
+                                                    </a>
+                                  
+                                    </li>
+    
+  
+    </ul>
+  </li>
+
+
+    <li  ng-if="roledetails.analytics.traveldata == 1 && roledetails.analytics.parentId == 0">
+        <a ui-sref="#">
+                          <i class="fa fa-flag"></i>
+                          <span> Travel data</span>
+                          
+                      </a>
+    
+      </li>
+
+      <li  ng-if="roledetails.analytics.supplierdata == 1 && roledetails.analytics.parentId == 0">
+          <a ui-sref="#">
+                            <i class="fa fa-flag"></i>
+                            <span> Supplier data</span>
+                            
+                        </a>
+      
+        </li>
+        <li  ng-if="roledetails.analytics.accidentdata == 1 && roledetails.analytics.parentId == 0">
+            <a ui-sref="#">
+                              <i class="fa fa-flag"></i>
+                              <span> Accident data</span>
+                              
+                          </a>
+        
+          </li>
+
+          <li class="treeview" ng-if="roledetails.analytics.managementdata == 1 && roledetails.analytics.parentId == 0">
+              <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Management data</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+              <ul class="treeview-menu">
+                  <li><a ui-sref="#"><i class="fa fa-users"></i>Communications </a>
+                  </li>
+                <li><a ui-sref="#"><i class="fa fa-users"></i>Activity Records</a>
+                </li>
+               
+              </ul>
+            </li>
+
+            <li  ng-if="roledetails.analytics.analyticsresoucre == 1 && roledetails.analytics.parentId == 0">
+                <a ui-sref="#">
+                                  <i class="fa fa-flag"></i>
+                                  <span> Resource Library</span>
+                                  
+                              </a>
+            
+              </li>
+
+              <li  ng-if="roledetails.analytics.training == 1 && roledetails.analytics.parentId == 0">
+                  <a ui-sref="#">
+                                    <i class="fa fa-flag"></i>
+                                    <span>Training & Medical</span>
+                                    
+                                </a>
+              
+                </li>
+
+                <li  ng-if="roledetails.analytics.appusage == 1 && roledetails.analytics.parentId == 0">
+                    <a ui-sref="#">
+                                      <i class="fa fa-flag"></i>
+                                      <span>App usage</span>
+                                      
+                                  </a>
+                
+                  </li>
+                  <li  ng-if="roledetails.analytics.userdata == 1 && roledetails.analytics.parentId == 0">
+                      <a ui-sref="#">
+                                        <i class="fa fa-flag"></i>
+                                        <span>User data</span>
+                                        
+                                    </a>
+                  
+                    </li>
+
+    
+
+
+ 
+
+
+<!--Analytics menu End -->
+
+<!--Resource library main menu start -->
+<li class="treeview" ng-if="roledetails.resourcelib.parentId == 1 ">
+    <a href="#" >
+                  <i class="fa fa-list"></i>
+                  <span>Resource Library</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+              </a>
+   
+              <ul class="treeview-menu">
+
+  
+                        <li  ng-if="roledetails.resourcelib.resourcelibview == 1 ">
+                            <a ui-sref="#">
+                                              <i class="fa fa-flag"></i>
+                                              <span> View</span>
+                                              
+                                          </a>
+                        
+                          </li>
+
+                          <li class="treeview" ng-if="roledetails.resourcelib.resourcelibedit == 1 ">
+                              <a href="#">
+                                                <i class="fa fa-users"></i>
+                                                <span>Edit Library</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                              <ul class="treeview-menu">
+                                  <li><a ui-sref="#"><i class="fa fa-users"></i>Add document </a>
+                                  </li>
+                                <li><a ui-sref="#"><i class="fa fa-users"></i>Edit documents</a>
+                                </li>
+                                <li><a ui-sref="#"><i class="fa fa-users"></i>Organise</a>
+                                </li>
+                               
+                              </ul>
+                            </li>
+
+                            
+    
+  
+    </ul>
+  </li>
+
+
+  
+  <li  ng-if="roledetails.resourcelib.resourcelibview == 1 && roledetails.resourcelib.parentId == 0">
+      <a ui-sref="#">
+                        <i class="fa fa-flag"></i>
+                        <span> View</span>
+                        
+                    </a>
+  
+    </li>
+
+    <li class="treeview" ng-if="roledetails.resourcelib.resourcelibedit == 1 && roledetails.resourcelib.parentId == 0">
+        <a href="#">
+                          <i class="fa fa-users"></i>
+                          <span>Edit Library</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </a>
+        <ul class="treeview-menu">
+            <li><a ui-sref="#"><i class="fa fa-users"></i>Add document </a>
+            </li>
+          <li><a ui-sref="#"><i class="fa fa-users"></i>Edit documents</a>
+          </li>
+          <li><a ui-sref="#"><i class="fa fa-users"></i>Organise</a>
+          </li>
+         
+        </ul>
+      </li>
+              
+               
+             
+  <!-- Resource library end -->
+               
+             
+            
+                
+               
+            
+            
+               
+               
+             
+            
+               
+             
+            
+               
+              
+            
+            
+
+
+
+         
+        
+
+
+        <li class="treeview">
+          <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>My Profile</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="main.myprofile"><i class="fa fa-angle-double-right"></i>Account Info</a>
+            </li>
+            <li><a ui-sref="main.password"><i class="fa fa-angle-double-right"></i>Change Password</a>   </li>        
+
+             <li ng-show="roledetails.myprofile.myprofileemrgncy == 1 " ><a ui-sref="main.emergency"><i class="fa fa-angle-double-right"></i>Emergency Details</a>
+              </li>
+                 <li ng-show="roledetails.myprofile.myprofilemedical == 1 "><a ui-sref="main.medicalinfo"><i class="fa fa-angle-double-right"></i>Medical Information</a>
+            </li>
+             <li ng-show="roledetails.myprofile.myprofiletraining == 1 " ><a ui-sref="#"><i class="fa fa-angle-double-right"></i>Training Records</a>
+             </li>
+          </ul>
+        </li>
+        
+       
+        
+        
+      
+     
+     
+       
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Right side column. Contains the navbar and content of the page -->
+  <aside class="right-side" ui-view></aside>
+  <!-- /.right-side -->
+</div>

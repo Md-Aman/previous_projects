@@ -1,0 +1,136 @@
+<div [ngSwitch]="step" class="card-action-button">
+    <div *ngSwitchCase="'modify'">
+        <!-- <button [attr.disabled]="quotationStatus == 'Draft'? null: true" (click)="ModifyQuotation(); Modify.open()" type="button"
+            class="btnDisplayed">Modify</button> -->
+        <button *ngIf="quotationStatus == 'Draft'" (click)="ModifyQuotation(); Modify.open()" type="button" class="btnDisplayed">Modify</button>
+        <button (click)="ViewQuotation(); View.open()" type="button" class="btnDisplayed">View</button>
+        <button type="button" (click)="Duplicate1.open()" class="btnDisplayed">Duplicate</button>
+        <!-- <button (click)="DeleteQuotation(); Delete.open()" type="button" class=" btnDisplayed">Delete</button> -->
+        <button *ngIf="quotationStatus == 'Draft'" (click)="DeleteQuotation(); Delete.open()" type="button" class=" btnDisplayed">Delete</button>
+    </div>
+    <div *ngSwitchCase="'publish'">
+        <div *ngIf="quotationStatus == 'Draft' || quotationStatus == 'Approved'; else message">
+            <!-- <button [attr.disabled]="quotationStatus == 'Draft'? null: true" (click)="RequestConfirmation(); Confirmation.open()" type="button"
+            class="btnDisplayed">Request For Confirmation</button> -->
+            <button *ngIf="quotationStatus == 'Draft'" (click)="RequestConfirmation(); Confirmation.open()" type="button" class="btnDisplayed">Request For Confirmation</button>
+            <!-- <button [attr.disabled]="quotationStatus == 'Approved'? null: true" 
+            (click)="ActivateQuotation(); Activate.open()" type="button" 
+            class="btnDisplayed">Activate</button> -->
+            <button *ngIf="quotationStatus == 'Approved'" (click)="ActivateQuotation(); Activate.open()" type="button" class="btnDisplayed">Activate</button>
+        </div>
+        <ng-template #message>
+            <p class="no-message">Note: No action available for this quotation </p>
+        </ng-template>
+    </div>
+
+    <!-- <div *ngSwitchCase="'quotation'">
+        <button (click)="newTemplate()" type="button" class=" btnDisplayed">New Template</button>
+    </div> -->
+</div>
+
+<!-- display modal for delete quotation once delete button is clicked -->
+<modal #Delete [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Delete Quotation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p *ngIf="!isPopup" class="popup-body">{{message}}</p>
+        <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Login and try again.</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn btn-primary" (click)="Delete.close();closeQuotationDeletePopup()">Close</button>
+    </modal-footer>
+</modal>
+
+<!-- display modal for activate quotation once activate button is clicked -->
+<modal #Activate [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Activate Quotation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p *ngIf="!isPopup" class="popup-body">{{message}}</p>
+        <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Login and try again.</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="Activate.close()">Close</button>
+    </modal-footer>
+</modal>
+
+<!-- display modal for duplicate quotation once duplicate button is clicked -->
+<!-- provide forgiveness if the user wants to go back to previous step -->
+<modal #Duplicate1 [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Duplicate Quotation</h3>
+    </modal-header>
+    <modal-content>
+        <p class="popup-body">Duplicate selected quotation?</p>
+    </modal-content>
+    <modal-footer>
+        <button class="btn-primary-style" (click)="DuplicateQuotation(); Duplicate2.open(); Duplicate1.close()">Yes</button>
+        <button class="btn-secondary-style" (click)="Duplicate1.close()">No</button>
+    </modal-footer>
+</modal>
+
+<!-- confirmation on duplication of quotations -->
+<modal #Duplicate2 [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Duplicate Quotation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">Quotation duplicated successfully!</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="Duplicate2.close();">Close</button>
+    </modal-footer>
+</modal>
+
+<!-- display modal for modify quotation once modify button is clicked -->
+<modal #Modify [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Modify Quotation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">Please wait while we are processing your request. </p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="Modify.close()">Close</button>
+    </modal-footer>
+</modal>
+
+<!-- display modal for modify quotation once modify button is clicked -->
+<modal #View [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">View Quotation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">Please wait while we are processing your request. </p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="View.close()">Close</button>
+    </modal-footer>
+</modal>
+
+<modal #Confirmation [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Request For Confirmation</h3>
+    </modal-header>
+
+    <modal-content>
+        <p *ngIf="!isPopup" class="popup-body">{{message}}</p>
+        <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Login and try again.</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="Confirmation.close()">Close</button>
+    </modal-footer>
+</modal>

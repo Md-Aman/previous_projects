@@ -1,0 +1,105 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getCategories();getNewsRaStatus();defalt_view = true">
+    <h1>
+        RA Categories
+        <div class="pull-right"><button class="btn btn-info" ng-click="table_view = true; defalt_view = false">Table View</button>
+            <button class="btn btn-info" ng-click="defalt_view = true ;table_view = false ">Default view</button>
+        </div>
+    </h1>
+
+    <!--<ol class="breadcrumb">
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+    </ol>-->
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div ng-if="defalt_view == true" class="col-lg-3 col-xs-6" ng-repeat="category in categories track by $index">
+            <!--<a ui-sref="main.list_category_questionnaire({category_id:category._id})" class="small-box-footer">-->
+            <a style="cursor: pointer;" class="small-box-footer" ng-click="redirect(category._id)">
+                <div class="small-box" style="text-align: center; height: 123px;" ng-class="{ 'bg-green': ($index%7) ==0 , 
+            'bg-red': ($index%7)==1 , 
+            'bg-teal': ($index%7)==2,
+            'bg-maroon': ($index%7)==3,
+            'bg-orange': ($index%7)==4,
+            'bg-fuchsia': ($index%7)==5 ,
+            'bg-black': ($index%7)==6}">
+                    <div class="inner" style="padding:25px;">
+                        <h4 style="font-size: 18px;" class="text-capitalize">{{category.categoryName}}</h4>
+                    </div>
+        </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-xs-6" ng-if="defalt_view == true">
+        <a style="cursor: pointer;" class="small-box-footer" ng-click="redirectTo('main.addSupplier')">
+            <div class="small-box bg-aqua" style="text-align: center; height: 123px;">
+                <div class="inner" style="padding:25px;">
+                    <h4 style="font-size: 18px;" class="text-capitalize">supplier</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-xs-6" ng-if="defalt_view == true">
+        <a style="cursor: pointer;" class="small-box-footer" ng-click="redirectTo('main.addCommunication')">
+            <div class="small-box bg-aqua" style="text-align: center; height: 123px;">
+                <div class="inner" style="padding:25px;">
+                    <h4 style="font-size: 18px;" class="text-capitalize">communication</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-xs-6" ng-if="defalt_view == true">
+        <a style="cursor: pointer;" class="small-box-footer" ng-click="redirectTo('main.addContingenciesKit')">
+            <div class="small-box bg-aqua" style="text-align: center; height: 123px;">
+                <div class="inner" style="padding:25px;">
+                    <h4 style="font-size: 18px;" class="text-capitalize">contingencies / kit</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-xs-6" ng-if="defalt_view == true">
+        <a style="cursor: pointer;" class="small-box-footer" ng-click="redirectTo('main.addAnyOtherInfo')">
+            <div class="small-box bg-aqua" style="text-align: center; height: 123px;">
+                <div class="inner" style="padding:25px;">
+                    <h4 style="font-size: 18px;" class="text-capitalize">Any Other Information</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="box-body" ng-if="table_view == true" style="margin-left: 20px">
+        <table class="table table-bordered table-inverse" style="width: 80%;">
+            <thead class="thead-inverse" style="background-color: #778899">
+                <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="category in categories track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{category.categoryName}}</td>
+                    <td><button class="btn btn-info" ng-click="redirect(category._id)">
+                        <i class="fa fa-eye" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group col-sm-12">
+        <div class="pull-right box-tools">
+            <button type="button" ng-if="is_submitted == false" class="btn btn-sm btn-primary" ng-click="submitRAToManager();">Submit your RA to approving manager</button>
+
+            <button type="button" ng-if="(is_submitted == true && is_more_info == true)" class="btn btn-sm btn-primary" ng-click="submitRAToManager();">ReSubmit RA to approving manager</button>
+
+
+        </div>
+    </div>
+    </div>
+</section>
+<!-- /.content -->

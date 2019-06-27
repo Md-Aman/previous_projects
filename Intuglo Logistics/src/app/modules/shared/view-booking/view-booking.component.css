@@ -1,0 +1,27 @@
+.box { padding: 20px; position: relative; min-width: 780px; height: 600px; overflow: auto;}
+.box .cross { background: url(../../../../assets/img/icon-dialog-close.svg) center center no-repeat; width: 24px; height: 24px; cursor: pointer; position: absolute; top: 10px; right: 10px;}
+.box h2 { font-size: 20px; color: #333; font-weight: 100; margin: 0 0 20px 0;}
+.wizard { margin-bottom: 20px; border-bottom: 1px solid #dadada; position: relative; margin-top: 40px;}
+.wizard ul { margin: 0; padding: 0;}
+.wizard li { list-style: none; display: inline-block; padding: 0 0 10px 0; min-width: 19.5%;}
+.wizard li.steps { color: #333; font-size: 16px; font-weight: 100; text-align: center;}
+.wizard li.steps.borderBtm { border-bottom:3px solid #F58220; position: relative; top: 1px;}
+.wizard .wizard-bullet { background: #F58220; width: 100%; height: 1px; position: absolute; top: -20px;}
+.wizard .wizard-bullet::before { content: " "; width: 9.75%; height: 1px; background: #fff; position: absolute; left: 0; top: 0; z-index: 0;}
+.wizard .wizard-bullet::after { content: " "; width: 12.5%; height: 1px; background: #fff; position: absolute; right: 0; top: 0; z-index: 0;}
+.wizard .wizard-bullet .wiz-1 { background: #fff; border: 1px solid #F58220; width: 28px; height: 28px; z-index: 1; position: absolute; bottom: -13px; left: calc(9.75% - 14px); border-radius: 50%; font-size: 14px; color: #F58220; line-height: 28px; text-align: center;}
+.wizard .wizard-bullet .wiz-1.active { background:#F58220; color:#fff;}
+.wizard .wizard-bullet .wiz-1:nth-child(2){ left: calc(29.25% - 14px);}
+.wizard .wizard-bullet .wiz-1:nth-child(3){ left: calc(48.75% - 14px);}
+.wizard .wizard-bullet .wiz-1:nth-child(4){ left: calc(69.25% - 14px);}
+.wizard .wizard-bullet .wiz-1:nth-child(5){ left: calc(89.5% - 14px);}
+
+.form-group label { font-weight: 100;}
+textarea { height: 50px; padding: 10px; resize: none;}
+.tableDivStyle { height: 400px; background: #f0f0f0; padding: 20px;}
+.tableDivStyle .order-details { color: #333; font-size: 20px; font-weight: 300;}
+.tableDivStyle .tableStyle {}
+.tableDivStyle .tableStyle th { font-size: 14px; font-weight: 400; color: #333; border-top: 0;}
+.tableDivStyle .tableStyle td { font-size: 14px; font-weight: 100; color: #333;}
+.tableDivStyle .tableStyle tr.tr { background: #dadada;}
+.tableDivStyle .tableStyle tr.tr td { font-weight: 400;}

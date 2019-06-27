@@ -1,0 +1,98 @@
+<div class="card">
+        
+    <div class="row">
+        <div class="col-md-6">
+            <label class="label-control">Departure Port/Terminal</label>
+            <!-- <input ng2-auto-complete class="form-control with" [value]="firstPortFrom" /> -->
+            <!-- <select class="form-control" [ngModel]="firstPortFrom">
+                <option *ngFor="let port of filterList | unique:'portFrom'">{{port.port_name_departure}}</option>
+            </select> -->
+            <input  ng2-auto-complete [source]="portsDepartureSource" 
+            [list-formatter]="autocomplePortListFormatter"
+            value-property-name="port_id" display-property-name="port_name"
+             placeholder="MYPKG, Port Klang, Malaysia"
+            class="form-control" min-chars="1" [accept-user-input]="false" 
+            tab-to-select="true" [(ngModel)]="selectedDeparture"
+            >
+        </div>
+        <div class="col-md-6">
+            <label class="label-control">Arrival Port/Terminal</label>
+            <!-- <input class="form-control with"
+             [value]="firstPortTo" /> -->
+             <input  ng2-auto-complete [source]="portsArrivalSource" 
+            [list-formatter]="autocomplePortListFormatter"
+            value-property-name="port_id" display-property-name="port_name"
+             placeholder="MYPKG, Port Klang, Malaysia"
+            class="form-control" min-chars="1" [accept-user-input]="false" 
+            tab-to-select="true" [(ngModel)]="selectedArrival"
+            >
+            <!-- <select class="form-control" [ngModel]="firstPortTo">
+                <option *ngFor="let port of filterList">{{port.port_name_arrival}}</option>
+            </select> -->
+        </div>
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-md-6 relative">
+                <!-- <label class="label-control uppercase">Etd</label>
+                <div>
+                    <span>
+                        <input type="date" class="form-control" [(ngModel)]="etd" [value]="etd" readonly>
+                        <my-date-picker [options]="myStartDateOptions"
+                        [(ngModel)]="departDate" (dateChanged)="onStartDateChanged($event)" placeholder="dd/mm/yyyy" required></my-date-picker> --
+                    </span>
+                </div> -->
+            <shipment-calendar (selectedVesselFromCalendarChange)="selectedVesselFromCalendarParent($event)" 
+                [departurePortTerminal]="selectedDeparture"
+                [arrivalPortTerminal]="selectedArrival" class="modifiedCalendar" 
+                [hidden]="shipmentCalendarHidden" [hiddenChanges]="shipmentCalendarHidden"
+                [fromPage]="'adminOrderList'">
+            </shipment-calendar>
+            <div class="form-group has-feedback" (click)="toggleShipmentCalendar()">
+                <label class="control-label uppercase">ETD</label>
+                <input  [(ngModel)]="departDate" readonly type="text" 
+                class="form-control cursor-pointer" placeholder="Etd">
+                <i  class="fa fa-calendar form-control-feedback cursor-pointer"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="label-control uppercase">ETA</label>
+            <div>   
+                <span>
+                    <input type="date" class="form-control " [(ngModel)]="arrivalDate" [value]="eta" readonly>
+                    <!-- <my-date-picker name="eta" [options]="myEndDateOptions"
+                    [(ngModel)]="arrivalDate" (dateChanged)="onEndDateChanged($event)" placeholder="dd/mm/yyyy" required></my-date-picker> -->
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="label-control">Vessel/Flight</label>
+            <input readonly class="form-control" [(ngModel)]="firstVessel" />
+            <!-- <select class="form-control" disabled [ngModel]="firstVessel" 
+                (change)="onClickSelectedVessel($event.target.value)">
+                <option *ngFor="let vess of filterList" value={{vess.vessel_id}}>
+                    {{vess.vessel_no}}
+                </option>
+            </select> -->
+            
+        </div>
+        <div class="col-md-6">
+            <label class="label-control">Shipping Agent</label>
+            <select class="form-control" [ngModel]="firstSupplier" (change)="onClickSelectedSupplier($event.target.value)">
+                <option *ngFor="let agent of supplierList | unique: 'supplier_name'" value={{agent.supplier_login_id}}>{{agent.supplier_name}}</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-10">
+            <button type="submit" class="primary-btn" (click)="onFilter()">filter</button>
+        </div>
+    </div> 
+
+</div>
+

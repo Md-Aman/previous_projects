@@ -1,0 +1,14 @@
+<div class="side-menu">
+    <ul class="menu-content">
+        <li class="menu-item"><span class="dashboard">Dashboard</span></li>
+        <li class="menu-item" tabindex="step = 'one'" [ngClass]="{selectedmenu : fromDashboard}" (click)="menuOrder()">Order Management</li>
+        <li class="menu-item" tabindex="step = 'two'" [ngClass]="{selectedmenu : fromUM}" (click)="menuUser()">User Management</li>
+        <li class="menu-item" tabindex="step = 'three'" [ngClass]="{selectedmenu : fromQM}" (click)="menuQuotation()">Quotation Management</li>
+        <!-- <li class="menu-item" tabindex="step = 'four'" 
+            [ngClass]="{selectedmenu : stepFour}" (click)="menuCustom()">Custom Management</li> -->
+        <li class="menu-item not-allowed" tabindex="step = 'four'" [ngClass]="{selectedmenu : stepFour}" aria-disabled="true">Custom Management</li>
+        <li class="menu-item underline"><span class="dashboard">Reports</span></li>
+        <li class="menu-item" tabindex="step = 'five'" [ngClass]="{selectedmenu : fromEmployeeReport}" (click)="menuEmployeeReport()" >Employee Worksheet</li>
+        <li class="menu-item" tabindex="step = 'six'" [ngClass]="{selectedmenu : fromPaymentReport}" (click)="menuPaymentReport()" >Payment Report</li>   
+        </ul>   
+</div>

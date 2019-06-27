@@ -1,0 +1,84 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<p class="mg-bottom-25 _color-heading-primary">Assign specific questions to the individual risk label categories below:</p>
+
+<div class="subSet">
+    <div class="left mg-top-20">
+        <ul class="list-inline">
+            <li class="list-inline-item _color-heading-primary cursor-pointer" (click)="expandAll()">Expand all &nbsp;</li>
+            <li class="list-inline-item _color-heading-primary cursor-pointer" (click)="collapseAll()">
+              <span>|</span>&nbsp; Collapse all</li>
+          </ul>
+    </div>
+    <div class="left">
+        <div class="subSet _table">
+            <div class="subSet createNew pull-left mg-right-25" (click)="viewAllQuestions()">
+                <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+                <div class="left desc">
+                  <span>VIEW ALL</span>
+                  <span class="_b">QUESTIONS</span>
+                </div>
+              </div>
+            <!-- <div class="subSet createNew pull-left" [routerLink]="['/secure/client/create']">
+              <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+              <div class="left desc">
+                <span>CREATE NEW</span>
+                <span class="_b">QUESTION</span>
+              </div>
+            </div> -->
+          </div>
+    </div>
+
+  </div>
+
+<div class="row _customTab mg-top-20">
+
+  <div class="col-md-12">
+    <accordion class="relative" *ngFor="let label of riskLabelData;let i = index">
+      <accordion-group #grp *ngIf="label.rows.length > 0" [isOpen]="label.isOpen">
+          <div  accordion-heading class="btn btn-link"> {{label.categoryName}}
+              <i class="pull-right " [ngClass]="grp.isOpen ? 'arrowUp': 'arrowDown'"></i>
+          </div>
+          <div class="table-padding" *ngIf="label.rows.length > 0">
+              <app-collapsable-table
+              [rows]="label.rows" 
+              [columns]="columns" 
+              [page]="label.page" 
+              [columnMode]="'force'"
+              [riskMitigationTableRa]="riskMitigationTableRa"
+              (shareDataToParent)="receiveDataFromChild($event)"
+              >
+              </app-collapsable-table>
+            </div>
+
+
+          <div class="subSet _table add-question">
+            <div class="subSet createNew" (click)="addQuestion(label.categoryName,label._id)" >
+              <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+              <div class="left desc-mg-tp-31">
+                <span class="text-uppercase">assign question</span>
+              </div>
+            </div>
+          </div>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>
+
+<div class="left">
+    <div class="subSet _table">
+        <div class="subSet createNew pull-left mg-right-25" (click)="viewAllQuestions()">
+            <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+            <div class="left desc">
+              <span>VIEW ALL</span>
+              <span class="_b">QUESTIONS</span>
+            </div>
+          </div>
+      </div>
+</div>
+
+<div class="subSet mg-top-20">
+  <div class="right _btn fixed">
+    <a class="prev" (click)="riskMitigation('previous', false)">Previous</a>
+    <button type="submit" class="cont" (click)="riskMitigation('next', true)">Save + Continue</button>
+  </div>
+</div>

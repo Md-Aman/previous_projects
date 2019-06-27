@@ -1,0 +1,278 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+
+<form [formGroup]="trainingForm" (submit)="submitForm(trainingForm.value)">
+<div class="accord relative">
+  <span>Hostile Environment  Course Details / Date</span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control" formControlName="course_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp1="bsDatepicker" class="form-control" bsDatepicker  formControlName="course_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp1.toggle()" [attr.aria-expanded]="dp1.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp2="bsDatepicker" class="form-control" bsDatepicker  formControlName="course_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp2.toggle()" [attr.aria-expanded]="dp2.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control"  formControlName="course_qualification">
+    </div>
+</div>
+</div>
+
+<div class="accord relative">
+  <span>Hostile Environment Refresher / Date</span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control"  formControlName="refresher_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp3="bsDatepicker" class="form-control" bsDatepicker formControlName="refresher_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp3.toggle()" [attr.aria-expanded]="dp3.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp4="bsDatepicker" class="form-control" bsDatepicker formControlName="refresher_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp4.toggle()" [attr.aria-expanded]="dp4.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control" formControlName="refresher_qualification">
+    </div>
+</div>
+</div>
+
+
+<div class="accord relative">
+  <span>Public Order Course Details / Date</span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control" formControlName="public_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp5="bsDatepicker" class="form-control" bsDatepicker  formControlName="public_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp5.toggle()" [attr.aria-expanded]="dp5.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp6="bsDatepicker" class="form-control" bsDatepicker  formControlName="public_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp6.toggle()" [attr.aria-expanded]="dp6.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control"  formControlName="public_qualification">
+    </div>
+</div>
+</div>
+
+<div class="accord relative">
+  <span>First Aid at Work </span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control"  formControlName="aid_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp7="bsDatepicker" class="form-control" bsDatepicker formControlName="aid_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp7.toggle()" [attr.aria-expanded]="dp7.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp8="bsDatepicker" class="form-control" bsDatepicker formControlName="aid_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp8.toggle()" [attr.aria-expanded]="dp8.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control" formControlName="aid_qualification">
+    </div>
+</div>
+</div>
+
+
+<div class="accord relative">
+  <span>Trauma Risk Management </span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control" formControlName="risk_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp9="bsDatepicker" class="form-control" bsDatepicker formControlName="risk_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp9.toggle()" [attr.aria-expanded]="dp9.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp10="bsDatepicker" class="form-control" bsDatepicker formControlName="risk_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp10.toggle()" [attr.aria-expanded]="dp10.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control" formControlName="risk_qualification">
+    </div>
+</div>
+</div>
+
+<div class="accord relative">
+  <span>Manual Handling Course</span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control" formControlName="manual_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp11="bsDatepicker" class="form-control" bsDatepicker formControlName="manual_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp11.toggle()" [attr.aria-expanded]="dp11.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp12="bsDatepicker" class="form-control" bsDatepicker formControlName="manual_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp12.toggle()" [attr.aria-expanded]="dp12.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control" formControlName="manual_qualification">
+    </div>
+</div>
+</div>
+
+<div class="accord relative">
+  <span>Muscoskeletal Assessment and Training </span>
+  <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+<div class="row">
+    <div class="form-group col-md-3">
+      <label>Provider</label>
+      <input type="text" class="form-control" formControlName="assessment_provider">
+    </div>
+    <div class="form-group col-md-3">
+      <label>When Taken</label>
+      <div class="relative _updCal">
+        <input type="text" #dp13="bsDatepicker" class="form-control" bsDatepicker formControlName="assessment_taken"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp13.toggle()" [attr.aria-expanded]="dp13.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Months Valid for</label>
+      <div class="relative _updCal">
+        <input type="text" #dp14="bsDatepicker" class="form-control" bsDatepicker formControlName="assessment_valid"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+        <span class="arrow" (click)="dp14.toggle()" [attr.aria-expanded]="dp14.isOpen"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Qualification</label>
+      <input type="text"  class="form-control" formControlName="assessment_qualification">
+    </div>
+</div>
+</div>
+
+<div class="accord relative">
+  <span>Additional Training / Level / Date</span>
+  <i class="arrowUp"></i>
+</div>
+
+<div class="accord-content">
+<div formArrayName="additionalTrainingArray">
+  <ng-container *ngFor="let local of trainingForm.get('additionalTrainingArray')['controls']; let i=index">
+    <ng-container [formGroupName]="i">
+      <div class="row">
+        <div class="form-group col-md-11">
+          <label>Provider {{1+i}}</label>
+          <input type="text" formControlName="provider" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+          <label></label>
+          <button *ngIf="trainingForm.get('additionalTrainingArray')['controls'].length > 1" type="button" class="btn btn-sm btn-danger _cross-field pull-right"
+            (click)="deleteAdditionalTrainingArray(i)">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <div class="row">
+    <div class="col-md-6">
+        <button *ngIf="!maxInfoReached" type="button" class="btn btn-sm btn-primary margin-top-set dp-block" title="Add Passport Details"
+        (click)="addAdditionalTrainingArray()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        <span *ngIf="maxInfoReached">Additional Training / Level / Date Limit Reached.</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="subSet">
+  <div class="right _btn fixed">
+      <a class="prev" (click)="navigatePrevTab()">Previous</a>
+      <button type="submit" class="cont">Save</button>
+    </div>
+</div>
+</form>

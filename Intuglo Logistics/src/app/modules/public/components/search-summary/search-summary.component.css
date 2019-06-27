@@ -1,0 +1,8 @@
+.vessel-route { width:100%; background: url(../../../../../assets/img/arrow-port-indication.svg) 40% center no-repeat #fff; background-size: 16px; border-bottom: 1px solid #DEDEDE; padding: 20px;}
+.vessel-route .vessel-route-half { width: 47%; }
+.vessel-route .vessel-route-half p { font-size: 14px; color: #666; font-weight: 100; margin-bottom: 0;}
+.vessel-route .vessel-route-half p.port { font-size: 14px; color: #333; text-transform: uppercase; }
+.found { padding: 10px 20px; background: #fff;}
+.found p { font-size: 14px; color: #888; font-weight: 100; margin: 5px 0 0 0;}
+.found p.danger { color: rgb(243, 18, 18);}
+.found select { -webkit-appearance: none; background: url(../../../../../assets/img/arrow-down.svg) center right no-repeat; border: 0; outline: none; padding: 5px 20px 5px 10px; font-size: 14px; color: #333; font-weight: 100; background-size: 12px; min-width: 80px;}

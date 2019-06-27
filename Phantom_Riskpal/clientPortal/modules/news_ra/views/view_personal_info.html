@@ -1,0 +1,90 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getTravellerInfo();">
+    <h1>
+        Traveller's Personal Information
+        <!-- <small>New Contact</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Traveller's Personal Information</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-search"></i> Traveller's Personal Information
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="newsRaForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <h4 style="margin-left: 16px"> Traveller's details</h4>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's First Name'" type="text" class="form-control" ng-model="traveller.firstname" disabled placeholder="First Name"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Last Name'" type="text" class="form-control" ng-model="traveller.lastname" disabled placeholder="Last Name"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Email'" type="text" class="form-control" ng-model="traveller.email" disabled placeholder="Email"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="traveller.dob" disabled placeholder="Date of Birth"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Gender'" type="text" class="form-control" ng-model="traveller.gender" disabled placeholder="Gender"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Mobile Number'" type="text" class="form-control" ng-model="traveller.contact" disabled placeholder="Mobile Number"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Nationality'" type="text" class="form-control" ng-model="traveller.nationality" disabled placeholder="Nationality"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Passport Number" type="text" class="form-control" ng-model="traveller.passport" disabled
+                                        placeholder="Passport Number" />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <h4 style="margin-left: 16px"> Note for approving manager</h4>
+                                <div class="col-sm-10">
+                                    <div ng-bind-html="traveller.notes_for_approving_manager"></div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-10">
+                                <div class="pull-right box-tools" ng-if="log.length == 0">
+                                    <button type="button" class="btn btn-sm btn-primary" ui-sref="main.terms_and_condition({traveller_id:traveller._id})">View Medical Information</button>
+                                </div>
+                                <div class="pull-right box-tools" ng-if="log.view_medical_info == true">
+                                    <button type="button" class="btn btn-sm btn-primary" ui-sref="main.view_medical_info({traveller_id:traveller._id})">View Medical Information</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                </form>
+                <!--<div ng-if="traveller.medical_info">No Record found</div>
+                </div>-->
+        </section>
+        </div>
+</section>

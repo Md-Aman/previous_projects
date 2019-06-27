@@ -1,0 +1,72 @@
+<div class="card-action-button">
+    <button type="button" *ngIf="documentLength" class="btnDisplayed">Download Documents</button>
+    <button type="button" *ngIf="customStatus != 'DOCUMENTSUBMITTED'" (click)="documentSubmitted();DocumentSubmitted.open()" class="btnDisplayed">Documents Submitted</button>
+    <button type="button" *ngIf="customStatus != 'CARGOCLEAREDDEPARTURE'" (click)="customApproved();CustomApproved.open()" class="btnDisplayed">Custom Approved</button>
+    <button type="button" *ngIf="customStatus != 'REJECTEDBYCUSTOM'" (click)="customRejected();CustomRejected.open()" class="btnDisplayed">Custom Rejected</button>
+    <button type="button" *ngIf="customStatus != 'HOLDBYCUSTOM'" (click)="holdByCustom();HoldByCustom.open()" class="btnDisplayed">Hold By Custom </button>
+</div>
+
+<modal #DocumentSubmitted [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Documents Submitted</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup();DocumentSubmitted.close()">Close</button>
+        <!-- <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DocumentSubmitted.close()">Yes</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DocumentSubmitted.close()">No</button> -->
+    </modal-footer>
+</modal>
+
+
+<modal #CustomApproved [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Custom Approved</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup();CustomApproved.close()">Close</button>
+        <!-- <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DocumentSubmitted.close()">Yes</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DocumentSubmitted.close()">No</button> -->
+    </modal-footer>
+</modal>
+
+<modal #CustomRejected [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Custom Rejected</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup();CustomRejected.close()">Close</button>
+        <!-- <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DocumentSubmitted.close()">Yes</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DocumentSubmitted.close()">No</button> -->
+    </modal-footer>
+</modal> 
+
+<modal #HoldByCustom [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Hold By Custom</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup();HoldByCustom.close()">Close</button>
+        <!-- <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DocumentSubmitted.close()">Yes</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DocumentSubmitted.close()">No</button> -->
+    </modal-footer>
+</modal>

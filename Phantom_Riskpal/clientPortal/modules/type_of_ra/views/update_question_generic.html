@@ -1,0 +1,76 @@
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <!-- /. tools -->
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Update Question
+                    </h3>
+                    <div class="pull-right box-tools">
+                        <!--<a ng-click="createNewQueForRa()">
+                            <button class="btn btn-sm btn-info">New Question</button>
+                        </a>-->
+                        <!--<a style="cursor: pointer">
+                             <button class="btn btn-sm btn-info"  ng-click="redirectToAddCat()">New Category</button>
+                        </a>-->
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="questionnaireForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-5">
+                                    <label class="col-sm-4 control-label">Question</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="question" name="question" placeholder="Enter Question" required ng-model="questionnaire.question"
+                                        />
+                                        <span class="text-danger" ng-show="questionnaireForm.question.$dirty &&  questionnaireForm.question.$error.required">Question is required</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-5">
+                                    <label class="col-sm-4 control-label">Select Category</label>
+                                    <div class="col-sm-8">
+                                        <div isteven-multi-select input-model="categoryArr" output-model="questionnaire.category_id" button-label="categoryName"
+                                            item-label="categoryName" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                            data-placement="top" title="Select Category" data-trigger="hover" tabindex="6" name="category"
+                                            helper-elements="filter"></div>
+                                    <span class="text-danger" ng-show="questionnaireForm.category.$dirty &&  questionnaireForm.category.$error.required">Category is required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-10">
+                                <label class="col-sm-2 control-label">Best Practice Advice</label>
+                                <div class="col-sm-10">
+                                    <textarea name="description" id="editor1" rows="10" cols="95" ng-model="questionnaire.best_practice_advice" tabindex="3">
+                                        </textarea>
+                                    <span class="text-danger" ng-show="questionnaireForm.best_practice_advice.$dirty &&  questionnaireForm.best_practice_advice.$error.required">Best Practice Advice is required</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-9">
+
+                            <!--<div class="pull-right box-tools">
+                                <button ng-disabled="questionnaireForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="addQuestionnaire(questionnaire);">Next</button>
+                            </div>-->
+                            <div class="pull-right box-tools">
+                                <button ng-disabled="questionnaireForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right:-34px;" ng-click="updateQuestionToGeneric(questionnaire);">Update</button>
+                            </div>
+                            <!--<div class="pull-right box-tools">-->
+                                <!--<button ng-disabled="categoryForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right: 16px;" ng-click="addCategory(category);">Previous</button>-->
+                                <!--<a class="btn btn-sm btn-primary" style="margin-right: 16px;" ui-sref="add_risk_assisment.step2({ra_id:ra_id})">Previous</a>
+                            </div>-->
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+        </section>
+    </div>
+</section>

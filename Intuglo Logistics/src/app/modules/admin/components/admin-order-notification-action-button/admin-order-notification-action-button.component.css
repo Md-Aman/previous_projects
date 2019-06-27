@@ -1,0 +1,73 @@
+.card-action-button{
+    background-color: #F6F8F8;
+      height: 70px;
+      box-shadow: 0 1px 0 0 #DEE5E7;
+  }
+  .btnDisplayed{
+    height: 30px;	
+    width: 165px;
+    border: 1px solid #CED0DA;
+    background: linear-gradient(0deg, #F2F4F7 0%, #FFFFFF 100%);
+    color: #354052;	
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 730;
+    line-height: 19px;	
+    text-align: center;
+  
+  }
+  
+  .btnColor{
+    color: white;
+    background-color: brown;
+  }
+  .btn-link{
+      color: red;
+  }
+  .padding-top-left{
+    padding-top: 24px;
+    padding-left: 26px;
+  }
+  .centered{
+    text-align:center;
+  }
+  .popup-header{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .popup-body{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .centered{
+    text-align:center;
+  }
+
+  .popup-header{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .popup-body{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  #form-title{
+    color: black;
+    margin-top: 25px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    background-color: #647FC9;
+    width: 1000px;
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size:16px;
+}

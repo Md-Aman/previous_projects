@@ -1,0 +1,77 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<div class="_customFrom">
+  <form [formGroup]="templateDetailsForm" (ngSubmit)="submitTemplateFrom()">
+    <div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Department</label>
+          <ng-select [items]="deptList" [multiple]="true" [closeOnSelect]="false" bindLabel="department_name" formControlName="Department">
+            <ng-template ng-header-tmp>
+              <span type="button" (click)="selectAllDepartment()" class="btn btn-sm btn-secondary">Select all</span>
+              &nbsp;
+              <span type="button" (click)="unSelectAllDepartment()" class="btn btn-sm btn-secondary">Unselect all</span>
+          </ng-template>
+          </ng-select>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Country</label>
+          <ng-select [items]="countryList" [multiple]="true" [searchFn]="customSearchFn" [virtualScroll]="true" [closeOnSelect]="false" bindLabel="name" formControlName="Country">
+              <ng-template ng-header-tmp>
+                  <span type="button" (click)="selectAllCountry()" class="btn btn-sm btn-secondary">Select all</span>
+                  &nbsp;
+                  <span type="button" (click)="unSelectAllCountry()" class="btn btn-sm btn-secondary">Unselect all</span>
+              </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <p class="tabs"><span class="tab">Select which pages you would like to appear in the risk assessment:</span></p>
+ 
+      <div class="checkboxArea mg-top-20">
+          <div class="checkboxBlock">
+            <p>Country Profile Page</p>
+            <div class="relative">
+              <input class="_customCheckbox" formControlName="CountryProfile" type="checkbox" (click)="getSelectedItem('countryrequired', $event.target.checked)"
+                >
+              <label></label>
+            </div>
+          </div>
+          <div class="checkboxBlock">
+            <p>Risks & Mitigation</p>
+            <div class="relative">
+              <input class="_customCheckbox" formControlName="Risk" type="checkbox" (click)="getSelectedItem('questionRequired', $event.target.checked)" >
+              <label></label>
+            </div>
+          </div>
+          <div class="checkboxBlock">
+            <p>Supplier Information</p>
+            <div class="relative">
+              <input class="_customCheckbox" formControlName="Supplier" type="checkbox" (click)="getSelectedItem('supplierRequired', $event.target.checked)" >
+              <label></label>
+            </div>
+          </div>
+          <div class="checkboxBlock">
+            <p>Communications</p>
+            <div class="relative">
+              <input class="_customCheckbox" formControlName="Communication" type="checkbox" (click)="getSelectedItem('communicationRequired', $event.target.checked)">
+              <label></label>
+            </div>
+          </div>
+          <div class="checkboxBlock">
+            <p>Contingencies</p>
+            <div class="relative">
+              <input class="_customCheckbox" formControlName="Contingency" type="checkbox" (click)="getSelectedItem('contingenciesRequired', $event.target.checked)">
+              <label></label>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="subSet">
+      <div class="right _btn fixed">
+        <!-- <a class="prev" href="">Previous</a> -->
+        <button type="submit" class="cont">Continue</button>
+        <!-- <button type="submit" class="cont">Save + Continue</button> -->
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,81 @@
+<div [ngSwitch]="step" class="card-action-button">
+    <div class="subSet">
+        <div *ngSwitchCase="'booking'">
+            <button (click)="changeStatusToOrderDropped(); DropOrder.open()" type="button" class="btnDisplayed">Drop Order</button>
+            <button (click)="changeStatusToOrderLockIn(); LockIn.open()" type="button" class="btnDisplayed">Order Lock In</button>
+        </div>
+        <div *ngSwitchCase="'cargo'">
+            <button (click)="changeStatusToCargoReleased(); CargoReleased.open()" type="button" class="btnDisplayed">Cargo Released</button>
+        </div>
+        <div *ngSwitchCase="'payment'">
+            <button (click)="GeneratePaymentList(); Generate.open()" type="button" class=" btnDisplayed">Generate Payment List</button>
+        </div>
+    </div>
+</div>
+
+<!-- Change Booking Status to order drop -->
+<modal #DropOrder [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Order Dropped</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();DropOrder.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DropOrder.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DropOrder.close()">No</button>
+    </modal-footer>
+</modal>
+
+<!-- Change Booking Status to order Lock In -->
+<modal #LockIn [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Order Lock In</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();LockIn.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();LockIn.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();LockIn.close()">No</button>
+    </modal-footer>
+</modal>
+
+
+<!-- Change Booking Status to cargo released -->
+<modal #CargoReleased [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Cargo Released</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();CargoReleased.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();CargoReleased.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();CargoReleased.close()">No</button>
+    </modal-footer>
+</modal>
+
+
+<modal #Generate [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Generate Payment List</h3>
+    </modal-header>
+
+    <modal-content>
+        <p class="popup-body">Under progress!</p>
+    </modal-content>
+
+    <modal-footer>
+        <button class="btn-primary-style" (click)="Generate.close()">Close</button>
+    </modal-footer>
+</modal>

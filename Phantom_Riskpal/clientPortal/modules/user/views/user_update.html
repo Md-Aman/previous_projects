@@ -1,0 +1,335 @@
+<style>
+  /*input[type='file'] {
+          color: transparent;
+      }
+      */
+  
+  .checkbox {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 10px;
+    line-height: 18px;
+  }
+  
+  input[type=checkbox] {
+    display: none;
+  }
+  
+  .checkbox:before {
+    content: "";
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+    background-color: #FFC200;
+    color: #f3f3f3;
+    text-align: center;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    border-radius: 3px;
+  }
+  
+  .checkbox.pl:before {
+    background-color: green;
+  }
+  
+  .checkbox.p2:before {
+    background-color: red;
+  }
+  
+  input[type=checkbox]:checked+.checkbox:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 30px;
+  }
+  
+  </style>
+  <!-- Content Header (Page header) -->
+  <section class="content-header" ng-init="getAllClients();getUserDetails();getCountries();getProofOfLifeQuestions();">
+    <h1>
+          User
+          <!-- <small>New Contact</small> -->
+      </h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li class="active">Edit User</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content" >
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+      <section class="col-lg-12">
+        <div class="box box-primary box-solid">
+          <div class="box-header">
+            <h3 class="box-title">Edit User
+                      </h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form role="form" name="usereditForm" novalidate class="form-horizontal">
+            <div class="box-body">
+              <div ng-if="showLoader" class="col-lg-7 pull-right">
+                <div loader-css="ball-pulse"></div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <div class="col-sm-5">
+                    <label>
+                      <h5>First name</h5></label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter first name" required ng-model="userform.firstname" autocomplete="off" maxlength="30" />
+                    <span class="text-danger" ng-show="usereditForm.firstname.$dirty &&  usereditForm.firstname.$error.required">First is required</span>
+                  </div>
+                   <div class="col-sm-5">
+                    <label>
+                      <h5>Last name</h5></label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter last name" required ng-model="userform.lastname" autocomplete="off" maxlength="30" />
+                    <span class="text-danger" ng-show="usereditForm.lastname.$dirty &&  usereditForm.lastname.$error.required">Lastname is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-12">
+   
+                     <div class="col-sm-5 input-width-100">
+                      <label class="col-sm-12" style="padding-left: 0px;"><h5>Mobile number</h5></label>
+                      <input type="text" class="form-control" type="tel" id="number" ng-model="userform.mobile_number"    ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" maxlength="15" autocomplete="off" name="number" international-phone-number placeholder="Enter mobile number"  />
+                      <span class="text-danger" ng-show="usereditForm.number.$dirty &&  usereditForm.number.$error.required">Mobile number is required</span>
+                      <span class="text-danger" ng-show="usereditForm.number.$dirty &&  usereditForm.number.$error.pattern">Mobile number is not valid</span>
+                    </div>
+                    <div class="col-sm-5">
+                      <label>
+                        <h5>Email</h5></label>
+                      <input type="text" class="form-control" id="email" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off" placeholder="Enter Email"  ng-model="userform.email" required />
+                      <span class="text-danger" ng-show="usereditForm.email.$dirty &&  usereditForm.email.$error.required">Email is required</span>
+                      <span class="text-danger" ng-show="usereditForm.email.$dirty &&  usereditForm.email.$error.pattern">Email is not valid</span>
+                    </div>
+                 
+                </div>
+                <div class="form-group col-sm-12" ng-if="superAdminUserData.super_admin == true">
+                  <div class="col-sm-5">
+                    <label>
+                      <h5>Client</h5></label>
+                      <select class="form-control" name="client" id="client" ng-model="userform.client"  ng-change="clientusergroup(userform)" >
+                      
+                        <option ng-repeat="option in clientArr" value="{{option}}" ng-selected="userform.client_id == option._id">{{option.company_name}}</option>
+                      </select>
+                      <span class="text-danger" ng-show="usereditForm.client.$dirty &&  usereditForm.client.$error.required">Client is required</span>
+                  </div>
+                  <div class="col-sm-5">
+                    <label>
+                      <h5> User group</h5></label>
+                      <select class="form-control" name="usergroups" id="usergroups" ng-model="userform.usergroups"  >
+                      
+                        <option ng-repeat="usergroups in usergroupArr" value="{{usergroups}}" ng-selected="userform.roleId == usergroups._id">{{usergroups.group_name}}</option>
+                      </select>
+                    <span class="text-danger" ng-show="usereditForm.usergroups.$dirty &&  usereditForm.usergroups.$error.required">Usergroup is required</span>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12" ng-if="superAdminUserData.super_admin == false">
+                  
+                    <div class="col-sm-5">
+                      <label>
+                        <h5> User group</h5></label>
+                        <select class="form-control" name="usergroups" id="usergroups" ng-model="userform.usergroups"  >
+                        
+                          <option ng-repeat="usergroups in usergroupArr" value="{{usergroups}}" ng-selected="userform.roleId == usergroups._id">{{usergroups.group_name}}</option>
+                        </select>
+                      <span class="text-danger" ng-show="usereditForm.usergroups.$dirty &&  usereditForm.usergroups.$error.required">Usergroup is required</span>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <label>
+                          <h5> Department</h5></label>
+                        <div isteven-multi-select input-model="departmentArr" output-model="userform.departmentArr" button-label="department_name" item-label="department_name" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select Department" data-trigger="hover" tabindex="6" name="department" output-properties="_id"></div>
+                        <span class="text-danger" ng-show="usereditForm.category.$dirty &&  usereditForm.department.$error.required">Department is required</span>
+                      </div>
+                  </div>
+  
+                <div class="form-group col-sm-12" ng-if="superAdminUserData.super_admin == true">
+                  <div class="col-sm-5">
+                    <label>
+                      <h5> Department</h5></label>
+                    <div isteven-multi-select input-model="departmentArr" output-model="userform.departmentArr" button-label="department_name" item-label="department_name" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select Department" data-trigger="hover" tabindex="6" name="department" output-properties="_id"></div>
+                    <span class="text-danger" ng-show="usereditForm.category.$dirty &&  usereditForm.department.$error.required">Department is required</span>
+                  </div>
+                  
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <div class="form-group col-sm-5">
+                    <label class="col-sm-12 text-left">Date Of Birth</label>
+                    <div class="col-sm-12">
+                      <div class="input-group">
+                        <div class="btn btn-primary input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></div>
+                        <input type="text" placeholder="Enter date of birth" class="form-control" datepicker-popup="{{format}}" ng-model="personal_details.dob" is-open="opened" max-date="dtmax"  close-text="Close" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-5">
+                    <label class="col-sm-12 text-left">Gender</label>
+                    <div class="col-sm-12">
+                      <select class="form-control" id="gender" name="gender"  ng-model="personal_details.gender">
+                        <option ng-selected="true">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                      <span class="text-danger" ng-show="passportDetailsForm.gender.$dirty &&  passportDetailsForm.gender.$error.required">Gender is required</span>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form-group col-sm-12" ng-repeat=" passportData in  passport_de track by $index">
+                  <div class="form-group col-sm-3">
+                    <label class="col-sm-12 text-left">Nationality</label>
+                    <div class="col-sm-12">
+                      <select class="form-control" name="nationality" id="nationality" ng-model="passport_de[$index].nationality" >
+                        <option ng-selected="true">Select Country</option>
+                        <option ng-repeat="option in countryArr" value="{{option.name}}" ng-selected="{{passportData.nationality == option.name}}">{{option.name}}</option>
+                      </select>
+                      <span class="text-danger" ng-show="passportDetailsForm.country.$dirty &&  passportDetailsForm.country.$error.required">Country is required</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label class="col-sm-12 text-left">Passport Number</label>
+                    <div class="col-sm-12">
+                      <input class="form-control" autocomplete="off" name="passport_number" ng-model="passport_de[$index].passport_number" type="text" placeholder="Passport Number" >
+                      <span class="text-danger" ng-show="passportDetailsForm.passport_number.$dirty &&  passportDetailsForm.passport_number.$error.required">Passport Number is required</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label class="col-sm-12 text-left">Issue Date</label>
+                    <div class="col-sm-12">
+                      <input class="form-control" autocomplete="off" name="issuedate" ng-model="passport_de[$index].issuedate" type="date" placeholder="Passport Number" >
+                      <span class="text-danger" ng-show="passportDetailsForm.passport_number.$dirty &&  passportDetailsForm.issuedate.$error.required">Passport Number is required</span>
+                    
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label class="col-sm-12 text-left">Expiry Date</label>
+                    <div class="col-sm-12">
+                      <input class="form-control" autocomplete="off" name="expirydate" ng-model="passport_de[$index].expirydate" type="date" placeholder="Passport Number" >
+                      <span class="text-danger" ng-show="passportDetailsForm.passport_number.$dirty &&  passportDetailsForm.issuedate.$error.required">Passport Number is required</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-primary margin-top-set" ng-show="$first" title="Add Passport Details" ng-click="addPassportDetails()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  <button class="btn btn-sm btn-danger margin-top-set" ng-show="$last && $index != 0" title="Remove Passport Details" ng-click="removePassportDetails()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                </div>
+                <div class="form-group col-sm-8">
+                  <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Emergency Contact
+                                      </h3>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Full name</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="full_name" ng-model="passport_details.full_name" type="text" placeholder="Full Name"  maxlength="50">
+                    <span class="text-danger" ng-show="passportDetailsForm.full_name.$dirty &&  passportDetailsForm.full_name.$error.required">Full Name is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Mobile number</label>
+                  <div class="col-sm-12 width-input-100">
+                    <input class="form-control"  style="width: 100%" international-phone-number autocomplete="off" name="number" ng-model="passport_details.mobile_number" type="tel" placeholder=" Enter mobile number"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" maxlength="15">
+                    <span class="text-danger" ng-show="usereditForm.number.$dirty &&  usereditForm.number.$error.pattern">Mobile number is not valid</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Email address</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="emergency_email" ng-model="passport_details.email" type="text" placeholder="Enter email address"  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="60">
+                    <span class="text-danger" ng-show="passportDetailsForm.emergency_email.$dirty &&  passportDetailsForm.emergency_email.$error.required">email is required</span>
+                    <span class="text-danger" ng-show="usereditForm.emergency_email.$dirty &&  usereditForm.emergency_email.$error.pattern">email is not valid</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Relationship to you</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="relationship_to_you" ng-model="passport_details.relationship_to_you" type="text" placeholder="Relationship to you"   maxlength="50">
+                    <span class="text-danger" ng-show="passportDetailsForm.relationship_to_you.$dirty &&  passportDetailsForm.relationship_to_you.$error.required">Relationship to you is required</span>
+                    <span class="text-danger" ng-show="passportDetailsForm.relationship_to_you.$dirty &&  passportDetailsForm.relationship_to_you.$error.pattern">Relationship to you is not valid</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-8">
+                  <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Alternative Emergency Contact
+                                      </h3>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Full name</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="alternative_full_name" ng-model="passport_details.alternative_full_name" type="text" placeholder="Full Name"  maxlength="50">
+                    <span class="text-danger" ng-show="passportDetailsForm.alternative_full_name.$dirty &&  passportDetailsForm.alternative_full_name.$error.required">Full name is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Mobile number</label>
+                  <div class="col-sm-12 width-input-100">
+                    <input class="form-control" style="width: 100%" international-phone-number autocomplete="off" type="tel" name="alternative_mobile_number" type="tel" ng-model="passport_details.alternative_mobile_number" type="text" placeholder="Enter mobile number"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" maxlength="15">
+                    <span class="text-danger" ng-show="passportDetailsForm.alternative_mobile_number.$dirty &&  passportDetailsForm.alternative_mobile_number.$error.required">Mobile number is required</span>
+                    <span class="text-danger" ng-show="usereditForm.alternative_mobile_number.$dirty &&  usereditForm.alternative_mobile_number.$error.pattern">Mobile number is not valid</span>
+                  </div>
+  
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Email address</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="alternative_email" ng-model="passport_details.alternative_email" type="text" placeholder="Enter email address"  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="60">
+                    <span class="text-danger" ng-show="passportDetailsForm.alternative_email.$dirty &&  passportDetailsForm.alternative_email.$error.required">email is required</span>
+                    <span class="text-danger" ng-show="usereditForm.alternative_email.$dirty &&  usereditForm.alternative_email.$error.pattern">email is not valid</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Relationship to you</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="alternative_relationship_to_you" ng-model="passport_details.alternative_relationship_to_you" type="text" placeholder="Relationship to you"   maxlength="50">
+                    <span class="text-danger" ng-show="passportDetailsForm.alternative_relationship_to_you.$dirty &&  passportDetailsForm.alternative_relationship_to_you.$error.required">Relationship to you is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-8">
+                  <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Proof Of Life
+                                      </h3>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Proof of life question</label>
+                  <div class="col-sm-12">
+                    <select class="form-control" name="Proof_of_life_question" id="nationality" ng-model="personal_details.proof_of_life_question" >
+                      <option ng-selected="true">Select proof of life Question</option>
+                      <option ng-repeat="proof_of_life in proofOfLifeQuestions" value="{{proof_of_life.question}}" ng-selected="{{personal_details.proof_of_life_question == proof_of_life.question}}">{{proof_of_life.question}}</option>
+                    </select>
+                    <span class="text-danger" ng-show="passportDetailsForm.Proof_of_life_question.$dirty &&  passportDetailsForm.Proof_of_life_question.$error.required">Proof of life question is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Proof of life answer</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="proof_of_life_answer" ng-model="personal_details.proof_of_life_answer" type="text" placeholder="Proof Of Life Answer"  maxlength="50">
+                    <span class="text-danger" ng-show="passportDetailsForm.proof_of_life_answer.$dirty &&  passportDetailsForm.proof_of_life_answer.$error.required">Proof of life answer is required</span>
+                  </div>
+                </div>
+                
+                <div class="" style="clear:both;" ng-show="messageError">
+                    <div class="form-group col-sm-12">
+                    <div class="alert alert-danger" >
+                           <div ng-bind-html="messageError" ></div>
+                    </div>
+                    </div>
+                </div> 
+  
+                <div class="form-group col-sm-10">
+                  <div class="pull-right box-tools">
+                    <button ng-disabled="usereditForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="updateUser(userform);">Update User</button>
+                  </div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+          </form>
+          </div>
+      </section>
+      </div>
+  </section>
+  

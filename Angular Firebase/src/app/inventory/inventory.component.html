@@ -1,0 +1,44 @@
+<div class="container">
+  <h2 class="text-center">
+    <strong>Inventory</strong>
+  </h2>
+  <form [formGroup]="register" (ngSubmit)="onSubmitItem()">
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <input type="text" formControlName="ItemDescription" #desciption [(ngModel)]="item_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ItemDescription.errors }"
+          placeholder="Enter item name" />
+        <div *ngIf="submitted && f.ItemDescription.errors" class="invalid-feedback">
+          <div *ngIf="f.ItemDescription.errors.required">Item Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-2">
+        <button class="btn btn-primary">Add Item</button>
+      </div>
+    </div>
+  </form>
+
+
+  <h5 class="">Items Available</h5>
+  <ul class="list-inline">
+    <li class="list-inline-item user-name btn btn-outline-success list-css" (click)="getAvailableItemId(item.id, item.data.item_name)"
+      *ngFor="let item of items_available | async;">{{ item.data.item_name }}</li>
+  </ul>
+  
+  <h5 class="">Items Finished</h5>
+  <ul class="list-inline">
+    <li class="list-inline-item user-name btn btn-outline-warning list-css" (click)="getUnavailableItemId(item.id,item.data.item_name)"
+      *ngFor="let item of items_unavailable | async;">{{ item.data.item_name }}</li>
+  </ul>
+</div>
+
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button>
+  </div>
+</div>

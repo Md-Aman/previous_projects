@@ -1,0 +1,318 @@
+@charset "~bootstrap/dist/css/bootstrap.css";
+label {
+    font-size: 12px;
+    font-weight: normal;
+    font-family: sans-serif;
+    margin-bottom: 0px;
+}
+input[type="radio"], input[type="checkbox"] {
+    margin: 6px 18px 0;
+    line-height: normal;
+}
+input[type=text], select {
+    padding: 5px 10px;
+    margin: -2px 0px;
+    display: inline-block;
+    background-color: #FFFFFF;
+    border: 1px solid #DDE3E8;
+    border-radius: 5px;
+    box-sizing: border-box;	
+}
+
+.input-table-1{
+    background-color: #C5D0D8;
+}
+
+.input-table-2 {
+    background-color: #CFD7DD;
+}
+
+.input-table-3 {
+    background-color: #DADFE4;
+}
+
+.input-table-4 {
+    background-color: #E5E8EB;
+}
+
+.terms-condition{
+    color: #788995;
+}
+/* 
+#quotationform{
+    z-index:100;
+    padding:5px;
+    position:relative !important;
+} */
+
+/* .form-group{
+margin-bottom: 5px !important;
+margin-top: 0px;
+} */
+
+#form-title{
+    color: black;
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.h2 {
+    margin-bottom: -7px;
+}
+
+.font-color{
+    color: black;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.btn-color{
+    background-color: rgb(223, 169, 69)
+}
+
+.center-block {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;  
+}
+
+.help-block {
+    display: block;
+    margin: 0;
+    margin-top: 11px;    
+    font-size: 13px;
+    font-family: sans-serif;
+}
+
+.btn-primary {
+   color: #fff;
+   background-color: #FF7E2A;
+   border-color: #FF7E2A; 
+   padding: 7px; 
+   font-size: 12px; 
+   width: 100%;
+   margin-top: 28px;
+}
+
+.btn:focus,.btn:active{
+   background-color: #FF7E2A !important;
+   border-color: #FF7E2A !important;
+}
+
+/* #cargocontainer{
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border-radius:5px;
+    padding: 5px 143px 230px 139px;
+} */
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    opacity: 0
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(/../../../../../../assets/img/calender-icon.PNG) center/80% no-repeat;
+    height: 25px;
+    width: 20px;
+    color: rgba(0, 0, 0, 0);
+    opacity: 0.6
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background: url(/../../../../../../assets/img/calender-icon.PNG) center/80% no-repeat;
+    opacity: 1
+}
+
+.has-error[_ngcontent-c4] .help-block[_ngcontent-c4], .has-error[_ngcontent-c4] .control-label[_ngcontent-c4], .has-error[_ngcontent-c4] .radio[_ngcontent-c4], .has-error[_ngcontent-c4] .checkbox[_ngcontent-c4], .has-error[_ngcontent-c4] .radio-inline[_ngcontent-c4], .has-error[_ngcontent-c4] .checkbox-inline[_ngcontent-c4], .has-error.radio[_ngcontent-c4] label[_ngcontent-c4], .has-error.checkbox[_ngcontent-c4] label[_ngcontent-c4], .has-error.radio-inline[_ngcontent-c4] label[_ngcontent-c4], .has-error.checkbox-inline[_ngcontent-c4] label[_ngcontent-c4] {
+    color: #ffffff;
+}
+
+.table{
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 14px;
+    background-color: #eee;
+}
+
+.table-heading{
+    color: black;
+    font: bold;
+}
+
+.table-values{
+    color: #354052;
+}
+
+.form-control{
+    height: 30.5px;
+    font-size: 14px;
+}
+
+.checkbox-style >>> .mat-checkbox-inner-container{
+    height: 13px !important;
+    width: 13px !important;
+}
+
+.add{
+    text-align: right; 
+    padding: .5em;}
+
+.addButton{
+    color: white; 
+    background: rgba(0, 150, 0, 1)
+}
+
+.deleteButton{
+    color: white; 
+    background: rgba(255, 0, 0, .5)
+}
+
+.infotext {
+    display: inline;
+    margin: 13px -6px 6px 4px;
+    font-size: 14px;
+  }
+
+  .group {
+    display: flex;
+    margin-bottom: -8px;
+  }
+
+  .underline-label{
+    font-size: 13px;
+    margin-top: 28px;
+  }
+  .has-error{
+    font-size: 9px;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: -5px !important;
+    color: #737373;
+}
+.required::after{
+    content:"*";
+    font-weight: 700;
+    font-size: 16px;
+    color: red;
+}
+
+.inputfile-box {
+    position: relative;
+   }
+   
+   .inputfile {
+    display: none;
+   }
+   
+   .container {
+    display: inline-block;
+    width: 100%;
+   }
+   
+   .file-box {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid;
+    padding: 5px 182px 18px 5px;
+    box-sizing: border-box;
+    height: calc(2rem - 2px);
+    font-size: 12px;
+    border: 1px solid #ced4da;
+    line-height: 1.5;
+    background-color: #fff;
+    border-radius: .25rem;
+    height: 30.8px;
+   }
+   
+   .file-button {
+    background: lightblue;
+    padding: 6px;
+    position: absolute;
+    border: 1px solid;
+    top: 1px;
+    right: 0px;
+    font-size: 10.5px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+   }
+
+   .file-browse{
+    background: lightblue;
+    padding: 6px;
+    position: absolute;
+    border: 1px solid;
+    top: 0px;
+    right: -30px;
+    font-size: 10.5px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+   }
+   
+   .remove-button {
+    background: #CCCCCF;
+    padding: 6px;
+    position: absolute;
+    border: 1px solid;
+    top: 0px;
+    right: 47px;
+    font-size: 10.5px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+   }
+
+   .download-button{
+    background: lightblue;
+    padding: 6px;
+    position: absolute;
+    border: 1px solid;
+    top: 0px;
+    right: 53px;
+    font-size: 10.5px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    margin-right: 180px;
+    margin-top: 30px;
+    cursor: pointer;
+   }
+
+   .align{
+    margin-left: 15px;
+   }
+
+   .title-estimated{
+    margin-top: 40px !important;
+    margin-left: 5px;
+   }
+  
+   .padding-50-top-30{
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 30px;
+   }
+
+   .uppercase{
+       text-transform: uppercase;
+   }

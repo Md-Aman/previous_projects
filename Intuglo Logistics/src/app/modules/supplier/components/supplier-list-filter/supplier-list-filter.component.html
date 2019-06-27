@@ -1,0 +1,23 @@
+<div class="card subSet">
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-control">Vessel/Flight:</label>
+      <!-- [(ngModel)]="selectedVessels"  -->
+      <select [ngModel]="firstVessel" (change)="onSelectVessels($event.target.value)"
+          class="form-control border-color">
+        <option *ngFor="let vessel of supplierBookingVessel" value={{vessel.vessel_id}}>
+            {{vessel.vessel_no}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="label-control">Quotation ID:</label>
+      <select [ngModel]="firstQuotation" (change)="getQuotationById($event.target.value)" 
+        class="form-control border-color">
+        <option *ngFor="let quotation of supplierQuotationId">
+            {{quotation.quotation_id}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div> 

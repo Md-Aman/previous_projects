@@ -1,0 +1,50 @@
+<div class="search-area " id="wrap" ng-cloak>
+    <div class="container" >
+        <div class="row">
+            <div class=" col-md-12">
+                <div class="searchInfo">
+                    <div class="col-sm-12" >
+                        <a  class="btn btn-default btnBrd pull-right marTop25 marLeft20" data-toggle="modal" data-target="#csvModal" accept=".csv" ng-disabled="formEnabled">Import</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="csvModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">Import travellers data  (Using CSV File)</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Importing traveller data can done using CSV file</h3>
+                <h3>Instruction</h3>
+                <ul>
+                    <li>File format should be in csv only</li>
+                    <li>Don't put , (comma) between any filed.</li>
+                    <li>email field should be unique.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                    <form class="form-horizontal" name="importForm" ng-submit="import(myFile)" role="form" novalidate>
+                    <div class="col-sm-12">
+                    <div class="col-sm-6" >
+                    <input class="btn btn-primary pull-left" type="file" title="Choose File" name="file" id="file" file-model="myFile" ng-model='file' />
+                    </div>
+                    <div class="col-sm-6">
+                    <button ng-disabled="!myFile" class="btn btn-primary pull-right">Upload csv</button>
+                        
+                    </div>
+                 </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+#csvModal .modal-dialog {
+    width: 60%;
+}
+</style>

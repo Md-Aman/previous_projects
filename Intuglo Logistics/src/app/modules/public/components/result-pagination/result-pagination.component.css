@@ -1,0 +1,22 @@
+.my-pagination /deep/ .ngx-pagination .current {
+    background-color: #FF7E2A;
+    padding: 6px 12px;
+    text-decoration: none;
+
+    
+  }
+
+  .my-pagination /deep/.ngx-pagination a, .ngx-pagination button{
+    color: #FF7E2A;
+    border: 1px solid #ddd;
+    margin-left: -2px;
+    border-radius: 3px;
+    padding: 6px 12px;
+  
+  }
+ul {
+    list-style : none;
+} 
+.check{
+    color: brown;
+}

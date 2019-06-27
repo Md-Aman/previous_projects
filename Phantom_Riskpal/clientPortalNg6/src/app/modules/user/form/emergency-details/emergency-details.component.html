@@ -1,0 +1,349 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+
+<form [formGroup]="emergencyFormGroup" (submit)="submitForm(emergencyFormGroup.value)">
+ <div class="accord relative">
+        <span>Communications</span>
+        <i class="arrowUp"></i>
+  </div>
+  <div class="accord-content">
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Mobile 1 IMEI</label>
+            <input type="text" formControlName="Mobile1IMEI"  class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Phone Make Model</label>
+            <input type="text" formControlName="PhoneMakeModel" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>MEID number</label>
+            <input type="text" formControlName="MEIDNumber" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>MISC Information </label>
+            <input type="text" formControlName="MiscInformation" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Satellite Phone Number</label>
+            <input type="text" formControlName="SatellitePhoneNumber" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Satellite Phone IMEI</label>
+            <input type="text" formControlName="SatellitePhoneIMEI" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+         
+          <div class="form-group col-md-4">
+            <label>Tracker Details</label>
+            <input type="text" formControlName="TrackerDetails" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Secondary Email Address</label>
+            <input type="text" formControlName="SecondaryEmailAddress" class="form-control">
+          </div>
+      </div>
+  </div>
+
+  <div class="accord relative">
+      <span>Personal Information</span>
+      <i class="arrowUp"></i>
+    </div>
+    <div class="accord-content" formArrayName="passport_data">
+      <ng-container *ngFor="let passoprt of emergencyFormGroup.get('passport_data')['controls']; let i=index">
+        <ng-container [formGroupName]="i">
+          <div class="row">
+            <div class="form-group col-md-4">
+                <label>Date of Birth</label>
+                <div class="relative _updCal">
+                  <input type="text" #dp1="bsDatepicker" class="form-control" formControlName="dateOfBirth" bsDatepicker 
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <span class="arrow" (click)="dp1.toggle()" [attr.aria-expanded]="dp1.isOpen"></span>
+                </div>
+              </div>
+            <div class="form-group col-md-4">
+                <label>Nationality</label>
+                <ng-select
+                    [items]="countries"
+                    [multiple]="false"
+                    [closeOnSelect]="true"
+                    labelForId="clients"
+                    bindValue="_id"
+                    bindLabel="name"
+                    [searchFn]="customSearchFn"
+                    formControlName="nationality"
+                   >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        <span>{{item.name}}</span>
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item">
+                        <div>{{item.name}}</div>
+                    </ng-template>
+                  </ng-select>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Passport Number</label>
+                <input type="text" formControlName="passport_number" class="form-control">
+              </div>
+          </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Issue Date</label>
+                <div class="relative _updCal">
+                  <input type="text" #dp2="bsDatepicker" class="form-control" formControlName="issuedate" bsDatepicker 
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <span class="arrow" (click)="dp2.toggle()" [attr.aria-expanded]="dp2.isOpen"></span>
+                </div>
+              </div>
+            <div class="form-group col-md-4">
+              <label>Expiry Date</label>
+              <div class="relative _updCal">
+                <input type="text" #dp3="bsDatepicker"  class="form-control" formControlName="expirydate" bsDatepicker
+                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <span class="arrow" (click)="dp3.toggle()" [attr.aria-expanded]="dp3.isOpen"></span>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label></label>
+                <button *ngIf="emergencyFormGroup.get('passport_data')['controls'].length > 1" type="button" class="btn btn-sm btn-danger _cross-field margin-top-set"
+                    (click)="deletePassportDataRow(i)"><i class="fa fa-remove" aria-hidden="true"></i></button>
+              </div>
+
+        </div>
+
+      </ng-container>
+    </ng-container>
+    <div class="row">
+      <div class="col-lg-12">
+          <button *ngIf="!maxPassportLimitReached" type="button" class="btn btn-sm btn-primary margin-top-set dp-block" title="Add Passport Details"
+          (click)="addNewPassportDataRow()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <span *ngIf="maxPassportLimitReached">Max Passport Limit Reached.</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="accord-content">
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Job Title</label>
+            <input type="text" formControlName="JobTitle"  class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Middle Name</label>
+            <input type="text" formControlName="MiddleName" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Other Name Used / Aliases</label>
+            <input type="text" formControlName="OtherNameUsed" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Gender</label>
+            <select class="form-control" formControlName="Gender" id="gender" name="gender">
+              <option value="" selected="selected">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="female">Other</option>
+              <option value="Other">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Home Address </label>
+            <input type="text" formControlName="HomeAddress" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Identifying Marks/Tatoos/Scars </label>
+            <input type="text" formControlName="IdentifyingMarks" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Press Pass ID</label>
+            <input type="text" formControlName="PressPassID" class="form-control">
+          </div>
+      </div>
+
+      <div formArrayName="languages">
+        <div class="row">
+          <ng-container *ngFor="let coun of emergencyFormGroup.get('languages')['controls']; let i=index">
+            <ng-container [formGroupName]="i">
+              <div class="form-group col-md-3">
+                <label>Languages Spoken and Fluency</label>
+                <!-- <input type="text" formControlName="LanguagesSpoken" class="form-control"> -->
+                <ng-select
+                [items]="languages"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                bindValue="name"
+                bindLabel="name"
+                [searchFn]="customSearchFn"
+                formControlName="LanguagesSpoken"
+               >
+                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    <span>{{item.name}}</span>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item">
+                    <div>{{item.name}}</div>
+                </ng-template>
+              </ng-select>
+              </div>
+              <div class="form-group col-md-1">
+                <label></label>
+                <button *ngIf="emergencyFormGroup.get('languages')['controls'].length > 1" type="button" class="btn btn-sm btn-danger _cross-field pull-left"
+                  (click)="deleteLanguage(i)">
+                  <i class="fa fa-remove" aria-hidden="true"></i>
+                </button>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+              <button *ngIf="!maxLanguageLimitReached" type="button" class="btn btn-sm btn-primary margin-top-set dp-block" title="Add Passport Details"
+              (click)="addNewLanguage()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+              <span *ngIf="maxLanguageLimitReached">Languages Spoken and Fluency Limit Reached.</span>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+
+
+  <div class="accord relative">
+      <span>Emergency Contact 1</span>
+      <i class="arrowUp"></i>
+    </div>
+    <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Title</label>
+              <input type="text" formControlName="Em1Title" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Name</label>
+              <input type="text" formControlName="Em1Name" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Relationship</label>
+              <input type="text" formControlName="Em1Relationship" class="form-control">
+            </div>
+        </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Telephone Number</label>
+            <input type="text" formControlName="Em1TelephoneNumber" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Mobile Number</label>
+            <int-phone-prefix *ngIf="!isEmgMobileNo" formControlName="Em1MobileNumber" [defaultCountry]="country"></int-phone-prefix>
+            <int-phone-prefix *ngIf="isEmgMobileNo" formControlName="Em1MobileNumber" ></int-phone-prefix>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Email Address</label>
+            <input type="text" formControlName="Em1EmailAddress" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Home Address</label>
+            <input type="text" formControlName="Em1HomeAddress" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Misc. information + special instructions</label>
+            <input type="text" formControlName="Em1MiscInformation" class="form-control">
+          </div>
+      </div>
+    </div>
+
+    <div class="accord relative">
+      <span>Emergency Contact 2</span>
+      <i class="arrowUp"></i>
+    </div>
+    <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Title</label>
+              <input type="text" formControlName="Em2Title" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Name</label>
+              <input type="text" formControlName="Em2Name" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Relationship</label>
+              <input type="text" formControlName="Em2Relationship" class="form-control">
+            </div>
+        </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Telephone Number</label>
+            <input type="text" formControlName="Em2TelephoneNumber" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Mobile Number</label>
+            <int-phone-prefix *ngIf="!isAltEmgMobileNo" formControlName="Em2MobileNumber" [defaultCountry]="country"></int-phone-prefix>
+            <int-phone-prefix *ngIf="isAltEmgMobileNo" formControlName="Em2MobileNumber"></int-phone-prefix>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Email Address</label>
+            <input type="text" formControlName="Em2EmailAddress" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Home Address</label>
+            <input type="text" formControlName="Em2HomeAddress" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Misc. information + special instructions</label>
+            <input type="text" formControlName="Em2MiscInformation" class="form-control">
+          </div>
+      </div>
+    </div>
+
+    <div class="accord relative">
+        <span>Crisis Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Statement 1</label>
+              <input type="text" formControlName="CrisisStatement1" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Statement 2</label>
+              <input type="text" formControlName="CrisisStatement2" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Statement 3</label>
+              <input type="text" formControlName="CrisisStatement3" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Duress Word</label>
+              <input type="text" formControlName="DuressWord" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Duress Action</label>
+              <input type="text" formControlName="DuressAction" class="form-control">
+            </div>
+          </div>
+      </div>
+
+
+      <div class="subSet">
+        <div class="right _btn fixed">
+            <a class="prev" (click)="navigatePrevTab()">Previous</a>
+            <button type="submit" class="cont">Save</button>
+          </div>
+    </div>
+  </form>

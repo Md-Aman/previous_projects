@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #ffca83;
+      }
+
+      .cls-2 {
+        fill: #ffca83;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Icon" transform="translate(-1230 -689)">
+    <g id="Ellipse" class="cls-1" transform="translate(1230 689)">
+      <circle class="cls-3" cx="19" cy="19" r="19"/>
+      <circle class="cls-4" cx="19" cy="19" r="18.5"/>
+    </g>
+    <g id="message-icon" transform="translate(1241 700)">
+      <path id="message-icon-2" data-name="message-icon" class="cls-2" d="M-159-1854h-5l1.828-2H-156a1,1,0,0,0,1-1v-6h1a1,1,0,0,1,1,1v7a1,1,0,0,1-1,1h-2v3Zm-7-4h-2a1,1,0,0,1-1-1v-7a1,1,0,0,1,1-1h10a1,1,0,0,1,1,1v7a1,1,0,0,1-1,1h-5l-3,3Z" transform="translate(169 1867)"/>
+    </g>
+  </g>
+</svg>

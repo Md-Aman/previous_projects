@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="label-control">Country</label>
+            <select class="form-control" [ngModel]="firstCountry" (change)="onClickSelectedCountry($event.target.value)">
+                <option *ngFor="let country of countryList">{{country.country_code_dep_name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card-action-button" *ngIf="displayCountryName">
+       <div id="test" *ngFor="let button of routeList; let i = button">
+            <button class="btn-select" [ngClass]="{'active': selectedIndex == button.country_code}" (click)="onClickSelectedRoutes(button.country_code)" (click)="shareDataToAdminFirstFilter(button)">{{button.country_code}}</button>
+        </div> 
+
+    </div> 
+</div>

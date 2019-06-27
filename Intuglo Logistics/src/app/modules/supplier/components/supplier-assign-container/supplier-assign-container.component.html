@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+  <div class="container box">
+    <div class="text-right">
+      <p (click)="onCloseCancel()" class="glyphicon glyphicon-remove"></p>
+    </div>
+    <div class="tableDiv ">
+      <h4 class="header"> Assign Container Number</h4>
+      <div *ngIf="show_message">
+        <p *ngIf="success_message" class="alert alert-success">{{message}}</p>
+        <p *ngIf="error_message" class="alert alert-danger">It seems your session is expired! Please login and try again.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="text">Container Number</label>
+        <input type="string" name="password" class="form-control input-sm input-field">
+      </div>
+
+      <div class="row">
+
+        <br>
+        <button class="btn  btn-flat change" (click)="onCloseCancel()">Back
+        </button>
+        <button class="btn  btn-flat change" (click)="updateContainerNo()">Update
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</form>

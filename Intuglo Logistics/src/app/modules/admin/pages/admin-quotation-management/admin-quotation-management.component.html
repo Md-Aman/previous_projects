@@ -1,0 +1,29 @@
+<admin-navbar (controlSideBar)="receiveDataFromHeader($event)"></admin-navbar>
+  
+<ng-sidebar-container class="ng-container bg-color">
+  <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+    <admin-left-menu [sideBar]="isSideBarOpen" [fromQM]='isOpen'></admin-left-menu>
+  </ng-sidebar>
+  
+  <div class="dashboard-layout" ng-sidebar-content>
+    <h2>Quotation Management</h2>
+    <div class="content-area">
+      <div>
+        <!-- <admin-quotation-country-list (shareRouteToAdminQuotation)="receiveRoute($event)" (shareCountryTabToQuotationManagement)="receiveCountryTabFromAdminQuotationCountryFilter($event)"></admin-quotation-country-list> -->
+        <admin-quotation-country-list (shareRouteToAdminQuotation)="receiveRoute($event)"></admin-quotation-country-list>
+      </div>
+      <div>
+        <admin-quotation-filter-list (shareDataToParent)="receiveDataFromChild($event)" [selectedRoute]="selectedRoute" (shareVesselId)="receiveVesselId($event)"></admin-quotation-filter-list>
+      </div>       
+      <div>
+        <admin-quotation-top-menu (shareDataToParent)="receiveDataFromChild($event)"></admin-quotation-top-menu>
+      </div>
+      <div>
+        <admin-quotation-action-button [hidden]="!displayActionButtons" [step]="step" (hideCustomerActionButtons)="onClickOnActionButtonHideActionButtonComponent($event)"></admin-quotation-action-button>
+      </div>
+      <div>
+        <admin-quotation-list (shareIsCheckedChecboxToDashboard)="receiveIsCheckedChecboxFromCustomerBookings($event)" [vesselId]="vesselId"></admin-quotation-list>
+      </div>  
+    </div>
+  </div>  
+</ng-sidebar-container>

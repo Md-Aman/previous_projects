@@ -1,0 +1,43 @@
+/* 
+Owner: M Irfan Qureshi
+Author: M Irfan Qureshi
+Modified: 4 September 2018
+Application: Intuglo
+Language: CSS Written by author - M Irfan Qureshi - aka iQ
+*/
+
+/* CSS iQ */
+.banner-text { text-align: right; position: absolute; right: 0; width: 40%; top: 200px; transform: translateX(0%); -webkit-transform: translateX(0%);}
+.banner-text h2 { color: #23376D; font-size: 40px; text-transform: uppercase; font-weight: 400;}
+.banner-text p { font-size: 16px; color: #23376D; margin-bottom: 20px;}
+.banner-text .banner-button {}
+.banner-text .banner-button a:hover { text-decoration: none;}
+.banner-text .banner-button .button-primary { display: inline-block; font-weight: 300; color: #fff; border: 1px solid #F58220; background: #F58220; line-height: 36px; text-align: center; min-width: 120px; cursor: pointer; font-size: 14px; text-transform: uppercase;}
+.banner-text .banner-button .button-secondry { display: inline-block; font-weight: 300; color: #F58220; border: 1px solid #F58220; background: #fff; line-height: 36px; text-align: center; min-width: 120px; cursor: pointer; font-size: 14px; text-transform: uppercase;}
+.transition { animation: slide-in 1.5s forwards;
+    -webkit-animation: slide-in 1.5s forwards;
+    -moz-animation: slide-in 1.5s forwards;
+    -o-animation: slide-in 1.5s forwards; }
+
+/* Keyframe animation */
+@keyframes slide-in {
+    0% { transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        -ms-transform: translateX(100%); opacity: 0;}
+    50% { transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        -ms-transform: translateX(0%); opacity: 0.5;}
+    100% { transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        opacity: 1;}
+}
+/* Keyframe animation */
+
+/* CSS iQ */

@@ -1,0 +1,48 @@
+<span *ngIf="!comingFromOtherPage" class="_close-mat" routerLink="/secure/manage-riskpal/risk-label" (click)="closeModal();"></span>
+<span *ngIf="comingFromOtherPage" class="_close-mat" (click)="closeModal();"></span>
+
+<div class="centeredLayout material-popup">
+    <div class="subSet ">
+  
+        <h2>Risk Label</h2>
+        <p>Fill out Sector details below:</p>
+    </div>
+  
+    <form [formGroup]="formGroup" (submit)="submit(formGroup.value)">
+      <div class="accord relative ">
+        <span>Risk Label Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Risk Label Name</label>
+              <input type="text" formControlName="categoryName" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+          <label>Sector</label>
+            <ng-select 
+              [items]="sectors" 
+              [multiple]="true" 
+              [closeOnSelect]="false" 
+              labelForId="sectorName"
+              bindLabel="sectorName"
+              formControlName="sector_name">
+            </ng-select>
+        </div>
+        </div>
+      </div>
+       
+    
+      <div class="subSet">
+          <div class="right _btn mg-bottom-25">
+              <a class="prev" *ngIf="!comingFromOtherPage" routerLink="/secure/manage-riskpal/risk-label">Previous</a>
+              <a *ngIf="comingFromOtherPage" class="prev" (click)="closeModal()">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

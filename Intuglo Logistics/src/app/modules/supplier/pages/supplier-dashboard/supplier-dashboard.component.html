@@ -1,0 +1,55 @@
+
+<supplier-navbar (controlSideBar)="receiveDataFromHeader($event)"></supplier-navbar>
+
+
+<ng-sidebar-container class="ng-container bg-color">
+
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+
+        <supplier-left-menu [sideBar]="isSideBarOpen" [fromDashboard]='isOpen'></supplier-left-menu>
+
+    </ng-sidebar>
+
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>Booking Order</h2>
+        <div class="content-area">
+                <div>
+                        <!-- <supplier-country-filter (shareToggleValueToDashboard)="receiveToggleValue($toggle)" (shareCountryTabToSupplierDashboard)="receiveCountryTabFromSupplierCountryFilter($event)" (shareDataToSupplierDashboard)="receiveDataFromCountryFilter($event)"></supplier-country-filter> -->
+                        <supplier-country-filter 
+                                (shareCountryTabToSupplierDashboard)="receiveCountryTabFromSupplierCountryFilter($event)"
+                                (shareDataToSupplierDashboard)="receiveDataFromCountryFilter($event)">
+                        </supplier-country-filter>
+                </div>
+                <div>
+                        <supplier-list-filter [selectedCountry]="selectedCountry" 
+                                (shareQIdToPagination)="receiveQId($event)">
+                        </supplier-list-filter>
+                </div>
+                <div>
+                        <supplier-top-menu (shareDataToParent)="receiveDataFromChild($event)"></supplier-top-menu>
+                        <supplier-action-button [step]="step" 
+                                [isCheckedCheckBox]="isCheckedBooking"
+                                [isCheckedMasterCheckBox]="checkedMasterCheckBox"
+                                [containerId]="containerId" 
+                                (hideSupplierActionButtons)="onClickOnActionButtonHideActionButtonComponent($event)">
+                        </supplier-action-button>
+                </div>
+                <div>
+                        <supplier-bookings (shareContainerIdToSupplierDashboard)="receiveContainerId($event)" 
+                                (shareDataToSupplierDashboard)="receiveDataFromSupplierBooking($event)" 
+                                (shareCheckedMasterCheckBoxToSupplierDashboard)="getCheckedMasterCheckBoxFromBookings($event)"
+                                [selectedQuotation]="selectedQuotation" [containerId]="containerId">
+                        </supplier-bookings>
+                        <!-- *ngFor="let item of supplierBookings" [supplierBookingValues]='item' -->
+                </div>
+                <div>
+                        <supplier-table-pagination [selectedQuotationId]="selectedQuotationId"
+                                (shareContainerId)="receiveContainerId($event)"
+                                (shareQuotationId)="receiveQId($event)">
+                        </supplier-table-pagination>
+                        <!-- *ngFor="let item of supplierBookings" [supplierBookingValues]='item' -->
+                </div>
+        </div>
+    </div>
+
+</ng-sidebar-container>

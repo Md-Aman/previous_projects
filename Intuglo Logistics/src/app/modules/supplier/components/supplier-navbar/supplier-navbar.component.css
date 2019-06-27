@@ -1,0 +1,22 @@
+:host >>> .mat-toolbar-row, :host >>> .mat-toolbar-single-row { height: inherit; display: block; padding: 0;}
+.menu-detail { background-color: #23376D; height: 80px; }
+.menu-detail .nav-bar { margin: 20px 0 0 20px;}
+.menu-detail .nav-bar .icon-style { background: url(../../../../../assets/img/menu-hamburger.svg) center center no-repeat; width: 25px; height: 24px; display: inline-block; cursor: pointer; position: relative; top: 7px;}  
+.menu-detail .nav-bar a { display: inline-block; margin-left: 10px;}
+.menu-detail .nav-bar a > img { width: auto;}
+.menu-detail .logistic { margin: 20px 0 0 20px; display: flex;}
+.menu-detail .logistic .srpt { height: 40px; width: 1px; background: #fff;}
+.menu-detail .logistic .logistics-menu { background: url(../../../../../assets/img/arrow-down-menu.svg) right center no-repeat; font-size: 18px; font-weight: 100; color:#fff; margin-top: 5px; margin-left: 20px; background-size: 16px; padding-right: 26px; cursor: pointer;}
+.menu-detail .logistic .arrow-dialog { margin: 0; padding: 10px; min-width: 200px; position: absolute; left: 0; top: 50px; background: #fff; box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.35); z-index: 101;}
+.menu-detail .logistic .arrow-dialog::after { bottom: 100%; left: 50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(255, 255, 255, 0); border-bottom-color: #fff; border-width: 10px; margin-left: -10px;}
+.menu-detail .logistic .arrow-dialog li { list-style: none; color: #333; font-size: 14px; cursor: pointer; font-weight: 400; padding: 0 10px;}
+.menu-detail .logistic .arrow-dialog li:hover { background-color: #f1f1f1;}
+.menu-detail .customer-name { margin: 15px 20px 0 0; position: relative; cursor: pointer;}
+.menu-detail .customer-name div span { font-size: 16px; color: #fff; margin-right: 5px; font-weight: 100; position: relative; top: 2px;}
+.menu-detail .customer-name div img { width: 50px; height: 50px;}
+
+.dropdown-content { display: block; position: absolute; top: 65px; right: 0; background-color: #fff; min-width: 120px; box-shadow: 0px 8px 81px 0px rgba(0,0,0,0.2); z-index: 1; }
+.dropdown-content ul { margin: 0; padding: 0;}
+.dropdown-content li { list-style: none;}
+.dropdown-content li a { text-align: left; color: #333; padding: 5px 10px; display: block; font-size: 14px; text-decoration: none;}
+.dropdown-content li a:hover { background-color: #f1f1f1;}

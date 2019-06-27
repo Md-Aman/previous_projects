@@ -1,0 +1,90 @@
+<div *ngFor="let route of routeDetails;">
+
+  <mat-accordion>
+    <mat-expansion-panel class="booking-box" [expanded]="true" style="box-shadow: none; margin-bottom: 20px;">
+      <mat-expansion-panel-header class="mat-header" [collapsedHeight]="'90px'" [expandedHeight]="'90px'">
+        <mat-panel-title>
+          <div class="panel-title-col">
+            <label class="heading">
+              <b>ETD: blala {{route.ETD}}</b>
+              <span class="heading-value">{{route.ETD}}</span>
+            </label>
+            <br>
+            <label class="heading">
+              <b>DEPARTURE PORT/TERMINAL:</b>
+              <span class="heading-value">{{route.PortFrom}}</span>
+            </label>
+            <br>
+            <label class="heading">
+              <b>VESSEL/FLIGHT:</b>
+              <span class="heading-value">{{route.VesselFlight}}</span>
+            </label>
+          </div>
+        </mat-panel-title>
+        <mat-panel-title>
+          <div>
+            <label class="heading">
+              <b>ETA:</b>
+              <span class="heading-value">{{route.ETA}}</span>
+            </label>
+            <br>
+            <label class="heading">
+              <b>ARRIVAL PORT/TERMINAL:</b>
+              <span class="heading-value">{{route.PortTo}}</span>
+            </label>
+            <br>
+            <label class="heading">
+              <b>QUOTATION ID:</b>
+              <span class="heading-value">{{route.quotation_id}}</span>
+            </label>
+
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <!-- Table starts here -->
+      <div class="bg-color-expansion-model-body">
+
+        <table id="bookings-table">
+          <thead>
+            <tr>
+              <th>
+              </th>
+              <th>Order ID </th>
+              <th>Frieght Agent</th>
+              <th>Document Sent</th>
+              <th>Cargo Status</th>
+              <th>Custom Status</th>
+              <th>Payment Status</th>
+            </tr>
+
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let booking of route.order;  let index=index">
+              <td>
+                <input type="checkbox" [(ngModel)]="booking.checked" (click)="selectOneCheckBox(index, route.order, routeDetails)" (click)="getOrderDetails($event,booking.order_id,booking.document_list,booking.cargo_status_code,booking.custom_status_code)">
+              </td>
+              <td>{{booking.order_id}}</td>
+              <td>{{booking.supplier_name}}</td>
+
+              <td>
+                <select class="document-box">
+                  <option>View</option>
+                  <option *ngFor="let document of booking.document_list;">{{document.file_name}}</option>
+                </select>
+              </td>
+              <td>{{booking.cargo_status_code}}</td>
+              <td>{{booking.custom_status_code}}</td>
+              <td>{{booking.payment_status_code}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<!-- <button (click)="testroute()">test</button> -->

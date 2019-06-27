@@ -1,0 +1,473 @@
+<div class="box">
+  <span (click)="onCloseCancel()" class="dialog-cross"></span>
+  <div class="row" *ngIf="showFormPages">
+    <div class="col-sm-7 consignee">
+      <div class="wizard">
+        <div class="wizard-bullet">
+            <span class="wiz-1" [ngClass]="{ active : isStepConsignor }">1</span>
+            <span class="wiz-1" [ngClass]="{ active : isStepConsignee }">2</span>
+            <span class="wiz-1" [ngClass]="{ active : isStepShipment }">3</span>
+            <span class="wiz-1" [ngClass]="{ active : isStepCargo }">4</span>
+        </div>
+        <ul>
+          <li class="steps" [ngClass]="{ borderBtm : isStepConsignor }">Consignor's Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : isStepConsignee }">Consignee's Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : isStepShipment }">Shipment Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : isStepCargo }">Cargo Details</li>
+        </ul>
+      </div>
+
+      <!-- Form starts here -->
+      <form>
+
+        <!--  step Shipper's details -->
+        <div [hidden]="!isStepConsignor">
+          <form [formGroup]="formOne">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label for="company" class="labelStyle required">Company</label>
+                <input class="form-control" type="text" name="consignor_companyName" [(ngModel)]="consignor_companyName" value={{consignor_companyName}}
+                  formControlName="compName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Contact Person</label>
+                <input type="text" placeholder="Contact Person" class="form-control input-group" name="consignor_customerName"
+                  [(ngModel)]="consignor_customerName" value={{consignor_customerName}} formControlName="contPerson">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required">Shipper</label>
+                <input class="form-control input-group" type="text" formControlName="shipperName" name="consignor_shipper" [(ngModel)]="consignor_shipper">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact number" class="labelStyle required">Contact Number</label>
+                <input type="text" name="consignor_contactNum" class="form-control input-group" [(ngModel)]="consignor_contactNum"
+                  value={{consignor_contactNum}} formControlName="contNum">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="labelStyle required">E-Mail</label>
+                <input type="email" class="form-control input-group" name="consignor_email" [(ngModel)]="consignor_email" value={{consignor_email}}
+                  formControlName="emailCust">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Merchandise Value</label>
+                <div class="input-group">
+                  <span class="input-group-addon">RM</span>
+                  <input class="form-control currency" formControlName="merchandiseCust" name="consignor_merchandiseValue" type="text"
+                    min="0" oninput="this.value = Math.abs(this.value)" [(ngModel)]="consignor_merchandiseValue" currencyMask [options]="{allowNegative:false, prefix:''}">
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required ">Commercial Invoice Value</label>
+                <div class="input-group">
+                  <span class="input-group-addon">RM</span>
+                  <input type="text" min="0" oninput="this.value = Math.abs(this.value)" class="form-control currency" formControlName="commercialCust"
+                    name="consignor_commercialValue" [(ngModel)]="consignor_commercialValue" currencyMask [options]="{allowNegative:false, prefix:''}">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Billing Address</label>
+                <textarea class="form-control textarea" name="consignor_billAdd" [(ngModel)]="consignor_billAdd" value={{consignor_billAdd}}
+                  formControlName="billingCust" style="resize:none"></textarea>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required">Ship From/Deliver From Address</label>
+                <textarea class="form-control textarea" formControlName="shipCust" name="consignor_deliveryAdd" [(ngModel)]="consignor_deliveryAdd"
+                  value={{consignor_deliveryAdd}} style="resize:none"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="arrow-back left" (click)="onCloseCancel()">Back</button>
+              <button class="btnContinue right" (click)="stepConsignee()">Continue</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step consignee -->
+        <div [hidden]="!isStepConsignee">
+          <form [formGroup]="formTwo">
+            <div class="form-group">
+              <label for="company" class="labelStyle required">Company</label>
+              <input class="form-control input-sm" formControlName="compSupp" name="consignee_companyName" type="text" [(ngModel)]="consignee_companyName">
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Contact Person</label>
+                <input class="form-control input-group" formControlName="contPersonSupp" name="consignee_contactPerson" type="text"
+                  [(ngModel)]="consignee_contactPerson">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required">Shipper</label>
+                <input class="form-control input-group" name="consignee_shipper" formControlName="shipSuppName" type="text" [(ngModel)]="consignee_shipper">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact number" class="labelStyle required">Contact Number</label>
+                <input class="form-control input-group" formControlName="contSupp" type="text" name="consignee_contactNum"
+                  [(ngModel)]="consignee_contactNum">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="labelStyle required">E-Mail</label>
+                <input type="emailSupplier" name="consignee_email" class="form-control input-group" formControlName="emailSupp" [(ngModel)]="consignee_email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Merchandise Value</label>
+                <div class="input-group">
+                  <span class="input-group-addon">RM</span>
+                  <input class="form-control currency" formControlName="merchandiseSupp" name="consignee_merchandiseValue" min="0" oninput="this.value = Math.abs(this.value)"
+                    type="text" [(ngModel)]="consignee_merchandiseValue" currencyMask [options]="{allowNegative:false, prefix:''}">
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required">Commercial Invoice Value</label>
+                <div class="input-group">
+                  <span class="input-group-addon">RM</span>
+                  <input type="text" class="form-control currency" formControlName="commercialSupp" name="consignee_commercialValue" min="0" oninput="this.value = Math.abs(this.value)"
+                    [(ngModel)]="consignee_commercialValue" currencyMask [options]="{allowNegative:false, prefix:''}">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="contact person" class="labelStyle required">Billing Address</label>
+                <textarea class="form-control textarea" style="resize:none" formControlName="billingSupp" name="consignee_billAdd" [(ngModel)]="consignee_billAdd"></textarea>
+
+              </div>
+              <div class="form-group col-md-6">
+                <label for="shipper" class="labelStyle required">Ship To/Deliver To Address</label>
+                <textarea class="form-control textarea" style="resize:none" formControlName="shipSupp" name="consignee_deliveryAdd" [(ngModel)]="consignee_deliveryAdd"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="left arrow-back" (click)="stepConsignor()">Back</button>
+              <button class="right btnContinue" (click)="stepShipment()">Continue</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- // step Shippment details -->
+        <div [hidden]="!isStepShipment">
+          <form [formGroup]="formThree">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="quotation id person" class="labelStyle">Quotation Id </label>
+                <input class="form-control input-group" name="quotation_id" type="text" [(ngModel)]="quotationID" value={{quotationID}}
+                  readonly [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="logistic company" class="labelStyle ">Logistic Company</label>
+                <input class="form-control input-group" name="logistic_company" type="text" [(ngModel)]="logistic_company" value={{logistic_company}}
+                  readonly [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="ETD" class="labelStyle">ETD</label>
+                <input class="form-control input-group" name="etd" type="text" [(ngModel)]="departureDate" 
+                value={{departureDate}} readonly [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ETA" class="labelStyle ">ETA</label>
+                <input class="form-control input-group" name="eta" type="text" [(ngModel)]="arrivalDate" 
+                value={{arrivalDate}} readonly [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="departure port" class="labelStyle">Port of Departure</label>
+                <input class="form-control input-group" name="portFrom" type="text" [(ngModel)]="portFrom" value={{portFrom}}
+                  readonly [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="arrival port" class="labelStyle ">Port of Arrival</label>
+                <input class="form-control input-group" name="portTo" type="text" [(ngModel)]="portTo"
+                value={{portTo}} readonly [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="logistic provider" class="labelStyle"> Logistic Provider/Freight Forwarder </label>
+                <input class="form-control input-group" name="logistic_freight_provider" type="text" 
+                [(ngModel)]="logistic_freight_provider" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="flight no" class="labelStyle "> Vessel/Flight No.</label>
+                <input class="form-control input-group" name="vessel" type="text" [(ngModel)]="vessel" 
+                value={{vessel_no}} readonly [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="row" *ngIf="!hasCustomBroker">
+              <div class="form-group col-md-6">
+                <label for="custome broker" class="labelStyle required">Custom Broker</label>
+                <!-- <input class="form-control input-group" name="customBroker" type="text" [(ngModel)]="customBroker" value={{customBroker}}
+                  readonly [ngModelOptions]="{standalone: true}"> -->
+                  <select class="form-control input-group" [(ngModel)]="customBroker" formControlName="custom">
+                    <option *ngFor="let agent of agentList" value={{agent.custom_agent_id}}>{{agent.agent_name}}</option>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="logistic company" class="labelStyle ">Bill of Lading</label>
+                <input class="form-control input-group" name="billing_of_loading" type="text" 
+                [(ngModel)]="billing_of_loading" formControlName="billLoad">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="hasCustomBroker">
+              <div class="form-group col-md-6">
+                <label for="custome broker" class="labelStyle required">Custom Broker</label>
+                <input class="form-control input-group" name="customBroker" type="text" [(ngModel)]="customBrokerName" value={{customBrokerName}}
+                  readonly formControlName="custom">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="logistic company" class="labelStyle ">Bill of Lading</label>
+                <input class="form-control input-group" name="billing_of_loading" type="text" 
+                [(ngModel)]="billing_of_loading" formControlName="billLoad">
+              </div>
+            </div>
+
+            <div class="row" >
+              <div class="form-group col-md-6">
+                <label for="warehouse at departure" class="labelStyle">Consolidation Warehouse at Departure</label>
+                <textarea class="form-control textarea" name="warehouseDepartureAddress" 
+                formControlName="warehouseDepart" 
+                [(ngModel)]="warehouseDepartureAddress" style="resize:none" 
+                  readonly>{{warehouseDepartureAddress}}</textarea>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="warehouse at arrival" class="labelStyle ">Consolidation Warehouse at Arrival</label>
+                <textarea class="form-control textarea" style="resize:none" 
+                  name="warehouseArrivalAddress" [(ngModel)]="warehouseArrivalAddress" 
+                  formControlName="warehouseArrivalAddress"
+                  [value]="warehouseArrivalAddress"
+                  readonly>{{warehouseArrivalAddress}}</textarea>
+              </div>
+            </div>
+
+            <!-- <div class="row" *ngIf="halal_status">
+              <div class="form-group col-md-6">
+                <label for="warehouse at departure" class="labelStyle">Consolidation Warehouse at Departure</label>
+                <textarea class="form-control textarea" name="warehouseDepartureAddress"
+                [(ngModel)]="halal_consolidation" style="resize:none" value={{halal_consolidation}} [ngModelOptions]="{standalone: true}" readonly></textarea>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="warehouse at arrival" class="labelStyle ">Consolidation Warehouse at Arrival</label>
+                <textarea class="form-control textarea" style="resize:none" name="warehouseArrivalAddress" [(ngModel)]="halal_unstuffing" value={{halal_unstuffing}}
+                [ngModelOptions]="{standalone: true}" readonly></textarea>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <button class="left arrow-back" (click)="stepConsignee()">Back</button>
+              <button class="right btnContinue" (click)="stepCargo()">Continue</button>
+            </div>
+          </form>
+        </div>
+        <!-- Step cargo details -->
+        <div [hidden]="!isStepCargo">
+          <form [formGroup]="formFour">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="6 digit hs code" class="labelStyle">6 Digit HS Code</label>
+                <input class="form-control input-group" name="_6_hs_code" type="text" [(ngModel)]="_6_hs_code" value={{_6_hs_code}}
+                [ngModelOptions]="{standalone: true}" readonly>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="4 digit hs code" max="4" class="labelStyle required">Last 4 Digit HS Code</label>
+                <input class="form-control input-group" formControlName="hs_4" name="fourDigitHSCode" type="string" [(ngModel)]="fourDigitHSCode">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cargo description" class="labelStyle required">Cargo Description</label>
+              <input class="form-control input-sm" formControlName="cargoDesc" name="cargoDescription" type="text" [(ngModel)]="cargoDescription">
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="estimated CBM" class="labelStyle">Estimated CBM</label>
+                <input class="form-control input-group" formControlName="estimateCbm" name="cbm" type="number" [(ngModel)]="cbm"
+                  value={{cbm}} readonly>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="estimated CBM" class="labelStyle ">Estimated Weight</label>
+                <input class="form-control input-group" formControlName="estimateWeight" name="weight" type="number" [(ngModel)]="weight"
+                  value={{weight}} readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="packing details" class="labelStyle required">Packing Details</label>
+                <select class="form-control input-group" [(ngModel)]="packing_details" formControlName="pack">
+                  <option *ngFor="let packing of packingList" value={{packing.packing_type_id}}>{{packing.packing_type_description}}</option>
+                </select>
+                <!-- <select class="form-control">
+                  <option *ngFor="let country of packgingList" value={{country.packing_type_id}}>{{country.packing_type_id}}</option>
+                </select> -->
+              </div>
+              <div class="form-group col-md-6">
+                <label for="quantity" class="labelStyle required">Quantity</label>
+                <input class="form-control input-group" formControlName="qty" name="quantity" type="number" [(ngModel)]="quantity" min="0"
+                  oninput="this.value = Math.abs(this.value)">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="halal/non-halal" class="labelStyle">Halal/Non-Halal</label>
+                <!-- <select class="form-control input-group margin-left-7" [(ngModel)]="halalStatus" formControlName="halal"> -->
+                <!-- <option *ngFor="let halalStatus of halalNonhalalStatus" [ngValue]="halalStatus">{{halalStatus}}</option> -->
+                <!-- </select> -->
+                <input class="form-control input-group" formControlName="halal" name="halalStatus" type="text" [(ngModel)]="halalStatus"
+                  value={{halalStatus}} readonly>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="tracking number" class="labelStyle">Tracking Number</label>
+                <input class="form-control input-group" name="tracking_number" type="text" [(ngModel)]="tracking_number" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="labelNote"><b>Note:</b><br> Pallet height should not exceed a maximum of 1.2meter from floor up</p>
+              <p class="termsCondition">
+                <input type="checkbox" (change)="statusAgreed()"> I AGREE WITH THE 
+                  <a routerLink="/terms-and-condition" [queryParams]="{page: 'book'}" target="_blank">
+                    TERMS AND CONDITION
+                  </a>
+              </p>
+            </div>
+            <div class="row">
+              <span class="left arrow-back" (click)="stepShipment()">Back</span>
+              <button class="right btnContinue" [ngClass]="{ 'disabled' : !isAgreed || !formFour.valid }" [disabled]="!isAgreed || !formFour.valid"
+                (click)="showSuccesssfulOrder()">Confirm Booking</button>
+            </div>
+          </form>
+        </div>
+      </form>
+    </div>
+
+    <div class="tableDivStyle col-sm-5">
+      <label class="order-details"> Order Details </label>
+      <!-- Table starts from here -->
+      <div>
+        <table class="table tableStyle">
+          <tr>
+            <th class="description">Description</th>
+            <th class="header-unit">Unit</th>
+            <th class="header-price">Price/Unit</th>
+            <th class="header-total">Total</th>
+          </tr>
+          <tr>
+            <td class="departure-arrival">Sea Freight Rate (Container) </td>
+            <td class="unit-element">{{cbm}} </td>
+            <td class="price-data">{{cost_part_a_per_cbm | currency:'RM'}}</td>
+            <td class="total-data">{{cost_part_a | currency:'RM'}}</td>
+          </tr>
+          <tr>
+            <td class="departure-arrival">Document Charges at Departure Port {{portFromAbbr}}</td>
+            <td class="unit-element">1 </td>
+            <td class="price-data" >{{cost_part_b_departure | currency:'RM'}}</td>
+            <td class="total-data">{{cost_part_b_departure | currency:'RM'}}</td>
+          </tr>
+          <tr>
+            <td class="departure-arrival">Document Charges at Arrival Port {{portToAbbr}}</td>
+            <td class="unit-element">1 </td>
+            <td class="price-data">{{cost_part_b_arival | currency:'RM'}}</td>
+            <td class="total-data">{{cost_part_b_arival | currency:'RM'}}</td>
+          </tr>
+          <tr class="tr">
+              <td class="freight-logistic">Freight Logistic</td>
+              <td></td>
+              <td></td>
+              <td class="total-amount">{{cost_total_before_tax | currency:'RM'}}</td>
+            </tr>
+          <tr>
+            <td colspan="2">{{cost_tax_type}}</td>
+            <td class="price-data">{{cost_tax_rate}}</td>
+            <td class="total-data">{{cost_tax_amount | currency:'RM'}}</td>
+          </tr>
+          <tr class="tr">
+              <td class="freight-logistic">Grand Total Price after {{cost_tax_type}} </td>
+              <td></td>
+              <td></td>
+              <td class="total-amount">{{cost_total_after_tax | currency:'RM'}}</td>
+            </tr>
+        </table>
+      </div>
+
+      <!-- <div class="padding-top-10">
+        <p class="order-id margin-left-5"> ORDER ID </p>
+        <div>
+          <input class="form-control order-id-input margin-left-5" type="text" placeholder="ML_1234567890_438263_0098" readonly>
+          <p class="table-note margin-left-5">
+            <b>Note:</b>
+            <br> Please ensure that above information is correct before confirming your order. Keep you Order ID as reference</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="row upd" *ngIf="isOrderSuccessfull">
+    <div class="col-md-12">
+      <div class="msg">
+        <p class="thank-you"> Thank you for your Order! </p>
+        <p class="note">Please keep the below information for your reference on your Order.</p>
+      </div>
+
+      <div class="padding-top-50">
+        <form >
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="order id" class="label-style">ORDER ID</label>
+              <input type="email" class="form-control" value={{order_id}} readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="credit block" class="label-style">LAST DAY FOR CREDIT BLOCK </label>
+              <input type="text" class="form-control" value={{creditBlock}} readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="cargo from" class="label-style">WAREHOUSE ACCEPTING CARGO FROM: </label>
+              <input type="email" class="form-control" value={{warehouseAcceptCargo}} readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="custom declaration" class="label-style">PLEASE UPLOAD YOUR CUSTOM DECLARATION DOCUMENT BEFORE: </label>
+              <input type="text" class="form-control" value={{customFile}} readonly>
+            </div>
+          </div>
+          <div class="form-group col-md-12">
+            <label for="send cargo" class="label-style">PLEASE SEND CARGO TO:</label>
+            <input type="text" class="form-control" value={{warehouseDepartureAddress}} readonly>
+          </div>
+        </form>
+
+        
+        <div class="col-md-12 pad05">
+          <span class="cargo-ready"> When cargo is ready for pick-up, click
+            <button class="cargo-pickup">Cargo ready for pick up</button> at my Bookings </span>
+        </div>
+      </div>
+      <div class="col-md-12 subSet pad05">
+        <div class="left">
+          <span class="btnContinue" (click)="onCartClick()">Go to Cart</span>
+        </div>
+        <div class="right">
+          <span class="arrow-back left" (click)="onPrint()">Print</span>  
+          <span class="arrow-back left" routerLink="/" (click)="onCloseCancel()">Make Another Booking</span>
+          <!-- <a routerLink="/customer/dashboard" (click)="onDashboard()" class="go-dashboard">GO TO DASHBOARD</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

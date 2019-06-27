@@ -1,0 +1,13 @@
+<div class="top-menu-area subSet">
+  <ul class="top-menu-list">
+    <li class="tab" (click)="shareDataToParentOrder()" tabindex="step" 
+      [ngClass]="{tabselect  : stepOne}" (click)="tabOrder()">Order / Booking</li>
+    <li class="tab" (click)="shareDataToParentCargo()" tabindex="step" 
+      [ngClass]="{tabselect : stepTwo}" (click)="tabCargo()">Cargo</li>
+    <!-- <li class="tab" (click)="shareDataToParentCustom()" tabindex="step" 
+      [ngClass]="{tabselect : stepThree}" (click)="tabCustom()">Custom</li> -->
+    <li class="tab" (click)="shareDataToParentBuyer()" tabindex="step" 
+      [ngClass]="{tabselect : stepFour}" (click)="tabBuyer()">Buyer Document</li>
+    <!-- <li class="btn tab" (click) = "shareDataToParentPacking()" tabindex="step" [ngClass]="{tabselect : stepFive}" (click)="tabPacking()">Packing List</li> -->
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+<div class="centeredLayout">
+  <p>Created from Risk Assessment Template Name:</p>
+  <div class="row">
+    <div class="col-md-10">
+      <h1>{{templateName}}</h1>
+    </div>
+    <div class="col-md-2 text-right" *ngIf="isApprovingManager">
+      <span class="_approve mg-right-7" (click)="approveAndShare()" tooltip="Approve">
+      </span>
+      <span class="_more-info mg-right-7" (click)="requestMoreInformation()" tooltip="Request more info">
+      </span>
+      <span class="_forward" (click)="ForwardRaManagers()" tooltip="Forward">
+      </span>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+  <div class="tabs">
+    <a class="tab" (click)="raNavigateStep('raDetails')" [ngClass]="{'active': options.selectedTab == 'raDetails'}">RA Details</a>
+    <a class="tab" *ngIf="pages.countryrequired" (click)="raNavigateStep('country')" [ngClass]="{'active': options.selectedTab == 'countryProfile'}">Country Profile</a>
+    <a class="tab" *ngIf="pages.questionRequired" (click)="raNavigateStep('risk')" [ngClass]="{'active': options.selectedTab == 'riskMitigation'}">Risk & Mitigation</a>
+    <a class="tab" *ngIf="pages.supplierRequired" (click)="raNavigateStep('supplier')" [ngClass]="{'active': options.selectedTab == 'supplier'}">Supplier</a>
+    <a class="tab" *ngIf="pages.communicationRequired" (click)="raNavigateStep('communication')" [ngClass]="{'active': options.selectedTab == 'communication'}">Communication</a>
+    <a class="tab" *ngIf="pages.contingenciesRequired" (click)="raNavigateStep('contingency')" [ngClass]="{'active': options.selectedTab == 'contingency'}">Contingency</a>
+    <a class="tab" (click)="raNavigateStep('otherDetails')" [ngClass]="{'active': options.selectedTab == 'otherDetails'}">Other Details</a>
+  </div>
+
+  <router-outlet></router-outlet>
+
+
+</div>

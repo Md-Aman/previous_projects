@@ -1,0 +1,89 @@
+<style>
+    .pagination {
+        float: right !important;
+    }
+</style>
+<!-- Main content -->
+<section class="content" ng-init="getAllRiskQuestionnaire();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <a ui-sref="risk_assesment_generic.add_question"><button class="btn btn-sm btn-info">New Question</button></a>
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-question-circle"></i>
+                    <h3 class="box-title">Question</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by question" ng-model="questionnair_name"
+                            autocomplete="false" ng-change="getAllRiskQuestionnaire(questionnair_name)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                    <div ng-if="showLoader" class="col-lg-2 pull-right" style="margin-top:131px;">
+                        <div loader-css="ball-pulse"></div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered ng-table-resizable-columns ng-table-rowselected table-bordered" ng-table="tableParams"
+                        style="text-align: left;" data-resizable-columns-id="myTable">
+                        <tbody ng-model="data">
+                            <tr ng-repeat="que in questionnaire" class="item">
+                                <td data-title="'S No.'">{{$index+1}}</td>
+                                <td data-title="'Question'" sortable="'question'">
+
+
+                                    <a ng-click="underConstructionIndiQueDetails(que._id);" style="cursor: pointer" ng-bind-html="(que.question | limitTo :100) + (que.question.length > 100 ? '.......': '') "></a>
+                                       <label style="font-size: 12px;" class="col-lg-12"> Risk Labels </label>
+                                        <div ng-repeat="catArr in que.categoryArr" class="col-lg-4">
+                                            <div ng-if="!catArr.selected">
+                                                <a ui-sref="risk_assesment_generic.get_risk_que({ra_id:ra_id,risk_label_id:catArr.id})" style="cursor: pointer">{{catArr.name}} {{(que.categoryArr.length > 1 && $index+1 !== que.categoryArr.length) ? ',' : ''}}</a>
+                                            </div>
+                                            <div ng-if="catArr.selected" style="color: grey">
+                                                {{catArr.name}} {{(que.categoryArr.length > 1 && $index+1 !== que.categoryArr.length) ? ',' : ''}}
+                                            </div>
+                                        </div>
+
+
+                                </td>
+
+                                <!--<td data-title="'Best Practice Advice'" ng-bind-html="que.best_practice_advice" class="text-justify"></td>-->
+                                <!--<td data-title="'Categories Associated'">{{que.categoryArr.toString()}}</td>-->
+                                <!--<td data-title="'Actions'" align="center" class="actions">
+                                    <a class="btn btn-xs btn-info" ui-sref="risk_assesment_generic.update_generic_question({question_id:que._id})">
+                                        Edit
+                                    </a>
+                                </td>-->
+                                <td data-title="'Assign Questions'" align="center" class="actions">
+                                    <input type="checkbox" ng-model="questionnaire[$index].assign" ng-change="assignQuesToIndividualRa(questionnaire[$index],$index);"
+                                        ng-checked="questionnaire[$index].assign">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tr ng-if="questionnaire.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                        </table>
+                </div>
+
+                <div class="col-lg-2">
+                    <!--<div class="pull-right box-tools">
+                        <button ng-disabled="questions.length == 0" style="margin-left: 10px;" type="button" class="btn btn-sm btn-primary" ui-sref="risk_assesment_generic.generic_step4({ra_id:ra_id})">Next</button>
+                    </div>-->
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-sm btn-primary" ui-sref="under_construction_risk_assesment_individual.individual_step2({individualRa_id:individualRa_id})">Return To Main Menu</button>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

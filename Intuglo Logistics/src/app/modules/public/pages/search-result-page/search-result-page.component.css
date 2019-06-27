@@ -1,0 +1,4 @@
+:host >>> body { background: #F8F9FC;}
+.search-result-list { width: 100%; z-index: 10; margin-top: -30px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25); background: #fff;}    
+.search-result-list .result-filter { width: 20%; }
+.search-result-list .search-summary { width: 80%; }

@@ -1,0 +1,28 @@
+<div class="vessel-route subSet">
+  <!-- <div class="left vessel-route-half">
+    <p class="port">{{searchboxDetails?.PortFrom}}</p>
+    <p>{{searchboxDetails.ETD}}</p>
+  </div>
+  <div class="right vessel-route-half">
+      <p class="port">{{searchboxDetails?.PortTo}}</p>
+      <p>{{searchboxDetails.ETA}}</p>
+    </div> -->
+  <div class="left vessel-route-half">
+    <p class="port">{{portFrom}}</p>
+    <p>{{etd}}</p>
+  </div>
+  <div class="right vessel-route-half">
+    <p class="port">{{portTo}}</p>
+    <p>{{eta}}</p>
+  </div>
+</div>
+<div class="subSet found">
+  <p *ngIf="publicApiService.search_result_type=='searched_result'" class="left">
+    <span>{{publicApiService.search_result_data_length}}</span> Quotation(s) found</p>
+  <p *ngIf="publicApiService.search_result_type!='searched_result'" class="left danger">No Quotation found
+    <span *ngIf="publicApiService.search_result_data_length>0"> - You can explore suggested quotations</span>
+  </p>
+  <select class="right">
+    <option value="sortby">Sort by</option>
+  </select>
+</div>

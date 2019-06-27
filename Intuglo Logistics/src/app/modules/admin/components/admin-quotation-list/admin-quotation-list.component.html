@@ -1,0 +1,81 @@
+<div class="no-rec-found" *ngIf="quotationList?.length < 1">
+  <span>No record found.Please enter filter options first to get Record.</span>
+</div>
+<div *ngFor="let quotation of quotationList| groupBy:'supplier_name'; let index = index">
+    <mat-accordion>
+      <mat-expansion-panel class="booking-box" [expanded]="true" style="box-shadow: none;">
+        <mat-expansion-panel-header class="mat-header" [collapsedHeight]="'90px'" [expandedHeight]="'90px'">
+          <mat-panel-title>
+            <div class="panel-title-col">
+              <p class="heading">
+                <span class="heading-value">ETD:</span>
+                <!-- <span class="heading-value">{{quotation.etd}}</span> -->
+              </p>
+              <p class="heading">
+                <span class="heading-value">DEPARTURE PORT/TERMINAL:</span>
+                <!-- <span class="heading-value">{{quotation.port_name_departure}}</span> -->
+              </p>
+              <p class="heading">
+                <span class="heading-value">SHIPPING AGENT:</span>
+                <span>{{quotation.key}}</span>
+              </p>
+            </div>
+          </mat-panel-title>
+          <mat-panel-title>
+            <div class="panel-title-col">
+              <p class="heading">
+                <span class="heading-value">ETA:</span>
+                <!-- <span class="heading-value">{{quotation.eta}}</span> -->
+              </p>
+              <p class="heading">
+                <span class="heading-value">ARRIVAL PORT/TERMINAL:</span>
+                <!-- <span class="heading-value">{{quotation.port_name_arrival}}</span> -->
+              </p>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+  
+        <!-- Table starts here -->
+  
+        <div class="bg-color-expansion-model-body">
+          <table width="100%" id="bookings-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Quotation ID</th>
+                <th>Container</th>
+                <th>Total Containers</th>
+                <th>Total CBM</th>
+                <th># of People Sharing</th>
+                <th>Halal/Non-Halal</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let list of quotation.value;let i = index;">
+                <td>
+                  <input type="checkbox" [(ngModel)]="list.checked" (click)="updateSelection(i, quotationList);" 
+                  (click)="getQuotationId($event,list.quotation_id, list.quotation_status_id)">
+                </td>
+                <td>{{list.quotation_id}}</td>
+                <td>{{list.container_no}}</td>
+                <td>{{list.total_cbm}}</td>
+                <td>{{list.total_weight}}</td>
+                <td>{{list.total_people_per_shipment}}</td>
+                <td>
+                  <span *ngIf="list.halal_status == 'n'">
+                    Non halal
+                  </span>
+                  <span *ngIf="list.halal_status != 'n' ">
+                    Halal
+                  </span>
+                </td>
+                <td>{{list.quotationStatus}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>

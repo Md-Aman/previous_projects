@@ -1,0 +1,76 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Supplier
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Supplier list</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllSupplier();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a ui-sref="main.add_supplier">
+                            <button class="btn btn-sm btn-info">New Supplier</button>
+                        </a>
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-users"></i>
+                    <h3 class="box-title">Suppliers</h3>
+                    <div class="input-group input-group-sm col-lg-4 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by name/country/service/rating" ng-model="keyword" autocomplete="false" ng-change="getAllSupplier(keyword)">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="supplier in $data">
+                            <td data-title="'Supplier Name'" sortable="'supplier_name'"><a ui-sref="main.update_supplier({supplier_id:supplier._id})">{{supplier.supplier_name?supplier.supplier_name:'NA'}}</a></td>
+                            <td data-title="'Country'" sortable="'country'">{{supplier.country?supplier.country:"NA"}}</td>
+                             <!-- <td data-title="'Department Name'" sortable="'department'">{{supplier.departmentArr.toString()?supplier.departmentArr.toString():"NA"}}</td> -->
+                            <td data-title="'City'" sortable="'city'">{{supplier.city?supplier.city:"NA"}}</td>
+                            <td data-title="'Supplier Service'" sortable="'service_provided'">{{supplier.service_provided?supplier.service_provided:"NA"}}</td>
+                            <td data-title="'Contact'" >{{supplier.contact[0].contact?supplier.contact[0].contact:"NA"}}</td>
+                            <!-- <td data-title="'Alternative contacts'" >{{supplier.contact[1].contact?supplier.contact[1].contact:"NA"}}</td> -->
+                            <td data-title="'Price per unit/day'" >{{supplier.cost?supplier.cost:"NA"}}</td>
+                             <td data-title="'Currency'" >{{supplier.currency?supplier.currency:"NA"}}</td>
+                            <td data-title="'Rating'" sortable="'rate'" ng-class="{'btn-danger': supplier.rate == 'red', 'btn-success': supplier.rate == 'green', 'btn-warning': supplier.rate == 'amber'}">{{supplier.rate?supplier.rate:"NA"}}</td>
+                             <td data-title="'Rating With Star'" sortable="'rating_with_star'">{{supplier.rating_with_star ? supplier.rating_with_star +' Star':'0 Star'}} </td>
+                             <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(supplier.status,supplier._id)"><span 
+                                 ng-class="{'label label-success': supplier.status == 'Active' , 'label label-danger': supplier.status == 'Inactive'}"   
+                                >{{supplier.status}}</span></a>
+                            </td>
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.update_supplier({supplier_id:supplier._id})">
+                                    Edit
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteSupplier(supplier._id)">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="supplierData.length == 0">
+                            <td colspan="13" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

@@ -1,0 +1,103 @@
+<div class="card">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="label-control">Country</label>
+                <select class="form-control" [(ngModel)]="selectedCountry" (change)="onClickSelectedCountry($event.target.value)">
+                    <option  *ngFor="let country of countryList" value={{country.country_name}}>{{country.country_name}}</option>
+                </select>
+            </div>
+            <div class="col-md-6 relative">
+                <label class="label-control">Select Month</label>
+              <!-- <mat-form-field>
+                      <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+                      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                      <mat-datepicker #dp
+                                      startView="multi-year"                           
+                                      panelClass="example-month-picker"
+                                      (change)="checkResources()"
+                                      (yearSelected)="chosenYearHandler($event)"
+                                      (monthSelected)="chosenMonthHandler($event, dp)"
+                                      (selectedChanged)="onDate($event, dp)">
+                      </mat-datepicker>
+                    </mat-form-field> -->
+                    <div class="input-group">
+                      <input type="text" class="form-control" value="{{selectedDate | date:'MMMM-yyyy' }}" readonly>
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" (click)="displayCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </div>
+                    </div> 
+                    <div class="customDatePicker" *ngIf="customCal">
+                      <dl-date-time-picker 
+                      *ngIf="showCalendar"
+                      [(maxView)]="maxView" 
+                      [(minView)]="minView" 
+                      [(startView)]="startView"
+                      [(minuteStep)]="minuteStep"
+                      [(ngModel)]="selectedDate"
+                      (change)="onCustomDateChange($event)">
+                    </dl-date-time-picker>
+                  </div>
+          </div>
+        </div>
+      
+      
+      <!--Routes -->
+      <div class="row">
+      <div class="col-md-6">
+          <label class="label-control">Route</label>
+          <select class="form-control" (change)="onSelectedRoute()" [(ngModel)]="selectedRoute">
+              <option *ngFor="let route of filterRoutes" [ngValue]="route">{{route.portName}}</option>
+            </select>
+      </div>
+      <div class="col-md-6">
+          <label class="label-control">Vessel/Flight</label>
+          <!-- <select class="form-control" (change)="onSelectedVessel()" [(ngModel)]="selectedVessel"> -->
+            <select class="form-control" [(ngModel)]="selectedVessel">
+            <option *ngFor="let vessel of filterVessels" [ngValue]="vessel">{{vessel.vessel_name}}</option>
+          </select>
+      </div>
+      </div>
+      <button type="submit" class="primary-btn mt-5" (click)="onFilterPaymentList()">filter</button> <!--(click)="onFilter()" -->
+      
+      
+      <!--Results, payment list -->
+      <div>
+          <h2 class= "mt-5"> Results </h2>
+      </div>
+          <div class="bg-color-expansion-model-body">
+              <mat-table [dataSource]="dataSource">
+                  <ng-container matColumnDef="booking_date">
+                      <mat-header-cell *matHeaderCellDef>Booking Date</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.booking_date}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="created_on">
+                      <mat-header-cell *matHeaderCellDef>Booking Time</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.created_on}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="quotation_id">
+                      <mat-header-cell *matHeaderCellDef>Quotation ID</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.quotation_id}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="order_id">
+                      <mat-header-cell *matHeaderCellDef>Order ID</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.order_id}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="customer_name">
+                      <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.customer_name}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="closing_price_total">
+                      <mat-header-cell *matHeaderCellDef>Final Amount</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.closing_price_total}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="closing_price_gst">
+                      <mat-header-cell *matHeaderCellDef>GST</mat-header-cell>
+                      <mat-cell *matCellDef="let supplier">{{supplier.closing_price_gst}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+              </mat-table>
+          </div>
+      <button type="submit" class="primary-btn" (click)="onConfirmReport()">CONFIRM</button> <!--(click)="onFilter()" -->
+      <button type="submit" class="primary-btn" (click)="onConfirmGenerateReport()">CONFIRM AND DOWNLOAD</button> <!--(click)="onFilter()" -->
+      

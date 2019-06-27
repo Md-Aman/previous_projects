@@ -1,0 +1,33 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Risk Category</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" [routerLink]="['/secure/manage-riskpal/category/create']">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW</span>
+      <span class="_b">Risk Category</span>
+    </div>
+  </div>
+  <div class="filterBy _upd">
+    <!-- <span>Filter by:</span>
+    <select><option value="">Role</option></select> -->
+    <!-- <select><option value="">Role</option></select>
+    <select><option value="">Active / Inactive</option></select> -->
+    <form [formGroup]="searchCategoryForm" (submit)="onSearch(searchCategoryForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Category...">
+      <span (click)="onSearch(_search.value)" class="_search-icon"></span>
+    </div>
+    </form>
+  </div>
+  <div class="_tableData">
+      <app-simple-table
+        [rows]="rows"
+        [columns]="columns"
+        [page]="page"
+        (emitEventChange)="receiveEvent($event)">
+      </app-simple-table>
+  </div>
+</div>

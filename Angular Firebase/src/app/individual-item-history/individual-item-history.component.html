@@ -1,0 +1,43 @@
+<div class="container">
+    <h2 class="text-center">
+        <strong>Item History</strong>
+        <br>
+        <small *ngFor="let user of userData;" >{{user.name}}</small>
+    </h2>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th class="text-center">Date & Time</th>
+            <th class="text-center">Desciption</th>
+            <th class="text-center">Price (MYR)</th>
+        </tr>
+        <tr *ngFor="let item of items | async; let i = index">
+            <td>{{i+1}}</td>
+            <td class="text-center">{{ item.date_time }}</td>
+            <td class="text-center">{{ item.item_description }}</td>
+            <td class="text-center">{{ item.price }}</td>
+            <!-- <td> -->
+                <!-- <button (click)="add()" type="button" class="btn btn-sm btn-outline-secondary">Add</button> &nbsp; -->
+                <!-- <button (click)="update(dat.id)" type="button" class="btn btn-sm btn-outline-secondary">Update</button> &nbsp;
+                <button (click)="deleteDoc(dat.id)" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+            </td> -->
+        </tr>
+        <tr>
+                <th class="text-center" colspan="3">Total Expenditure </th>
+                <th class="text-center">MYR {{total_price | number : '1.2-2'}}</th>
+            </tr>
+
+    </table>
+    <br>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button>
+  </div>
+</div>

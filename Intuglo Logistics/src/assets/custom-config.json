@@ -1,0 +1,18 @@
+{
+  "environment": {
+      "name": "DEVELOPMENT"
+    },
+  "development":{
+    "api":"http://13.228.41.116:8200",
+    "application":"http://13.228.41.116:4200"
+  },
+  "staging":{
+    "api":"http://175.139.158.78:8000",
+    "application":"http://175.139.158.78:4200"
+  },
+  "production":{
+    "api":"http://175.139.158.78:8000",
+    "application":"http://175.139.158.78:4200"
+  }
+
+}

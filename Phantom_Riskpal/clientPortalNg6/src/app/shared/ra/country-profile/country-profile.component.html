@@ -1,0 +1,186 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<div class="_customTab" [ngClass]="{centeredLayout: realTime == 'false'}" *ngIf="displayCountryProfile == true; else countryProfile">
+
+  <div class="row _country-tabs">
+      <ul>
+          <li *ngFor="let country of countryDetails;" class="" [ngClass]="{'active': selectedIndex == country.country_id.name}" (click)="onClickSelectedCountry(country.country_id.name, country._id)">{{country.country_id.name}}</li>
+      </ul>
+  </div>
+
+  <br> <br>
+  <!-- <tabset>
+    <tab *ngFor="let country of countryDetails" [heading]="country.country_id.name" 
+    [active]="country.active" [customClass]="country.customClass">
+    </tab>
+  </tabset> -->
+
+  <div class="row">
+    <div class="col-md-4">
+      <p class="_color-heading-primary country-name"> Country Name</p>
+      <p> {{countryObj.country_id.name}}
+        <span class="uppercase">({{countryObj.code}})</span>
+      </p>
+    </div>
+    <div class="col-md-8 ">
+      <p class="_color-heading-primary classification"> Classification</p>
+      <span class="_custom-label" [ngClass]="{
+                    'green': countryObj.country_id.color === 'green' || countryObj.country_id.color === 'Green',
+                    'red': countryObj.country_id.color === 'red' || countryObj.country_id.color === 'Red',
+                    'amber': countryObj.country_id.color === 'amber' || countryObj.country_id.color === 'Amber'}">
+        {{countryObj.country_id.color | titlecase}}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <ul class="threat">
+      <li class="text-center threat-level border-right padding-right-20px">Threat Levels</li>
+      <li class="text-center threat-level border-right padding-right">
+        <button class="btn btn-success btn-sm"></button> &nbsp; Low</li>
+      <li class="threat-level border-right padding-right">
+        <button class="btn btn-warning btn-sm amber"></button>&nbsp; Medium</li>
+      <li class="threat-level padding-right">
+        <button class="btn btn-danger btn-sm"></button>&nbsp; High</li>
+    </ul>
+  </div>
+
+
+  <div class="row">
+    <ngx-charts-bar-horizontal [view]=countryObj.view [customColors]=countryObj.customColors [results]=countryObj.graphData [yAxis]="showYAxis"
+      [tooltipDisabled]="tooltipDisabled" [legend]="showLegend">
+    </ngx-charts-bar-horizontal>
+  </div>
+
+  <div class="mg-top-20">
+    <h1 class="uppercase _color-heading-primary"> Country Details </h1>
+  </div>
+
+
+  <accordion class="mg-top-20 relative">
+    <accordion-group #group [isOpen]>
+      <div accordion-heading class="btn btn-link"> Specific Information
+        <i class="pull-right " [ngClass]="group?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+      </div>
+      <div class="para" *ngIf="countryObj.country_id.specific_info !=''; else specificInformation">
+        <p> {{countryObj.country_id.specific_info}} </p>
+      </div>
+    </accordion-group>
+    <accordion-group #group1 [isOpen]>
+      <div accordion-heading class="btn btn-link"> Description
+        <i class="pull-right " [ngClass]="group1?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+      </div>
+      <div *ngIf="countryObj.description !=''; else countryDescription">
+        <p class="para"> {{countryObj.description}} </p>
+      </div>
+    </accordion-group>
+    <accordion-group #group2 [isOpen]>
+      <div accordion-heading class="btn btn-link"> Security
+        <i class="pull-right " [ngClass]="group2?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+      </div>
+      <div *ngIf="countryObj.security !=''; else countrySecurity">
+        <p class="para"> {{countryObj.security}} </p>
+      </div>
+    </accordion-group>
+  </accordion>
+
+  <!-- <tabset>
+    <tab *ngFor="let country of countryDetails" [heading]="country.country_id.name"
+     [active]="country.active" [customClass]="country.customClass">
+
+      <div class="row">
+        <div class="col-md-4">
+          <p class="_color-heading-primary country-name"> Country Name</p>
+          <p> {{country.country_id.name}}
+            <span class="uppercase">({{country.code}})</span>
+          </p>
+        </div>
+        <div class="col-md-8 ">
+          <p class="_color-heading-primary classification"> Classification</p>
+          <span class="_custom-label" [ngClass]="{
+              'green': country.country_id.color === 'green' || country.country_id.color === 'Green',
+              'red': country.country_id.color === 'red' || country.country_id.color === 'Red',
+              'amber': country.country_id.color === 'amber' || country.country_id.color === 'Amber'}">
+            {{country.country_id.color | titlecase}}</span>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <ul class="threat">
+          <li class="text-center threat-level border-right padding-right-20px">Threat Levels</li>
+          <li class="text-center threat-level border-right padding-right">
+            <button class="btn btn-success btn-sm"></button> &nbsp; Low</li>
+          <li class="threat-level border-right padding-right">
+            <button class="btn btn-warning btn-sm amber"></button>&nbsp; Medium</li>
+          <li class="threat-level padding-right">
+            <button class="btn btn-danger btn-sm"></button>&nbsp; High</li>
+        </ul>
+      </div>
+
+
+      <div class="row">
+        <ngx-charts-bar-horizontal [view]=country.view [customColors]=country.customColors [results]=country.graphData [yAxis]="showYAxis"
+          [tooltipDisabled]="tooltipDisabled" [legend]="showLegend">
+        </ngx-charts-bar-horizontal>
+      </div>
+
+
+      <div class="mg-top-20">
+        <h1 class="uppercase _color-heading-primary"> Country Details </h1>
+      </div>
+
+
+      <accordion class="mg-top-20 relative">
+        <accordion-group #group [isOpen]>
+          <div accordion-heading class="btn btn-link"> Specific Information
+            <i class="pull-right " [ngClass]="group?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+          </div>
+          <div *ngIf="country.country_id.specific_info !=''; else specificInformation">
+            <p class="para"> {{country.country_id.specific_info}} </p>
+          </div>
+        </accordion-group>
+        <accordion-group #group1 [isOpen]>
+          <div accordion-heading class="btn btn-link"> Description
+            <i class="pull-right " [ngClass]="group1?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+          </div>
+          <div *ngIf="country.description !=''; else countryDescription">
+            <p class="para"> {{country.description}} </p>
+          </div>
+        </accordion-group>
+        <accordion-group #group2 [isOpen]>
+          <div accordion-heading class="btn btn-link"> Security
+            <i class="pull-right " [ngClass]="group2?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+          </div>
+          <div *ngIf="country.security !=''; else countrySecurity">
+            <p class="para"> {{country.security}} </p>
+          </div>
+        </accordion-group>
+      </accordion>
+
+    </tab>
+
+  </tabset> -->
+
+</div>
+
+<div class="subSet mg-top-20">
+  <div class="right _btn fixed" *ngIf="realTime == null">
+    <a class="prev" (click)="countryProfileStep('previous', false)">Previous</a>
+    <button type="submit" class="cont" (click)="countryProfileStep('next', true)">
+      <span *ngIf="raId === null">
+          Continue
+      </span>
+      <span *ngIf="raId !== null">
+          Save + Continue
+      </span>
+    </button>
+  </div>
+  <div class="right _btn fixed" *ngIf="realTime == 'false'">
+    <a class="prev" routerLink="/secure/manage-riskpal/country">Back</a>
+  </div>
+</div>
+
+
+<ng-template #countryProfile>This template serves multiple locations. See Country List for specific country information</ng-template>
+<ng-template #specificInformation><p class="para">No Specific Information is available for this country</p></ng-template>
+<ng-template #countryDescription><p class="para">No Description is available for this country</p></ng-template>
+<ng-template #countrySecurity><p class="para">No Security Information is available for this country</p></ng-template>

@@ -1,0 +1,115 @@
+<!-- Content Header (Page header) -->
+<!-- <section class="content-header" ng-init="getOtherInfo();">
+    <h1>
+        Any Other Information -->
+<!-- <small>New Contact</small> -->
+<!--     </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Any Other Information</li>
+    </ol>
+</section> -->
+<!-- Main content -->
+<section class="content" ng-init="getOtherInfo();" style="padding: 20px 0px">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <div class="">
+    <section>
+      <div class="box box-primary box-solid">
+        <div class="box-header">
+          <h3 class="box-title">Add Any Other Information
+            </h3>
+        </div>
+        <!-- form start -->
+        <div class="box-body">
+          <form role="form" name="otherInfoForm" novalidate class="form-horizontal">
+            <div class="row" style="padding: 0px; margin: 7px;">
+              <div ng-if="showLoader" class="col-lg-7 pull-right">
+                <div loader-css="ball-pulse"></div>
+              </div>
+              <div class="form-group col-sm-10">
+                <label class="col-sm-10 text-left">Please provide any information that you have missed or explain why sections of the risk assessment have been left incomplete</label>
+              </div>
+              <div class="form-group col-sm-12">
+                <div class="col-sm-10">
+                  <trix-editor name="relevant_info{{$index}}" id="relevant_info{{$index}}" style="background-color: white;" angular-trix ng-model="otherinfo.relevant_info" class="trix-content"></trix-editor>
+                </div>
+              </div>
+                <div class="col-sm-10">
+                  <label class="col-sm-10 text-left">Please detail any other risks not already identified
+                  </label>
+                </div>
+                
+                <div class="form-group col-sm-12 " >
+                  <div class="col-sm-10">
+                    <trix-editor name="risk_detailed" id="risk_detailed" style="background-color: white;" angular-trix ng-model="otherinfo.risk_detailed" class="trix-content"></trix-editor>
+                  </div>
+              </div>
+              <div class="form-group col-sm-10">
+                <label class="control-label" style="margin-left: 10px">Upload Supporting Information</label>
+              </div>
+              <div class="form-group col-sm-12">
+                <div class="col-sm-12">
+                  <input type="file"   multiple name="supporting_docs" ngf-select ng-change="attach_supporting_docs(otherinfo.supporting_docs)" ng-model="otherinfo.supporting_docs" id="files">
+                </div>
+                
+               
+              </div>
+
+              
+              <table  class="table" ng-if="otherinfo.supporting_docs.length > 0">
+                <thead>
+                    <tr>
+                        <th>Resources</th>
+                        <th>Download</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="docs in otherinfo.supporting_docs track by $index">
+                        <td>{{docs}}</td>
+                        <td>
+                        <a href="{{docs}}" download="{{docs.url.split('-')[1] }}"><i class="fa fa-download" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                        <a href="" ng-click="removeDoc(docs,$index)"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+        </table> 
+              <div class="form-group col-sm-12">
+                <div class="pull-right box-tools">
+                  <button type="button" class="btn btn-sm btn-primary" ng-click="backToContingencyPage();">Back</button>
+                  <button ng-disabled="otherInfoForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="addAnyOtherInfo(otherinfo)">Next</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+<style>
+/*.box.box-primary {
+  border-top-color: #3c8dbc;
+  border-left-color: #3c8dbc;
+  border-right-color: #3c8dbc;
+  border-bottom-color: #3c8dbc;
+}
+.box {
+  position: relative;
+  background: #ffffff;
+  border-top: 2px solid #c1c1c1;
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+  border-bottom: 1px solid #c1c1c1;
+  margin-bottom: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: -11px;
+  width: 100%;
+  box-shadow: 43 34px 19px rgba(0, 0, 0, 0.1);
+}*/
+
+</style>

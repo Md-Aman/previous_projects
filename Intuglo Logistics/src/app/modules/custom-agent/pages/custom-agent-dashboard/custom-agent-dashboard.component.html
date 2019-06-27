@@ -1,0 +1,24 @@
+<!-- This is header / nav bar  -->
+<custom-agent-navbar (controlSideBar)="receiveDataFromHeader($event)"></custom-agent-navbar>
+<!-- Container for sidebar(s) + page content -->
+<ng-sidebar-container class="ng-container bg-color">
+    <!-- Container for sidebar(s)  -->
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <custom-agent-left-menu [sideBar]="isSideBarOpen" [fromDashboard]='isOpen'></custom-agent-left-menu>
+    </ng-sidebar>
+    <!-- page content starts -->
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>Booking Order</h2>
+        <div class="content-area">
+            <div>
+                <custom-agent-country-filter (shareDataToCustomAgentBookings)="recieveDataFromCountryFilter($event)"></custom-agent-country-filter>
+            </div>
+            <div>
+                <custom-agent-action-button [customStatus]="customStatus" [hidden]="!isCheckBox" (hideAdminActionButtons)="getHideButtonsFromActionButtons($event)" [documentLength]="isDocumentLength"></custom-agent-action-button>
+            </div>
+            <div>
+                <custom-agent-bookings (shareIsCheckedChecboxToDashboard)="getCheckboxValueAndDocLengthFromBookings($event)" [route]="selectedRoute"></custom-agent-bookings>
+            </div>
+        </div>
+    </div>
+</ng-sidebar-container>

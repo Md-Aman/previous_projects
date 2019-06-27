@@ -1,0 +1,86 @@
+<style>
+    thead {
+        background-color: #5c6d81;
+        color: white;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Risk
+        <small>Appropriate to country</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Risk appropriate to country</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getCountriesForThreatMatrix();getAllCategories();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+
+                    <!-- /. tools -->
+                    <i class="fa fa-tags"></i>
+                    <h3 class="box-title">Country threat Matrix</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by country name" ng-model="keyword"
+                            autocomplete="false" ng-change="filterCountryThreatMatrix(keyword)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th ng-if="!showLoader" rowspan="2">Country Name</th>
+                                <th ng-repeat="category in categoryArr">{{category.categoryName}}</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="country in countryArr |  itemsPerPage:10 track by $index">
+                                <div ng-if="showLoader" class="col-lg-6 pull-right" style="margin-top:131px;">
+                                    <div loader-css="ball-pulse"></div>
+                                </div>
+                                <td ng-style="{ 'font-size' : (country.code) ? '16px' : '12px' }">{{country.name}}</td>
+                                <td ng-repeat="category in categoryArr">
+                                    <input type="checkbox" ng-true-value="High" ng-model="country[$index].appropriate_risk" ng-change="saveCountryThreatMatrix(country,category,$index);"
+                                        ng-checked="getRiskBycategory(category.categoryName,country, 'High')" disabled>High <br>
+                                        <input type="checkbox" ng-true-value="Medium" ng-model="country[$index].appropriate_risk" ng-change="saveCountryThreatMatrix(country,category,$index);"
+                                            ng-checked="getRiskBycategory(category.categoryName,country,'Medium')" disabled>Medium <br>
+
+
+                                            <input type="checkbox" ng-true-value="Low" ng-model="country[$index].appropriate_risk" ng-change="saveCountryThreatMatrix(country,category,$index);"
+                                                ng-checked="getRiskBycategory(category.categoryName,country,'Low')" disabled>
+                                                Low
+                                </td>
+                            </tr>
+                            <tr ng-if="countryArr.length == 0">
+                                <td colspan="12" align="center">No Record Found!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" ng-if="!showLoader">
+                    <div class="col-md-12">
+                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

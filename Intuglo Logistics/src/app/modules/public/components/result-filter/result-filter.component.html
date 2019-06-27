@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-content">
+      <div class="title">Filters</div>
+      <div class="side-menu">
+        <div class="menu">
+          <section>
+            <p>Incoterm</p>
+            <label *ngFor="let list of incoTerms" class="checkbox-container fl-checkbox">
+              <input type="checkbox" class="checkbox"  value="{{list.value}}" 
+                (change)="onCheckboxChange(list,$event)">{{list.value}}
+            </label>
+          </section>
+
+          <section>
+            <p>Price (RM)</p>
+            <ion-range-slider [(ngModel)]="priceFilter" #sliderOne type="double" 
+              min="0" max="100000"  (onChange)="priceChange($event)"
+              [from]="fromPrice" [to]="toPrice">
+            </ion-range-slider>
+          </section>
+
+
+          <!-- <section>
+            <p># of people sharing</p>
+            <ion-range-slider #sliderFour type="double" min="0" max="300" from="30" to="200">
+
+            </ion-range-slider>
+          </section> -->
+
+          <section>
+            <p>Logistic Partner</p>
+            <input class="default-input" name="logisticPartnerFilter" [(ngModel)]="logisticPartnerFilter" type="text">
+          </section>
+
+          <section>
+            <p>Quotation ID</p>
+            <input class="default-input" name="quotationIdFilter" [(ngModel)]="quotationIdFilter" type="text">
+          </section>
+          
+          <section>
+              <button class="btn-check-rate" (click)="submit()">Filter</button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>

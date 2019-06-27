@@ -1,0 +1,180 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getNewsRaDetails();">
+  <h1>
+        RA Details
+        <!-- <small>New Contact</small> -->
+    </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </li>
+    <li class="active">RA Details</li>
+  </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <div class="row">
+    <section class="col-lg-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-tags"></i> RA Details
+                    </h3>
+        </div>
+        <!-- form start -->
+        <form role="form" name="newsRaForm" novalidate class="form-horizontal">
+          <div class="box-body">
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">Assign project name</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Enter Project Name" required ng-model="newsRa.project_name" maxlength="50" ng-pattern="/^[a-zA-Z]+[a-zA-Z' ]*$/" autocomplete="off" />
+                    <span class="text-danger" ng-show="newsRaForm.project_name.$dirty &&  newsRaForm.project_name.$error.required">Project name is required</span>
+                    <span class="text-danger" ng-show="newsRaForm.project_name.$dirty &&  newsRaForm.project_name.$error.pattern">Project name is not valid</span>
+                  </div>
+                </div>
+                <!--                           <div class="form-group col-sm-5">
+                                    <label class="col-sm-4 control-label">Select Department</label>
+                                    <div class="col-sm-8">
+                                        <div isteven-multi-select input-model="departmentArr" output-model="newsRa.department" button-label="department_name" item-label="department_name"
+                                            tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select Department"
+                                            data-trigger="hover" tabindex="6" name="category" on-item-click="onItemClick(newsRa.department)"></div>
+                                    <span class="text-danger" ng-show="newsRaForm.category.$dirty &&  newsRaForm.category.$error.required">Department is required</span>
+                                </div>
+                            </div> -->
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">Select department</label>
+                  <div class="col-sm-8">
+                    <multiple-autocomplete ng-model="finalDepartmentArray" suggestions-arr="departmentArr" name="category" object-property="department_name">
+                    </multiple-autocomplete>
+                    <span class="text-danger" ng-show="newsRaForm.category.$dirty &&  newsRaForm.category.$error.required">Department is required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-12">
+                <!--      <div class="form-group col-sm-5">
+                                    <label class="col-sm-4 control-label">Date of RA</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" autocomplete="off" name="date_of_ra" ng-model="newsRa.date_of_ra" data-date-format="dd/MM/yyyy"
+                                            name="date_of_ra" bs-datepicker type="text" placeholder="Date of RA" onkeydown="return false"
+                                            required>
+                                            <span class="text-danger" ng-show="newsRaForm.date_of_ra.$dirty &&  newsRaForm.date_of_ra.$error.required">Date of ra is required</span>
+                                    </div>
+                                </div> -->
+                <!--      <div class="form-group col-sm-5">
+                                <label class="col-sm-4 control-label">Date of RA</label>
+                                <div class="col-sm-8">
+                                        <input date-range-picker class="form-control date-picker" type="text" ng-model="newsRa.date_of_ra" placeholder="Date of RA" required/>
+                                        <span class="text-danger" ng-show="newsRaForm.date_of_ra.$dirty &&  newsRaForm.date_of_ra.$error.required">Date of ra is required</span>
+                                    </div>
+                            </div> -->
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">Start date</label>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="btn btn-primary input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></div>
+                      <input type="text" placeholder="Enter start date" class="form-control" datepicker-popup="{{format}}" ng-model="newsRa.startdate" is-open="opened" max-date="dtmax" ng-required="true" close-text="Close" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">End date </label>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="btn btn-primary input-group-addon" ng-click="open1($event)"><i class="fa fa-calendar"></i></div>
+                      <input type="text" placeholder="Enter end date" class="form-control" datepicker-popup="{{format}}" ng-model="newsRa.enddate" is-open="opened1" max-date="dtmax" ng-required="true" close-text="Close" />
+                    </div>
+                  </div>
+                </div>
+                <!--                <div class="form-group col-sm-5">
+                                    <label class="col-sm-4 control-label">Attach Team Profile</label>
+                                    <div class="col-sm-8">
+
+                                        <div isteven-multi-select input-model="travellerArr" output-model="newsRa.travellerTeamArr" name="travellerArr" button-label="firstname lastname"
+                                            item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                            data-placement="top" title="Select Travellers" data-trigger="hover" tabindex="6"></div>
+
+                                    <span class="text-danger" ng-show="newsRaForm.travellerArr.$dirty &&  newsRaForm.travellerArr.$error.required">Team Traveller is required</span>
+                                </div>
+                            </div> -->
+              </div>
+              <div class="form-group col-sm-12">
+                  <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">Other Travellers</label>
+                    <div class="col-sm-8">
+                    
+                       <div isteven-multi-select input-model="getDeptRelatedUsers" output-model="newsRa.getDeptRelatedUsers" name="getDeptRelatedUsers" button-label="firstname lastname" item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select users" data-trigger="hover" tabindex="6"></div>
+                      <span class="text-danger" ng-show="newsRaForm.travellerArr.$dirty &&  newsRaForm.travellerArr.$error.required">Team traveller is required</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">Approving manager</label>
+                    <div class="col-sm-8">
+                   
+                     <div isteven-multi-select input-model="approvingManager" name="approvingManager" output-model="newsRa.approvingManager" button-label="firstname lastname" item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select Approving Managers" data-trigger="hover" tabindex="6"></div> 
+                      <span class="text-danger" ng-show="newsRaForm.approvingManager.$dirty &&  newsRaForm.approvingManager.$error.required">Approving manager is required</span>
+                    </div>
+                  </div>
+                </div>
+              <div class="form-group col-sm-12">
+                <!--                             <div class="form-group col-sm-5">
+                                <label class="col-sm-4 control-label">Country Of Operation</label>
+                                <div class="col-sm-8">
+
+                                    <div isteven-multi-select input-model="countryArr" output-model="newsRa.country" name="country" button-label="name" item-label="name"
+                                        output-properties="name" tick-property="ticked" data-toggle="tooltip" data-placement="top"
+                                        title="Select Countries" data-trigger="hover" tabindex="6"></div>
+
+                                <span class="text-danger" ng-show="newsRaForm.country.$dirty &&  newsRaForm.country.$error.required">Country is required</span>
+                            </div>
+                        </div> -->
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">Country</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="country" id="country" ng-model="newsRa.country">
+                      <option ng-selected="true" disabled>Select Country</option>
+                      <!--  <option value="" ng-selected="newsRa.country == null">All</option> -->
+                      <option ng-repeat="country in countryArr" value="{{country}}" ng-selected="newsRa.country[0].name == country.name">{{country.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <!--                         <div class="form-group col-sm-5">
+                            <label class="col-sm-4 control-label">Approving Manager</label>
+                            <div class="col-sm-8">
+
+                                <div isteven-multi-select input-model="approvingManagerArr" name="approvingManager" output-model="newsRa.approvingManager"
+                                    button-label="name" item-label="name" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                    data-placement="top" title="Select Approving Managers" data-trigger="hover" tabindex="6"></div>
+
+                            <span class="text-danger" ng-show="newsRaForm.approvingManager.$dirty &&  newsRaForm.approvingManager.$error.required">Approving Manager is required</span>
+                        </div>
+                    </div> -->
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 control-label">Approving Manager</label>
+                  <div class="col-sm-8">
+                    <multiple-autocomplete ng-model="finalApprovingManager" name="name" object-property="fullname" suggestions-arr="approvingManagerArr">
+                      <span class="text-danger" ng-show="newsRaForm.approvingManager.$dirty &&  newsRaForm.approvingManager.$error.required">Approving Manager is required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-10">
+                <label class="col-sm-2 control-label">Description of Task</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" autocomplete="off" name="description_of_task" ng-model="newsRa.description_of_task" placeholder="Description of task" required style="margin-left:-8px; width: 97%"></textarea>
+                  <span class="text-danger" ng-show="newsRaForm.description_of_task.$dirty &&  newsRaForm.description_of_task.$error.required">Description of task is required</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-9">
+              <div class="pull-right box-tools">
+                <button ng-disabled="newsRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="copyNewsRa(newsRa);">Copy RA</button>
+                <!--<button ng-disabled="newsRaForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right: 200px;" ng-click="updateNewsRaAndNext(newsRa);">Next</button>-->
+              </div>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </form>
+      </div>
+    </section>
+  </div>
+</section>

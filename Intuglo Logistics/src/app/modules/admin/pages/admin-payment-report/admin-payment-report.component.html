@@ -1,0 +1,16 @@
+<admin-navbar (controlSideBar)="receiveDataFromHeader($event)"></admin-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+  <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+    <admin-left-menu [sideBar]="isSideBarOpen" [fromPaymentReport]='isOpen'></admin-left-menu>
+  </ng-sidebar>
+  <div class="dashboard-layout" ng-sidebar-content>
+    <h2>Payment Report</h2>
+    <div class="content-area">
+        <div>
+          <admin-payment-list></admin-payment-list>
+        </div>
+
+    </div>
+  </div>
+</ng-sidebar-container>

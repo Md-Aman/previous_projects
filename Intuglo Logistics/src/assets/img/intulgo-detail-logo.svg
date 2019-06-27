@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.534 39.278">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 20px;
+        font-family: Montserrat-ExtraBold, Montserrat;
+        font-weight: 800;
+      }
+    </style>
+  </defs>
+  <g id="Logo" transform="translate(-436.466 -145.036)">
+    <ellipse id="Ellipse_281" data-name="Ellipse 281" class="cls-1" cx="14.079" cy="10.801" rx="14.079" ry="10.801" transform="translate(441.692 156.542) rotate(14)"/>
+    <ellipse id="Ellipse_282" data-name="Ellipse 282" class="cls-1" cx="6.75" cy="5.786" rx="6.75" ry="5.786" transform="translate(468.645 160.218) rotate(7)"/>
+    <ellipse id="Ellipse_283" data-name="Ellipse 283" class="cls-1" cx="9.065" cy="6.557" rx="9.065" ry="6.557" transform="translate(479.506 148.379) rotate(18)"/>
+    <ellipse id="Ellipse_284" data-name="Ellipse 284" class="cls-1" cx="2.7" cy="2.507" rx="2.7" ry="2.507" transform="translate(485.116 145.036) rotate(1)"/>
+    <text id="INTUGLO" class="cls-2" transform="translate(503 175.967)"><tspan x="0" y="0">INTUGLO</tspan></text>
+  </g>
+</svg>

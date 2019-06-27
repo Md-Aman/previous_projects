@@ -1,0 +1,89 @@
+<div *ngIf="rawJsonBookingDetails?.length < 1" class="messageStyle">
+    No booking data is available
+</div>
+<div *ngFor="let booking of rawJsonBookingDetails; let index = index">
+  <mat-accordion>
+    <mat-expansion-panel class="booking-box" [expanded]="true" style="box-shadow: none;">
+      <mat-expansion-panel-header class="mat-header" [collapsedHeight]="'100px'" [expandedHeight]="'100px'">
+        <mat-panel-title>
+          <div class="panel-title-col">
+            <p class="heading">
+              <span class="heading-value">ETD:</span>
+              <span>{{booking.etd}}</span>
+            </p>
+            <p class="heading">
+              <span class="heading-value">DEPARTURE PORT/TERMINAL:</span>
+              <span>{{booking.portFrom}}</span>
+            </p>
+            <p class="heading">
+              <span class="heading-value">VESSEL/FLIGHT:</span>
+              <span>{{booking.vessel}}</span>
+            </p>
+          </div>
+        </mat-panel-title>
+        <mat-panel-title>
+          <div class="panel-title-col">
+            <p class="heading">
+              <span class="heading-value">ETA:</span>
+              <span>{{booking.eta}}</span>
+            </p>
+            <p class="heading">
+              <span class="heading-value">ARRIVAL PORT/TERMINAL:</span>
+              <span>{{booking.portTo}}</span>
+            </p>
+            <p class="heading">
+              <span class="heading-value">QUOTATION ID:</span>
+              <span>{{booking.quotation_id}}</span>
+            </p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <!-- Table starts here -->
+
+      <div class="bg-color-expansion-model-body">
+        <table width="100%" id="bookings-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Order ID</th>
+              <th>Shipping Agent</th>
+              <th>Container No</th>
+              <th>Booking Price</th>
+              <th>Est. Actual Price</th>
+              <!-- <th>Tracking Number</th> -->
+              <th>Documents</th>
+              <th>Order Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <input type="checkbox" [(ngModel)]="booking.checked" 
+                  (click)="updateSelection(index, rawJsonBookingDetails);" 
+                  (click)="getOrderIdAndOrderStatusCodeAndButtonCode(
+                      $event,booking.order_id,booking.cargo_status_code,booking.button_code,
+                      booking.payment_status_code)">
+              </td>
+              <td>{{booking.order_id}}</td>
+              <td>{{booking.consignor_shipper}}</td>
+              <td>{{booking.container_no}}</td>
+              <td>{{booking.booking_price_total | currency:'RM'}}</td>
+              <td>{{booking.closing_price_total | currency:'RM'}}</td>
+              <!-- <td>{{booking.tracking_number}}</td> -->
+              <td>
+                <select class="document-box">
+                  <option>View</option>
+                  <option *ngFor="let document of booking.document_name" [disabled]="selectDisabled">{{document.file_name}}</option>
+                </select>
+              </td>
+              <td class="border-radius">
+                <span>{{booking.cargo_status_description}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

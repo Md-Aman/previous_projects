@@ -1,0 +1,33 @@
+<div class="centeredLayout">
+    <div class="subSet ">
+  
+        <h2>Sector</h2>
+        <p>Fill out Sector details below:</p>
+    </div>
+  
+    <form [formGroup]="formGroup" (submit)="submit(formGroup.value)">
+      <div class="accord relative ">
+        <span>Sector Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content checkboxArea">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Sector Name</label>
+              <input type="text" formControlName="sectorName" class="form-control">
+            </div>
+        </div>
+      </div>
+       
+    
+      <div class="subSet">
+          <div class="right _btn mg-bottom-25">
+              <a class="prev" routerLink="/secure/manage-riskpal/sector">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

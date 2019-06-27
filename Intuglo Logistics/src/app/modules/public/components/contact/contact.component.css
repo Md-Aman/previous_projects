@@ -1,0 +1,10 @@
+.contact { background:url(../../../../../assets/img/Contact.png) center center no-repeat #efefef; background-size:cover; position: relative; text-align: center; height: 360px;}
+.contact .content {padding: 20px; background: rgba(238,238,238,.9); width: 460px; position: relative; top: 50px;}
+.contact .content p { font-size: 20px; font-weight: 500; color: #23376D; margin: 0 0 -10px 0; text-align: left; text-transform: uppercase; font-family: montserrat;}
+.contact .content > h2 { font-size: 45px; font-weight: 100; color:#23376D; margin: 0; text-align: left; font-family: montserrat;}
+.contact .content table { border-collapse: collapse; text-align: left; margin-top: 20px;}
+.contact .content table td { padding: 5px; font-size: 14px; color: #333;}
+.contact .content table td .explore { border:1px solid #23376D; line-height: 30px; color: #23376D; text-align: center; padding: 0 10px; min-width: 100px; display: inline-block;}
+agm-map {
+    height: 300px;
+  }

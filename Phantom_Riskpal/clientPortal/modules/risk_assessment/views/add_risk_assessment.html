@@ -1,0 +1,320 @@
+<style>
+    /* BASIC STYLINGS
+============================================================================= */
+/*    
+    body {
+        padding-top: 20px;
+    }*/
+    
+    pre {
+        margin-bottom: 20px;
+    }
+    /* form styling */
+    
+    #form-container {
+        background: #2f2f2f;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    
+    #form-container .page-header {
+        background: #151515;
+        margin: 0;
+        padding: 30px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    /* numbered buttons */
+    
+    #status-buttons {}
+    
+    #status-buttons a {
+        color: #FFF;
+        display: inline-block;
+        font-size: 12px;
+        margin-right: 10px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    #status-buttons a:hover {
+        text-decoration: none;
+    }
+    
+    #status-buttons span {
+        background: #3c8dbc;
+        display: block;
+        height: 30px;
+        margin: 0 auto 10px;
+        padding-top: 5px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    /* active buttons */
+    
+    #status-buttons a.active span {
+        background: #00BC8C;
+    }
+    /* ANIMATION STYLINGS
+============================================================================= */
+    
+    #signup-form {
+        position: relative;
+        min-height: 300px;
+        overflow: hidden;
+        padding: 30px;
+    }
+
+    #form-views.ng-enter,
+    #form-views.ng-leave {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        transition: 0.5s all ease;
+        -moz-transition: 0.5s all ease;
+        -webkit-transition: 0.5s all ease;
+    }
+ 
+    
+    #form-views.ng-enter {
+        -webkit-animation: zoomOutRight 0.5s both ease;
+        -moz-animation: zoomOutRight 0.5s both ease;
+        animation: zoomOutRight 0.5s both ease;
+    }
+
+    
+    #form-views.ng-leave {
+        -webkit-animation: zoomOutLeft 0.5s both ease;
+        -moz-animation: zoomOutLeft 0.5s both ease;
+        animation: zoomOutLeft 0.5s both ease;
+    }
+    /* ANIMATIONS
+============================================================================= */
+    /* slide out to the left */
+    
+    @keyframes zoomOutLeft {
+        to {
+            transform: translateX(-200%);
+        }
+    }
+    
+    @-moz-keyframes zoomOutLeft {
+        to {
+            -moz-transform: translateX(-200%);
+        }
+    }
+    
+    @-webkit-keyframes zoomOutLeft {
+        to {
+            -webkit-transform: translateX(-200%);
+        }
+    }
+
+    
+    @keyframes zoomOutRight {
+        from {
+            transform: translateX(200%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+    
+    @-moz-keyframes zoomOutRight {
+        from {
+            -moz-transform: translateX(200%);
+        }
+        to {
+            -moz-transform: translateX(0);
+        }
+    }
+    
+    @-webkit-keyframes zoomOutRight {
+        from {
+            -webkit-transform: translateX(200%);
+        }
+        to {
+            -webkit-transform: translateX(0);
+        }
+    }
+ #form-views.ng-enter {
+  -webkit-animation-name: zoomOutLeft;
+  animation-name: zoomOutLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes zoomOutLeft {
+  40% {
+  opacity: 1;
+  -webkit-transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: scale(.1) translate3d(-2000px, 0, 0);
+  transform: scale(.1) translate3d(-2000px, 0, 0);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+  }
+  }
+  @keyframes zoomOutLeft {
+  40% {
+  opacity: 1;
+  -webkit-transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: scale(.1) translate3d(-2000px, 0, 0);
+  transform: scale(.1) translate3d(-2000px, 0, 0);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+  }
+  } 
+
+  #form-views.ng-leave{
+  -webkit-animation-name: zoomOutRight;
+  animation-name: zoomOutRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes zoomOutRight {
+  40% {
+  opacity: 1;
+  -webkit-transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: scale(.1) translate3d(-2000px, 0, 0);
+  transform: scale(.1) translate3d(-2000px, 0, 0);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+  }
+  }
+  @keyframes zoomOutRight {
+  40% {
+  opacity: 1;
+  -webkit-transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: scale(.1) translate3d(-2000px, 0, 0);
+  transform: scale(.1) translate3d(-2000px, 0, 0);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+  }
+  }
+
+</style>
+<!-- Include Editor style. -->
+
+<section class="content-header" ng-init="getRadetailsForAdmin();">
+    <h1>
+        Ra details
+        <!-- <small>New Contact</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Ra details</li>
+    </ol>
+</section>
+<div class="row" ng-init="getCountryListForRa();getAllQuestionnaireForRa();getAllDepartmentOfClient();getRaPreviewData();getRiskQueDetail();getCurrencyList();">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <!-- the links to our nested states using relative paths -->
+                <!-- add the active class if the state matches our ui-sref -->
+                <div id="status-buttons" class="text-center">
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individual_step1'}" ng-click="redirectTostep1()"><span>1</span> Create RA</a>
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="countrythreattest || activecountry || individualRa.countrythreattest" ng-class="{active: individual_stepflag == 'individualcountry_step2'}" ng-click="sendToCountryThreatMatrix()" style="cursor: pointer"><span>2</span> Country Profile Page </a>
+
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="questiontest || individualRa.questionRequired" ng-class="{active: individual_stepflag == 'individual_step2'}" ng-click="sendIndividualSecondStep()" style="cursor: pointer"><span>{{!(countryvalue || countrythreattest)?2:3}}</span>Risks and Mitigation</a>
+
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="supplierInformationtest || individualRa.supplierRequired" ng-class="{active :supplier_active == true}" ng-click="goToSupplierPage();" style="cursor: pointer"><span>{{(!(questiontest || individualRa.questionRequired) && !(countryvalue || countrythreattest))? 2 : ((questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?3:(!(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?3:4}}
+                           </span> Supplier Info</a>
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="communicationstest || individualRa.communicationRequired" ng-class="{active :communication_active == true}" ng-click="goToCommunicationPage();" style="cursor: pointer">
+                            <span>{{
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(questiontest || individualRa.questionRequired) &&!(activecountry || countrythreattest))?2:
+                                (!(activecountry || countrythreattest) && (supplierInformationtest || individualRa.supplierRequired) && !(questiontest || individualRa.questionRequired))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?4:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(questiontest || individualRa.questionRequired )&& (activecountry || countrythreattest))?3:5}}
+                            </span> Communications </a>
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="contingenciestest || individualRa.contingenciesRequired" ng-class="{active :contingency_active == true}" ng-click="goToContingencyPage();" style="cursor: pointer">
+                            <span> {{
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(questiontest || individualRa.questionRequired )&& !(activecountry || countrythreattest))?2:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired )&& (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?3:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired )&& !(questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired )&& !(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?4:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?4:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired )&& !(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?4:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?5:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired )&&( questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?5:
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(questiontest || individualRa.questionRequired) && (activecountry || countrythreattest))?5:
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (questiontest || individualRa.questionRequired) && !(activecountry || countrythreattest))?5:6}}
+                            </span>Contingencies</a>
+                            <a ng-style="!ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individual_step3'}" ng-click="sendIndividualThirdStep()" style="cursor: pointer">
+                            <span>{{
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?2:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest )&& !(questiontest || individualRa.questionRequired))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest )&& !(questiontest || individualRa.questionRequired))?3:
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest )&& !(questiontest || individualRa.questionRequired))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest )&& !(questiontest || individualRa.questionRequired))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?3:
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?4:     
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?4:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired )&& !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest )&& !(questiontest || individualRa.questionRequired))?4:       
+                                (!(supplierInformationtest || individualRa.supplierRequired )&& (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired )&& !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?4:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?4:   
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?4:   
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?4:   
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?4:     
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?4:     
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?4:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:     
+                                (!(supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:       
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?5:        
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:   
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:   
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?5:   
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?5:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?5:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?5:     
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && !(questiontest || individualRa.questionRequired))?6: 
+                                ((supplierInformationtest || individualRa.supplierRequired) && !(communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest) && (questiontest || individualRa.questionRequired))?6: 
+                                (!(supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest )&& (questiontest || individualRa.questionRequired))?6: 
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && !(contingenciestest || individualRa.contingenciesRequired) && (activecountry || countrythreattest )&& (questiontest || individualRa.questionRequired))?6: 
+                                ((supplierInformationtest || individualRa.supplierRequired) && (communicationstest || individualRa.communicationRequired) && (contingenciestest || individualRa.contingenciesRequired) && !(activecountry || countrythreattest )&& (questiontest || individualRa.questionRequired))?6:7}} 
+                            </span> Preview </a>
+                </div>
+            </div>
+            <div id="form-views" ui-view></div>
+           <!--  </form> -->
+
+        </div>
+
+
+    </div>
+</div>

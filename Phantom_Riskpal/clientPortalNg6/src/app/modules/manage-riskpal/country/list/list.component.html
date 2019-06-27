@@ -1,0 +1,33 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Manage Country</h2>
+</div>
+
+<div class="subSet _table">
+
+  <div class="filterBy">
+    <div class="tabs">
+      <a  class="tab _m-country"
+        *ngFor="let val of alphabets"
+        (click)="searchCountry(val)"
+        [ngClass]="{'active': selectedAlphabet == val}">
+         {{ val }}
+       </a>
+    </div>
+    <form [formGroup]="searchCountryForm" (submit)="onSearch(searchCountryForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search"  formControlName="searchKey" #_search type="text" placeholder="Search Country...">
+      <span (click)="onSearch(_search.value)" class="icon-position"></span>
+    </div>
+    </form>
+  </div>
+  <div class="_tableData">
+      <app-simple-table
+        [rows]="rows"
+        [columns]="columns"
+        [page]="page"
+        [actions]="actions"
+        (emitEventChange)="receiveEvent($event)">
+      </app-simple-table>
+  </div>
+</div>

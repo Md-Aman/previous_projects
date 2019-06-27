@@ -1,0 +1,305 @@
+<div class="header-section">
+  <div class="centered90">
+    <div class="main-navigation subSet">
+      <div class="left product-logo">
+        <a routerLink="/">
+          <img src="../../../../../assets/img/intuglo-logo.png" alt="productLogo">
+        </a>
+      </div>
+      <div class="left nav relative">
+        <ul id="mainmenu">
+          <li class="relative" (click)="clickedInside($event)">
+            <a (click)="showSubMenuAbout()">About Us</a>
+            <ul class="subNav" *ngIf="subMenuAbout">
+              <li>
+                <a routerLink="/our-story">Our Story</a>
+              </li>
+              <li>
+                <a routerLink="/our-vision-mission">Our Vision & Mission</a>
+              </li>
+              <li>
+                <a routerLink="/our-core-technology">Our Core Technology</a>
+              </li>
+              <li>
+                <a routerLink="/our-team">Our Team</a>
+              </li>
+              <li>
+                <a routerLink="/join-us">Join Us</a>
+              </li>
+            </ul>
+          </li>
+          <li (click)="clickedInside($event)">
+            <a (click)="showModuleMenu()">Services</a>
+          </li>
+          <!-- <li class="relative" (click)="switchVisibility('subMenuServices')" (click)="clickedInside($event)">
+            <a (click)="showSubMenuServices()">Services</a>
+            <ul class="subNav" *ngIf="subMenuServices">
+              <li>
+                <a routerLink="/shared-logistic">Shared Logistic</a>
+              </li>
+              <li>
+                <a routerLink="/shared-warehouse">Shared Warehouse</a>
+              </li>
+              <li>
+                <a routerLink="/production-management">Production Management</a>
+              </li>
+              <li>
+                <a routerLink="/qc-for-hire">QC for Hire</a>
+              </li>
+              <li>
+                <a routerLink="/showcase">24/7 Showcase</a>
+              </li>
+              <li>
+                <a routerLink="/multi-platform">Multi-Platform E-Procurement</a>
+              </li>
+              <li>
+                <a routerLink="/market-validation">Market Validation</a>
+              </li>
+              <li>
+                <a routerLink="/project-management">Project Management</a>
+              </li>
+            </ul>
+          </li> -->
+          <li class="relative" (click)="clickedInside($event)">
+            <a (click)="showSubMenuAffiliate()">Affiliate & Partnership</a>
+            <ul class="subNav" *ngIf="subMenuAffiliate">
+              <li>
+                <a>Our Affiliate</a>
+              </li>
+              <li>
+                <a routerLink="/our-partners">Our Partners</a>
+              </li>
+            </ul>
+          </li>
+          <li class="relative" (click)="clickedInside($event)">
+            <a (click)="showSubMenuPrograms()">Programs</a>
+            <ul class="subNav" *ngIf="subMenuPrograms">
+              <li>
+                <a routerLink="/affiliate-sponsorship">Affiliate Sponsorship</a>
+              </li>
+              <li>
+                <a routerLink="/community-sponsorship">Community Sponsorship</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a routerLink="/pricing">Pricing</a>
+          </li>
+          <li>
+            <a>News</a>
+          </li>
+          <li>
+            <a>Media</a>
+          </li>
+          <li>
+            <a routerLink="/contact-us">Contact Us</a>
+          </li>
+        </ul>
+        <div class="menu-section grid" *ngIf="moduleMenu">
+          <div class="menu-grid" routerLink="/shared-logistic">
+            <img alt="" src="../../../../../assets/img/icon-logistic.svg">
+            <p>Logistics</p>
+          </div>
+          <div class="menu-grid" routerLink="/shared-warehouse">
+            <img alt="" src="../../../../../assets/img/icon-warehouse.svg">
+            <p>Warehouse</p>
+          </div>
+          <div class="menu-grid" routerLink="/qc-for-hire">
+            <img alt="" src="../../../../../assets/img/icon-qc-for-hire.svg">
+            <p>QC For Hire</p>
+          </div>
+          <div class="menu-grid" routerLink="/production-management">
+            <img alt="" src="../../../../../assets/img/icon-production-management.svg">
+            <p>Production
+              <br> Management</p>
+          </div>
+          <div class="menu-grid" routerLink="/showcase">
+            <img alt="" src="../../../../../assets/img/icon-online-exibition.svg">
+            <p>24/7 Online
+              <br> Exhibition</p>
+          </div>
+          <div class="menu-grid" routerLink="/multi-platform">
+            <img alt="" src="../../../../../assets/img/icon-e-procurement.svg">
+            <p>E-Procurement</p>
+          </div>
+          <div class="menu-grid" routerLink="/market-validation">
+            <img alt="" src="../../../../../assets/img/icon-market-validation.svg">
+            <p>Market
+              <br> Validation</p>
+          </div>
+          <div class="menu-grid" routerLink="/project-management">
+            <img alt="" src="../../../../../assets/img/icon-project-management.svg">
+            <p>Project
+              <br> Management</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- old code for menu starts here  -->
+
+      <div id="navbar" class="right">
+        <ul id="mainmenu" class="nav nav-font">
+          <!-- <li *ngIf="!isUserAuthentication" (click)="clickedInside($event)" class="menu padding-top-5 margin-right-20">
+        <button  (click)="switchVisibility('login')" class=" nav-login btn btn-success">
+          Log In
+        </button>
+        <div class="z-index position margin-top-10 margin-left-182">
+          <div *ngIf="login">
+            <login (loginAccessEvent) = "userAuthentication($event)"></login>
+          </div>
+        </div>
+      </li> -->
+
+          <li *ngIf="isUserAuthentication" class="cursor-hand">
+            <div (click)="clickDropdown()" (click)="clickedInside($event)" class="avatar">
+              <img alt="Intuglo" class="img-circle" [src]="logo">
+              <label class="cursor-hand"> {{userName}} </label>
+              <div class="dropdown-content">
+                <ul *ngIf="display">
+                  <div *ngIf="isCustomer">
+                    <li>
+                      <a class="cursor-hand" (click)="customerDashboard()">Dashboard</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" routerLink="/customer/profile">Profile</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" (click)="customerCart()">Cart</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" (click)="sessionExpiryHome()">Logout</a>
+                    </li>
+                  </div>
+                  <div *ngIf="isSupplier">
+                    <li>
+                      <a class="cursor-hand" routerLink="/supplier/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" routerLink="/supplier/profile">Profile</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" (click)="sessionExpiryHome()">Logout</a>
+                    </li>
+                  </div>
+                  <div *ngIf="isCustomAgent">
+                    <li>
+                      <a class="cursor-hand" routerLink="/customagent/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" routerLink="/customagent/profile">Profile</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" (click)="sessionExpiryHome()">Logout</a>
+                    </li>
+                  </div>
+                  <div *ngIf="isAdmin">
+                    <li>
+                      <a class="cursor-hand" routerLink="/admin/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                      <a class="cursor-hand" (click)="sessionExpiryHome()">Logout</a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- Old code for menu ends here  -->
+
+      <div class="right logon" *ngIf="!isUserAuthentication" (click)="clickedInside($event)">
+        <a href="#" (click)="switchVisibility('login')">Login</a>
+        <div class="logon-modal logon-modal-slidein subSet" *ngIf="login">
+          <div class="left">
+            <login (loginAccessEvent)="userAuthentication($event)"></login>
+          </div>
+          <span class="sprt"></span>
+          <div class="left">
+            <signup-option></signup-option>
+            <!-- signup component -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="container">
+  <nav role="navigation" id="navigationBar" class="navbar navbar-default">
+    <div class="navbar-header">
+        <img alt="Intuglo" class="cursor-hand" src="/../../../../../../assets/img/logo.JPG" (click)="reloadLandingPage()">
+    </div>
+    <div id="navbar" class="collapse navbar-collapse primary-font font-small" style= "float: left;">
+      <ul id="mainmenu" class="nav navbar-nav nav-font">
+        <li class="active menu ">
+          <a href="#">HOME</a>
+        </li>
+        <li>
+          <a href="#">MODULES</a>
+        </li>
+        <li>
+          <a href="#">AFFILLATES & PARTNERS</a>
+        </li>
+        <li>
+          <a href="#">PROGRAMS</a>
+        </li>
+        <li>
+          <a href="#">PRICINGS</a>
+        </li>
+        <li>
+          <a href="#">BLOGS & FORUMS</a>
+        </li>
+        <li>
+        <a href="#">CONTACT US</a>
+        </li>
+        </ul>
+        </div>
+        
+        <div id="navbar">
+          <ul id="mainmenu" class="nav nav-font">
+        <li *ngIf="!isUserAuthentication" (click)="clickedInside($event)" class="menu padding-top-5 margin-right-20">
+          <button  (click)="switchVisibility('login')" class=" nav-login btn btn-success">
+            Log In
+          </button>
+          <div class="z-index position margin-top-10 margin-left-182">
+            <div *ngIf="login">
+              <login (loginAccessEvent) = "userAuthentication($event)"></login>
+            </div>
+          </div>
+        </li>
+
+        <li *ngIf="!isUserAuthentication" (click)="clickedInside($event)" class="menu dropdown-md padding-top-5">
+          <button  (click)="switchVisibility('signup')" class="btn btn-primary nav-login dropdown-toggle" aria-expanded="true">
+            Sign up
+          </button>
+          <div class="z-index position margin-top-10 margin-left-328 card-width">
+            <div *ngIf="signup">
+              <signup-option></signup-option>
+            </div>
+          </div>
+        </li> 
+
+        <li *ngIf="isUserAuthentication" class="cursor-hand">
+          <div class="margin-top-3" (click)="clickDropdown()" (click)="clickedInside($event)" >
+          <img class="z-index position margin-left-32 card-width" alt="Intuglo" class="img-circle" [src]="logo">
+           <label class="cursor-hand" >{{userName}} </label>
+            <a class="icon-fa-dropdown"></a>
+            <div class="dropdown-content">
+              <div *ngIf = "display">
+                <li><a class="cursor-hand" (click)="customerDashboard()">Dashboard</a></li>
+                <li><a class="cursor-hand" (click)="customerCart()">Cart</a></li>
+                <li><a class="cursor-hand" (click)="sessionExpiryHome()">Logout</a></li>
+              </div>
+            </div>    
+          </div>
+        </li> 
+       </ul>
+    </div>
+  </nav>
+</div> -->

@@ -1,0 +1,29 @@
+.padding-tab{
+    margin-bottom: 0px
+}
+h1{
+    font-weight: 700;
+    font-size: 26px;
+}
+
+._approve {
+    background: url(../../../../assets/images/icon-approve.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    cursor: pointer;
+}
+._more-info {
+    background: url(../../../../assets/images/icon-req-more-info.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    cursor: pointer;
+}
+._forward {
+    background: url(../../../../assets/images/icon-forward.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    cursor: pointer;
+}

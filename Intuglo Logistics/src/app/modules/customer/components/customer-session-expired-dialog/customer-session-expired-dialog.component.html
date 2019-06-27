@@ -1,0 +1,33 @@
+<div class="container box">
+  <p class="title">Session Expired!</p>
+  <p class="desc">Your session is expired. Please login to your account to continue.</p>
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div *ngIf="!validUser" class="alert alert-danger">
+        <span *ngFor="let item of errorHandling">{{item}}</span>
+      </div>
+      <div *ngIf="supplierAccess">
+        <span> Your account is registered as Customer </span>
+      </div>
+      <form>
+        <div class="form-group">
+          <label for="username" class="email-address-password">Email address</label>
+          <input type="email" [(ngModel)]="userEmail" name="email" placeholder="Your email here" class="form-control"
+            [invalidTooltip]="{required: 'This field is required', pattern: 'Please enter valid email'}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="email-address-password">Password</label>
+          <input type="password" name="password" [(ngModel)]="password" placeholder="********" class="form-control">
+        </div>
+
+        <div>
+          <span class="primary-button" (click)="verifiedUser()">Log In Now</span>
+          <span class="secondary-button" (click)="onCloseCancel()">Log In Later</span>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

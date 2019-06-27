@@ -1,0 +1,159 @@
+@import 'styles.scss';
+.text-dec-none {
+    text-decoration: none;
+    color: #11436e;
+}
+.bg-blue {
+    background: #11436e;
+    div {
+        color: white;
+        @include bold(bold);
+        @include uppercase;
+    }
+}
+.material {
+    border: 1px solid #f5f6f8;
+}
+.datatable-body {
+    .datatable-body-row {
+        border-bottom: 1px solid #dbe2e5;
+      &.datatable-row-odd {
+        background-color: #f5f6f8;
+      }
+    //   &.active {
+    //     background-color: #1483ff;
+    //     color: #FFF;
+    //   }
+    }
+  }
+.mg-rt-5 {
+    margin-right: 5px;
+}
+._delete {
+    background: url(../../../../../assets/images/icon-table-delete.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+}
+._edit {
+    background: url(../../../../../assets/images/icon-table-edit.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+}
+._emg-approval {
+    background: url(../../../../../assets/images/icon-emg.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+    background-size: 100%;
+}
+._change{
+    background: url(../../../../../assets/images/change.png) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+    background-size: 100%;
+}
+._resend-email {
+    background: url(../../../../../assets/images/resend_email.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+    background-size: 100%;
+}
+._download {
+    background: url(../../../../../assets/images/icon-download.svg) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+}
+._deactivate {
+    background: url(../../../../../assets/images/icon-deactivate.png) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+    background-size: 26px;
+}
+._activate {
+    background: url(../../../../../assets/images/icon-activate.png) center center no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    cursor: pointer;
+    background-size: 26px;
+}
+.red{
+    color: red;
+}
+.yellow{
+    color: yellow;
+}
+.green{
+    color: green;
+}
+.amber{
+    color: #FFBF00;
+}
+
+.assign{
+        border-radius: 15px;
+        cursor: pointer;
+        padding: 3px !important;
+        color: black;
+        border: 2px solid #d8d8d8;
+}
+
+.approved{
+    border: 1px solid #2b8894;
+    padding: 8px 18px;
+    border-radius: 15px;
+}
+
+.unread{
+    border: 1px solid #d85b73;
+    padding: 8px 18px;
+    border-radius: 15px;
+}
+.ngx-datatable.material .datatable-footer .datatable-pager li.active a { background-color: #11436E; color: #fff;}
+.leftP {
+    margin-right: 3px;
+}
+
+.table-style{
+    padding-left: 59px;
+    font-size: 14px;
+}
+
+.ngx-datatable.material { 
+    .datatable-body {
+        .datatable-row-detail {
+            background: gainsboro;
+}}}
+
+.collapseTable { padding-left: 50px;
+    table {
+        border-collapse: collapse;
+        tbody {margin-bottom: 30px;display: contents;}
+        tr {
+            th { font-family: $roboto; font-size: 13px; color:#888; @include bold(bold); @include uppercase; padding: 8px 0; padding-left: 9px;}
+            td { font-family: $overpass; font-size: 13px; color:#0D2234; @include bold(bold); padding: 10px; vertical-align: top;}
+        }
+    }
+    .best-practice-explan {
+        line-height: 20px;
+    }
+}
+
+.ngx-datatable.material .empty-row{
+    font-size: 15px;
+    padding-top: 16px;
+    font-family: $overpass !important;
+}

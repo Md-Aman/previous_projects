@@ -1,0 +1,40 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true}">
+</ngx-loading>
+<div class="subSet wrapper">
+  <h2>Risk Assessments</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" routerLink="/secure/ra/create/ra-details">
+    <img class="left" src="../../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW RISK</span>
+      <span class="_b">Assessment</span>
+    </div>
+  </div>
+  <!-- <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="1">Added by</option></select>
+    <select><option value="1">All dates</option></select>
+    <input class="_search" (click)="searchRa($event.target.value)" type="text" placeholder="Search Assessments...">
+  </div> -->
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select>
+      <option value="1">Added by</option>
+    </select>
+    <select>
+      <option value="1">All dates</option>
+    </select>
+    <form [formGroup]="searchRaForm" (submit)="searchRa(searchRaForm.value.searchKey)">
+      <div class="relative">
+        <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Assessments...">
+        <span (click)="searchRa(_search.value)" class="_search-icon"></span>
+      </div>
+    </form>
+  </div>
+  <div class="_tableData">
+    <app-simple-table [rows]="rows" [actions]="actions" [columns]="columns" [checkRaStatus]="checkRaStatus" [hideEditIcon]="hideEditIcon"
+      [page]="page" (emitEventChange)="receiveEvent($event)" [messages]="messages">
+    </app-simple-table>
+  </div>
+</div>

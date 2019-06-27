@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="104" height="104" viewBox="0 0 104 104">
+  <defs>
+    <filter id="Ellipse_214" x="10.637" y="6.715" width="47.725" height="47.725" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1037" data-name="Group 1037" transform="translate(-531 -229.923)">
+    <g id="Ellipse_213" data-name="Ellipse 213" transform="translate(531 229.923)" fill="none" stroke="#1c9bd8" stroke-width="3">
+      <ellipse cx="52" cy="52" rx="52" ry="52" stroke="none"/>
+      <ellipse cx="52" cy="52" rx="50.5" ry="50.5" fill="none"/>
+    </g>
+    <path id="iconmonstr-document-thin" d="M41.266,47.12H2V0H29.486l11.78,11.78ZM27.523,1.963H3.963V45.157H39.3V13.743H27.523Zm5.89,29.45v1.963H9.853V31.413Zm0-5.89v1.963H9.853V25.523Zm0-5.89V21.6H9.853V19.633ZM29.486,11.78h9l-9-9Z" transform="translate(561 258.422)" fill="#0d2234" fill-rule="evenodd"/>
+    <g transform="matrix(1, 0, 0, 1, 531, 229.92)" filter="url(#Ellipse_214)">
+      <circle id="Ellipse_214-2" data-name="Ellipse 214" cx="14.862" cy="14.862" r="14.862" transform="translate(19.64 15.71)" fill="#fff"/>
+    </g>
+    <g id="Group_790" data-name="Group 790" transform="translate(0 -20)">
+      <rect id="Rectangle_2090" data-name="Rectangle 2090" width="5.029" height="2.235" rx="1.117" transform="translate(568.875 280.125)" fill="#0d2234" opacity="0.8"/>
+      <rect id="Rectangle_2091" data-name="Rectangle 2091" width="5.028" height="2.235" rx="1.117" transform="translate(567.219 277.802) rotate(-45)" fill="#0d2234" opacity="0.9"/>
+      <rect id="Rectangle_2092" data-name="Rectangle 2092" width="5.029" height="2.235" rx="1.117" transform="translate(556.584 280.125)" fill="#0d2234" opacity="0.4"/>
+      <rect id="Rectangle_2093" data-name="Rectangle 2093" width="5.028" height="2.235" rx="1.117" transform="translate(558.527 286.493) rotate(-45)" fill="#0d2234" opacity="0.5"/>
+      <rect id="Rectangle_2094" data-name="Rectangle 2094" width="5.028" height="2.235" rx="1.117" transform="translate(566.641 284.314) rotate(90)" fill="#0d2234" opacity="0.6"/>
+      <rect id="Rectangle_2095" data-name="Rectangle 2095" width="5.028" height="2.235" rx="1.117" transform="translate(568.602 282.346) rotate(45)" fill="#0d2234" opacity="0.7"/>
+      <rect id="Rectangle_2096" data-name="Rectangle 2096" width="5.028" height="2.235" rx="1.117" transform="translate(566.641 272.582) rotate(90)" fill="#0d2234"/>
+      <rect id="Rectangle_2097" data-name="Rectangle 2097" width="5.028" height="2.235" rx="1.117" transform="translate(560.305 274.049) rotate(45)" fill="#0d2234" opacity="0.3"/>
+    </g>
+  </g>
+</svg>

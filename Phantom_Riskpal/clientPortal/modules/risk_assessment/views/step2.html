@@ -1,0 +1,128 @@
+<!--<style>
+    .pagination {
+        float: right !important;
+    }
+</style>
+<section class="content" ng-init="getAllQuestionnaireForRa();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="pull-right box-tools">
+                        <a ui-sref="add_risk_assessment.add_question"><button class="btn btn-sm btn-info">New Question</button></a>
+                    </div>
+                    <i class="fa fa-question-circle"></i>
+                    <h3 class="box-title">Question</h3>
+
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by question" ng-model="questionnair_name"
+                            autocomplete="false" ng-change="getAllQuestionnaireForRa(questionnair_name)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                    <div ng-if="showLoader" class="col-lg-2 pull-right" style="margin-top:131px;">
+                        <div loader-css="ball-pulse"></div>
+                    </div>
+                </div>
+                 <div class="col-sm-4">
+                    <select class="form-control" name="sector" id="sector" ng-model="risk_label" required ng-change="filterQueByRiskLable(risk_label)">
+                                        <option ng-selected="true">Select Risk Label</option>
+                                        <option value="all">All</option>
+                                        <option ng-repeat="option in categoryArr" value="{{option._id}}" >{{option.categoryName}}</option>
+                                    </select>
+                </div>
+                <br>
+                <br>
+                <div class="box-body">
+                    <table class="table table-bordered ng-table-resizable-columns ng-table-rowselected table-bordered" ng-table="tableParams"
+                        style="text-align: left;" data-resizable-columns-id="myTable">
+                        <tbody ng-model="data">
+                            <tr ng-repeat="que in questionnaire" class="item">
+                                <td data-title="'Question'" sortable="'question'">{{que.question}}</td>
+                                <td data-title="'Best Practice Advice'" ng-bind-html="que.best_practice_advice" class="text-justify"></td>
+                                <td data-title="'Categories Associated'">{{que.categoryArr.toString()}}</td>
+                                <td data-title="'Assign Questions'" align="center" class="actions">
+                                    <input type="checkbox" ng-model="questionnaire[$index].assign" ng-change="assignQuesToIndividualRa(questionnaire[$index],$index);"
+                                        ng-checked="questionnaire[$index].assign">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tr ng-if="questionnaire.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                        </table>
+                </div>
+                <div class="form-group col-sm-12">
+                    <div class="pull-right box-tools">
+                        <button ng-disabled="questions.length == 0" style="margin-left: 10px;" type="button" class="btn btn-sm btn-primary" ui-sref="add_risk_assessment.step3({raId:raId})">Next</button>
+                    </div>
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-sm btn-primary" ui-sref="add_risk_assessment.step1">Back</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>-->
+<section class="content" ng-init="getAllRiskLabels();getRalabel();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                            <div class="input-group input-group-sm col-lg-3 pull-right box-tools" >
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="label_name"
+                                        autocomplete="false" ng-change="getAllRiskLabels(label_name)">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                </div>
+                             
+                            
+                    </div>
+                    
+                </div>
+                <p class="text-center" style="font-size: 20px;font-weight: 200">Select Risk Labels</p>
+                <div class="box-body">
+
+                    <table class="table font-size-16 " ng-table="tableParams" >
+                        <tr ng-repeat="category in $data track by $index">
+                            <!--<td data-title="'Name'" sortable="'categoryName'">{{category.categoryName}}</td>-->
+                         
+                            <td>
+                                   
+                           
+                            <span>
+                            <a href="" ng-click="redirectToIndiRiskQue(category._id);">  {{category.categoryName}}</a>
+</span>
+<div ng-repeat="test in questions">
+
+        <div ng-repeat="option in test.catArr">
+
+
+<span ng-show="option.id == category._id ">  <span class="label label-success">Selected Label</span>
+
+</span>
+
+</div>
+
+</div>
+                                </td>
+                                                             </tr>
+                        <tr ng-if="categories.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                      <button type="button" ng-click="backToStep1()" style="float: left; margin-top: 15px;" class="btn btn-sm btn-primary" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+                      <button ng-disabled="questions.length == 0" type="button" style="float: right;  margin-top: 15px;" class="btn btn-sm btn-primary" ng-click="nextToStep3()">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>            </div>
+
+                    </section>
+    </div>
+</section>
+
+        

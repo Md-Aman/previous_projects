@@ -1,0 +1,261 @@
+<!-- Content Header (Page header) -->
+<!-- <section class="content-header" ng-init="getContingencyData();getRaContingencyData()">
+    <h1>
+        Contingencies -->
+        <!-- <small>New Contact</small> -->
+<!--     </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Contingencies</li>
+    </ol>
+</section> -->
+<!-- Main content -->
+<section class="content" ng-init="getContingencyData();getRaContingencyData()">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="">
+        <!-- <section class="col-lg-12" ng-if="Racontingencies.contingency_preview">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                <h3 class="box-title">Recommended providers
+                    </h3></div>
+                    <div class="box-body">
+                <form role="form" name="contingenciesForm" novalidate class="form-horizontal">
+                        <div class="row">
+                            <div ng-if="showLoader" class="col-lg-7 pull-right">
+                                <div loader-css="ball-pulse"></div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-12 control-label">Medical provision/skill provided there to treat a casualty at point of injury</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="medical_provision" ng-model="Racontingencies.medical_provision" type="text"
+                                        placeholder="Medical Provision" readonly="">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-12 control-label">Detail method of evacuation to nearest hospital(self drive/ambulance)</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="method_of_evacuation" ng-model="Racontingencies.method_of_evacuation"
+                                        type="text" placeholder="Method Of Evacuation"readonly> 
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-5">
+                                <label class="col-sm-10 control-label">Detail nearest hospital, address, number</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="detail_nearest_hospital" ng-model="Racontingencies.detail_nearest_hospital"
+                                        type="text" placeholder="Detail Nearest Hospital" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="col-sm-8 control-label">Medevac Company</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="medevac_company" ng-model="Racontingencies.medevac_company" type="text"
+                                        placeholder="Medevac Company" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="col-sm-9 control-label">Specialist kit being taken</label>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Sat Phone/ Number</label>
+                                    <div class="col-sm-8">
+                                        <span >{{(Racontingencies.sat_phone_number)?'Yes':'No'}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Tracker/ID</label>
+                                    <div class="col-sm-8">
+                                        <span >{{(Racontingencies.tracker_id)?'Yes':'No'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">First Aid Kit</label>
+                                    <div class="col-sm-8">
+                                    <span >{{(Racontingencies.first_aid_kit)?'Yes':'No'}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Personal Protective Equipment</label>
+                                    <div class="col-sm-8">
+                                    <span >{{(Racontingencies.personal_protective_equipment)?'Yes':'No'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        </div>
+                        <!-- /.box-body -->
+                </div>
+                
+                </section> 
+                </div>
+                <section >
+            <div class="box box-primary box-solid" >
+                <div class="box-header">
+                    <h3 class="box-title">Add Contingencies
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="contingenciesForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+  
+                    <div class="row">
+                            <div ng-if="showLoader" class="col-lg-7 pull-right">
+                                <div loader-css="ball-pulse"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-12 ">What medical provision/skill is there to treat a casualty at point of injury?</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="medical_provision" ng-model="contingencies.medical_provision" type="text"
+                                        placeholder="Medical Provision" required>
+                                        <span class="text-danger" ng-show="contingenciesForm.medical_provision.$dirty &&  contingenciesForm.medical_provision.$error.required">Medical provision is required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                    <label class="col-sm-10">Local hospital information</label>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label class="col-sm-1 control-label"></label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" autocomplete="off" name="detail_nearest_hospital" ng-model="contingencies.detail_nearest_hospital"
+                                            type="text" placeholder="Detail Nearest Hospital" required>
+                                            <span class="text-danger" ng-show="contingenciesForm.detail_nearest_hospital.$dirty &&  contingenciesForm.detail_nearest_hospital.$error.required">Detail Nearest Hospital is required</span>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-12 ">Method of evacuation to nearest hospital (self drive/ambulance etc)</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="method_of_evacuation" ng-model="contingencies.method_of_evacuation"
+                                        type="text" placeholder="Method Of Evacuation" required>
+                                        <span class="text-danger" ng-show="contingenciesForm.method_of_evacuation.$dirty &&  contingenciesForm.method_of_evacuation.$error.required">Method of evacuation is required</span>
+                                </div>
+                            </div>
+
+                          
+
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-8 ">Medical Evacuation Company</label>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" autocomplete="off" name="medevac_company" ng-model="contingencies.medevac_company" type="text"
+                                        placeholder="Medical Evacuation Company" required>
+                                        <span class="text-danger" ng-show="contingenciesForm.medevac_company.$dirty &&  contingenciesForm.medevac_company.$error.required">Medical Evacuation Company is required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label class="col-sm-9 control-label">Specialist kit being taken</label>
+                            </div>
+
+                           <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Sat Phone/ Number</label>
+                                    <div class="col-sm-8">
+                                        <input type="checkbox" ng-model="contingencies.sat_phone_number" />
+                                        <span> 
+                                     <input ng-if="contingencies.sat_phone_number"  ng-model="contingencies.no_of_satellite_phone" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Tracker/ID</label>
+                                    <div class="col-sm-8">
+                                        <input type="checkbox" ng-model="contingencies.tracker_id" />
+                                          <span> 
+                                        <input ng-if="contingencies.tracker_id"  ng-model="contingencies.no_of_tracker" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">First Aid Kit</label>
+                                    <div class="col-sm-8">
+                                        <input type="checkbox" ng-model="contingencies.first_aid_kit" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Personal Protective Equipment</label>
+                                    <div class="col-sm-8">
+                                        <input type="checkbox" ng-model="contingencies.personal_protective_equipment" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group col-sm-12">
+                                <div class="col-sm-10" ng-if="!(contingencies.medevac_company && contingencies.detail_nearest_hospital && contingencies.method_of_evacuation && contingencies.medical_provision)">
+                                      <label>Your manager is more likely to reject this RA if fields are left blank. So please make sure that you complete the boxes to the best of your ability or give an adequate reason why you are unable to provide this information.</label>
+                                        <textarea class="form-control" id="incompleteform" name="incompleteform" placeholder="Please provide the reason" ng-model="contingencies.incompleteform"></textarea>
+                                    </div>
+                            </div>                  -->
+                            <div class="form-group col-sm-8" >
+                                <div class="pull-right box-tools">
+                                    <!--<button ng-disabled="contingenciesForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaContingencies(contingencies);">Save And Return Later</button>
+                                    <button ng-disabled="contingenciesForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="redirectTo('main.addAnyOtherInfo')">Next</button>-->
+                                    <button  type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaContingencies(contingencies,Racontingencies,'Save')">Save And Return Later</button>
+                                    <button type="button" class="btn btn-sm btn-primary" ng-click="backToCommunicationPage();">Back</button>
+                                    <button  type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaContingencies(contingencies,Racontingencies,'next')">Next</button>
+                                </div>
+
+                                <!-- ng-disabled="contingenciesForm.$invalid && !Racontingencies" -->
+                            </div>
+                        </div>
+                        </div>
+                        </form>
+                        <!-- /.box-body -->
+                </div>
+        </section>
+        </div>
+</section>
+<style >
+/*.box.box-primary {
+    border-top-color: #3c8dbc;
+    border-left-color: #3c8dbc;
+    border-right-color: #3c8dbc;
+    border-bottom-color: #3c8dbc;
+}
+.box {
+    position: relative;
+    background: #ffffff;
+    border-top: 2px solid #c1c1c1;
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+    margin-bottom: 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: -11px;
+    width: 100%;
+    box-shadow: 43 34px 19px rgba(0, 0, 0, 0.1);
+}*/
+</style>

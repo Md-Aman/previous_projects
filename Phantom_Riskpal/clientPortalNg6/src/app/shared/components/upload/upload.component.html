@@ -1,0 +1,8 @@
+<div class="upload-btn-wrapper">
+    <img class="img" *ngIf="!imageData" src="../../../../assets/images/upload.svg"/>
+    <img class="img" *ngIf="imageData" [src]="imageData"/>
+    <input 
+       type="file"
+       accept="image/*"
+       (change)="fileChange($event)">
+</div>

@@ -1,0 +1,7 @@
+.custom-pagination { margin-top: 30px;}
+.custom-pagination > .left { margin-right: 10px;}
+.custom-pagination .prev { background: url(../../../../../assets/img/icon-prev-1.svg) center center no-repeat #232D5E; background-size: 16px; height: 30px; width: 30px; cursor: pointer;}
+.custom-pagination .prev.disabled { opacity: .8; cursor: no-drop;}
+.custom-pagination .next { background: url(../../../../../assets/img/icon-next-1.svg) center center no-repeat #232D5E; background-size: 16px; height: 30px; width: 30px; cursor: pointer;}
+.custom-pagination .next.disabled { opacity: .8; cursor: no-drop;}
+.custom-pagination .info { background: #E3EAF1; font-size: 14px; font-weight: 400; color: #333; text-align: center; line-height: 30px; padding: 0 10px; margin: 0;}

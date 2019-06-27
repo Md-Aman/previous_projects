@@ -1,0 +1,10 @@
+@import "styles.scss";
+
+.burgerMenu {
+    background: url(../../../assets/images/hamburger.png) center center no-repeat #087483;
+    cursor: pointer;
+    width: 75px;
+    height: 70px;
+}
+.auditBar { background: url(../../../assets/images/audit-log.png) center center no-repeat; width: 75px; height: 70px;}
+.footerLogo { background: url(../../../assets/images/riskpal-mini-logo.svg) center center no-repeat #fff; width: 75px; height: 70px; position: $fixed; bottom: 0; left: 0;}

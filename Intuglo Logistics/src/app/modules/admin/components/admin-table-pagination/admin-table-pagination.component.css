@@ -1,0 +1,94 @@
+.pull-left{
+    margin-left: 15px;
+    margin-right: 0px;
+}
+
+.btn-toolbar > .btn, .btn-toolbar > .btn-group, .btn-toolbar > .input-group {
+    margin-left: 100px;
+}
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination[_ngcontent-c11] > .disabled[_ngcontent-c11] > span[_ngcontent-c11], .pagination[_ngcontent-c11] > 
+.disabled[_ngcontent-c11] > span[_ngcontent-c11]:hover, .pagination[_ngcontent-c11] > 
+.disabled[_ngcontent-c11] > span[_ngcontent-c11]:focus, .pagination[_ngcontent-c11] > 
+.disabled[_ngcontent-c11] > a[_ngcontent-c11], .pagination[_ngcontent-c11] > 
+.disabled[_ngcontent-c11] > a[_ngcontent-c11]:hover, .pagination[_ngcontent-c11] > 
+.disabled[_ngcontent-c11] > a[_ngcontent-c11]:focus {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+    padding: 5px 10px;
+    height: 29px;
+    text-align: center;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 5px 10px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 29px;
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 7px;
+    /* margin: 5px 0px 5px 5px; */
+    margin: 10px -39px -20px 50px;
+    border-radius: 4px;
+}
+
+.quotation-holder{
+    height: 29px;	
+    width: 312px;	
+    border: 1px solid #E6EAEE;	
+    border-radius: 4px;	
+    background-color: #F7981C;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 14px;	
+    font-weight: 500;	
+    color: white;
+    line-height: 26px;
+  }
+
+  .share{
+    height: 29px;	
+    width: 180px;	
+    border: 1px solid #E6EAEE;	
+    border-radius: 4px;	
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 14px;	
+    font-weight: 500;	
+    line-height: 26px;
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+  }
+
+  .page{
+    height: 29px;	
+    width: 145px;	
+    border: 1px solid #E6EAEE;	
+    border-radius: 4px;	
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 14px;	
+    font-weight: 500;	
+    line-height: 26px;
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+  }

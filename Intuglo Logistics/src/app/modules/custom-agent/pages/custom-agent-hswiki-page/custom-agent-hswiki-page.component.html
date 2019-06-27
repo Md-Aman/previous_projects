@@ -1,0 +1,20 @@
+<custom-agent-navbar (controlSideBar)="receiveDataFromHeader($event)"></custom-agent-navbar>
+
+
+<ng-sidebar-container class="ng-container bg-color" >
+
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+
+        <custom-agent-left-menu [sideBar]="isSideBarOpen" [fromHSwiki]='isOpen'></custom-agent-left-menu>
+
+    </ng-sidebar>
+
+    <div  ng-sidebar-content>
+        <div class="padding-left-right-0 padding-top-12">
+          <div>
+            <custom-agent-hswiki-list></custom-agent-hswiki-list>
+          </div>
+        </div>
+    </div>
+
+</ng-sidebar-container>

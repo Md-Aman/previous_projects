@@ -1,0 +1,83 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Risk Labels
+        <!--<small>List</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Risk Labels</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllCategories();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a ui-sref="main.add_categories">
+                            <button class="btn btn-sm btn-info">New Risk Labels</button>
+                        </a>
+                        <!--<a style="cursor: pointer">
+                             <button class="btn btn-sm btn-info"  ng-click="redirectToAddCat()">New Category</button>
+                        </a>-->
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-tags"></i>
+                    <h3 class="box-title">Risk Labels</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by label" ng-model="category_name"
+                            autocomplete="false" ng-change="getAllCategories(category_name)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="category in $data">
+                             <td data-title="'Label'" sortable="'categoryName'">{{category.categoryName}}</td>
+                            <!--<td data-title="'Type Of Ra'">{{category.types_of_ra_id.ra_name}}</td>-->
+                            <!--<td data-title="'Country Name'" sortable="'country'">{{category.countryArr.toString()}}</td>-->
+                            <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(category.status,category._id)"><span 
+                                 ng-class="{'label label-success': category.status == 'Active' , 'label label-danger': category.status == 'Inactive'}"   
+                                >{{category.status}}</span></a>
+                            </td>
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.update_categories({category_id:category._id})">
+                                    Edit
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteCategory(category._id)">
+                                    Delete
+                                </a>
+                            </td>
+                            <!--<td  data-title="'Mandatory/Not Mandatory'" align="center" class="actions">
+                                <a ng-if="category.status == 'Active'" ng-class="{'btn btn-xs btn-warning': category.is_mandatory == false , 'btn btn-xs btn-success': category.is_mandatory == true}"
+                                    ng-click="markAsMandatory(category.is_mandatory,category._id)">
+                                    {{category.is_mandatory == true ? 'Mandatory' : 'Not Mandatory'}}
+                                    </a>
+                            </td>-->
+                            <!--<td data-title="'Questions Of Category'">
+                                <a class="btn btn-xs btn-info" ui-sref="main.list_questionnaire({category_id:category._id})">
+                                    View Questions
+                                </a>
+                            </td>-->
+                        </tr>
+                        <tr ng-if="categories.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

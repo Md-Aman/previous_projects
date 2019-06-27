@@ -1,0 +1,6 @@
+<div class="cust-noti">
+    <img alt="Avatar" class="img-circle" [src]="url">
+    <label class="primary-button">Select Image<input type='file' (change)="onSelectFile($event)" style="display: none"></label>
+    <span class="secondary-button" (click)="onUpload()">Upload</span> 
+</div>
+<ng4-loading-spinner></ng4-loading-spinner>

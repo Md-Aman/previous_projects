@@ -1,0 +1,73 @@
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Add Client Risk Assessment
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="raForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-7">
+                                <label class="col-sm-4 control-label">RA Name</label>
+                                <div class="col-sm-8">
+                                <!-- ng-pattern="/^[a-zA-Z]+[a-zA-Z' /]*$/" -->
+                                    <input type="text" class="form-control" id="ra_name" name="ra_name" placeholder="Enter RA Name" required ng-model="individualRa.ra_name"
+                                        maxlength="50"  autocomplete="off" />
+                                    <span class="text-danger" ng-show="raForm.ra_name.$dirty &&  raForm.ra_name.$error.required">Name of RA is required</span>
+                    <!--                 <span class="text-danger" ng-show="raForm.ra_name.$dirty &&  raForm.ra_name.$error.pattern">Name of RA is not valid </span> -->
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-7">
+                                <label class="col-sm-4 control-label">Client</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="client" id="client" ng-model="individualRa.clientList" required ng-change="getDepartment(individualRa.clientList);">
+                                        <option ng-selected="true">Select Client</option>
+                                        <option ng-repeat="option in clientList" value="{{option._id}}" ng-selected="{{individualRa.clientList == option._id}}">{{option.company_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-7" ng-if="individualRa.clientList && clientDepartmentList.length > 0">
+                                <label class="col-sm-4 control-label">Department</label>
+                                <div class="col-sm-8">
+                                    <!--<select class="form-control" name="client" id="client" ng-model="individualRa.clientDepartment" required ng-change="getDepartment(individualRa.clientDepartment);">
+                                        <option ng-selected="true">Select Department</option>
+                                        <option ng-repeat="department in clientDepartmentList" value="{{department._id}}">{{department.department_name}}</option>
+                                    </select>-->
+
+                                    <div isteven-multi-select input-model="clientDepartmentList" output-model="individualRa.clientDepartment" button-label="department_name"
+                                        item-label="department_name" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                        data-placement="top" title="Select Department" data-trigger="hover" tabindex="6" name="department_name"></div>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-7" >
+                            <label class="col-sm-4 control-label">Country</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="country" id="country" ng-model="individualRa.country" >
+                                        <option value="">All</option>
+                                        <option ng-selected="true">Select Country</option>
+                                        <option ng-repeat="country in countryArr" value="{{country}}" ng-selected="individualRa.country == country._id">{{country.name}}</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-11">
+                                <div class="pull-right box-tools" style="margin-right: 14px;">
+                                    <button ng-disabled="raForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="updateUnderConstructionIndividualRa(individualRa);">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </form>
+    </div>
+    </section>
+    </div>
+</section>

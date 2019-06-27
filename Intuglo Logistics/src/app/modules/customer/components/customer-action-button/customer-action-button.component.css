@@ -1,0 +1,29 @@
+.card-action-button { margin-bottom: 20px;}
+.card-action-button .btnDisplayed { display: inline-block; text-align: center; background: transparent; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #F58220; cursor: pointer; margin-right: 5px; border: 1px solid #F58220; padding: 0 10px;}
+.card-action-button .btnDisplayed.btn-link { font-weight: 600; }
+
+.msg { padding: 0 5px;}
+.msg .thank-you { color: #333; font-size: 14px; font-weight: 100;  background: url(../../../../../assets/img/icon-done.svg) left center no-repeat; padding-left: 26px;}
+.msg .note { color: #333; font-size: 14px; font-weight: 100;}
+
+
+.fileSection { height: 36px; cursor: pointer; margin-bottom: 20px; background: #fff; display: block; border: 1px solid #DADADA; position: relative;}
+.fileSection #upload-file-selector { opacity: 0; width: 100%;}
+.fileSection .upload { margin: 0; background: url(../../../../../assets/img/icon-upload.svg) 10px center no-repeat; font-size: 14px; color: #f58220; text-transform: uppercase; text-align: center; cursor: pointer; position: absolute; right: 0; top: -1px; font-weight: 400; padding: 0 10px 0 36px; background-size: 16px; border: 1px solid #f58220; line-height: 34px;}
+.fileSection > span { margin: 7px 0 0 10px; display: block; font-weight: normal; font-size: 14px;}
+
+.btn-primary-style { background: #F58220; color: #fff; padding: 0 10px; min-width: 120px; line-height: 34px; border:1px solid #F58220; display: inline-block; font-size: 14px; text-transform: uppercase; cursor: pointer; text-align: center; vertical-align: bottom; font-weight: 100; margin: 0 5px 0 0;}
+.btn-secondary-style { background: transparent; color: #F58220; padding: 0 10px; min-width: 120px; line-height: 34px; border:1px solid #F58220; display: inline-block; font-size: 14px; text-transform: uppercase; cursor: pointer; text-align: center; vertical-align: bottom;}
+
+ /* Popup CSS  */
+.inputfile-box { position: relative; }
+.inputfile { display: none; }
+
+.list-doc {clear: both; padding-top: 20px;}
+.list-doc .table td { word-break: break-all; }
+.file-width { width: 50%; overflow: hidden;}
+.loading-container {
+    /* display: flex; */
+    flex-wrap: wrap;
+  }
+.display-in-block{display:inline-block;}

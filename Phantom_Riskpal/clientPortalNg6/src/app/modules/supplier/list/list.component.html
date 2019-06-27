@@ -1,0 +1,39 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Suppliers</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" (click)="openSupplierForm()">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW </span>
+      <span class="_b">Supplier</span>
+    </div>
+  </div>
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="1">Service Type</option></select>
+    <select><option value="1">Country</option></select>
+    <!-- <select><option value="1">Status</option></select> -->
+    <!-- <input class="_search" type="text" placeholder="Search Suppliers..." (input)="searchSupplier($event.target.value)"> -->
+    <form [formGroup]="searchSupplierForm" (submit)="searchSupplier(searchSupplierForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Suppliers...">
+      <span (click)="searchSupplier(_search.value)" class="_search-icon"></span>
+    </div>
+    </form>
+  </div>
+  <div class="_tableData padding-top">
+      <app-collapsable-table
+      [rows]="rows" 
+      [columns]="columns" 
+      [page]="page" 
+      [columnMode]="'force'"
+      [supplierTable]="supplierTable"
+      (shareDataToParent)="receiveDataFromChild($event)"
+      [messages]="messages"
+      >
+      </app-collapsable-table>
+    </div>
+</div>

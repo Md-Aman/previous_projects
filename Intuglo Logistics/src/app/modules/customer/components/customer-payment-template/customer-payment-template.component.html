@@ -1,0 +1,68 @@
+<div class="subSet">
+  <div class="left width70">
+    <div class="selection subSet">
+      <div class="cc left">
+        <img src="../../../../../assets/img/icon-credit-card.svg" alt="">
+        <span>Credit Card</span>
+      </div>
+      <div class="cc left">
+        <img src="../../../../../assets/img/icon-home-bank.svg" alt="">
+        <span>Bank Account</span>
+      </div>
+      <div class="left">
+        <ngx-paypal *ngIf="payaplButtonShow" class="paypal-btn" [config]="payPalConfig"></ngx-paypal>
+      </div>
+    </div>
+    <div class="payment-method subSet">
+      <img src="../../../../../assets/img/payment-method.png" alt="">
+    </div>
+    <div class="row desc">
+      <div class="col-md-12">
+        <label for="">Name on Card</label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div class="row desc">
+      <div class="col-md-12">
+        <label for="">Card Number</label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div class="row desc">
+      <div class="col-md-6">
+        <label for="">Expiry Date</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="">CCV</label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span class="secondry-btn" *ngIf="!payaplButtonShow" (click)="confirmContainerSpace()">Proceed To Payment</span>
+        <span class="secondry-btn" (click)="backToPreviousPage()">Back to Cart</span>
+      </div>
+    </div>
+  </div>
+  <div class="right width30">
+    <h2>Order Summary</h2>
+    <table width="100%">
+      <tr>
+        <td>Sub-Total</td>
+        <td>{{total| currency:'RM'}}</td>
+      </tr>
+      <tr>
+        <td>{{tax_type}}</td>
+        <td>{{tax_amount| currency:'RM'}}</td>
+      </tr>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>{{total| currency:'RM'}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

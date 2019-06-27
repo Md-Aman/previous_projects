@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-4">
+    <label class="label-control">Country</label>
+    <select class="form-control with" [(ngModel)]="selectedCountryCode">
+        <option *ngFor="let country of countryList" [ngValue]="country.country_code">{{country.country_name}}</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="label-control">Account Type</label>
+    <select class="form-control with" [ngModel]="selectedUserType" (change)="onSelectUserType($event.target.value)">
+      <option value="1">Supplier</option>
+      <option value="2">Customer</option>
+      <option value="3">Custom Agent</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <span class="primary-btn" (click)="showUsersList()">Display</span>
+  </div>
+</div>
+
+<div class="card-action-button">
+  <div *ngIf="selectedRowIndex>=0">
+    <button *ngIf="showDownloadDocuments" [disabled]="isDownloaded" type="button" class="btnDisplayed" (click)="DownloadDocuments();downloadDocument.open()">Download Documents</button>
+    <button *ngIf="showActiveButton" type="button" class="btnDisplayed" (click)="onClickActivateUser()">Activate</button>
+    <button *ngIf="showInactiveButton" type="button" class="btnDisplayed" (click)="onClickDeactivateUser()">Deactivate</button>
+  </div>
+</div>
+
+
+<!-- modal will display once user will click on Download Documents  -->
+<modal #downloadDocument [hideCloseButton]="true" [closeOnOutsideClick]="false">
+  <modal-header>
+      <h3>Download Documents</h3>
+  </modal-header>
+  <modal-content>
+      <p>Please wait, Document is being ready to be downloaded</p>
+  </modal-content>
+  <modal-footer>
+      <button class="btn-primary-style" (click)="downloadDocument.close()">Close</button>
+  </modal-footer>
+</modal>
+
+<p class="table-title">Account Activation</p>
+
+<div class="bg-color-expansion-model-body">
+  <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-header-cell *matCellDef="let user">
+          <mat-checkbox [(ngModel)]="user.checked" (click)="updateSelection($event, user.login_id, dataSource);" (change)="getLoginId($event,user,user.login_id,user.documents.length)"></mat-checkbox>
+        </mat-header-cell>
+      </ng-container>
+      <ng-container matColumnDef="account_name">
+        <mat-header-cell *matHeaderCellDef>ACCOUNT NAME</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.account_name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="merchant_id">
+        <mat-header-cell *matHeaderCellDef>MERCHANT ID</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.merchant_id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="documents">
+        <mat-header-cell *matHeaderCellDef>Documents</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <mat-select placeholder= "View Document">
+            <mat-option *ngFor="let documents of user.documents">{{documents.file_name}}</mat-option>
+          </mat-select>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="verified_user">
+        <mat-header-cell *matHeaderCellDef>STATUS</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span *ngIf="user.verified_user">Active</span>
+          <span *ngIf="!user.verified_user">InActive</span>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+      <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+</div>

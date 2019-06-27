@@ -1,0 +1,50 @@
+<span class="_close-mat" (click)="closeModal();"></span>
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<div class="row">
+    <div class="col-md-12 subSet">
+        <h1> {{riskLabel.riskCategoryName}} Questions </h1>
+        <p *ngIf="riskLabel.type === 'raTemplate'" class="paragraph">Choose the questions you would like to assign to the Risk Assessment template: </p>
+      </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <hr class="_hr" align="left"> 
+    </div>
+    <div class="col-md-3">
+        <span *ngIf="riskLabel.type === 'raTemplate'" class="_question-assign"> <span class="cursor-pointer" (click)="assignAll()">Assign all</span> | <span class="cursor-pointer" (click)="unassignAll()"> Remove all </span></span>
+    </div>
+</div>
+ 
+<div class="row">
+  
+<div class="col-md-12">
+
+
+    <div class="_tableData padding-top">
+      <app-collapsable-table
+      *ngIf="riskLabel.type === 'raTemplate' && rows.length > 0"
+      [rows]="rows" 
+      [columns]="columns" 
+      [page]="page" 
+      [columnMode]="'force'"
+      [riskMitigationTable]="riskMitigationTable"
+      (shareDataToParent)="receiveDataFromChild($event)"
+      >
+      </app-collapsable-table>
+
+      <app-collapsable-table
+      *ngIf="riskLabel.type === 'ra' && rows.length > 0"
+      [rows]="rows" 
+      [columns]="columns" 
+      [page]="page" 
+      [columnMode]="'force'"
+      [riskMitigationTableRa]="riskMitigationTableRa"
+      (shareDataToParent)="receiveSelectedQuestionData($event)"
+      >
+      </app-collapsable-table>
+    </div>
+  </div>
+</div>
+<br> <br>
+<!-- <button class="btn btn-outline-success pull-right" (click)="closeModal()"> Close </button> -->

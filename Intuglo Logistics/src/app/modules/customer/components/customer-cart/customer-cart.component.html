@@ -1,0 +1,102 @@
+<div class="dashboard-layout">
+  <h2>Cart</h2>
+  <div class="content-area" *ngIf="!message">
+    <div class="company-address">
+      <table>
+        <tr>
+          <td>Company Name:</td>
+          <td>
+            <p>{{companyName}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>Address:</td>
+          <td>
+            <p>{{customerAddressLine1}}</p>
+            <p *ngIf="customerAddressLine2>''">{{customerAddressLine2}}</p>
+            <p>{{customerAddressLine3}}</p>
+            <p>{{customerAddressLine4}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>email:</td>
+          <td>
+            <p>{{customerEmail}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td>
+            <p>{{customerPhone}}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="subSet download">
+      <span class="right btn-download" (click)="downloadInvoice()">Download</span>
+    </div>
+    <div class="custom-table">
+      <table width="100%">
+        <tr>
+          <th class="header-orderid">No.</th>
+          <th class="header-orderid">Order ID</th>
+          <th class="header-description">Description</th>
+          <th class="header-amount">AMOUNT</th>
+          <th class="header-delete"></th>
+        </tr>
+        <tr *ngFor="let cartData of CartDetails;let i=index">
+          <!-- <th class="content"><button (click)="deleteOrders(cartData.order_id )" class="btn"><i class="fa fa-trash" aria-hidden="true"></i></button></th> -->
+          <td>{{i+1}}</td>
+          <td>{{cartData.order_id}}</td>
+          <td>{{cartData.transaction_description}} - {{cartData.portFrom}} to {{cartData.portTo}} -
+            ETD:{{cartData.ETD}}</td>
+          <td class="text-center">{{cartData.transaction_fee| currency:'RM'}}</td>
+          <td class="text-center">
+            <span (click)="ConfirmDelete.open(); getCartItemId(cartData.cart_item_id)" class="btn-delete"></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="subSet relative">
+      <div class="transaction-fee">Only transaction fee is charge now</div>
+      <div class="custom-table right">
+        <table width="100%">
+          <tr>
+            <td>Sub-Total</td>
+            <td class="text-right">{{amount| currency:'RM'}}</td>
+          </tr>
+          <tr>
+            <td>{{tax_type}}</td>
+            <td class="text-right">{{tax_amount | currency:'RM'}}</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td class="text-right">{{total| currency:'RM'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="default-buttons">
+      <button class="btn-primary" (click)="payBill()">Pay
+        Bill now</button>
+      <span class="btn-secondary" (click)="makeAnotherBooking()">Make another booking</span>
+    </div>
+  </div>
+  <div *ngIf="message" class="empty-message">
+    No item in the cart
+  </div>
+</div>
+
+<modal #ConfirmDelete [closeOnOutsideClick]="false">
+  <modal-header>
+    <h2>Confirm Delete</h2>
+  </modal-header>
+  <modal-content>
+    <h3>Are you sure you want to delete the order?</h3>
+  </modal-content>
+  <modal-footer>
+    <button class="btn-primary-style" (click)="deleteOrders();ConfirmDelete.close()">Yes</button>
+    <button class="btn-secondary-style" (click)="ConfirmDelete.close()">No</button>
+  </modal-footer>
+</modal>

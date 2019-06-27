@@ -1,0 +1,10 @@
+.side-menu { background: #E7E9EF; padding: 20px 0; }
+.side-menu ul.menu-content { padding: 0;}
+.side-menu ul.menu-content li { list-style: none; color: #23376D; font-size: 14px; font-weight: 100; padding: 8px 10px 8px 48px;}
+.side-menu ul.menu-content li:hover { background-color: #D2D6E1;}
+.side-menu ul.menu-content li.menu-item { cursor: pointer;}
+.side-menu ul.menu-content li.menu-item span.dashboard { background: url(../../../../../assets/img/icon-dashboard.svg) left center no-repeat; padding-left: 28px; margin-left: -28px;}
+.side-menu ul.menu-content li.menu-item span.customer { background: url(../../../../../assets/img/icon-customer.svg) left center no-repeat; padding-left: 28px; margin-left: -28px;}
+.side-menu ul.menu-content li.menu-item span.report { background: url(../../../../../assets/img/icon-customer.svg) left center no-repeat; padding-left: 28px; margin-left: -28px;}
+
+.side-menu ul.menu-content li.menu-item.selectedmenu { padding-left: 68px; background-color: #D2D6E1;} 

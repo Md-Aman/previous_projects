@@ -1,0 +1,162 @@
+<style type="text/css">
+/*
+/* Created by Filipe Pina
+ * Specific styles of signin, register, component
+ */
+
+
+/*
+ * General styles
+ */
+
+body,
+html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-color: #d3d3d3;
+    font-family: 'Oxygen', sans-serif;
+}
+
+.main {
+    margin-top: 70px;
+}
+
+h1.title {
+    font-size: 50px;
+    font-family: 'Passion One', cursive;
+    font-weight: 400;
+}
+
+hr {
+    width: 10%;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login {
+    background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.main-center {
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 40px 40px;
+}
+
+.login-button {
+    margin-top: 5px;
+}
+
+.login-register {
+    font-size: 11px;
+    text-align: center;
+}
+</style>
+<div class="container">
+ <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h2 class="title">Admin Registration</h2>
+                <hr/>
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form role="form" name="signUpForm" novalidate class="form-horizontal">
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">First Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter your first name" ng-pattern="/^[a-zA-Z]+[a-zA-Z']*$/" autocomplete="off" required ng-model="admin.firstname" maxlength="25" />
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.fname.$dirty &&  signUpForm.fname.$error.required">First name is required</span>
+                        <span class="text-danger" ng-show="signUpForm.fname.$dirty &&  signUpForm.fname.$error.pattern">First name is not valid</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Last Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter your last name" ng-pattern="/^[a-zA-Z]+[a-zA-Z']*$/" autocomplete="off" required ng-model="admin.lastname" maxlength="25"/>
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.lname.$dirty &&  signUpForm.lname.$error.required">Last name is required</span>
+                        <span class="text-danger" ng-show="signUpForm.lname.$dirty &&  signUpForm.lname.$error.pattern">Last name is not valid</span>
+                    </div>
+                </div>
+                 <!-- <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Company Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-building-o" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Enter your company name" autocomplete="off" required ng-model="admin.company_name" maxlength="30"/>
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.company_name.$dirty &&  signUpForm.company_name.$error.required">Company name is required</span>
+                    </div>
+                </div> -->
+               <!--  <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Phone Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Enter your phone number" autocomplete="off" required ng-model="admin.phone_number" />
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.phone_number.$dirty &&  signUpForm.phone_number.$error.required">Phone number is required</span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off" required ng-model="admin.email" maxlength="60"/>
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.email.$dirty &&  signUpForm.email.$error.required">Email is required</span>
+                        <span class="text-danger" ng-show="signUpForm.email.$dirty &&  signUpForm.email.$error.pattern">Email is not valid</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required ng-model="admin.password" autocomplete="off" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{5,15}$/"/>
+                        </div>
+                        <span class="text-danger" ng-show="signUpForm.password.$dirty &&  signUpForm.password.$error.required">Password is required</span>
+                        <span class="text-danger" ng-show="signUpForm.password.$dirty &&  signUpForm.password.$error.pattern">The password must be a combination of lowercase, uppercase, numeric, and special character with a maximum length of 15</span>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <button ng-disabled="signUpForm.$invalid" type="button" class="btn btn-primary btn-md btn-block login-button" ng-click="adminRegister(admin);">Sign-Up</button>
+                </div>
+                <div class="login">
+                    Already registered ?
+                    <a href="#">click here for login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

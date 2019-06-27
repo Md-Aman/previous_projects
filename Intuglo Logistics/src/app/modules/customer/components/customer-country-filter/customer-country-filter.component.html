@@ -1,0 +1,8 @@
+<div class="card">
+    <div *ngIf="diplayCountryName">
+        <div id="test" *ngFor="let button of rawJsonCountry; let i = button">
+            <button class="btn-select" [ngClass]="{'active': selectedIndex == button.country}" (click)="onClickSelectedCountry(button.country)" (click)="shareDataToListFilter(button)">{{button.country}}</button>
+        </div>
+    </div>
+   
+</div>

@@ -1,0 +1,42 @@
+/* CSS Written by iQureshi */
+.btn-group > .btn, .btn-group-vertical > .btn { width: 33.3%;}
+.btn-group, .btn-group-vertical { display: block;}
+.calendarView__landing { margin:10px 0 30px 0; clear: both;}
+.cal-month-view { border-bottom: 1px solid #E9E9F0;}
+:host >>> .cal-month-view .cal-day-badge { background-color: rgba(59, 134, 255, .2); font-size: 9px; color:#333; position: absolute; top: 0; right: 0; width: 12px; height: 12px; padding: 0; line-height: 12px; margin: 0; border-radius: 50%;}
+:host >>> .cal-month-view .cal-days { border: 0;}
+:host >>> .cal-month-view .cal-days .cal-cell-row { border: 0;}
+:host >>> .cal-month-view .cal-day-cell:not(:last-child) { border: 0;}
+:host >>> .cal-month-view .cal-day-cell { min-height: 30px;}
+:host >>> .cal-month-view .cal-day-cell.cal-today { background: transparent;}
+:host >>> .cal-month-view .cal-day-cell.cal-today .cal-cell-top { border-radius: 50%; background-color: rgba(59, 134, 255, .2);}
+:host >>> .cal-month-view .cal-day-cell.cal-today .cal-day-number { font-size: 14px;}
+:host >>> .cal-month-view .cal-day-cell.cal-weekend .cal-day-number { color: #333;}
+:host >>> .cal-month-view .cal-cell-top { min-height: 30px; width: 30px; position: relative; text-align: center; margin: auto;}
+:host >>> .cal-month-view .cal-day-number { font-size: 14px; opacity: 1; margin: 0; float: none; display: inline-block; line-height: 30px;}
+:host >>> .cal-month-view .cal-cell-row .cal-cell:hover, :host >>> .cal-month-view .cal-cell.cal-has-events.cal-open { background-color: rgba(59, 134, 255, .2); border-radius: 50%;}
+:host >>> .cal-month-view .cal-cell-row:hover { background: transparent;}
+:host >>> .cal-month-view .cal-cell-row .cal-cell:hover, :host >>> .cal-month-view .cal-cell.cal-has-events.cal-open { background: transparent;}
+
+.cal-title { margin: 53px 0 16px 0; font-size: 18px; font-weight: 400; line-height: 18px; color: #23376D; font-family: montserrat;}
+.calendar-main { background: #fff; padding: 20px; position: relative; margin-bottom: 20px; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);}
+.calendar-main .msg { color: #666; font-size: 12px; position: absolute; width: 100%; left: 0; bottom: 0; background: rgba(35,55,109,.1); margin: 0; line-height: 30px; padding: 0 10px; }
+.calendar-main .top-bar { text-align: center;}
+.calendar-main .top-bar .prev { background: url(../../../../../assets/img/icon-prev.svg) center center no-repeat; width: 16px; height: 16px; cursor: pointer; display: block; margin: 2px 0 0 0;}
+.calendar-main .top-bar .next { background: url(../../../../../assets/img/icon-next.svg) center center no-repeat; width: 16px; height: 16px; cursor: pointer; display: block; margin: 2px 0 0 0;}
+.calendar-main .top-bar .date-calendar { font-size: 15px; color: #333; margin: 0; font-weight: 600; display: inline-block; line-height: 16px;}
+.vessels-list { box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1); position: absolute; z-index: 10; width: 400px; top: 0; right: -415px; background: #fff; padding: 10px; max-height: 500px;}
+.vessels-list::after { right: 100%;	top: 20%; border: solid transparent; content: " "; height: 0;	width: 0;	position: absolute;	pointer-events: none;	border-color: rgba(255, 255, 255, 0);	border-right-color: #ffffff; border-width: 10px; margin-top: -10px; }
+.vessels-list h4 { padding: 0 0 10px 0; font-size: 18px; color: #333; font-weight: 500; margin: 0; border-bottom: 1px solid #eee;}
+.vessels-list h4 span { color: #999;}
+.vessels-list .vessels-gray { padding: 10px; border-bottom: 1px solid #eee;}
+.vessels-list .vessels-gray .wid-30 { width: 30%;}
+.vessels-list .vessels-gray .wid-70 { width: 70%;}
+.vessels-list .vessels-gray .wid-30 .desc { padding: 0 14px 0 24px; border-right: 1px solid #eee; background: url(../../../../../assets/img/icon-clock.svg) top left no-repeat; background-size: 16px;}
+.vessels-list .vessels-gray .wid-30 .desc p {font-size: 12px; color: #666; font-weight: 400; margin: 0;}
+.vessels-list .vessels-gray .wid-70 .desc { padding-left: 20px;}
+.vessels-list .vessels-gray .wid-70 .desc p { font-size: 14px; color: #333; font-weight: 400; margin: 0;}
+.vessels-list .vessels-gray .wid-70 .desc p.gray { color: #999;}
+.vessels-list .cross { position: absolute; top: 10px; right: 10px; background: url(../../../../../assets/img/icon-dialog-close.svg) center center no-repeat; width: 24px; height: 24px; cursor: pointer; }
+.text-center { text-align: center;}
+/* CSS Written by iQureshi */

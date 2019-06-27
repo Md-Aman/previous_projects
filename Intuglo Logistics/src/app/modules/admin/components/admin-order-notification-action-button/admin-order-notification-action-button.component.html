@@ -1,0 +1,148 @@
+<div [ngSwitch]="step" class="card-action-button">
+    <div class="padding-top-left">
+      <!-- <div *ngSwitchCase="'booking'"> -->
+        <button (click)="DaysClose(); DaysClose.open()" type="button" class="btnDisplayed">5 Days to Closing</button>
+        <button (click)="BookClose(); BookClose.open()" type="button" class="btnDisplayed">Booking Close</button>
+      <!-- </div> -->
+      <!-- <div *ngSwitchCase="'cargo'">
+        <button (click)="PickUpCargo(); PickCargo.open()" type="button" class="btnDisplayed">Pick Up Cargo</button>
+        <button (click)="SendCargo(); SendCargo.open()" type="button" class="btnDisplayed">Send Cargo</button>
+      </div>
+      <div *ngSwitchCase="'payment'">
+        <button (click)="ApproveCreditBlock(); ApproveCreditBlock.open()" type="button" class=" btnDisplayed">Approve Credit Block</button>
+        <button (click)="FinalPaymentDeducted(); FinalPaymentDeducted.open()" type="button" class=" btnDisplayed">Final Payment Deducted</button>
+    </div>
+    <div *ngSwitchCase="'custom'">
+            <button (click)="SendDocumentation(); SendDocumentation.open()" type="button" class=" btnDisplayed">Send Documentation</button>
+            <button (click)="FillUpDeclaration(); FillUpDeclaration.open()" type="button" class=" btnDisplayed">Fill Up Declaration Form</button>
+            <button (click)="PayCustomTax(); PayCustomTax.open()" type="button" class=" btnDisplayed">Pay Custom Tax & Duties</button>
+        </div> -->
+    </div>
+  </div>
+  
+  <modal #DaysClose [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">5 Days to Closing</h3>
+    </modal-header>
+  
+    <modal-content class="centered">
+         <p class="popup-body">Under progress!</p>
+    </modal-content>
+  
+    <modal-footer>
+        <button class="btn btn-primary" (click)="DaysClose.close()">Close</button>
+    </modal-footer>
+  </modal>
+
+  <modal #BookClose [closeOnOutsideClick]="false">
+        <modal-header>
+            <h3 class="centered popup-header">Booking Close</h3>
+        </modal-header>
+      
+        <modal-content class="centered">
+             <p class="popup-body">Under progress!</p>
+        </modal-content>
+      
+        <modal-footer>
+            <button class="btn btn-primary" (click)="BookClose.close()">Close</button>
+        </modal-footer>
+    </modal>
+
+  <modal #PickUpCargo [closeOnOutsideClick]="false">
+      <modal-header>
+          <h3 class="centered popup-header">Pick Up Cargo</h3>
+      </modal-header>
+    
+      <modal-content class="centered">
+           <p class="popup-body">Under progress!</p>
+      </modal-content>
+    
+      <modal-footer>
+          <button class="btn btn-primary" (click)="PickUpCargo.close()">Close</button>
+      </modal-footer>
+  </modal>
+
+  <modal #SendCargo [closeOnOutsideClick]="false">
+      <modal-header>
+          <h3 class="centered popup-header">Send Cargo</h3>
+      </modal-header>
+    
+      <modal-content class="centered">
+            <p class="popup-body">Under progress!</p>
+      </modal-content>
+    
+      <modal-footer>
+          <button class="btn btn-primary" (click)="SendCargo.close()">Close</button>
+      </modal-footer>
+    </modal>
+
+  <modal #ApproveCreditBlock [closeOnOutsideClick]="false">
+      <modal-header>
+          <h3 class="centered popup-header">Approve Credit Block</h3>
+      </modal-header>
+    
+      <modal-content class="centered">
+            <p class="popup-body">Under progress!</p>
+      </modal-content>
+    
+      <modal-footer>
+          <button class="btn btn-primary" (click)="ApproveCreditBlock.close()">Close</button>
+      </modal-footer>
+    </modal>
+
+<modal #FinalPaymentDeducted [closeOnOutsideClick]="false">
+        <modal-header>
+            <h3 class="centered popup-header">Final Payment Deducted</h3>
+        </modal-header>
+        
+        <modal-content class="centered">
+                <p class="popup-body">Under progress!</p>
+        </modal-content>
+        
+        <modal-footer>
+            <button class="btn btn-primary" (click)="FinalPaymentDeducted.close()">Close</button>
+        </modal-footer>
+</modal>
+
+    <modal #SendDocumentation [closeOnOutsideClick]="false">
+        <modal-header>
+            <h3 class="centered popup-header">Send Documentation</h3>
+        </modal-header>
+        
+        <modal-content class="centered">
+                <p class="popup-body">Under progress!</p>
+        </modal-content>
+        
+        <modal-footer>
+            <button class="btn btn-primary" (click)="SendDocumentation.close()">Close</button>
+        </modal-footer>
+    </modal>
+
+        <modal #FillUpDeclaration [closeOnOutsideClick]="false">
+            <modal-header>
+                <h3 class="centered popup-header">Fill Up Declaration</h3>
+            </modal-header>
+            
+            <modal-content class="centered">
+                    <p class="popup-body">Under progress!</p>
+            </modal-content>
+            
+            <modal-footer>
+                <button class="btn btn-primary" (click)="FillUpDeclaration.close()">Close</button>
+            </modal-footer>
+        </modal>
+
+                
+        <modal #PayCustomTax [closeOnOutsideClick]="false">
+            <modal-header>
+                <h3 class="centered popup-header">Pay Custom Tax</h3>
+            </modal-header>
+            
+            <modal-content class="centered">
+                    <p class="popup-body">Under progress!</p>
+            </modal-content>
+            
+            <modal-footer>
+                <button class="btn btn-primary" (click)="PayCustomTax.close()">Close</button>
+            </modal-footer>
+        </modal>

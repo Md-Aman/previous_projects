@@ -1,0 +1,264 @@
+<!-- Content Header (Page header) -->
+<!-- <section class="content-header" ng-init="getNewsRaDetails();">
+    <h1>
+        Update RA Details -->
+        <!-- <small>New Contact</small> -->
+<!--     </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Update RA Details</li>
+    </ol>
+</section> -->
+<!-- Main content -->
+<section class="content" ng-init="getNewsRaDetails();addMoreCountry();getAllApprovingManger();getCountries();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div>
+        <section >
+            <div class="box box-primary box-solid" >
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Update RA Details
+                    </h3>
+                </div>
+                <!-- form start -->
+                <form role="form" name="newsRaForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div ng-if="showLoader" class="col-lg-6 pull-right" style="margin-right: 150px;">
+                            <div loader-css="ball-pulse"></div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                            <!-- ng-pattern="/^[a-zA-Z]+[a-zA-Z' ]*$/"  -->
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label"> Project name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Enter Project Name"  ng-model="newsRa.project_name" maxlength="50" autocomplete="off" required />
+                                        <span class="text-danger" ng-show="newsRaForm.project_name.$dirty &&  newsRaForm.project_name.$error.required">Project Name is required</span>
+                               <!--          <span class="text-danger" ng-show="newsRaForm.project_name.$dirty &&  newsRaForm.project_name.$error.pattern">Project Name is not valid</span> -->
+                                    </div>
+                                </div>
+<div ng-if="newsRa.authorcheck == 1 && newsRa.author_id == superAdminUserData._id">
+                                <div ng-if="roledetails.mytravel.riskassessmentothers == 1 && newsRa.author_id == superAdminUserData._id">
+                                    <div class="form-group col-sm-6">
+                                            <label class="col-sm-6 control-label">Primary Traveller</label>
+
+                                      <!-- ng-pattern="/^[a-zA-Z]+[a-zA-Z' ]*$/" -->
+                                      <!-- <label class="col-sm-6 control-label">Are you traveling? </label>
+                                      <div class="col-sm-4">
+                                        <input type="checkbox" class="form-control" id="authorcheck" name="authorcheck" placeholder="Enter Project Name"  ng-model="newsRa.authorcheck" maxlength="50"   />
+                                      </div> -->
+                                    
+
+                                      <div class="col-sm-6">
+                                        <select class="form-control" name="primarytraveller" id="primarytraveller" ng-model="newsRa.traveller_id" ng-change="othertraveller(newsRa.traveller_id)">
+                    
+                                          <option ng-selected="true" disabled>Select  Traveller</option>
+                                          <option ng-repeat="option in getDeptRelatedUsers" value="{{option._id}}" ng-selected="newsRa.traveller_id == option._id">{{option.firstname}} {{option.lastname}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                    
+                                    </div>
+                                    </div>
+                                <!-- <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Select Department</label>
+                                    <div class="col-sm-8">
+                                        <multiple-autocomplete ng-model="finalDepartmentArray" suggestions-arr="departmentArr" name="category" object-property="department_name">
+                                        </multiple-autocomplete>
+                                        <span class="text-danger" ng-show="newsRaForm.category.$dirty &&  newsRaForm.category.$error.required">Department is required</span>
+                                    </div>
+                            </div> -->
+
+
+                        </div>
+                          <div class="form-group col-sm-12">
+                         <!--    <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label">Start Date</label>
+                                <div class="col-sm-8">
+                                        <input class="form-control" autocomplete="off"  ng-model="newsRa.startdate" data-date-format="dd/MM/yyyy" name="startdate" bs-datepicker type="text" placeholder="Date of RA" onkeydown="return false" required>
+                                        <span class="text-danger" ng-show="newsRaForm.startdate.$dirty &&  newsRaForm.startdate.$error.required">Date of ra is required</span>
+                                    </div>
+                            </div>
+                           <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label">End Date </label>
+                                <div class="col-sm-8">
+                                        <input class="form-control" autocomplete="off" name="enddate" ng-model="newsRa.enddate" data-date-format="dd/MM/yyyy"  bs-datepicker type="text" placeholder="Date of RA" onkeydown="return false" required>
+                                        <span class="text-danger" ng-show="newsRaForm.enddate.$dirty &&  newsRaForm.enddate.$error.required">Date of ra is required</span>
+                                    </div>
+                            </div> -->
+                                     <div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label">Start date</label>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="btn btn-primary input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></div>
+                      <input type="text" placeholder="Enter start date" class="form-control" datepicker-popup="{{format}}" ng-model="newsRa.startdate" is-open="opened" max-date="newsRa.enddate" ng-required="true" close-text="Close" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label">End date </label>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="btn btn-primary input-group-addon" ng-click="open1($event)"><i class="fa fa-calendar"></i></div>
+                      <input type="text" placeholder="Enter end date" class="form-control" datepicker-popup="{{format}}" ng-model="newsRa.enddate" is-open="opened1" min-date="newsRa.startdate" ng-required="true" close-text="Close" />
+                    </div>
+                  </div>
+                </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-6">
+                              <label class="col-sm-4 control-label">Other Travellers</label>
+                              <div class="col-sm-8">
+                              
+                                 <div isteven-multi-select input-model="getDeptRelatedUsersother" output-model="newsRa.getDeptRelatedUsers" name="getDeptRelatedUsers" button-label="firstname lastname" item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select users" data-trigger="hover" tabindex="6"></div>
+                                <span class="text-danger" ng-show="newsRaForm.travellerArr.$dirty &&  newsRaForm.travellerArr.$error.required">Team traveller is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                              <label class="col-sm-4 control-label">Approving Manager </label>
+                              <div class="col-sm-8">
+                                    <select class="form-control" name="approvingManager" id="approvingManager" ng-model="newsRa.approvingManager">
+
+                                            <option ng-selected="true" disabled>Select Approving Manger</option>
+                                            <option ng-repeat="option in approvingManager" value="{{option._id}}" ng-selected="newsRa.approvingManager[0] == option._id">  {{option.firstname}} {{option.lastname}}</option>
+                                          </select>
+                                <span class="text-danger" ng-show="newsRaForm.approvingManager.$dirty &&  newsRaForm.approvingManager.$error.required">Approving manager is required</span>
+                              </div>
+                            </div>
+                          </div>
+                    <div class="form-group col-sm-12">
+                      <div class="form-group moreCountryField col-sm-6" ng-repeat="newsRa in moreCountryField">
+                            <label class="col-sm-4 control-label">Country</label>
+                            <div class="col-sm-7">
+                                <!-- <select class="form-control" name="country" id="country" ng-model="newsRa.country"> -->
+                                        <!-- <option ng-selected="true" disabled>Select Country</option> -->
+                                       <!--  <option value="" ng-selected="newsRa.country == null">All</option> -->
+                                        <!-- <option ng-repeat="country in countryArr" value="{{country}}" 
+                                        ng-selected="newsRa.country[0].name == country.name">{{country.name}}</option> -->
+                                    <!-- </select> -->
+                                    <select class="form-control" name="country" id="country" ng-model="newsRa.country">
+                                        <option ng-selected="true" disabled>Select country </option>
+                                        <!--  <option value="" ng-selected="newsRa.country == null">All</option> -->
+                                        <option ng-repeat="(index, country) in countryArr" value="{{country}}" 
+                                            ng-selected="country._id == newsRa._id">{{country.name}}
+                                        </option>
+                                    </select>
+                            </div>
+                            <div class="col-sm-1" ng-if="moreCountryField.length > 1" 
+                                ng-click="removeMoreCountry($index)"><i class="fa fa-remove"></i></div>
+                        </div> 
+                        
+                   </div>
+                   
+        <div class="form-group col-sm-12">
+                  <label class="col-sm-2 control-label"></label>
+                  <div class="col-sm-10" >
+                      <button ng-disabled="countryAddMoreDisabled" type="button"
+                      class="btn btn-sm btn-primary" 
+                      ng-click="addMoreCountry();">
+                      Add more Country
+                     </button>
+                  </div>
+                      
+              </div>
+
+              <div class="form-group col-sm-12">
+                    <div class="form-group col-sm-6">
+                            <label class="col-sm-4 control-label">Department</label>
+                            <div class="col-sm-8">
+                              <!-- <select ng-required="true" class="form-control" name="department" id="department" ng-model="newsRa.department">
+                                  <-- <select class="form-control" name="country" id="country" ng-model="newsRa.country"> --
+                                <option ng-selected="true" disabled>Select department</option>
+                                <--  <option value="" travellerDepartment ng-selected="newsRa.country == null">All</option> --
+                                <option ng-repeat="department in client_department" ng-selected="department._id == newsRa.department[0]" value="{{department._id}}">{{department.department_name}}</option>
+                                <-- <option ng-repeat="department in departmentData" value="{{department}}" ng-selected="newsRa.department[0].name == country.name">{{department.name}}</option> --
+                              </select> -->
+                              <div isteven-multi-select input-model="client_department" 
+                                output-model="newsRa.department" 
+                                name="department" button-label="department_name" 
+                                item-label="department_name" output-properties="_id" 
+                                tick-property="ticked" data-toggle="tooltip" 
+                                data-placement="top" title="Select Department" 
+                                data-trigger="hover" tabindex="6"></div>
+                              <span class="text-danger" ng-show="newsRaForm.department.$dirty 
+                                &&  newsRaForm.department.$error.required">
+                               Department is required</span>
+                            </div>
+                          </div>
+                </div>
+    <div class="form-group col-sm-12">
+            <label class="col-sm-2 control-label">Task Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" autocomplete="off" name="description_of_task" ng-model="newsRa.description_of_task" placeholder="Task Description "
+                    required style="margin-left:-8px; width: 97%"></textarea>
+                    <span class="text-danger" ng-show="newsRaForm.description_of_task.$dirty &&  newsRaForm.description_of_task.$error.required">Task Description  is required</span>
+            </div>
+    </div>
+    <!--Itineary start-->
+    <!-- ng-repeat="itineary in scheduleArr track by $index" -->
+    <div  class="form-group col-sm-12">
+        <!--<div class="form-group col-sm-12">-->
+<!--         <div class="form-group col-sm-6">
+            <label class="col-sm-4 control-label">Itineary</label>
+            <div class="col-sm-8">
+                <input date-range-picker class="form-control date-picker" type="text" ng-model="scheduleArr[$index].itineary" placeholder="Itineary"
+                />
+            </div>
+        </div> -->
+
+        <!--</div>-->
+        <!--<div class="form-group col-sm-12">-->
+            <label class="col-sm-2 control-label">Description of Itinerary</label>
+            <div class="col-sm-10">
+                <textarea rows="11" cols="50" style="margin-left:-8px; width: 97%" class="form-control" autocomplete="off" name="itineary_description" ng-model="newsRa.itineary_description"
+                    placeholder="Description Of Itineary" required ></textarea>
+            </div> 
+        <!--</div>-->
+<!--         <button class="btn btn-sm btn-primary" ng-show="$first" title="Add Itineary" ng-click="addItineary()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        <button class="btn btn-sm btn-danger" ng-show="$last && $index != 0" title="Remove Itineary" ng-click="removeItineary()"><i class="fa fa-minus" aria-hidden="true"></i></button> -->
+    </div>
+    <div class="row" style="clear:both;" ng-show="messageError">
+        <div class="form-group col-sm-12">
+        <div class="alert alert-danger" >
+                <div ng-bind-html="messageError" ></div>
+        </div>
+        </div>
+    </div> 
+    <!--end-->
+    <div class="form-group col-sm-12">
+            <div class="pull-right box-tools">
+                <button ng-disabled="newsRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="updateRaAndNext(newsRa, false);">Save And Return Later</button>
+                <button ng-disabled="newsRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="updateRaAndNext(newsRa);">Next</button>
+            </div>
+        </div>
+    </div>
+    
+    </form>
+    </div>
+    <!-- /.box-body -->
+    </div>
+    </section>
+    </div>
+</section>
+<style >
+/*    .box.box-primary {
+    border-top-color: #3c8dbc;
+    border-left-color: #3c8dbc;
+    border-right-color: #3c8dbc;
+    border-bottom-color: #3c8dbc;
+}
+.box {
+    position: relative;
+    background: #ffffff;
+    border-top: 2px solid #c1c1c1;
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+    margin-bottom: 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: -11px;
+    width: 100%;
+    box-shadow: 43 34px 19px rgba(0, 0, 0, 0.1);
+}*/
+</style>

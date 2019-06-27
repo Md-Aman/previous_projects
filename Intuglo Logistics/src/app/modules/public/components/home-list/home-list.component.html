@@ -1,0 +1,25 @@
+<div id="navbar_width_reference" class="row">
+  <div class="col-md-12 col-lg-12">
+    <div id="result_list">
+      <div class="row">
+        <div class="col-md-3">
+          <shipment-calendar></shipment-calendar>
+          <news-announcements></news-announcements>
+        </div>
+        <div class="col-md-9 flipcard">
+          <p>Featured</p>
+          <h2>Providers</h2>
+          <div *ngFor = "let item of adsCollection;">
+            <div class="col-md-12">
+              <flippable-ads *ngFor = "let item of flippableAdsCollection"></flippable-ads>
+            </div>
+            <div class="col-md-12">
+              <!-- <fixed-ads></fixed-ads> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <result-pagination></result-pagination>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<supplier-navbar (controlSideBar)="receiveDataFromHeader($event)"></supplier-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+
+        <supplier-left-menu [sideBar]="isSideBarOpen" [fromViewQuotation]='isOpen'></supplier-left-menu>
+
+    </ng-sidebar>
+
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>View Quotation</h2>
+        <div class="content-area">
+            <supplier-quotation-template [comingFrom]="'view'"></supplier-quotation-template>
+        </div>
+    </div>
+
+</ng-sidebar-container> 

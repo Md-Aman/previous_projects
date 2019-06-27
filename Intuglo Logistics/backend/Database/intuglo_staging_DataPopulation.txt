@@ -1,0 +1,860 @@
+## Data population ##
+######################################################
+#                       _                 _          #
+#                      | |               | |         #
+#    ___   ___   _ __  | |_   ___  _ __  | |_  ___   #
+#   / __| / _ \ | '_ \ | __| / _ \| '_ \ | __|/ __|  #
+#  | (__ | (_) || | | || |_ |  __/| | | || |_ \__ \  #
+#   \___| \___/ |_| |_| \__| \___||_| |_| \__||___/  #
+#                                                    #
+######################################################
+
+###	1. LIST OF TABLES THAT REQUIRED DATA POPULATION ###
+#--------------------------------------------------------
+# config
+# countries
+# hs_code
+# incoterms
+# industries
+# order_status
+# ports
+# shipment_types
+# businesses
+# quotation_status
+# unit_of_measure
+# terms_conditions
+
+### 2. LIST OF TABLES THAT NOT REQUIRED DATA POPULATION ###
+#-----------------------------------------------------------
+# quotations
+# logins
+# orders
+# containers
+# customers
+# suppliers
+
+--
+-- Truncating Data From All Table
+--
+
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE TABLE intuglo_logistics.announcements;
+TRUNCATE TABLE intuglo_logistics.businesses;
+TRUNCATE TABLE intuglo_logistics.carts;
+TRUNCATE TABLE intuglo_logistics.config;
+TRUNCATE TABLE intuglo_logistics.containers;
+TRUNCATE TABLE intuglo_logistics.countries;
+TRUNCATE TABLE intuglo_logistics.custom;
+TRUNCATE TABLE intuglo_logistics.custom_documents;
+TRUNCATE TABLE intuglo_logistics.customers;
+TRUNCATE TABLE intuglo_logistics.hs_code;
+TRUNCATE TABLE intuglo_logistics.hs_code_set;
+TRUNCATE TABLE intuglo_logistics.hs_code_set_list;
+TRUNCATE TABLE intuglo_logistics.incoterms;
+TRUNCATE TABLE intuglo_logistics.industries;
+TRUNCATE TABLE intuglo_logistics.logins;
+TRUNCATE TABLE intuglo_logistics.news;
+TRUNCATE TABLE intuglo_logistics.notification_status;
+TRUNCATE TABLE intuglo_logistics.notifications;
+TRUNCATE TABLE intuglo_logistics.order_status;
+TRUNCATE TABLE intuglo_logistics.orders;
+TRUNCATE TABLE intuglo_logistics.packing_list;
+TRUNCATE TABLE intuglo_logistics.payment_types;
+TRUNCATE TABLE intuglo_logistics.platforms;
+TRUNCATE TABLE intuglo_logistics.ports;
+TRUNCATE TABLE intuglo_logistics.quotation_charges;
+TRUNCATE TABLE intuglo_logistics.quotation_handling_charges;
+TRUNCATE TABLE intuglo_logistics.quotation_status;
+TRUNCATE TABLE intuglo_logistics.quotations;
+TRUNCATE TABLE intuglo_logistics.seq_containers;
+TRUNCATE TABLE intuglo_logistics.seq_merchants;
+TRUNCATE TABLE intuglo_logistics.seq_orders;
+TRUNCATE TABLE intuglo_logistics.seq_quotations;
+TRUNCATE TABLE intuglo_logistics.shipment_types;
+TRUNCATE TABLE intuglo_logistics.suppliers;
+TRUNCATE TABLE intuglo_logistics.terms_conditions;
+TRUNCATE TABLE intuglo_logistics.unit_of_measure;
+TRUNCATE TABLE intuglo_logistics.user_platforms;
+TRUNCATE TABLE intuglo_logistics.routes;
+TRUNCATE TABLE intuglo_logistics.vessel;
+SET FOREIGN_KEY_CHECKS=1;
+
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO intuglo_logistics.config (`config_id`, `config_key`, `config_value`, `updated_on`) VALUES
+(1, 'mail-server-address', 'smtp.gmail.com', '2017-06-29 22:59:28'),
+(2, 'mail-server-port', '587', '2017-06-29 23:00:05'),
+(3, 'mail-server-Username', 'siroi.intuglo@gmail.com', '2017-06-29 23:00:41'),
+(4, 'mail-server-password', 'IntugloLogistics', '2017-06-29 23:01:15'),
+(5, 'validity-days', '30', '2018-07-03 03:35:18'),
+(6, 'start-credit-block', '-9', '2018-07-03 03:35:18'),
+(7, 'end-credit-block', '-7', '2018-07-03 03:35:18'),
+(8, 'start-cargo-sent', '-9', '2018-07-03 03:35:18'),
+(9, 'end-cargo-sent', '-7', '2018-07-03 03:35:18'),
+(10, 'quotation-closed', '-8', '2018-07-03 03:35:18'),
+(11, 'start-warehouse-accept-cargo', '-9', '2018-07-03 03:35:18'),
+(12, 'end-warehouse-accept-cargo', '-5', '2018-07-03 03:35:18'),
+(13, 'start-upload-custom-declaration-document', '-open_days', '2018-07-03 03:35:18'),
+(14, 'end-upload-custom-declaration-document', '-8', '2018-07-03 03:35:18'),
+(15, 'booking-fee', '30', '2018-07-03 03:35:18'),
+(16, 'booking-fee-description', 'Transaction fee that need to be paid', '2018-07-03 03:35:18'),
+(17, 'quotation-upload-file-path', 'uploads/quotations', '2018-07-03 03:35:18'),
+(18, 'import-export-upload-file-path', 'uploads/import_export_license', '2018-07-03 03:35:18'),
+(19, 'business-license-upload-file-path', 'uploads/business_license', '2018-07-03 03:35:18'),
+(20, 'custom-upload-file-path', 'uploads/custom', '2018-07-03 03:35:18'),
+(21, 'serving-url-link', 'http://localhost:8000', '2018-07-03 03:35:18');
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO intuglo_logistics.countries (`country_code`, `country_name`) VALUES
+('AD', 'Andorra'),
+('AE', 'United Arab Emirates'),
+('AF', 'Afghanistan'),
+('AG', 'Antigua and Barbuda'),
+('AI', 'Anguilla'),
+('AL', 'Albania'),
+('AM', 'Armenia'),
+('AO', 'Angola'),
+('AQ', 'Antarctica'),
+('AR', 'Argentina'),
+('AS', 'American Samoa'),
+('AT', 'Austria'),
+('AU', 'Australia'),
+('AW', 'Aruba'),
+('AX', 'Åland Islands'),
+('AZ', 'Azerbaijan'),
+('BA', 'Bosnia and Herzegovina'),
+('BB', 'Barbados'),
+('BD', 'Bangladesh'),
+('BE', 'Belgium'),
+('BF', 'Burkina Faso'),
+('BG', 'Bulgaria'),
+('BH', 'Bahrain'),
+('BI', 'Burundi'),
+('BJ', 'Benin'),
+('BL', 'Saint Barthélemy'),
+('BM', 'Bermuda'),
+('BN', 'Brunei Darussalam'),
+('BO', 'Bolivia, Plurinational State of'),
+('BQ', 'Bonaire, Sint Eustatius and Saba'),
+('BR', 'Brazil'),
+('BS', 'Bahamas'),
+('BT', 'Bhutan'),
+('BV', 'Bouvet Island'),
+('BW', 'Botswana'),
+('BY', 'Belarus'),
+('BZ', 'Belize'),
+('CA', 'Canada'),
+('CC', 'Cocos (Keeling) Islands'),
+('CD', 'Congo, the Democratic Republic ofthe'),
+('CF', 'Central African Republic'),
+('CG', 'Congo'),
+('CH', 'Switzerland'),
+('CI', 'Côte dIvoire'),
+('CK', 'Cook Islands'),
+('CL', 'Chile'),
+('CM', 'Cameroon'),
+('CN', 'China'),
+('CO', 'Colombia'),
+('CR', 'Costa Rica'),
+('CU', 'Cuba'),
+('CV', 'Cape Verde'),
+('CW', 'Curaçao'),
+('CX', 'Christmas Island'),
+('CY', 'Cyprus'),
+('CZ', 'Czech Republic'),
+('DE', 'Germany'),
+('DJ', 'Djibouti'),
+('DK', 'Denmark'),
+('DM', 'Dominica'),
+('DO', 'Dominican Republic'),
+('DZ', 'Algeria'),
+('EC', 'Ecuador'),
+('EE', 'Estonia'),
+('EG', 'Egypt'),
+('EH', 'Western Sahara'),
+('ER', 'Eritrea'),
+('ES', 'Spain'),
+('ET', 'Ethiopia'),
+('FI', 'Finland'),
+('FJ', 'Fiji'),
+('FK', 'Falkland Islands (Malvinas)'),
+('FM', 'Micronesia, Federated States of'),
+('FO', 'Faroe Islands'),
+('FR', 'France'),
+('GA', 'Gabon'),
+('GB', 'United Kingdom'),
+('GD', 'Grenada'),
+('GE', 'Georgia'),
+('GF', 'French Guiana'),
+('GG', 'Guernsey'),
+('GH', 'Ghana'),
+('GI', 'Gibraltar'),
+('GL', 'Greenland'),
+('GM', 'Gambia'),
+('GN', 'Guinea'),
+('GP', 'Guadeloupe'),
+('GQ', 'Equatorial Guinea'),
+('GR', 'Greece'),
+('GS', 'South Georgia and the South Sandwich Islands'),
+('GT', 'Guatemala'),
+('GU', 'Guam'),
+('GW', 'Guinea-Bissau'),
+('GY', 'Guyana'),
+('HK', 'Hong Kong'),
+('HM', 'Heard Island and McDonald Islands'),
+('HN', 'Honduras'),
+('HR', 'Croatia'),
+('HT', 'Haiti'),
+('HU', 'Hungary'),
+('ID', 'Indonesia'),
+('IE', 'Ireland'),
+('IL', 'Israel'),
+('IM', 'Isle of Man'),
+('IN', 'India'),
+('IO', 'British Indian Ocean Territory'),
+('IQ', 'Iraq'),
+('IR', 'Iran, Islamic Republic of'),
+('IS', 'Iceland'),
+('IT', 'Italy'),
+('JE', 'Jersey'),
+('JM', 'Jamaica'),
+('JO', 'Jordan'),
+('JP', 'Japan'),
+('KE', 'Kenya'),
+('KG', 'Kyrgyzstan'),
+('KH', 'Cambodia'),
+('KI', 'Kiribati'),
+('KM', 'Comoros'),
+('KN', 'Saint Kitts and Nevis'),
+('KP', 'Korea, Democratic Republic of Peoples '),
+('KR', 'Korea, Republic of'),
+('KW', 'Kuwait'),
+('KY', 'Cayman Islands'),
+('KZ', 'Kazakhstan'),
+('LA', 'Lao Peoples Democratic Republic'),
+('LB', 'Lebanon'),
+('LC', 'Saint Lucia'),
+('LI', 'Liechtenstein'),
+('LK', 'Sri Lanka'),
+('LR', 'Liberia'),
+('LS', 'Lesotho'),
+('LT', 'Lithuania'),
+('LU', 'Luxembourg'),
+('LV', 'Latvia'),
+('LY', 'Libya'),
+('MA', 'Morocco'),
+('MC', 'Monaco'),
+('MD', 'Moldova, Republic of'),
+('ME', 'Montenegro'),
+('MF', 'Saint Martin (French part)'),
+('MG', 'Madagascar'),
+('MH', 'Marshall Islands'),
+('MK', 'Macedonia, the Former Yugoslav Republic of'),
+('ML', 'Mali'),
+('MM', 'Myanmar'),
+('MN', 'Mongolia'),
+('MO', 'Macao'),
+('MP', 'Northern Mariana Islands'),
+('MQ', 'Martinique'),
+('MR', 'Mauritania'),
+('MS', 'Montserrat'),
+('MT', 'Malta'),
+('MU', 'Mauritius'),
+('MV', 'Maldives'),
+('MW', 'Malawi'),
+('MX', 'Mexico'),
+('MY', 'Malaysia'),
+('MZ', 'Mozambique'),
+('NA', 'Namibia'),
+('NC', 'New Caledonia'),
+('NE', 'Niger'),
+('NF', 'Norfolk Island'),
+('NG', 'Nigeria'),
+('NI', 'Nicaragua'),
+('NL', 'Netherlands'),
+('NO', 'Norway'),
+('NP', 'Nepal'),
+('NR', 'Nauru'),
+('NU', 'Niue'),
+('NZ', 'New Zealand'),
+('OM', 'Oman'),
+('PA', 'Panama'),
+('PE', 'Peru'),
+('PF', 'French Polynesia'),
+('PG', 'Papua New Guinea'),
+('PH', 'Philippines'),
+('PK', 'Pakistan'),
+('PL', 'Poland'),
+('PM', 'Saint Pierre and Miquelon'),
+('PN', 'Pitcairn'),
+('PR', 'Puerto Rico'),
+('PS', 'Palestine, State of'),
+('PT', 'Portugal'),
+('PW', 'Palau'),
+('PY', 'Paraguay'),
+('QA', 'Qatar'),
+('RE', 'Réunion'),
+('RO', 'Romania'),
+('RS', 'Serbia'),
+('RU', 'Russian Federation'),
+('RW', 'Rwanda'),
+('SA', 'Saudi Arabia'),
+('SB', 'Solomon Islands'),
+('SC', 'Seychelles'),
+('SD', 'Sudan'),
+('SE', 'Sweden'),
+('SG', 'Singapore'),
+('SH', 'Saint Helena, Ascension and Tristan da Cunha'),
+('SI', 'Slovenia'),
+('SJ', 'Svalbard and Jan Mayen'),
+('SK', 'Slovakia'),
+('SL', 'Sierra Leone'),
+('SM', 'San Marino'),
+('SN', 'Senegal'),
+('SO', 'Somalia'),
+('SR', 'Suriname'),
+('SS', 'South Sudan'),
+('ST', 'Sao Tome and Principe'),
+('SV', 'El Salvador'),
+('SX', 'Sint Maarten (Dutch part)'),
+('SY', 'Syrian Arab Republic'),
+('SZ', 'Swaziland'),
+('TC', 'Turks and Caicos Islands'),
+('TD', 'Chad'),
+('TF', 'French Southern Territories'),
+('TG', 'Togo'),
+('TH', 'Thailand'),
+('TJ', 'Tajikistan'),
+('TK', 'Tokelau'),
+('TL', 'Timor-Leste'),
+('TM', 'Turkmenistan'),
+('TN', 'Tunisia'),
+('TO', 'Tonga'),
+('TR', 'Turkey'),
+('TT', 'Trinidad and Tobago'),
+('TV', 'Tuvalu'),
+('TW', 'Taiwan, Province of China'),
+('TZ', 'Tanzania, United Republic of'),
+('UA', 'Ukraine'),
+('UG', 'Uganda'),
+('UM', 'United States Minor Outlying Islands'),
+('US', 'United States'),
+('UY', 'Uruguay'),
+('UZ', 'Uzbekistan'),
+('VA', 'Holy See (Vatican City State)'),
+('VC', 'Saint Vincent and the Grenadines'),
+('VE', 'Venezuela, Bolivarian Republic of'),
+('VG', 'Virgin Islands, British'),
+('VI', 'Virgin Islands, U.S.'),
+('VN', 'Viet Nam'),
+('VU', 'Vanuatu'),
+('WF', 'Wallis and Futuna'),
+('WS', 'Samoa'),
+('YE', 'Yemen'),
+('YT', 'Mayotte'),
+('ZA', 'South Africa'),
+('ZM', 'Zambia'),
+('ZW', 'Zimbabwe');
+
+--
+-- Dumping data for table `hs_code_set`
+--
+
+INSERT INTO intuglo_logistics.hs_code_set (`hs_code_set`, `hs_code_set_description`) VALUES
+('HS1', NULL),
+('HS2', NULL),
+('HS3', NULL),
+('HS4', NULL),
+('HS5', NULL),
+('HS6', NULL);
+
+--
+-- Dumping data for table `incoterms`
+--
+
+INSERT INTO intuglo_logistics.incoterms (`incoterm_code`, `description`, `is_active`, `cargo_pickup`, `updated_on`) VALUES
+('CFR', 'Cost and Freight', 1, 1, '2017-09-07 09:38:21'),
+('CIF', 'Cost, Insurance & Freight', 1, 1, '2017-09-07 09:38:42'),
+('CIP', 'Carriage and Insurance Paid', 1, 1, '2017-09-07 09:38:21'),
+('CPT', 'Carriage Paid To', 1, 1, '2017-09-07 09:38:21'),
+('DAF', 'Deliver At Frontier', 1, 1, '2017-09-07 09:38:21'),
+('DAP', 'Delivered At Place', 1, 1, '2017-09-07 09:39:05'),
+('DDP', 'Delivered Duty Paid', 1, 1, '2017-09-07 09:38:21'),
+('EXW', 'ExWorks', 1, 0, '2017-09-07 09:38:21'),
+('FAS', 'Free Alongside Ship', 1, 0, '2017-09-07 09:38:21'),
+('FCA', 'Free Carrier', 1, 0, '2017-09-07 09:38:21'),
+('FOB', 'Free on Board', 1, 1, '2017-09-07 09:38:21');
+
+--
+-- Dumping data for table `industries`
+--
+
+INSERT INTO intuglo_logistics.industries (`industry_id`, `industry_name`) VALUES
+('AG', 'Agricultural Products'),
+('AP', 'Apparel, Garments & Accessories'),
+('AU', 'Automotive, Parts & Components'),
+('BE', 'Beverages'),
+('BU', 'Building & Construction - Material & Hardware'),
+('CH', 'Chemicals, Minerals & Alloys'),
+('CI', 'Consumer & Industrial - Electrical & Electronic Products'),
+('DE', 'Defence Product & Equipment'),
+('EE', 'Electrical & Electronic Parts & Components'),
+('FA', 'Fashion Accessories & Textiles'),
+('FU', 'Furniture'),
+('FW', 'Footwear'),
+('GL', 'Gloves'),
+('HP', 'Household Products'),
+('HW', 'Computer Hardware'),
+('JW', 'Gift, Sovenir & Jewellery'),
+('MC', 'Machinery & Equipment and Automation'),
+('MD', 'Medical Products'),
+('OG', 'Oil & Gas Products'),
+('PC', 'Packaging & Containers'),
+('PF', 'Prepared Food'),
+('PH', 'Phamaceutical, Toiletries & Cosmetics'),
+('PO', 'Palm Oil Products'),
+('PP', 'Plastic Products'),
+('RP', 'Rubber Products'),
+('ST', 'Stationery'),
+('SW', 'Computer Software'),
+('TC', 'Telecommunication'),
+('TR', 'Transport Equipment & Parts'),
+('TS', 'Toys & Sports Equipment'),
+('TX', 'Textiles, Yarns & Other Related Products'),
+('WP', 'Wood Products');
+
+--
+-- Dumping data for table `businesses`
+--
+INSERT INTO intuglo_logistics.businesses (`business_id`, `business_name`, `business_type`, `industry_id`) VALUES
+('MF', 'Manufacturing', NULL, 'AG'),
+('PS', 'Partnership', NULL, 'AP'),
+('SB', 'Service Business', NULL, 'MC');
+
+--
+-- Dumping data for table `order_status`
+--
+
+INSERT INTO intuglo_logistics.order_status (`order_status_code`, `order_status_description`) VALUES
+('CARGODELIVERED', 'Cargo Delivered'),
+('CARGOPICKEDUP', 'Cargo Picked Up'),
+('CARGOREADYFORPICKUP', 'Cargo Ready for Pick up'),
+('CARGORECEIVED', 'Cargo Received'),
+('CARGOSENT', 'Cargo Sent'),
+('CARGOSHIPPED', 'Cargo Shipped'),
+('CLEARINGCUSTOM', 'Cargo Clearing Custom'),
+('CONTAINERSEALED', 'Container Sealed'),
+('HOLDBYCUSTOM', 'Cargo hold by custom'),
+('ORDERBOOKED ', 'Order Booked'),
+('ORDERCANCELLED', 'Order Cancelled'),
+('ORDERCONFIRMED', 'Order Confirmed'),
+('ORDERDROPPED', 'Order Dropped'),
+('ORDERPLACED', 'Order Placed'),
+('SHIPMENTCOMPLETED', 'Shipment Completed');
+
+--
+-- Dumping data for table `ports`
+--
+
+INSERT INTO intuglo_logistics.ports (`port_id`, `port_name`, `country_code`, `is_active`) VALUES
+(1, 'MYPKG, Port Klang, Malaysia', 'MY', 1),
+(2, 'CNSZX, Shenzhen Port, China', 'CH', 1),
+(3, 'CNSHA, Shanghai, China', 'CH', 1),
+(4, 'MYTPS, Tanjung Pelepas, Malaysia', 'MY', 1),
+(5, 'USLAS, Los Angeles, U.S.A', 'US', 1),
+(6, 'USLBH, Long Beach, U.S.A', 'US', 1),
+(7, 'AUSSH, Sydney Harbour, Australia', 'AU', 1),
+(8, 'AUSPW, Port Weld, Australia', 'AU', 1),
+(9, 'CHXMN, Xiamen, China', 'CH', 1),
+(10, 'MYPNG, Penang, Malaysia', 'MY', 1);
+
+
+--
+-- Dumping data for table `quotation_charges`
+--
+
+INSERT INTO intuglo_logistics.quotation_charges (`charges_id`, `charges_description`) VALUES
+(2, 'Booking Fee'),
+(3, 'Packaging Fee'),
+(1, 'Shipping Fee');
+
+--
+-- Dumping data for table `quotation_status`
+--
+
+INSERT INTO intuglo_logistics.quotation_status (`quotation_status_id`, `quotation_status_description`) VALUES
+('ACTIVE', 'Active'),
+('APPROVED', 'Approved'),
+('ARCHIVED', 'Archived'),
+('CLOSED', 'Closed'),
+('DELETED', 'Deleted'),
+('DRAFT', 'Draft'),
+('PENDINGAPPROVAL', 'Pending Approval');
+
+--
+-- Dumping data for table `seq_quotations`
+--
+
+INSERT INTO intuglo_logistics.seq_quotations (`id_seq_quotations`) VALUES
+(1),
+(2);
+
+--
+-- Dumping data for table `shipment_types`
+--
+
+INSERT INTO intuglo_logistics.shipment_types (`shipment_type_id`, `shipment_type`, `is_active`) VALUES
+(1, 'Ship', 1),
+(2, 'Flight', 1);
+
+--
+-- Dumping data for table `hs_code`
+--
+
+INSERT INTO intuglo_logistics.hs_code (`hs_code_id`, `hs_code_header`, `hs_code_sub`, `hs_code_item`, `tax_export`, `tax_import`, `is_active`, `updated_on`, `description`, `gst_percentage`) VALUES
+(1, '2701', '11', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Anthracite', 6),
+(2, '2701', '12', '1000', '0', '0', 1, '2018-07-04 03:41:35', 'Coking coal', 6),
+(3, '2701', '12', '9000', '0', '0', 1, '2018-07-04 03:41:35', 'Other', 6),
+(4, '2701', '19', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Other coal', 6),
+(5, '2701', '20', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Briquettes, ovoids and similar solid fuels manufactured from coal', 6),
+(6, '2702', '10', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Lignite, whether or not pulverised, but not agglomerated', 6),
+(7, '2702', '20', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Agglomerated lignite', 6),
+(8, '2703', '0', '1000', '0', '0', 1, '2018-07-04 03:41:35', 'Peat, whether or not compressed into bales, but not agglomerated', 6),
+(9, '2703', '0', '2000', '0', '0', 1, '2018-07-04 03:41:35', 'Agglomerated peat', 6),
+(10, '2704', '0', '1000', '0', '0', 1, '2018-07-04 03:41:35', 'Coke and semicoke of coal', 6),
+(11, '2704', '0', '2000', '0', '0', 1, '2018-07-04 03:41:35', 'Coke and semicoke of lignite or of peat', 6),
+(12, '2704', '0', '3000', '0', '0', 1, '2018-07-04 03:41:35', 'Retort carbon', 6),
+(13, '2705', '0', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Coal gas, water gas, producer gas and similar gases, other than petroleum gases and gaseous hydrocarbons.', 6),
+(14, '2706', '0', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Tar distilled from coal, from lignite or from peat, and other mineral tars, whether or not partially distilled, including reconstituted tars', 6),
+(15, '2707', '10', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Benzol (benzene)', 6),
+(16, '2707', '20', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Toluol(toluene)', 6),
+(17, '2707', '30', '0', '0', '0', 1, '2018-07-04 03:41:35', 'Xylol (xylenes)', 6),
+(18, '2707', '40', '0', '0', '0', 1, '2018-07-04 03:41:36', 'Naphthalene', 6),
+(19, '2707', '50', '0', '0', '0', 1, '2018-07-04 03:41:36', 'Other aromatic hydrocarbon mixture of which 65% or more by volume (including losses) distils at 250C by the ISO 3405 method (equivalent to the ASTM D 86 method)', 6),
+(20, '2707', '91', '0', '0', '0', 1, '2018-07-04 03:41:36', 'Creosote oils', 6),
+(21, '2707', '99', '1000', '0', '0', 1, '2018-07-04 03:41:36', 'Carbon black feedstock', 6),
+(22, '2707', '99', '9000', '0', '0', 1, '2018-07-04 03:41:36', 'Other', 6),
+(23, '2708', '10', '0', '0', '0', 1, '2018-07-04 03:41:36', 'Pitch', 6),
+(24, '2708', '20', '0', '0', '0', 1, '2018-07-04 03:41:36', 'Pitch coke', 6),
+(25, '2709', '0', '1000', '10.00%', '0', 1, '2018-07-04 03:41:36', 'Crude petroleum oils', 6),
+(26, '2709', '0', '2000', '10.00%', '5.00%', 1, '2018-07-04 03:41:36', 'Condensates', 6),
+(27, '2709', '0', '9000', '10.00%', '5.00%', 1, '2018-07-04 03:41:36', 'Other', 6),
+(28, '2710', '12', '1100', '0', '0', 1, '2018-07-04 03:41:36', 'Of RON 97 and above', 6),
+(29, '2710', '12', '1200', '0', '0', 1, '2018-07-04 03:41:36', 'Of RON 90 and above but below RON 97', 6),
+(30, '2710', '12', '1300', '0', '0', 1, '2018-07-04 03:41:36', 'Of other RON', 6),
+(31, '2710', '12', '2100', '0', '0', 1, '2018-07-04 03:41:36', 'Unblended', 6),
+(32, '2710', '12', '2200', '0', '0', 1, '2018-07-04 03:41:36', 'Blended with ethanol', 6),
+(33, '2710', '12', '2300', '0', '0', 1, '2018-07-04 03:41:36', 'Other', 6),
+(34, '2710', '12', '2400', '0', '0', 1, '2018-07-04 03:41:36', 'Unblended', 6),
+(35, '2710', '12', '2500', '0', '0', 1, '2018-07-04 03:41:36', 'Blended with ethanol', 6),
+(36, '2710', '12', '2600', '0', '0', 1, '2018-07-04 03:41:36', 'Other', 6),
+(37, '2710', '12', '2700', '0', '0', 1, '2018-07-04 03:41:36', 'Unblended', 6),
+(38, '2710', '12', '2800', '0', '0', 1, '2018-07-04 03:41:36', 'Blended with ethanol', 6),
+(39, '2710', '12', '2900', '0', '0', 1, '2018-07-04 03:41:36', 'Other', 6),
+(40, '2710', '12', '3100', '0', '0', 1, '2018-07-04 03:41:36', '100 octane and above', 6),
+(41, '2710', '12', '3900', '0', '0', 1, '2018-07-04 03:41:36', 'Other', 6),
+(42, '2710', '12', '4000', '0', '0', 1, '2018-07-04 03:41:36', 'Tetrapropylene', 6),
+(43, '2710', '12', '5000', '0', '0', 1, '2018-07-04 03:41:36', 'White spirit', 6),
+(44, '2710', '12', '6000', '0', '0', 1, '2018-07-04 03:41:37', 'Low aromatic solvents containing by weight less than 1% aromatic content', 6),
+(45, '2710', '12', '7000', '0', '0', 1, '2018-07-04 03:41:37', 'Other solvent spirits', 6),
+(46, '2710', '12', '8000', '0', '0', 1, '2018-07-04 03:41:37', 'Naphtha, reformates and other preparations of a kind used for blending into motor spirits', 6),
+(47, '2710', '12', '9100', '0', '0', 1, '2018-07-04 03:41:37', 'Alpha olefins', 6),
+(48, '2710', '12', '9200', '0', '0', 1, '2018-07-04 03:41:37', 'Other, petroleum spirit, having a flashpoint of less than 23C', 6),
+(49, '2710', '12', '9900', '0', '0', 1, '2018-07-04 03:41:37', 'Other', 6),
+(50, '2710', '19', '2000', '0', '0', 1, '2018-07-04 03:41:37', 'Topped crudes', 6);
+
+INSERT INTO intuglo_logistics.logins (`login_id`, `email`, `password`, `is_active`, `created_on`, `created_by`, `user_type`, `need_change_password`, `is_on_boarded`, `token_id`, `token_validity`, `merchant_id`) VALUES
+(1, 'admin@intuglo.com', 'admin1234', 1, '2018-07-03 11:35:32', 0, 0, 0, 0, NULL, '2018-07-03 11:35:32', NULL);
+--
+-- Dumping data for table `terms_conditions`
+--
+
+INSERT INTO intuglo_logistics.terms_conditions (`tc_id`, `tc_type`, `terms_conditions_text`, `created_by`, `created_on`) VALUES
+(1, 1, 'The Intellectual Property disclosure will inform users that the contents, logo and other visual media you created is your property and is protected by copyright laws.', 1, '2018-07-03 11:35:32'),
+(2, 2, 'PLEASE NOTE THAT YOUR USE OF AND ACCESS TO OUR SERVICES (DEFINED BELOW) ARE SUBJECT TO THE FOLLOWING TERMS; IF YOU DO NOT AGREE TO ALL OF THE FOLLOWING, YOU MAY NOT USE OR ACCESS THE SERVICES IN ANY MANNER.\r\n\r\nWelcome to Intuglo Logistics. Please read on to learn the rules and restrictions that govern your use of our website(s), products, services and applications (the “Services”). If you have any questions, comments, or concerns regarding these terms or the Services, please contact us at support@goIntuglo Logistics.com.\r\n\r\nThese Terms of Use (the “Terms”) are a binding contract between you and Popout, Inc. d/b/a Intuglo Logistics. (“Intuglo Logistics,” “we” and “us”). You must agree to and accept all of the Terms, or you don’t have the right to use the Services. Your use of the Services in any way means that you agree to all of these Terms, and these Terms will remain in effect while you use the Services. These Terms include the provisions in this document, as well as those in the Privacy Policy.\r\n\r\nWill these Terms ever change?\r\n\r\nWe are constantly trying to improve our Services, so these Terms may need to change along with the Services. We reserve the right to change the Terms at any time. If the changes materially impacts the Terms, we will use reasonable efforts to bring it to your attention by placing a notice on the Intuglo Logistics website, by sending you an email, and/or by some other means.\r\n\r\nIf you don’t agree with the new Terms, you are free to reject them; unfortunately, that means you will no longer be able to use the Services. If you use the Services in any way after a change to the Terms is effective, that means you agree to all of the changes.\r\n\r\nExcept for changes by us as described here, no other amendment or modification of these Terms will be effective unless in writing and signed by both you and us.\r\n\r\nWhat about my privacy?\r\n\r\nIntuglo Logistics takes the privacy of its users very seriously. For the current Intuglo Logistics Privacy Policy, please click here.\r\n\r\nThe Children’s Online Privacy Protection Act (“COPPA”) requires that online service providers obtain parental consent before they knowingly collect personally identifiable information online from children who are under 13. We do not knowingly collect or solicit personally identifiable information from children under 13; if you are a child under 13, please do not attempt to register for the Services or send any personal information about yourself to us. If we learn we have collected personal information from a child under 13, we will delete that information as quickly as possible. If you believe that a child under 13 may have provided us personal information, please contact us at support@goIntuglo Logistics.com.\r\n\r\nWhat are the basics of using Intuglo Logistics?\r\n\r\nIntuglo Logistics’s Services allow you to find, compare, select and buy courier services for shipping documents and goods nationally and internationally. You may use the Services to purchase postage from a third-party mail service or courier (“Courier”) and Intuglo Logistics will provide you with the appropriate evidence of postage, for example a shipping label, to use with your shipments. Intuglo Logistics serves as an intermediary between you and your selected Courier. Intuglo Logistics does not transport or deliver shipments and Intuglo Logistics is not a party to any contract you form with a Courier to pick up, transport, or deliver your shipments.\r\n\r\nYou may be required to sign up for an account, and select a password and user name (“Intuglo Logistics User ID”). You promise to provide us with accurate, complete, and updated registration information about yourself. You may not select as your Intuglo Logistics User ID a name that you don’t have the right to use, or another person’s name with the intent to impersonate that person. You may not transfer your account to anyone else without our prior written permission.', 1, '2018-07-03 11:35:32');
+
+--
+-- Dumping data for table `unit_of_measure`
+--
+
+INSERT INTO intuglo_logistics.unit_of_measure (`unit_of_measure_id`, `unit_of_measure_description`) VALUES
+(1, 'per container'),
+(2, 'per shipment'),
+(3, 'per order'),
+(4, 'per CBM');
+
+--
+-- Dumping data for table `logins`
+--
+
+INSERT INTO intuglo_logistics.logins (`login_id`, `email`, `password`, `is_active`, `created_on`, `created_by`, `user_type`, `need_change_password`, `is_on_boarded`, `token_id`, `token_validity`, `merchant_id`) VALUES
+(2, 'supplier@gmail.com', 'abc123', 1, '2018-03-29 08:48:57', 0, 1, 0, 1, NULL, '2018-07-03 11:35:32', 'MLAGPEC00002S'),
+(3, 'customer@gmail.com', 'abc123', 1, '2018-03-29 08:21:45', 0, 2, 0, 1, NULL, '2018-07-03 11:35:32', 'MLMCTXS00001C'),
+(4, 'filipus.kurniawan@gmail.com', 'abc123', 1, '2018-06-13 02:06:54', 0, 2, 0, 1, '9cccdb0e543843b7b051c10abe384d5d', '2018-07-13 02:06:54', NULL),
+(5, 'farahroslan0123@gmail.com', 'intuglo123', 1, '2018-06-19 18:08:43', 0, 2, 0, 1, 'a3782888275647939161cf9676d29809', '2018-07-19 18:08:43', NULL),
+(6, 'vence@intuglo.com', '2PZAU8U5', 1, '2018-06-20 00:35:30', 0, 2, 1, 0, '398318440edc4a70affabe3e641cee14', '2018-07-20 00:35:30', NULL),
+(7, 'loverirony@gmail.com', '3N5W772Y', 1, '2018-06-24 19:09:01', 0, 2, 1, 0, 'c3a95edb46f94cbcbfdeb68a2a4eaffd', '2018-07-24 19:09:01', NULL),
+(10, 'farraross@gmail.com', '7MUF4B8F', 1, '2018-06-25 18:19:10', 0, 2, 1, 0, '2209d729e5e04f96825b93560ee0a8f0', '2018-07-25 18:19:10', NULL),
+(11, 'hbgfluxrdigital@gmail.com', '7LXME9OH', 1, '2018-06-25 20:21:59', 0, 2, 1, 0, 'eb4ac42632f549189c59cbfbcd8def6b', '2018-07-25 20:21:59', NULL),
+(12, 'customerservice@intuglo.com', 'H206O0EG', 0, '2018-06-25 20:22:14', 0, 2, 1, 0, '8cdb0a4011b4499dbe47821dcd885868', '2018-07-25 20:22:14', NULL);
+
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO intuglo_logistics.customers (`customer_id`, `login_id`, `customer_name`, `mobile_no`, `country_code`, `business_id`, `address_line_one`, `address_line_two`, `company_name`, `company_registration_no`, `official_email`, `website`, `office_phone`, `office_fax`, `association_club`, `nature_of_business`, `timezone`, `import_export_license`, `business_license`, `business_category`, `tc_id`, `city`, `state`, `postal_code`, `industry_id`) VALUES
+(1, 3, 'Customer', '0104605552', 'MY', 'SB', 'B-8-3A,The Vertical,Bangsar South, Jalan Kerinchi,Malaysia', NULL, 'Siroi Solutions SDN BHD', 'MBFOX10C703', 'customer@gmail.com', 'siroi-solutions.com.my', '+60322420822', NULL, NULL, 'Products and Services', NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(2, 4, 'Filipus Kurniawan', '01115273114', 'MY', 'SB', 'B-8-3A,The Vertical,Bangsar South, Jalan Kerinchi,Malaysia', NULL, 'Siroi Solutions SDN BHD', 'MBFOX10C703', 'alvintan@gmail.com', 'siroi-solutions.com.my', '+60322420822', NULL, NULL, 'Products and Services', NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(3, 5, 'farah', '601126647995', 'MY', 'SB', 'Denai Alam', NULL, 'HBG Fluxr', '0123456-l', 'farahroslan0123@gmail.com', 'www.intuglo.com', '0331223456', NULL, NULL, 'plumbing', NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(4, 6, 'Vence Chong', '1131478286', 'MY', 'SB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(5, 7, 'MD. AMANULLAH', '1123003994', 'MY', 'SB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(6, 10, 'nursyafarah', '1126647995', 'MY', 'SB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(7, 11, 'Vence C.', '1131478286', 'MY', 'SB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL),
+(8, 12, 'farah', '1126647995', 'MY', 'SB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL);
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO intuglo_logistics.suppliers (`supplier_id`, `login_id`, `supplier_name`, `tc_id`, `mobile_no`, `country_code`, `business_id`, `address_line_one`, `address_line_two`, `company_name`, `company_registration_no`, `official_email`, `website`, `office_phone`, `office_fax`, `association_club`, `nature_of_business`, `import_export_license`, `business_license`, `timezone`, `business_category`, `city`, `state`, `postal_code`, `industry_id`) VALUES
+(1, 2, 'kayaba', 2, '0123456789', 'MY', 'MF', '2435, Lorong 68 Taman Ria Sungai Petani', NULL, 'Kayaba Sdn Bhd', 'KSF5894JK', 'kayaba@gmail.com', 'kayaba.com.my', '0123698522', '03456987', NULL, 'Products and Services', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO intuglo_logistics.routes (`port_id_from`,`port_id_to`,`route_id`) VALUES 
+(7,4,2),
+(1,3,3),
+(1,5,4),
+(6,2,5);
+
+INSERT INTO intuglo_logistics.vessel (`vessel_id`,`vessel_no`,`route_id`,`etd`,`eta`,`vessel_name`) VALUES 
+(1,11111,2,'2018-07-01','2018-07-12','SierraLarvitar'),
+(2,11112,3,'2018-07-11','2018-07-13','KarudaServices'),
+(3,1113,4,'2018-07-14','2018-07-16','Siniotanic'),
+(4,1114,5,'2018-07-22','2018-07-29','SnorlaxVessels');
+--
+-- Dumping data for table `quotations`
+--
+
+INSERT INTO intuglo_logistics.quotations (`quotation_id`, `shipment_type_id`, `cargo_transit_duration`, `departure_date`, `arrival_date`, `number_of_transit_ports`, `container_box_size`, `port_id_from`, `port_id_to`, `warehouse_departure_address`, `warehouse_arrival_address`, `incoterm_code`, `shipper_type`, `supplier_login_id`, `custom_broker`, `vessel`, `container_box_count`, `air_space_size`, `air_space_count`, `part_a`, `part_b`, `container_types`, `halal_consolidation`, `halal_unstuffing`, `unstuffing`, `consolidation`, `quotation_status`, `quote_ref_no`, `hs_code_id`, `file_name`,`vessel_id`) VALUES
+('0618_MLAGPEC00002S_AU000004MY_DAP',1,156,'2018-06-28','2018-08-18',1,500.00,7,4,'15 Healey Cct, Huntingwood NSW 2148','No. 21, Jln Feri, Lembaga Pelabuhan Johor, Pasir Gudang, Johor 81700, Malaysia','DAP','I',2,'Imex Shipping Pty Ltd','SeiraLavitar ',2,0.00,0,'12345','23456','high','','','','','ACTIVE','SEASF@8975',9,'test.txt',1),
+('0618_MLAGPEC00002S_MY000001CH_FOB',1,156,'2018-06-29','2018-08-10',5,100.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',5,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT8975',9,NULL,2),
+('0618_MLAGPEC00002S_MY000002CH_FOB',1,200,'2018-06-30','2018-08-15',3,200.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',3,0.00,0,'12345','23456','standard','','','','','APPROVED','FLIGHT9000',9,NULL,2),
+('0618_MLAGPEC00002S_MY000003US_FOB',1,163,'2018-06-30','2018-08-17',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',9,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000010US_FOB',1,163,'2018-07-10','2018-08-17',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',11,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000011US_FOB',1,163,'2018-07-17','2018-08-24',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000012US_FOB',1,163,'2018-07-24','2018-08-31',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',8,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000013US_FOB',1,163,'2018-06-30','2018-08-07',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',8,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000014US_FOB',1,163,'2018-07-10','2018-08-20',1,150.00,1,5,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','29712 Us Highway 19 N, Clearwater, FL 33761','FOB','I',2,'Tropicana Mini Storage','Siniotanic ',9,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT7489',5,NULL,3),
+('0618_MLAGPEC00002S_MY000015CH_FOB',1,156,'2018-06-29','2018-07-06',5,100.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT8975',9,NULL,2),
+('0618_MLAGPEC00002S_MY000016CH_FOB',1,156,'2018-07-06','2018-07-13',5,100.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',8,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT8975',9,NULL,2),
+('0618_MLAGPEC00002S_MY000017CH_FOB',1,156,'2018-07-13','2018-07-20',5,100.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',11,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT8975',9,NULL,2),
+('0618_MLAGPEC00002S_MY000020CH_FOB',1,156,'2018-07-20','2018-08-10',5,100.00,1,3,'No. 8-A, 1st Floor, Jalan 17/23, Seksyen 17, Shah Alam, Selangor 40000 , Malaysia','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','FOB','I',2,'Karuda Services Sdn. Bhd','Pavilion Leeara ',13,0.00,0,'12345','23456','standard','','','','','ACTIVE','FLIGHT8975',9,NULL,2),
+('0618_MLAGPEC00002S_US000005CN_DDP',1,20,'2018-06-27','2018-08-17',0,1250.00,6,2,'8728 Us Highway 19, Port Richey, FL 34668','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','DDP','I',2,'Storage Center Port Richey','Snorlax Vessels ',6,0.00,0,'12345','23456','standard','','','','','APPROVED','SYQ8975ERQ',5,NULL,4),
+('0618_MLAGPEC00002S_US000021CN_DDP',1,20,'2018-06-27','2018-07-17',0,1250.00,6,2,'8728 Us Highway 19, Port Richey, FL 34668','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','DDP','I',2,'Storage Center Port Richey','Snorlax Vessels ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','SYQ8975ERQ',5,NULL,4),
+('0618_MLAGPEC00002S_US000022CN_DDP',1,20,'2018-07-17','2018-07-31',0,1250.00,6,2,'8728 Us Highway 19, Port Richey, FL 34668','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','DDP','I',2,'Storage Center Port Richey','Snorlax Vessels ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','SYQ8975ERQ',5,NULL,4),
+('0618_MLAGPEC00002S_US000023CN_DDP',1,20,'2018-07-31','2018-08-21',0,1250.00,6,2,'8728 Us Highway 19, Port Richey, FL 34668','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','DDP','I',2,'Storage Center Port Richey','Snorlax Vessels ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','SYQ8975ERQ',5,NULL,4),
+('0618_MLAGPEC00002S_US000024CN_DDP',1,20,'2018-08-21','2018-09-04',0,1250.00,6,2,'8728 Us Highway 19, Port Richey, FL 34668','No.157 HAICHAO Road, HUANGPU District, Shanghai, 200011','DDP','I',2,'Storage Center Port Richey','Snorlax Vessels ',10,0.00,0,'12345','23456','standard','','','','','ACTIVE','SYQ8975ERQ',5,NULL,4),
+('0718_MLAGPEC00002S_AU000006MY_DAP',1,156,'2018-06-24','2018-07-08',1,500.00,7,4,'15 Healey Cct, Huntingwood NSW 2148','No. 21, Jln Feri, Lembaga Pelabuhan Johor, Pasir Gudang, Johor 81700, Malaysia','DAP','I',2,'Imex Shipping Pty Ltd','SeiraLavitar ',10,0.00,0,'12345','23456','high','','','','','ACTIVE','SEASF@8975',9,NULL,1),
+('0718_MLAGPEC00002S_AU000007MY_DAP',1,156,'2018-07-29','2018-08-05',1,500.00,7,4,'15 Healey Cct, Huntingwood NSW 2148','No. 21, Jln Feri, Lembaga Pelabuhan Johor, Pasir Gudang, Johor 81700, Malaysia','DAP','I',2,'Imex Shipping Pty Ltd','SeiraLavitar ',6,0.00,0,'12345','23456','high','','','','','ACTIVE','SEASF@8975',9,NULL,1),
+('0718_MLAGPEC00002S_AU000008MY_DAP',1,156,'2018-08-05','2018-08-18',1,500.00,7,4,'15 Healey Cct, Huntingwood NSW 2148','No. 21, Jln Feri, Lembaga Pelabuhan Johor, Pasir Gudang, Johor 81700, Malaysia','DAP','I',2,'Imex Shipping Pty Ltd','SeiraLavitar ',7,0.00,0,'12345','23456','high','','','','','ACTIVE','SEASF@8975',9,NULL,1),
+('0718_MLAGPEC00002S_AU000009MY_DAP',1,156,'2018-08-18','2018-08-25',1,500.00,7,4,'15 Healey Cct, Huntingwood NSW 2148','No. 21, Jln Feri, Lembaga Pelabuhan Johor, Pasir Gudang, Johor 81700, Malaysia','DAP','I',2,'Imex Shipping Pty Ltd','SeiraLavitar ',10,0.00,0,'12345','23456','high','','','','','ACTIVE','SEASF@8975',9,NULL,1);
+
+
+--
+-- Dumping data for table `containers`
+--
+
+INSERT INTO intuglo_logistics.containers (`container_id`, `container_no`, `quotation_id`, `total_cbm`, `remaining_cbm`, `halal_status`, `number_people_sharing`, `percentage_full`, `hs_code_id`) VALUES
+(1, 0, '0618_MLAGPEC00002S_MY000001CH_FOB', 100, 50, 'H', 1, '9.99', 9),
+(2, 0, '0618_MLAGPEC00002S_MY000001CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(3, 0, '0618_MLAGPEC00002S_MY000001CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(4, 0, '0618_MLAGPEC00002S_MY000001CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(5, 0, '0618_MLAGPEC00002S_MY000001CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(6, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(7, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(8, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(9, 0, '0618_MLAGPEC00002S_AU000004MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(10, 0, '0618_MLAGPEC00002S_AU000004MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(11, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(12, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(13, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(14, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(15, 0, '0618_MLAGPEC00002S_MY000003US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(16, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(17, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(18, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(19, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(20, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(21, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(22, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(23, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(24, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(25, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(26, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(27, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(28, 0, '0618_MLAGPEC00002S_MY000010US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(29, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(30, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(31, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(32, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(33, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(34, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(35, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(36, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(37, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(38, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(39, 0, '0618_MLAGPEC00002S_MY000011US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(40, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(41, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(42, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(43, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(44, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(45, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(46, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(47, 0, '0618_MLAGPEC00002S_MY000012US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(48, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(49, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(50, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(51, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(52, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(53, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(54, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(55, 0, '0618_MLAGPEC00002S_MY000013US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(56, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(57, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(58, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(59, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(60, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'H', 0, '0.00', 5),
+(61, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(62, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(63, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(64, 0, '0618_MLAGPEC00002S_MY000014US_FOB', 150, 150, 'N', 0, '0.00', 5),
+(65, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(66, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(67, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(68, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(69, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(70, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(71, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(72, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(73, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(74, 0, '0618_MLAGPEC00002S_MY000015CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(75, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(76, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(77, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(78, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(79, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(80, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(81, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(82, 0, '0618_MLAGPEC00002S_MY000016CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(83, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(84, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(85, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(86, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(87, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(88, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(89, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(90, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(91, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(92, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(93, 0, '0618_MLAGPEC00002S_MY000017CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(94 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(95 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(96 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(97 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(98 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(99 , 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'N', 0, '0.00', 9),
+(100, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(101, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(102, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(103, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(104, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(105, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(106, 0, '0618_MLAGPEC00002S_MY000020CH_FOB', 100, 100, 'H', 0, '0.00', 9),
+(107 , 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(108 , 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(109 , 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(110, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(111, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(112, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'U', 0, '0.00', 9),
+(113, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'U', 0, '0.00', 9),
+(114, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'U', 0, '0.00', 9),
+(115, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(116, 0, '0718_MLAGPEC00002S_AU000006MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(117, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(118, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(119, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(120, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(121, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(122, 0, '0718_MLAGPEC00002S_AU000007MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(123, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(124, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(125, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'U', 0, '0.00', 9),
+(126, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(127, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(128, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(129, 0, '0718_MLAGPEC00002S_AU000008MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(130, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(131, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(132, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(133, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(134, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'H', 0, '0.00', 9),
+(135, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(136, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(137, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(138, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(139, 0, '0718_MLAGPEC00002S_AU000009MY_DAP', 500, 500, 'N', 0, '0.00', 9),
+(140, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(141, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(142, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(143, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(144, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(145, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(146, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(147, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(148, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(149, 0, '0618_MLAGPEC00002S_US000024CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(150, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(151, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(152, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(153, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(154, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(155, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(156, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(157, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(158, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(159, 0, '0618_MLAGPEC00002S_US000021CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(160, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(161, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(162, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(163, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(164, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(165, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(166, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(167, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(168, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(169, 0, '0618_MLAGPEC00002S_US000022CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(170, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(171, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(172, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(173, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(174, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(175, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(176, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(177, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'H', 0, '0.00', 5),
+(178, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'N', 0, '0.00', 5),
+(179, 0, '0618_MLAGPEC00002S_US000023CN_DDP', 1250, 1250, 'H', 0, '0.00', 5);
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO intuglo_logistics.orders (`order_id`, `booking_date`, `confirmation_date`, `weight`, `cbm`, `booking_price_a`, `booking_price_b`, `booking_price_gst`, `booking_price_total`, `closing_price_a`, `closing_price_b`, `closing_price_gst`, `closing_price_total`, `order_status_code`, `hs_code_id`, `login_id`, `tc_id`, `quotation_id`, `consignor_company_name`, `consignor_contact_person`, `consignor_contact_number`, `consignor_email`, `consignor_delivery_address`, `consignee_company_name`, `consignee_contact_person`, `consignee_contact_number`, `consignee_email`, `consignee_delivery_address`, `four_digit_hs_code`, `cargo_description`, `consignor_merchandise_value`, `consignee_merchandise_value`, `quantity`, `tracking_number`, `consignor_commercial_value`, `consignee_commercial_value`, `consignor_billing_address`, `consignee_billing_address`, `logistic_provider`, `bill_of_loading`, `packing_details`, `consignor_shipper`, `consignee_shipper`, `custom_broker`, `button_code`, `order_pdf_url`, `container_id`, `halal_status`, `duties_and_tax`) VALUES
+('MY000001CH_MLMCTXS00001C_0518', '2018-06-30', '2018-07-10', 20, 50, '200.00', '200.00', '23.00', '200.00', '200.00', '200.00', '23.00', '223.00', 'ORDERPLACED', 9, 3, 2, '0618_MLAGPEC00002S_MY000001CH_FOB', 'Tiger-Smart SDN BHD', '', '', 'tigerenterprice@yahoo.com', '', '', '', '', '', '', '', '', 0, 0, 1, '0', 0, 0, '0', '0', '0', '0', '0', '0', '0', '0', 8388607, 'http://162.251.84.19:3000/user/booking.html', 1, 'H', '0.00');
+

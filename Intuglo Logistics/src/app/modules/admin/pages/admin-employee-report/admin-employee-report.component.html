@@ -1,0 +1,15 @@
+<admin-navbar (controlSideBar)="receiveDataFromHeader($event)"></admin-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+  <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+    <admin-left-menu [sideBar]="isSideBarOpen" [fromEmployeeReport]='isOpen'></admin-left-menu>
+  </ng-sidebar>
+  <div class="dashboard-layout" ng-sidebar-content>
+    <h2>Employee Worksheet Report</h2>
+    <div class="content-area">
+
+      <admin-employee-list></admin-employee-list>
+
+    </div>
+  </div>
+</ng-sidebar-container>

@@ -1,0 +1,51 @@
+<ng-template #customLoadingTemplate>
+  <div class="custom-class">
+    <h3 class="template_message">
+        Please wait a moment. Personal data is being decrypted
+    </h3>
+  </div>
+</ng-template>
+<!-- [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }" -->
+<!-- [config]="{animationType: ngxLoadingAnimationTypes.circle, primaryColour: primaryColour, secondaryColour: secondaryColour, backdropBorderRadius: '3px'}" -->
+<ngx-loading [show]="loading" 
+
+  [template]="customLoadingTemplate"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Users</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" [routerLink]="['../create']">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW</span>
+      <span class="_b">USER PROFILE</span>
+    </div>
+  </div>
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="">Department</option></select>
+    <!-- <select><option value="">Role</option></select>
+    <select><option value="">Active / Inactive / Expired</option></select> -->
+    <!-- <select><option value="">Role</option></select>
+    <input class="_search" type="text" (keyup)="onSearch($event.target.value)" placeholder="Search User..."> -->
+    <form [formGroup]="searchUserForm" (submit)="onSearch(searchUserForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search User...">
+      <span (click)="onSearch(_search.value)" class="_search-icon"></span>
+    </div>
+    </form>
+  </div>
+  <div class="_tableData">
+      <app-simple-table 
+        [rows]="rows" 
+        [columns]="columns" 
+        [page]="page" 
+        [colHead]="colHead"
+        [actions]="actions"
+        [popupMessage] ="popupMessage"
+        [isCollapse]="isCollapse"
+        (emitEventChange)="receiveEvent($event)"
+        [messages]="messages">
+      </app-simple-table>
+  </div>
+</div>

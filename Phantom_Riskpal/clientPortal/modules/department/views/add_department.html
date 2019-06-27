@@ -1,0 +1,130 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getUsers();getUsers_trackconnect();getTemplates();">
+    <h1>
+        Department
+        <!-- <small>New Contact</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Department</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <h3 class="box-title"> Add Department
+                    </h3>
+                </div>
+                <form role="form" name="departmentForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                           <div ng-if="showLoader" class="col-lg-7 pull-right">
+                                <div loader-css="ball-pulse"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <label class="col-sm-12 text-left">Department Name</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="department_name" name="department_name" placeholder="Enter Department Name" required
+                                            ng-model="department.department_name"  autocomplete="off"
+                                            maxlength="30" />
+                                        <span class="text-danger" ng-show="departmentForm.department_name.$dirty &&  departmentForm.department_name.$error.required">Department Name is required</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5" ng-if="super_admin">
+                                        <label class="col-sm-12 ">Client</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" name="client" id="client" ng-model="client" ng-change="getAllOtherData(client);" required>
+                                                <option ng-selected="true" value="0">Select Client</option>
+                                                <option ng-repeat="option in clients" value="{{option._id}}">{{option.company_name}}</option>
+                                            </select>
+                                            <span class="text-danger" ng-show="departmentForm.finalam.$dirty &&  departmentForm.finalam.$error.required">This field is required</span>
+                                        </div>
+                                    </div>
+                                <div class="col-sm-5">
+                                    <label class="col-sm-12 ">Approving Manager</label>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" name="finalam" id="finalam" ng-model="department.finalam"   >
+                                            <option ng-selected="true" value="0">Select User</option>
+                                            <option ng-repeat="option in userlist_trackconnect" value="{{option._id}}">{{option.firstname}} {{option.lastname}}</option>
+                                        </select>
+                                        <span class="text-danger" ng-show="departmentForm.finalam.$dirty &&  departmentForm.finalam.$error.required">This field is required</span>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-5">
+                                <label class="col-sm-12 text-left">Additional Approving Manager/s</label>
+                                <div class="col-sm-12">
+
+                                      <div isteven-multi-select input-model="userlist_trackconnect" output-model="department.alter_finalam" button-label="firstname lastname"
+                                      item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                      data-placement="top" title="Select User" data-trigger="hover" tabindex="6" name="alter_finalam">
+                                  </div>
+                                <span class="text-danger" ng-show="departmentForm.alter_finalam.$dirty &&  departmentForm.alter_finalam.$error.required">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="col-sm-12 text-left">Administrator</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" name="basic_admin" id="basic_admin" ng-model="department.basic_admin" >
+                                    <option ng-selected="true" value="0">Select User</option>
+                                    <option ng-repeat="option in userlist_trackconnect" value="{{option._id}}">{{option.firstname}} {{option.lastname}}</option>
+                                  </select>
+                            <span class="text-danger" ng-show="departmentForm.basic_admin.$dirty &&  departmentForm.basic_admin.$error.required">Basic admin is required</span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="col-sm-5">
+                            <label class="col-sm-12 text-left">Assign Risk Assessment Templates</label>
+                            <div class="col-sm-12">
+
+                                  <div isteven-multi-select input-model="templatelist" output-model="department.templatelist" button-label="ra_name"
+                                  item-label="ra_name" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                  data-placement="top" title="Select Template" data-trigger="hover" tabindex="6" name="template">
+                              </div>
+                            <span class="text-danger" ng-show="departmentForm.alter_finalam.$dirty &&  departmentForm.alter_finalam.$error.required">This field is required</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <label class="col-sm-12 text-left">Assign Users</label>
+                        <div class="col-sm-12">
+                                <div isteven-multi-select input-model="userlist" output-model="department.newusers" button-label="firstname lastname"
+                                item-label="firstname lastname" output-properties="_id" tick-property="ticked" data-toggle="tooltip"
+                                data-placement="top" title="Select User" data-trigger="hover" tabindex="6" name="newuser">
+                            </div>
+
+                            </div>
+                </div>
+                </div>
+                    <div class="form-group col-sm-12">
+
+                           <div class="col-sm-5">
+                        </div>
+                    </div>
+                    <div class="" style="clear:both;" ng-show="messageError">
+                            <div class="form-group col-sm-12">
+                            <div class="alert alert-danger" >
+                                   <div ng-bind-html="messageError" ></div>
+                            </div>
+                            </div>
+                        </div>
+            <div class="form-group col-sm-6" style="margin-top: 20px;">
+                <div class="pull-right box-tools">
+                    <button ng-disabled="departmentForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="saveDepartment(department, client);">Create Department</button>
+                </div>
+
+            </div>
+    </div>
+    <!-- /.box-body -->
+    </form>
+    </div>
+    </section>
+    </div>
+</section>

@@ -1,0 +1,72 @@
+<div id="firstscreen" class="main-banner relative">
+  <img class="banner-interactive banner-interactive-fadein" src="../../../../../assets/img/banner-interactive.svg" alt="banner-interactive">
+  <img class="vessel-interactive vessel-interactive-slidein" src="../../../../../assets/img/vessel-interactive.svg" alt="vessel-interactive">
+  <img class="truck-interactive truck-interactive-slidein" src="../../../../../assets/img/truck-interactive.svg" alt="truck-interactive">
+  <navbar></navbar>
+  <div id="searchformcontainer" class="centered90 relative">
+    <banner-ads></banner-ads>
+    <div id="shippingform_container">
+      <searchbox></searchbox>
+    </div>
+  </div>
+  <div>
+    <div class="menu-option">
+      <div class="left menu-option-button" (click)="SlideNavigation(true)"></div>
+      <div class="right menu-options">
+        <span class="option-left"></span>
+        <span class="option-count">1/8</span>
+        <span class="option-right"></span>
+      </div>
+    </div>
+    <div class="slide-menu-wrapper slide-navigation-slidein" *ngIf="slideNav">
+      <div class="menu-option-close" (click)="SlideNavigation(false)" [ngClass]="{active: slideNav}"></div>
+      <div class="slided-menu-option">
+        <div class="menu-grid">
+          <img alt="" src="../../../../../assets/img/icon-logistic.svg">
+          <p>Logistics</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-warehouse.svg">
+            <p>Warehouse</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-qc-for-hire.svg">
+            <p>QC For Hire</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-production-management.svg">
+            <p>Production <br> Management</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-online-exibition.svg">
+            <p>24/7 Online <br> Exhibition</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-e-procurement.svg">
+            <p>E-Procurement</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-market-validation.svg">
+            <p>Market <br> Validation</p>
+        </div>
+        <div class="menu-grid">
+            <img alt="" src="../../../../../assets/img/icon-project-management.svg">
+            <p>Project <br> Management</p>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<our-services></our-services>
+<!-- <partners></partners> -->
+<div id="main_content" class="main-container">
+  <div class="centered90 content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<why-intuglo></why-intuglo>
+<testimonials></testimonials>
+<contact></contact>
+<main-footer></main-footer>
+ 

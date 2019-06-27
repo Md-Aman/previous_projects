@@ -1,0 +1,82 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Department
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Department list</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllDepartment();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a ui-sref="main.add_department">
+                            <button class="btn btn-sm btn-info">New Department</button>
+                        </a>
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-building-o"></i>
+                    <h3 class="box-title">Departments</h3>
+                    <div class="input-group input-group-sm col-lg-4 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="keyword" autocomplete="false" ng-change="getAllDepartment(keyword)">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="department in $data">
+                            <td data-title="'Department Name'" sortable="'department_name'">
+                              <span ng-bind-html="department.department_name"></span>
+                            </td>
+
+                            <td data-title="'Final Approving Manager'">
+                                {{department.final_approving_manager.firstname}}</td>
+
+
+
+
+
+
+                              <td data-title="'Basic Admin'">{{department.basic_admin.firstname}}</td>
+
+
+                             <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(department.status,department._id)"><span
+                                 ng-class="{'label label-success': department.status == 'Active' , 'label label-danger': department.status == 'Inactive'}"
+                                >{{department.status}}</span></a>
+                            </td>
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.update_department({department_id:department._id})">
+                                    Edit
+                                    <!--<i class="fa fa-pencil" aria-hidden="true" title="Edit department"></i>-->
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteDepartment(department._id)">
+                                    Delete
+                                    <!--<i class="fa fa-trash-o" aria-hidden="true" title="Delete department"></i>-->
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="departmentData.length == 0">
+                            <td colspan="12" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

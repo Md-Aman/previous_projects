@@ -1,0 +1,29 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true}"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Pending Risk Assessments</h2>
+</div>
+<div class="subSet _table">
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="1">Added by</option></select>
+    <select><option value="1">All dates</option></select>
+    <form [formGroup]="searchRaForm" (submit)="searchRa(searchRaForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Assessments...">
+      <span (click)="searchRa(_search.value)" class="_search-icon"></span>
+    </div>
+  </form>
+  </div>
+  <div class="_tableData">
+    <app-simple-table 
+    [rows]="rows"
+    [columns]="columns" 
+    [actions]="actions"
+    [page]="page" 
+    [hideEditIcon]="hideEditIcon"
+    (emitEventChange)="receiveEvent($event)"
+    [messages]="messages">
+    </app-simple-table>
+  </div>
+</div>

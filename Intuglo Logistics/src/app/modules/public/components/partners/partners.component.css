@@ -1,0 +1,88 @@
+#brands{
+    background: #F8F9FC;
+    padding-top: 30px;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px; }
+    .row:before, .row:after {
+      content: " ";
+      display: table; }
+    .row:after {
+      clear: both; }
+/* repeated frm app */
+.container {
+margin-right: auto;
+margin-left: auto;
+padding-left: 15px;
+padding-right: 15px; }
+.container:before, .container:after {
+    content: " ";
+    display: table; }
+.container:after {
+    clear: both; }
+@media (min-width: 768px) {
+    .container {
+    width: 760px; } }
+@media (min-width: 992px) {
+    .container {
+    width: 980px; } }
+@media (min-width: 1200px) {
+    .container {
+    width: 1180px; } }
+
+#brands .progressive-image-main 
+{
+    width: auto ;
+}
+.oversize img{
+    width: 100%  !important;
+}
+.small img{
+    width: 34px  !important;
+    position: absolute;
+    left: 50%;
+    margin-left: -17px;
+}
+@media (max-width: 720px) {
+.oversize .progressive-image-main 
+    {
+        width: 100px !important;
+        position: absolute;
+        left: 50%;
+        margin-left: -50px ;
+}
+.small img{
+        width: 34px  !important;
+        position: absolute;
+        left: 50%;
+        margin-left: -17px;
+}
+.progressive-image-wrapper{
+        padding-bottom: 10% !important;
+}
+.medium img{
+        width: 80px  !important;
+        position: absolute;
+        left: 50%;
+        margin-left: -40px;
+}
+}
+.supplierLogo .progressive-image-main{
+	height: 100px;
+	width: 100px ;
+	border-top-left-radius: 3px !important;
+}
+.internal_add .progressive-image-main
+{
+	position: relative !important;
+	height: 100px;
+	width: 100%;
+}
+.external_add .progressive-image-main
+{
+	position: relative !important;
+	height: 60px;
+	width: 100%;
+}
+        

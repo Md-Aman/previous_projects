@@ -1,0 +1,259 @@
+
+<div [ngSwitch]="step" class="card-action-button">
+
+    <div>
+        <div *ngSwitchCase="'order'">
+            <span *ngIf="isCheckedCheckBox">
+                <button (click)="clickViewBooking()" type="button" class="btnDisplayed">View Booking </button>
+                <button (click)="buttonDownloadPDF();DownloadBookingForm.open()" type="button" class="btnDisplayed">Download Booking Form</button>
+            </span>
+            <span *ngIf="isCheckedMasterCheckBox">
+                <button (click)="AssignContainer.open()" type="button" class="btnDisplayed">Assign Container #</button>
+                <button (click)="downloadOrderListCSV();ButtonDownloadOrderListCSV.open()" type="button" class="btnDisplayed">Download Order List CSV</button>
+            </span>
+        </div>
+        <div *ngSwitchCase="'cargo'">
+            <span *ngIf="isCheckedCheckBox">
+                <button  (click)="ChangeStatusToCargoPickedUp();CargoPickedUp.open()" type="button" class="btnDisplayed">Cargo Picked up</button>
+                <button  (click)="ChangeStatusToCargoReceived();CargoReceived.open()" type="button" class="btnDisplayed">Cargo Received</button>
+            </span>
+            <span *ngIf="isCheckedMasterCheckBox">
+                <button  (click)="ChangeStatusToContainerSealed();ContainerSealed.open()" type="button" class="btnDisplayed">Container Sealed</button>
+                <button  (click)="ChangeStatusToCargoShipped();CargoShipped.open()" type="button" class="btnDisplayed">Cargo Shipped</button>
+                <button  (click)="ChangeStatusToCargoDelivered();CargoDelivered.open()" type="button" class="btnDisplayed">Cargo Delivered</button>
+                <button  (click)="ChangeStatusToShipmentCompleted();ShipmentCompleted.open()" type="button" class="btn-link btnDisplayed">Shipment Completed</button>
+            </span>
+        </div>
+        <div *ngSwitchCase="'buyer'">
+            <span *ngIf="isCheckedCheckBox">
+                <button (click)="downloadDocuments(); BuyerDownload.open()" type="button" class="btnDisplayed">Download</button>
+            </span>
+            <span *ngIf="isCheckedMasterCheckBox">
+                <p class="no-message">Note: No action available for the selection </p>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<!-- Download Booking form -->
+<modal #DownloadBookingForm [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Download Booking Form</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p *ngIf="!isPopup" class="popup-body">Please wait, Your booking form is downloading</p>
+        <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Do you want to continue?</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();DownloadBookingForm.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();DownloadBookingForm.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();DownloadBookingForm.close()">No</button>
+    </modal-footer>
+</modal>
+<!-- Assign Container -->
+<modal #AssignContainer [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Assign Container</h2>
+    </modal-header>
+    <modal-content>
+        <label for="password" class="text">Container Number</label>
+        <input type="string" name="number" class="form-control input-sm input-field" [(ngModel)]="container_no" value={{container_no}}>
+    </modal-content>
+    <modal-footer>
+        <div class="row">
+            <button class="btn  btn-flat change" (click)="AssignContainer.close()">Back
+            </button>
+            <button class="btn  btn-flat change" (click)="updateContainerNo();AssignContainer.close()">Update
+            </button>
+
+        </div>
+    </modal-footer>
+</modal>
+
+<!-- Download Order List CSV -->
+<modal #ButtonDownloadOrderListCSV [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Download Order List CSV</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p *ngIf="!isPopup" class="popup-body">Please wait, CSV file is downloading</p>
+        <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Please login and try again.</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();ButtonDownloadOrderListCSV.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();ButtonDownloadOrderListCSV.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();ButtonDownloadOrderListCSV.close()">No</button>
+    </modal-footer>
+</modal>
+<!-- Upload Order List CSV -->
+<!-- <modal #ButtonUploadOrderListCSV [closeOnOutsideClick]="false">
+        <modal-header>
+            <h2 class="centered popup-header">Upload Order List CSV</h2>
+        </modal-header>
+        <modal-content>
+            <div>
+                <input type="file" class="inputfile" accept=".csv" (change)="convertCsvFile($event)">
+            </div>
+        </modal-content>
+        <modal-footer>
+            <button class="btn btn-primary" (click)="uploadOrderListCSV(); ButtonUploadOrderListCSV.close(); fileUploadStatus.open()">Upload</button>
+        </modal-footer>
+    </modal> -->
+
+<!-- <modal #fileUploadStatus [closeOnOutsideClick]="false">
+        <modal-header>
+            <h2 class="centered popup-header">Upload Order List CSV</h2>
+        </modal-header>
+        <modal-content>
+            <div *ngIf="fileUpLoadStatus; else error" class="text-center popup-message-upload-csv">
+                {{message}}
+            </div>
+            <ng-template #error class="centered  popup-message-upload-csv"> Something wrong happned. Please refresh your browser and try again </ng-template>
+    
+        </modal-content>
+        <modal-footer>
+    
+        </modal-footer>
+    </modal> -->
+
+<!-- Cargo Picked up -->
+<modal #CargoPickedUp [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Cargo Picked up</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();CargoPickedUp.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();CargoPickedUp.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();CargoPickedUp.close()">No</button>
+    </modal-footer>
+</modal>
+<!-- Cargo Received -->
+<modal #CargoReceived [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Cargo Received</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();CargoReceived.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();CargoReceived.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();CargoReceived.close()">No</button>
+    </modal-footer>
+</modal>
+<!-- Container Sealed -->
+<modal #ContainerSealed [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Container Sealed</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();ContainerSealed.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();ContainerSealed.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();ContainerSealed.close()">No</button>
+    </modal-footer>
+</modal>
+<!-- Cargo Shipped -->
+<modal #CargoShipped [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Cargo Shipped</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();CargoShipped.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();CargoShipped.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();CargoShipped.close()">No</button>
+    </modal-footer>
+</modal>
+
+
+<!-- Cargo Delivered -->
+<modal #CargoDelivered [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Cargo Delivered</h2>
+    </modal-header>
+    <modal-content>
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();CargoDelivered.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();CargoDelivered.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();CargoDelivered.close()">No</button>
+    </modal-footer>
+</modal>
+
+<!-- Shipment Completed -->
+<modal #ShipmentCompleted [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Shipment Completed</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();ShipmentCompleted.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();ShipmentCompleted.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();ShipmentCompleted.close()">No</button>
+    </modal-footer>
+</modal>
+
+<!-- Packing Download -->
+<!-- <modal #PackingDownload [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Download(P)</h2>
+    </modal-header>
+    <modal-content>
+        <h3 style="text-align:center">Under Development</h3>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="closePopup();PackingDownload.close()">Close</button>
+    </modal-footer>
+</modal> -->
+<!-- Receive Duties and Tax -->
+<modal #ReceiveDutiesTax [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Receive Duties and Tax</h2>
+    </modal-header>
+    <modal-content>
+        <h3 style="text-align:center">Under Development</h3>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="ReceiveDutiesTax.close()">Close</button>
+    </modal-footer>
+</modal>
+<!-- Custom Declaration Done -->
+<modal #CustomDeclarationDone [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Custom Declaration Done</h2>
+    </modal-header>
+    <modal-content>
+        <h3 style="text-align:center">Under Development</h3>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="CustomDeclarationDone.close()">Close</button>
+    </modal-footer>
+</modal>
+<!-- Buyer Download -->
+<modal #BuyerDownload [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 class="centered popup-header">Download</h2>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{display_message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn btn-primary" (click)="closePopup();BuyerDownload.close()">Close</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="openLoginAgainModal();BuyerDownload.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn btn-primary" (click)="destroyAllSession();BuyerDownload.close()">No</button>
+    </modal-footer>
+</modal>

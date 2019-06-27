@@ -1,0 +1,150 @@
+<div class="signup" *ngIf="registrationPage">
+	<span (click)="onCloseCancel()" class="cross"></span>
+	<h2 class="title">Get started for free today</h2>
+	<form [formGroup]="form" (validSubmit)="createSignup()">
+		<div class="form-group">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label class="label">First and Last Name</label>
+					<input type="text" name="name" placeholder="e.g. John doe" [(ngModel)]="name" class="form-control with" formControlName="Name">
+				</div>
+				<div class="form-group col-md-6">
+					<label class="label">Email Address</label>
+					<input type="url" name="email" placeholder="e.g. customer@gmail.com" [(ngModel)]="email" class="form-control with" (blur)="checkDuplicateEmail()"
+					 formControlName="Email">
+					<span *ngIf="showDuplicateEmailErrorMessage" class="email-exist"> Email address already exists.</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label class="label">Phone Number</label>
+					<input type="string"  name="phoneNumber" placeholder="e.g. +60123456789" [(ngModel)]="phoneNumber" class="form-control with"
+					 formControlName="PhoneNumber">
+				</div>
+				<div class="form-group col-md-6">
+					<label class="label">Industry I am in</label>
+					<!-- (change)="onSelectIndustry($event.target.value)" -->
+					<select class="form-control with" formControlName="Industry" [(ngModel)]="selectedIndustryId">
+						<option *ngFor="let industry of industries" value={{industry.industry_id}}>{{industry.industry_name}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label class="label">Country</label>
+					<select class="form-control with" [(ngModel)]="selectedCountryCode" formControlName="Country">
+						<option *ngFor="let country of countries" [ngValue]="country.country_code">{{country.country_name}}</option>
+					</select>
+				</div>
+				<div class="form-group col-md-6">
+					<label class="label">Business I am in</label>
+					<select class="form-control with" [(ngModel)]="selectedBusinessID" formControlName="Business">
+						<option *ngFor="let business of businesses" [ngValue]="business.business_id">{{business.business_name}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<h2 class="paragraph-platform">Platform I want to sign up for</h2>
+			</div>
+
+			<div class="terms-condition-table">
+				<table class="checkbox-list">
+					<tbody>
+						<tr>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style" [checked]= "true" disabled></mat-checkbox> 
+									<span>Logistic Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>Warehouse Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>QC for Hire Solution </span>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>Production Management Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>Omni-Channel Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>24/7 Showcase Solution</span>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>
+								<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>E-Procument Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>Market Validation Solution </span>
+								</label>
+							</td>
+							<td>
+								<label>
+									<mat-checkbox class="checkbox-style"></mat-checkbox>
+									<span>Project Management Solution </span>
+								</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Value of hidden field will be assigned from ts file based on user email -->
+		<input type="hidden" [(ngModel)]="checkEmail" formControlName="CheckEmail">
+
+
+		<div class="form-group">
+			<!-- <h2 class="title">Terms and conditions</h2>
+			<div class="scrollbar scrollbar-warning">
+				<div>{{TermsConditionsText}}</div>
+			</div> -->
+			<label class="terms-condition">
+				<mat-checkbox class="checkbox-style" (change)="statusAgreed()"></mat-checkbox>
+				 I agree with the 
+				 <a routerLink="/terms-and-condition" [queryParams]="{page: 'signup'}" 
+				 	target="_blank">terms and condition</a>
+			</label>
+		</div>
+		<div class="from-group">
+			<button [ngClass]="{'disabled' : !isAgreed}" [disabled]="!isAgreed" class="register-button">Register me</button>
+			<span class="cancel-button" (click)="onCloseCancel()">Cancel</span>
+		</div>
+	</form>
+</div>
+
+<div *ngIf="isSuccesssfulRegistration" class="registration">
+	<span (click)="onCloseCancel()" class="cross"></span>
+	<h2>Registration Completed!</h2>
+	<div class="registration-completed">Registration successfully completed.</div>
+	<p>Registration email sent to <span>{{ email }}</span> Open this email to finish the registration.</p>
+	<p>If you don't see this email in your box within 15 minutes, look for it in your junk mail folder. If you find it there, please mark the email as "Not Junk".</p>	
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

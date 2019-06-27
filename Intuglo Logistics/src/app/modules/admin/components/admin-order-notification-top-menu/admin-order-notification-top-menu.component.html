@@ -1,0 +1,19 @@
+
+  <div class="row">
+      <div class="col-md-12">
+          <label id="form-title">notification</label>
+      </div>
+  </div>
+  
+  <div class="top-menu-area">
+      <ul class="top-menu-list">
+        <li class="btn tab" (click) = "shareDataToParentBooking()" tabindex="step"  [ngClass]="{tabselected  : stepOne}" (click)="tabBooking()" >
+          Booking</li>
+        <li class="btn tab" (click) = "shareDataToParentCargo()" tabindex="step"  [ngClass]="{tabselected : stepTwo}" (click)="tabCargo()">
+          Cargo</li>
+        <li class="btn tab" (click) = "shareDataToParentPayment()" tabindex="step"  [ngClass]="{tabselected : stepThree}" (click)="tabPayment()">
+          Payment</li>
+        <li class="btn tab" (click) = "shareDataToParentCustom()" tabindex="step" [ngClass]="{tabselected : stepFour}" (click)="tabCustom()">
+          Custom</li>
+      </ul>
+    </div>

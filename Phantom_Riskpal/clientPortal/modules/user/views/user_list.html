@@ -1,0 +1,114 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        User
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">User list</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllUser();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a ui-sref="main.add_user">
+                            <button class="btn btn-sm btn-info">New User</button>
+                        </a>
+                         <a  class="btn btn-sm btn-info" data-toggle="modal" data-target="#csvModal" accept=".csv"  ng-disabled="formEnabled">Import CSV</a>
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-users"></i>
+                    <h3 class="box-title">Users</h3>
+                    <div class="input-group input-group-sm col-lg-4 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by name"
+                            ng-model="keyword" autocomplete="false" ng-change="getAllUser(keyword)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="user in $data">
+                            <td data-title="'First Name'" sortable="'name'">{{user.firstname}}</td>
+                             <td data-title="'Last Name'" sortable="'name'">{{user.lastname}}</td>
+                            <td data-title="'Email'" sortable="'email'">{{user.email}}</td>
+                            <td data-title="'Client'" sortable="'mobile'">{{user.client_id.company_name}}</td>
+                            <td data-title="'Role'" sortable="'role'">{{user.roleId.group_name}}
+                                
+                            </td>
+           
+                           
+                            <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(user.status,user._id)"><span 
+                                 ng-class="{'label label-success': user.status == 'Active' , 'label label-danger': user.status == 'Inactive'}"   
+                                >{{user.status}}</span></a>
+                            </td>
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.update_user({user_id:user._id})">
+                                    Edit
+                                    <!--<i class="fa fa-pencil" aria-hidden="true" title="Edit approving manager"></i>-->
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteUsers(user._id)">
+                                    Delete
+                                    <!--<i class="fa fa-trash-o" aria-hidden="true" title="Delete Approving Manager"></i>-->
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="UserData.length == 0">
+                            <td colspan="7" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->
+<div class="modal fade" id="csvModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">Import Users data  (Using CSV File)</h4>
+            </div>
+            <div class="modal-body">
+                    <div ng-if="showLoader" class="col-lg-7 pull-right">
+                            <div loader-css="ball-pulse"></div>
+                          </div>
+                <h3>Importing User data can done using CSV file</h3>
+                <h3>Instruction</h3>
+                <ul>
+                    <li>File format should be in csv only</li>
+                    <li>Don't put , (comma) between any filed.</li>
+                    <li>email field should be unique.</li>
+                    <li>all fields are mandatory.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <form class="form-horizontal" name="importForm" ng-submit="importUser(myFile)" role="form" novalidate>
+                <div class="col-sm-12">
+                <div class="col-sm-6" >
+                <input class="btn btn-primary pull-left" type="file" title="Choose File" name="file" id="file" file-model="myFile" ng-model='file' />
+                </div>
+                <div class="col-sm-6">
+                <button ng-disabled="!myFile" class="btn btn-primary pull-right">Upload csv</button>
+                    
+                </div>
+             </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>

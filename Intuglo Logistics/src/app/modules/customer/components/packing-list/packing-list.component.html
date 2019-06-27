@@ -1,0 +1,215 @@
+<!-- <div class="text-right">
+  <p (click)="onCloseCancel()" class="glyphicon glyphicon-remove"></p>
+</div>
+<p class="h3 text-center">Quotation Details</p>
+<hr>
+<div class="container">
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Exporter/Consignor:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-6">
+      <label>Importer/Consignee:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Consignor Address:</label>
+      <textarea class="form-control input-sm"></textarea>
+    </div>
+    <div class="col-md-6">
+      <label>Consignee Address:</label>
+      <textarea class="form-control input-sm"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-3">
+      <label>Invoice No:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Date:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Incoterms:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Payment Terms:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-3">
+      <label>Type of Shipment:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Voyage Number:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Final Destination:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Mode of Transportation:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Ship From Address:</label>
+      <textarea class="form-control input-sm"></textarea>
+    </div>
+    <div class="col-md-6">
+      <label>Ship To Address:</label>
+      <textarea class="form-control input-sm"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Port/Terminal of Loading:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-6">
+      <label>Port/Terminal of Discharge:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Shipment Number:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-6">
+      <label>Container Number:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Country of Origin of Goods:</label>
+      <select class="form-control input-sm">
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label>Seal Number:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Carrier:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-6">
+      <label>Ultimate Consignee Address:</label>
+      <textarea class="form-control input-sm"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Bill of Loading Number:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>HWB:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>MWB:</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-3">
+      <label>Total PKGs (cartons):</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Total Pieces (Pallets):</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Total Gross Weight (KGs):</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-3">
+      <label>Total Net Weight (KGs):</label>
+      <input type="text" class="form-control input-sm">
+    </div>
+  </div>
+
+  <div>
+    <table border="1">
+      <tr>
+        <th>Material Number</th>
+        <th>Description of Goods</th>
+        <th>HS Code</th>
+        <th>Quantity (PKGs)</th>
+        <th>Gross Weight (KGs)</th>
+        <th>Net Weight (KGs)</th>
+        <th>Measurement (M
+          <sup>3</sup>)</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="3">Total This Page</td>
+        <td>Sum from Qty</td>
+        <td>Sum from gross</td>
+        <td>sum from net Weight</td>
+        <td>sum from Measurement</td>
+      </tr>
+      <tr>
+        <td colspan="3">Consignment Total</td>
+        <td>Sum from Qty</td>
+        <td>Sum from gross</td>
+        <td>sum from net Weight</td>
+        <td>sum from Measurement</td>
+      </tr>
+      <tr>
+        <th rowspan="4" colspan="3">Additional Information:
+          <input type="text" class="form-control input-sm">
+        </th>
+        <td colspan="4">Place and Date of Issue:
+          <input type="text" class="form-control input-sm">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Signatory Company:
+          <input type="text" class="form-control input-sm">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Name of Authorised Signatory:
+          <input type="text" class="form-control input-sm">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Signature:</td>
+      </tr>
+    </table>
+  </div>
+
+</div> -->
+
+<p>packing list works</p>

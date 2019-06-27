@@ -1,0 +1,52 @@
+<div class="centeredLayout">
+    <div class="subSet ">
+  
+        <h2>Risk Category</h2>
+        <p>Fill out Category details below:</p>
+    </div>
+  
+    <form [formGroup]="formGroup" (submit)="submit(formGroup.value)">
+      <!-- <div class="accord relative ">
+        <span>Risk Label Information</span>
+        <i class="arrowUp"></i>
+      </div> -->
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Risk Category Name</label>
+              <input type="text" formControlName="categoryName" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Country</label>
+                <ng-select 
+                  [items]="countries" 
+                  [multiple]="true" 
+                  [closeOnSelect]="false" 
+                  labelForId="name"
+                  bindLabel="name"
+                  [searchFn]="customSearchFn"
+                  formControlName="country">
+                  <ng-template ng-header-tmp>
+                    <button (click)="selectAllCountry()" class="btn btn-sm btn-secondary">Select all</button>
+                    &nbsp;
+                    <button (click)="unSelectAllCountry()" class="btn btn-sm btn-secondary">Unselect all</button>
+                </ng-template>
+                </ng-select>
+            </div>
+        </div>
+      </div>
+       
+    
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <a class="prev" routerLink="/secure/manage-riskpal/category">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

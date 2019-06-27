@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #707070;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke-linecap: round;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_1169" data-name="Group 1169" transform="translate(-461 -174.839)">
+    <g id="Ellipse_324" data-name="Ellipse 324" class="cls-1" transform="translate(461 174.839)">
+      <circle class="cls-3" cx="8" cy="8" r="8"/>
+      <circle class="cls-4" cx="8" cy="8" r="7.5"/>
+    </g>
+    <line id="Line_178" data-name="Line 178" class="cls-2" x2="0.5" transform="translate(461.5 183.339)"/>
+    <line id="Line_180" data-name="Line 180" class="cls-2" x2="0.5" transform="translate(469 190.089) rotate(-90)"/>
+    <line id="Line_179" data-name="Line 179" class="cls-2" x2="0.5" transform="translate(475.75 183.339)"/>
+    <line id="Line_181" data-name="Line 181" class="cls-2" x2="0.5" transform="translate(469 176.339) rotate(-90)"/>
+    <line id="Line_182" data-name="Line 182" class="cls-2" x2="3" transform="translate(469 183.339) rotate(45)"/>
+    <line id="Line_183" data-name="Line 183" class="cls-2" y1="4" transform="translate(469 178.839)"/>
+  </g>
+</svg>

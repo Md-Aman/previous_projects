@@ -1,0 +1,680 @@
+<style>
+    /* for 5 star rating */
+    
+    .rating {
+        float: left;
+    }
+    /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+    
+    .rating:not(:checked) > input {
+        position: absolute;
+        top: -9999px;
+        clip: rect(0, 0, 0, 0);
+    }
+    
+    .rating:not(:checked) > label {
+        float: right;
+        width: 1em;
+        padding: 0 .1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 200%;
+        line-height: 1.2;
+        color: #ddd;
+        text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
+    }
+    
+    .rating:not(:checked) > label:before {
+        content: '★ ';
+    }
+    
+    .rating > input:checked ~ label {
+        color: #f70;
+        text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5);
+    }
+    
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+        color: gold;
+        text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+    }
+    
+    .rating > input:checked + label:hover,
+    .rating > input:checked + label:hover ~ label,
+    .rating > input:checked ~ label:hover,
+    .rating > input:checked ~ label:hover ~ label,
+    .rating > label:hover ~ input:checked ~ label {
+        color: #ea0;
+        text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+    }
+    
+    .rating > label:active {
+        position: relative;
+        top: 2px;
+        left: 2px;
+    }
+    /* for red green and amber check */
+    
+    .checkbox {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 13px;
+        margin-right: 10px;
+        line-height: 18px;
+    }
+    
+    input[type=checkbox] {
+        display: none;
+    }
+    
+    .checkbox:before {
+        content: "";
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        vertical-align: middle;
+        background-color: #FFC200;
+        color: #f3f3f3;
+        text-align: center;
+        box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+        border-radius: 3px;
+    }
+    
+    .checkbox.pl:before {
+        background-color: green;
+    }
+    
+    .checkbox.p2:before {
+        background-color: red;
+    }
+    
+    input[type=checkbox]:checked + .checkbox:before {
+        content: "\2713";
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+        font-size: 30px;
+    }
+</style>
+<section class="content" ng-init="getAllCountries();getAllCurrencies();getSupplierRaData();getSupplierDetailsOfRaLocalContact();getSupplierDetailsOfRaLocalDriver();getSupplierDetailsOfRaAccomadation();getSupplierDetailsOfRaOther();" style="">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  
+    <div class="">
+        <section class="col-lg-12" style="">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <h3 class="box-title">Logistical Support</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                    <div class="box-body">
+                <form role="form" name="supplierForm" novalidate class="form-horizontal">
+                        <div class="row">
+                            <div ng-if="showLoader" class="col-lg-7 pull-right">
+                                <div loader-css="ball-pulse"></div>
+                            </div>
+                                   <label style="margin-left: 13px">Tell us who will be assisting you on the ground and where you will be staying</label><br>
+                                 <label style="margin-left: 20px"><h5>Local Contact/Fixer</h5></label><br>
+                                <div style="margin-left: 0px;" class="form-group col-sm-12" >
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Name</label>
+                                          <div class="col-sm-12 ">
+                                        <input type="text" maxlength="50" autocomplete="off" class="form-control" id="name1" name="name1" placeholder="Enter Name"
+                                            required ng-model="LocalContact.supplier_name" />
+                                        <span class="text-danger" ng-show="supplierForm.name1.$dirty &&  supplierForm.name1.$error.required">name is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                    <label class="col-sm-12 text-left">Number</label>
+                                     <div class="col-sm-12 input-width-100">
+                                            <!-- <input class="form-control"  style="width: 100%" international-phone-number autocomplete="off" name="number1" id="number1" ng-model="userform.passport_details.mobile_number" type="tel" placeholder=" Enter mobile number"  maxlength="18" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" autocomplete="off"  placeholder="Enter mobile number"  /> -->
+                                            <input class="form-control"  style="width: 100%"  international-phone-number autocomplete="off" name="number1" id="number1" ng-model="LocalContact.number" type="tel" placeholder=" Enter Number"  maxlength="18" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" autocomplete="off"  placeholder="Enter mobile number"  />
+
+                                    <!--       <span class="text-danger" ng-show="supplierForm.number1.$dirty &&  supplierForm.number1.$error.required">Number is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.number1.$dirty &&  supplierForm.number1.$error.pattern">Number is not valid</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Email</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="email1" name="email1" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off"
+                                            placeholder="Enter Email" required ng-model="LocalContact.email" />
+                                        <span class="text-danger" ng-show="supplierForm.email1.$dirty &&  supplierForm.email1.$error.required">Email is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.email1.$dirty &&  supplierForm.email1.$error.pattern">Email is not valid</span>
+                                        </div>
+                                    </div>
+                                 <div class="form-group col-sm-4">
+                                        <label class="col-sm-12">Country  </label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" name="country" id="country" ng-model="LocalContact.country" required>
+                                                    <option ng-selected="LocalContact.country">{{LocalContact.country}}</option>
+        
+                                                <option ng-repeat="option in countryArr" value="{{option.name}}" >{{option.name}}</option>
+                                             </select>
+                                            <span class="text-danger" ng-show="supplierForm.country.$dirty &&  supplierForm.country.$error.required">Country is required</span>
+                                        </div> 
+                                        </div>
+                                     <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">City</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="city1" name="city1"  autocomplete="off"
+                                            placeholder="Enter City" required ng-model="LocalContact.city" />
+                                        <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city1.$error.required">city is required</span>
+                                      <!--   <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city.$error.pattern">Email is not valid</span> -->
+                                        </div>
+                                    </div>
+                                     <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Currency</label>
+                                      <div class="col-sm-12">
+                                        <select class="form-control" name="currency1" id="currency1" ng-model="LocalContact.currency" ng-change="getSelectedcurrency()"
+                                            required>
+                                            <option ng-selected="true">Select Currency</option>
+                                            <option ng-repeat="option in currencyArr" value="{{option.abbreviation}}" ng-selected="LocalContact.currency == option.abbreviation">{{option.currency}}</option>
+                                            </select>
+                                            <span class="text-danger" ng-show="supplierForm.currency1.$dirty &&  supplierForm.currency1.$error.required">Currency is required</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                     <label class="col-sm-12 text-left">Cost</label>
+                                     <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="cost1" name="cost1" placeholder="Enter Cost Per Unit/Day" required ng-model="LocalContact.cost"
+                                            maxlength="30" autocomplete="off" />
+                                        <span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost1.$error.required">Cost is required</span>
+                                        <!--<span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost.$error.pattern">cost is not valid</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Sourcing</label>
+                                         <div class="col-sm-12">
+                                       <select class="form-control" name="sourcing1" id="sourcing1" ng-model="LocalContact.sourcing">
+                                              <option ng-selected="true" disabled>Select Source</option>
+                                              <option value="He was recommended">Recommendation</option>
+                                              <option value="other">Other</option>
+                                       </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="LocalContact.sourcing=='He was recommended'">
+                                         <label class="col-sm-12 text-left">Recommended By</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="who_recommended1" name="who_recommended1" 
+                                            placeholder="Enter Recommended By" required ng-model="LocalContact.who_recommended" />
+                                            <span class="text-danger" ng-show="supplierForm.who_recommended1.$dirty && supplierForm.who_recommended1.$error.required">Who Recommended is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="LocalContact.sourcing=='other'">
+                                        <label class="col-sm-12 text-left">More Information</label>
+                                        <div class="col-sm-12">
+                                        <textarea  type="text" class="form-control" id="more_info1" name="more_info1" 
+                                        placeholder="Provide more information about how you sourced the supplier" required ng-model="LocalContact.more_info" ></textarea>
+                                        <span class="text-danger" ng-show="supplierForm.more_info1.$dirty &&  supplierForm.more_info1.$error.required">More Information is required</span>
+                                    </div>
+                                    </div>
+
+
+
+                                <!--    <button class="btn btn-sm btn-primary" title="Add Contact" ng-show="$first" ng-click="addLocalContect($index)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                                    <button  class="btn btn-sm btn-danger" ng-show="$last && $index != 0" title="Remove Contact" ng-click="removeLocalContect()"><i class="fa fa-minus" aria-hidden="true"></i></button> -->
+                                </div>
+                                  <label style="margin-left: 20px"><h5>Local Driver</h5></label><br>
+                                <div style="margin-left: 0px;" class="form-group col-sm-12" >
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Name</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" maxlength="50" autocomplete="off" class="form-control" id="name2" name="name2" placeholder="Enter name"
+                                            required ng-model="LocalDriver.supplier_name" />
+                                        <span class="text-danger" ng-show="supplierForm.name2.$dirty &&  supplierForm.name2.$error.required">name is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                    <label class="col-sm-12 text-left">Number</label>
+                                     <div class="col-sm-12 input-width-100">
+                                        <input type="text" class="form-control" id="number2" maxlength="15" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                            autocomplete="off" international-phone-number name="number2" placeholder="Enter Number" required ng-model="LocalDriver.number"
+                                        />
+                           <!--              <span class="text-danger" ng-show="supplierForm.number2.$dirty &&  supplierForm.number2.$error.required">Number is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.number2.$dirty &&  supplierForm.number2.$error.pattern">Number is not valid</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Email</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="email2" name="email2" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off"
+                                            placeholder="Enter Email" required ng-model="LocalDriver.email" />
+                                        <span class="text-danger" ng-show="supplierForm.email2.$dirty &&  supplierForm.email2.$error.required">Email is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.email2.$dirty &&  supplierForm.email2.$error.pattern">Email is not valid</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                            <label class="col-sm-12">Country  </label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="country" id="country" ng-model="LocalDriver.country" required>
+                                                        <option ng-selected="LocalDriver.country">{{LocalDriver.country}}</option>
+            
+                                                    <option ng-repeat="option in countryArr" value="{{option.name}}" >{{option.name}}</option>
+                                                 </select>
+                                                <span class="text-danger" ng-show="supplierForm.country.$dirty &&  supplierForm.country.$error.required">Country is required</span>
+                                            </div> 
+                                            </div>
+                                         <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">City</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="city2" name="city2"  autocomplete="off"
+                                            placeholder="Enter City" required ng-model="LocalDriver.city" />
+                                        <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city2.$error.required">city is required</span>
+                                      <!--   <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city.$error.pattern">Email is not valid</span> -->
+                                        </div>
+                                    </div>
+                                     <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Currency</label>
+                                      <div class="col-sm-12">
+                                        <select class="form-control" name="currency2" id="currency2" ng-model="LocalDriver.currency" ng-change="getSelectedcurrency()"
+                                            required>
+                                            <option ng-selected="true">Select currency</option>
+                                            <option ng-repeat="option in currencyArr" value="{{option.abbreviation}}" ng-selected="LocalDriver.currency == option.abbreviation">{{option.currency}}</option>
+                                            </select>
+                                            <span class="text-danger" ng-show="supplierForm.currency2.$dirty &&  supplierForm.currency2.$error.required">Currency is required</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                     <label class="col-sm-12 text-left">Cost</label>
+                                     <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="cost2" name="cost2" placeholder="Enter Cost Per Unit/Day" required ng-model="LocalDriver.cost"
+                                            maxlength="30" autocomplete="off" />
+                                        <span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost2.$error.required">Cost is required</span>
+                                        <!--<span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost.$error.pattern">cost is not valid</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Sourcing</label>
+                                         <div class="col-sm-12">
+                                       <select class="form-control" name="sourcing2" id="sourcing2" ng-model="LocalDriver.sourcing">
+                                              <option ng-selected="true" disabled>Select Source</option>
+                                              <option value="He was recommended">Recommendation</option>
+                                              <option value="other">Other</option>
+                                       </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="LocalDriver.sourcing=='He was recommended'">
+                                         <label class="col-sm-12 text-left">Recommended By</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="who_recommended2" name="who_recommended2" 
+                                            placeholder="Enter Recommended By" required ng-model="LocalDriver.who_recommended" />
+                                        <span class="text-danger" ng-show="supplierForm.who_recommended2.$dirty &&  supplierForm.who_recommended2.$error.required">Who Recommended is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="LocalDriver.sourcing=='other'">
+                                        <label class="col-sm-12 text-left">More Information</label>
+                                        <div class="col-sm-12">
+                                        <textarea style="" type="text" class="form-control" id="more_info2" name="more_info2" 
+                                        placeholder="Provide more information about how you sourced the supplier" required ng-model="LocalDriver.more_info" ></textarea>
+                                        <span class="text-danger" ng-show="supplierForm.more_info2.$dirty &&  supplierForm.more_info2.$error.required">More Information is required</span>
+                                        </div>
+                                    </div>
+                                   <!-- <button class="btn btn-sm btn-primary" title="Add Contact" ng-show="$first" ng-click="addLocalDriver($index)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                                    <button  class="btn btn-sm btn-danger" ng-show="$last && $index != 0" title="Remove Contact" ng-click="removeLocalDriver()"><i class="fa fa-minus" aria-hidden="true"></i></button> -->
+                                </div>
+                                  <label style="margin-left: 20px;"><h5>Accommodation</h5></label>
+                                <div style="margin-left: 0px;" class="form-group col-sm-12" >
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Name</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" maxlength="50" autocomplete="off" class="form-control" id="name3" name="name3" placeholder="Enter name"
+                                            required ng-model="Accomodation.supplier_name" />
+                                        <span class="text-danger" ng-show="supplierForm.name3.$dirty &&  supplierForm.name3.$error.required">name is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                    <label class="col-sm-12 text-left">Number</label>
+                                     <div class="col-sm-12 input-width-100">
+                                        <input type="text" class="form-control" id="number3" maxlength="15" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                            autocomplete="off" international-phone-number name="number3" placeholder="Enter Number" required ng-model="Accomodation.number"
+                                        />
+                                       <!--  <span class="text-danger" ng-show="supplierForm.number3.$dirty &&  supplierForm.number3.$error.required">Number is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.number3.$dirty &&  supplierForm.number3.$error.pattern">Number is not valid</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Email</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="email3" name="email3" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off"
+                                            placeholder="Enter Email" required ng-model="Accomodation.email" />
+                                        <span class="text-danger" ng-show="supplierForm.email3.$dirty &&  supplierForm.email3.$error.required">Email is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.email3.$dirty &&  supplierForm.email3.$error.pattern">Email is not valid</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                            <label class="col-sm-12">Country  </label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="country" id="country" ng-model="Accomodation.country" required>
+                                                        <option ng-selected="Accomodation.country">{{Accomodation.country}}</option>
+            
+                                                    <option ng-repeat="option in countryArr" value="{{option.name}}" >{{option.name}}</option>
+                                                 </select>
+                                                <span class="text-danger" ng-show="supplierForm.country.$dirty &&  supplierForm.country.$error.required">Country is required</span>
+                                            </div> 
+                                            </div>
+                                        <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">City</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="city3" name="city3"  autocomplete="off"
+                                            placeholder="Enter City" required ng-model="Accomodation.city" />
+                                        <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city3.$error.required">city is required</span>
+                                      <!--   <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city.$error.pattern">Email is not valid</span> -->
+                                        </div>
+                                    </div>
+                                     <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Currency</label>
+                                      <div class="col-sm-12">
+                                        <select class="form-control" name="currency3" id="currency3" ng-model="Accomodation.currency" ng-change="getSelectedcurrency()"
+                                            required>
+                                            <option ng-selected="true">Select currency</option>
+                                            <option ng-repeat="option in currencyArr" value="{{option.abbreviation}}" ng-selected="Accomodation.currency == option.abbreviation">{{option.currency}}</option>
+                                            </select>
+                                            <span class="text-danger" ng-show="supplierForm.currency3.$dirty &&  supplierForm.currency3.$error.required">Currency is required</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                     <label class="col-sm-12 text-left">Cost</label>
+                                     <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="cost3" name="cost3" placeholder="Enter Cost Per Unit/Day" required ng-model="Accomodation.cost"
+                                            maxlength="30" autocomplete="off" />
+                                        <span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost3.$error.required">Cost is required</span>
+                                        <!--<span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost.$error.pattern">cost is not valid</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                         <label class="col-sm-12 text-left">Sourcing</label>
+                                         <div class="col-sm-12">
+                                       <select class="form-control" name="sourcing3" id="sourcing3" ng-model="Accomodation.sourcing">
+                                              <option ng-selected="true" >Select Source</option>
+                                              <option value="Have you stayed at location before">Previous Stay</option>
+                                              <option value="Has someone recommended it">Recommendation</option>
+                                              <option value="Sourced without recommendation">Other</option>
+                                       </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="Accomodation.sourcing=='Has someone recommended it'">
+                                         <label class="col-sm-12 text-left">Recommended By</label>
+                                          <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="who_recommended3" name="who_recommended3" 
+                                            placeholder="Enter Recommended By" required ng-model="Accomodation.who_recommended" />
+                                        <span class="text-danger" ng-show="supplierForm.who_recommended3.$dirty &&  supplierForm.who_recommended3.$error.required">who recommended is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4" ng-if="Accomodation.sourcing=='other'">
+                                        <label class="col-sm-12 text-left">More Information</label>
+                                        <div class="col-sm-12">
+                                        <textarea style="width: 485px;" type="text" class="form-control" id="more_info3" name="more_info3" 
+                                        placeholder="Provide more information about how you sourced the supplier" required ng-model="Accomodation.more_info" ></textarea>
+                                        <span class="text-danger" ng-show="supplierForm.more_info3.$dirty &&  supplierForm.more_info3.$error.required">More Information is required</span>
+                                        </div>
+                                    </div>
+                                 <!--   <button class="btn btn-sm btn-primary" title="Add Accomodation" ng-show="$first" ng-click="AddAccomodation($index)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                                    <button  class="btn btn-sm btn-danger" ng-show="$last && $index != 0" title="Remove Contact" ng-click="removeAccomodation()"><i class="fa fa-minus" aria-hidden="true"></i></button> -->
+                                </div>
+                                
+                                <div class="form-group col-sm-12">
+                                        <div class="col-sm-12 ">
+                                    <button ng-click="etc_supplier()" ng-hide="morebutton" class="btn btn-sm btn-primary pull-right">Add more Suppliers</button>
+                                </div>
+                                </div>
+
+                                <div class="more_suppliers" ng-show="addnewsupplier">
+                                        <label style="margin-left: 20px;"><h4>Additional Suppliers </h4></label>
+
+                                        <button class="btn btn-sm btn-primary" title="Add Supplier"  ng-click="addSuppliersList()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                    <div ng-repeat="supplier in suppliersList track by $index" style="border-block-end: #940" >
+
+                                
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                <label class="col-sm-12">Supplier Name</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="supplier_name" name="supplier_name" placeholder="Enter Supplier Name" required
+                                        ng-model="suppliersList[$index].supplier_name"  autocomplete="off"
+                                        maxlength="30" />
+                                    <span class="text-danger" ng-show="supplierForm.supplier_name.$dirty &&  supplierForm.supplier_name.$error.required">Supplier Name is required</span>
+                                    <span class="text-danger" ng-show="supplierForm.supplier_name.$dirty &&  supplierForm.supplier_name.$error.pattern">Supplier Name is not valid</span>
+                                </div>
+                                    
+
+                                </div>
+                                <div class="col-sm-5">
+                                <label class="col-sm-12">Country  </label>
+                                <div class="col-sm-12">
+                                    <select class="form-control" name="country" id="country" ng-model="suppliersList[$index].country" required>
+                                            <option ng-selected="suppliersList[$index].country">{{suppliersList[$index].country}}</option>
+
+                                        <option ng-repeat="option in countryArr" value="{{option.name}}" >{{option.name}}</option>
+                                     </select>
+                                    <span class="text-danger" ng-show="supplierForm.country.$dirty &&  supplierForm.country.$error.required">Country is required</span>
+                                </div> 
+                                </div>
+                                <div class="col-sm-2" style="margin-top: 23px !important">
+
+                                <button  class="btn btn-sm btn-danger"  ng-if="!suppliersList[$index]._id"  title="Remove Suppliers" ng-click="removeSuppliersList($index)"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+                                <button  class="btn btn-sm btn-danger"   ng-if="suppliersList[$index]._id"  title="Remove Suppliers" ng-click="deleteOthersuppliers(suppliersList[$index]._id)"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+
+                            </div>
+
+                            </div>
+                            <div style="clear: both"></div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-6">
+                                    <label  class="col-sm-12">City</label>
+                                    <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" required ng-model="suppliersList[$index].city"
+                                        ng-pattern="/^[a-zA-Z\.\' ]*$/" autocomplete="off" maxlength="50" />
+                                    <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city.$error.required">City is required</span>
+                                    <span class="text-danger" ng-show="supplierForm.city.$dirty &&  supplierForm.city.$error.pattern">City is not valid</span>    
+                                    </div>
+                                    
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label  class="col-sm-12">Cost</label>
+                                        <div class="col-sm-12">
+                                           <input type="text" class="form-control" id="cost" name="cost" placeholder="Cost per unit/day if known" required ng-model="suppliersList[$index].cost"
+                                               maxlength="30" autocomplete="off" />
+                                           <span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost.$error.required">Cost is required</span>
+                                           <!--<span class="text-danger" ng-show="supplierForm.cost.$dirty &&  supplierForm.cost.$error.pattern">cost is not valid</span>--> 
+                                        </div>
+                                           
+                                       </div>
+
+                                
+                            </div>
+                               <div class="form-group col-sm-12">
+                                    <div class="col-sm-4">
+                                     <label  class="col-sm-12">Address</label>
+                                     <div class="col-sm-12">
+                                         <input type="text" maxlength="50" autocomplete="off" class="form-control" id="address" name="address" placeholder="Enter Contact"
+                                            required ng-model="suppliersList[$index].address" />
+                                        <span class="text-danger" ng-show="supplierForm.address.$dirty &&  supplierForm.address.$error.required">Contact is required</span>
+                                     </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                    <label class="col-sm-12">Number</label>
+                                    <div class="col-sm-12 input-width-100">
+                                        <input type="tel" international-phone-number class="form-control" id="number" maxlength="15" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                            autocomplete="off" name="number" placeholder="Enter Number" required ng-model="suppliersList[$index].number"
+                                        />
+                                    </div>
+                                        
+                                    </div>
+                                    <div class="col-sm-3">
+                                     <label class="col-sm-12">Email</label>
+                                     <div  class="col-sm-12">
+                                        <input type="text" class="form-control" id="email" name="email" ng-pattern=" /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" autocomplete="off"
+                                            placeholder="Enter Email" required ng-model="suppliersList[$index].email" />
+                                        <span class="text-danger" ng-show="supplierForm.email.$dirty &&  supplierForm.email.$error.required">Email is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.email.$dirty &&  supplierForm.email.$error.pattern">Email is not valid</span> 
+                                     </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <!-- currency drop down-->
+                                    
+                                    <div class="col-sm-6">
+                                         <label  class="col-sm-12">Currency</label>
+                                         <div class="col-sm-12">
+                                        <select class="form-control" name="currency" id="currency" ng-model="suppliersList[$index].currency" ng-change="getSelectedcurrency()"
+                                            required>
+                                            <option ng-selected="true">Select currency</option>
+                                            <option ng-repeat="option in currencyArr" value="{{option.abbreviation}}" ng-selected="supplier.currency == option.abbreviation">{{option.currency}}</option>
+                                            </select>
+                                            <span class="text-danger" ng-show="supplierForm.currency.$dirty &&  supplierForm.currency.$error.required">Currency is required</span>     
+                                         </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <label class="col-sm-12">Recommended By / More Information</label>
+                                            <div  class="col-sm-12">
+                                             <input type="text" class="form-control" id="sourced_by" name="sourced_by" placeholder="Recommended By" required ng-model="suppliersList[$index].sourced_by"
+                                                 maxlength="50" autocomplete="off" ng-pattern="/^[a-zA-Z]+[a-zA-Z' .,-]*$/" />
+                                             <span class="text-danger" ng-show="supplierForm.sourced_by.$dirty &&  supplierForm.sourced_by.$error.required">Recommended by is required</span>
+                                             <span class="text-danger" ng-show="supplierForm.sourced_by.$dirty &&  supplierForm.sourced_by.$error.pattern">Recommended by is not valid</span>   
+                                            </div>
+                                         </div>
+                                   
+
+
+
+                                </div>
+                                <div class="form-group col-sm-12" style="margin: 0px 10px;">
+                                  <div class="col-sm-6" style="padding-left: 5px;">
+                                    <label>Service Provided</label>
+                                    <select name="service_provided" id="service_provided" class="js-states form-control" ng-model="suppliersList[$index].service_provided" ng-selected="suppliersList[$index].service_provided == option">
+                                    <option value="" selected disabled hidden>Select Service Provided</option>
+                                    <optgroup label="Accommodation">
+                                            <option value="Hotel">Hotel</option>
+                                            <option value="B &B">B&B</option>
+                                            <option value="Self Catering Apartment">Self Catering Apartment</option>
+                                            <option value="Air B n B">Air B n B</option>
+                                            <option value="Guesthouse">Guesthouse</option>
+                                        </optgroup>
+                                        <optgroup label="Transportation">
+                                            <option value="Taxi">Taxi</option>
+                                            <option value="Airline">Airline</option>
+                                            <option value="Car Rental/Self Drive">Car Rental/Self Drive</option>
+                                            <option value="Chauffered vehicle">Chauffered vehicle</option>
+                                            <option value="Train">Train</option>
+                                            <option value="Boat/Ferry">Boat/Ferry</option>
+                                            <option value="Driver">Driver</option>
+                                        </optgroup>
+                                        <optgroup label="Subsistence">
+                                            <option value="Restaurants/Cafe/Bar">Restaurants/Cafe/Bar</option>
+                                            <option value="Supermarket">Supermarket</option>
+                                        </optgroup>
+                                        <optgroup label="Facilitation Providers">
+                                            <option value="Fixers">Fixers</option>
+                                            <option value="Lawyers">Lawyers</option>
+                                            <option value="Interpreters / Translators">Interpreters / Translators</option>
+                                            <option value="Security Adviser">Security Adviser</option>
+                                            <option value="Doctor / Medic">Doctor / Medic</option>
+                                            <option value="Driver">Driver</option>
+                                            <option value="Banking Facilities / Currency Exchange">Banking Facilities / Currency Exchange</option>
+                                        </optgroup>
+                                        <optgroup label="Equipment Providers">
+                                            <option value="Local Shops Please state what kind of shop">Local Shops Please state what kind of shop</option>
+                                        </optgroup>
+                                        <optgroup label="Communications">
+                                            <option value="Mobile Networks">Mobile Networks</option>
+                                            <option value="Satellite Phone Network">Satellite Phone Network</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                 <div class="col-sm-6" ng-if="(supplier.service_provided =='Other Please State the type accommodation used') || (supplier.service_provided=='Other Professional Please State the service received')||(supplier.service_provided=='Other Please state what kind of provider')||(supplier.service_provided=='Other Please State the service received')||(supplier.service_provided=='Other Please State the transportation used')">
+                                    <label ng-if="(supplier.service_provided =='Other Please State the type accommodation used') || (supplier.service_provided=='Other Professional Please State the service received')||(supplier.service_provided=='Other Please state what kind of provider')||(supplier.service_provided=='Other Please State the service received')||(supplier.service_provided=='Other Please State the transportation used')">{{supplier.service_provided}}</label>
+                                    <input type="text" class="form-control" id="Other_service" name="Other_service" placeholder="" required ng-model="suppliersList[$index].other_service"
+                                     autocomplete="off" />
+                                 </div>
+                                 </div>
+                                 <div class="form-group col-sm-12">
+                                    <div class="col-sm-12">
+                                         <label  class="col-sm-12">Description</label>
+                                         <div class="col-sm-12">
+                                            <textarea class="form-control" id="description" name="description" placeholder="Enter Supplier Description" ng-model="suppliersList[$index].description"></textarea>
+                                            <span class="text-danger" ng-show="supplierForm.description.$dirty &&  supplierForm.description.$error.required">Description is required</span>
+                                        
+                                         </div>
+                                    </div>
+                                
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                        <div class="col-sm-12">
+                                            <hr style="margin-top: 20px;
+                                            margin-bottom: 20px;
+                                            border: 0;
+                                            border-top: 4px solid #f39c12;">
+                                        </div>
+                                    
+                                    </div>
+                            </div>
+                            </div>
+                        <!--         <div class="form-group col-sm-12"> -->
+                                    <!-- <label class="col-sm-1">Rating</label> -->
+                                    <!-- <div class="col-sm-12">
+
+                                        <label>okay to use</label>
+                                        <input type="checkbox" id="Option" name="rate" ng-model="supplier.rate" ng-true-value="'green'" />
+                                        <label class="checkbox pl" for="Option"></label>
+
+                                        <label>use with caution</label>
+                                        <input type="checkbox" id="Option2" name="rate" ng-model="supplier.rate" ng-true-value="'amber'" />
+                                        <label class="checkbox" for="Option2"></label>
+
+                                        <label>prohibited</label>
+                                        <input type="checkbox" id="Option3" name="rate" ng-model="supplier.rate" ng-true-value="'red'" />
+                                        <label class="checkbox p2" for="Option3"></label>
+                                    </div> -->
+
+                                    <span class="text-danger" ng-show="supplierForm.rate.$dirty &&  supplierForm.rate.$error.required">Rate supplier is required</span>
+
+                                <!--     <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="service_provided" name="service_provided" placeholder="Enter Service Provided"
+                                            required ng-model="supplier.service_provided" maxlength="50" autocomplete="off" ng-pattern="/^[a-zA-Z]+[a-zA-Z' .,-]*$/"
+                                        />
+                                        <span class="text-danger" ng-show="supplierForm.service_provided.$dirty &&  supplierForm.service_provided.$error.required">Service provided is required</span>
+                                        <span class="text-danger" ng-show="supplierForm.service_provided.$dirty &&  supplierForm.service_provided.$error.pattern">Service provided is not valid</span>
+                                    </div> -->
+
+                               <!--  </div> -->
+                               
+                                <!-- <div class="form-group col-sm-12" ng-if="!(supplier.service_provided && supplier.rate && supplier.description && supplier.cost && supplier.currency && supplier.supplier_name && supplier.country && supplier.city && supplier.sourced_by)" >
+                                    <div class="col-sm-12">
+                                      <label>Your manager is more likely to reject this RA if fields are left blank. So please make sure that you complete the boxes to the best of your ability or give an adequate reason why you are unable to provide this information.</label>
+                                        <textarea class="form-control" id="incompleteform" name="incompleteform" placeholder="Please provide the reason" ng-model="supplier.incompleteform"></textarea>
+                                    </div>
+                                </div> -->
+                            <!--     <div class="form-group col-sm-12">
+                                    <label class="col-sm-2">Attach any relevant doc</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" id="attachment" name="attachment" ngf-select ng-change="attachment(supplier.attachment)" ng-model="supplier.attachment">
+                                    </div>
+                                </div> -->
+                       
+                                <div class="form-group col-sm-12">
+                                    <div class="pull-right box-tools">
+                                        <!--<button ng-disabled="newsRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaSupplier(supplier);">Save And Return Later</button>
+                                        <button ng-disabled="communicationForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="redirectTo('main.addCommunication')">Next</button>-->
+                                        <button type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaSupplier(LocalContact,LocalDriver,Accomodation,suppliersList,supplierraData,'save')">Save And Return Later</button>
+                                        <button ng-disabled="newsRaForm.$invalid && !supplierraData" type="button" class="btn btn-sm btn-primary" ng-click="backToQuestionPage();">Back</button>
+                                        <button  type="button" class="btn btn-sm btn-primary" ng-click="addNewsRaSupplier(LocalContact,LocalDriver,Accomodation,suppliersList,supplierraData,'next')">Next</button>
+                                        <!-- ng-disabled="supplierForm.$invalid" -->
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                            <!-- /.box-body -->
+                </div>
+        </section>
+        </div>
+</section>

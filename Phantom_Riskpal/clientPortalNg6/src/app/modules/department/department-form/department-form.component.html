@@ -1,0 +1,147 @@
+<span class="_close-mat" (click)="closeModal();"></span>
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="centeredLayout material-popup">
+    <div class="subSet ">
+  
+        <h2 *ngIf="isUpdate == false">Create a new Department</h2>
+        <h2 *ngIf="isUpdate == true">Update Department</h2>
+    </div>
+ 
+
+    <form [formGroup]="departmentForm" class="accord-content">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>Department Name</label>
+          <input type="text" class="form-control" [(ngModel)]="department_name" formControlName="DepartmentName">
+        </div>
+
+        <div *ngIf="super_admin" class="form-group col-md-4">
+            <label>Client</label>
+            <ng-select 
+              [items]="clients"
+              [multiple]="false"
+              [closeOnSelect]="true"
+              bindLabel="company_name"   
+              [(ngModel)]="client_id"
+              (change)="changeClient()"
+              formControlName="clients">
+            </ng-select>
+          </div>
+
+        <div class="form-group col-md-4">
+          <label>Approving Manager</label>
+          <ng-select 
+          [items]="userlist_track"
+          [multiple]="false"
+          [closeOnSelect]="true"
+          [(ngModel)]="approving_manager"
+          formControlName="ApprovingManager">
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.firstname}} {{item.lastname}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.firstname}}  {{item.lastname}}</div>
+            </ng-template>
+        </ng-select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Additional Approving Manager(s) </label>
+          <ng-select 
+          [items]="userlist_track" 
+          [multiple]="true"
+          [closeOnSelect]="false"
+          [(ngModel)]="aditional_approving_manager"  
+          formControlName="AdditionalApprovingManager">
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.firstname}} {{item.lastname}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.firstname}}  {{item.lastname}}</div>
+            </ng-template>
+        </ng-select> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>Administrator</label>
+          <ng-select 
+          [items]="userlist_track"
+          [multiple]="false"
+          [closeOnSelect]="true"  
+          [(ngModel)]="administartor"
+          formControlName="Administartor">
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.firstname}} {{item.lastname}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.firstname}}  {{item.lastname}}</div>
+            </ng-template>
+        </ng-select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Assign RA Templates</label>
+          <ng-select 
+          [items]="templateList" 
+          [multiple]="true" 
+          [closeOnSelect]="false"
+          bindLabel="ra_name" 
+          [(ngModel)]="assigned_template" 
+          formControlName="AssignedRATemplates">
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.ra_name}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.ra_name}} </div>
+            </ng-template>
+            <ng-template ng-header-tmp>
+                <span type="button" (click)="selectAllTemplate()" class="btn btn-sm btn-secondary">Select all</span>
+                &nbsp;
+                <span type="button" (click)="unSelectAllTemplate()" class="btn btn-sm btn-secondary">Unselect all</span>
+            </ng-template>
+        </ng-select> 
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Assign Users </label>
+          <ng-select 
+          [items]="userDropdownList" 
+          [multiple]="true" 
+          [closeOnSelect]="false" 
+          [(ngModel)]="assigned_user"
+          formControlName="AssignedUsers">
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.firstname}} {{item.lastname}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.firstname}}  {{item.lastname}}</div>
+            </ng-template>
+            <ng-template ng-header-tmp>
+                <span type="button" (click)="selectAllUser()" class="btn btn-sm btn-secondary">Select all</span>
+                &nbsp;
+                <span type="button" (click)="unSelectAllUser()" class="btn btn-sm btn-secondary">Unselect all</span>
+            </ng-template>
+          </ng-select>
+        </div>
+
+      </div>
+      <div class="subSet">
+          <div class="right _btn">
+              <a class="prev" (click)="closeModal();" >Previous</a>
+              <button *ngIf="isUpdate == false" (click)="saveNewDepartment()" type="submit" class="cont">Save</button>
+              <button *ngIf="isUpdate == true" (click)="updateDepartment()"  type="submit" class="cont">Update</button>
+            </div>
+      </div>
+      <!-- <button *ngIf="isUpdate == false" type="submit" (click)="saveNewDepartment()"  class="btn btn-primary">Create Department </button>
+      <button *ngIf="isUpdate == true" type="submit" (click)="updateDepartment()"  class="btn btn-primary">Update Department </button> -->
+    </form>
+</div>
+

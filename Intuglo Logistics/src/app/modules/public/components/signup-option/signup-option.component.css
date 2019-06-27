@@ -1,0 +1,5 @@
+.signup { padding: 20px; margin-left: 10px;}
+.welcome-to-www-intug { color: #333333; font-size: 20px; font-weight: 200; margin-bottom: 5px;} 
+.choose-option { color: #333333; font-size: 14px; font-weight: 200; }
+.btn-customer-partner {	border:1px solid #F58220; line-height: 36px; width: 200px; color: #F58220; display: block; text-align: center; font-weight: 300; margin: 10px auto; font-size: 13px; text-transform: uppercase;}
+.btn-customer-partner:hover { text-decoration: none;}

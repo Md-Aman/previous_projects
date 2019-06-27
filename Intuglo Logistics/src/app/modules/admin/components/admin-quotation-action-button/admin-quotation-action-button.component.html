@@ -1,0 +1,48 @@
+<div [ngSwitch]="step" class="card-action-button">
+  <div class="subSet">
+    <!-- <div *ngSwitchCase="'quotation'"> -->
+    <div>
+      <button type="button" (click)="DownloadPdfCopy(); Download.open()" class="btnDisplayed">Download PDF Copy</button>
+      <button type="button" (click)="ViewQuotation()" class="btnDisplayed">View Quotation Template</button>
+      <button [attr.disabled]="quotationStatusLocal != 'PENDINGAPPROVAL'? true: null" type="button" (click)="QuotationTally(); Quotation.open()" 
+        class="btnDisplayed">Quotation Tally</button>
+    </div>
+    <!-- <div *ngSwitchCase="'notification'"> -->
+      <!-- <div>
+      <button type="button" class="btnDisplayed">Activate Quotation</button>
+      <button type="button" class="btnDisplayed">Upload Quotation</button>
+    </div> -->
+  </div>
+</div>
+
+  <!-- display modal for download pdf copy once button is clicked -->
+<modal #Download [closeOnOutsideClick]="false">
+  <modal-header>
+      <h3 class="popup-header">Download Pdf Copy</h3>
+  </modal-header>
+
+  <modal-content>
+    <p *ngIf="!isPopup" class="popup-body">File is downloaded</p>
+    <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Login and try again.</p>
+  </modal-content>
+
+  <modal-footer>
+      <button class="btn-primary-style" (click)="closePopup(); Download.close()">Close</button>
+  </modal-footer>
+</modal>
+
+  <!-- display modal for quotation tally once button is clicked -->
+  <modal #Quotation [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="popup-header">Quotation Tally</h3>
+    </modal-header>
+  
+    <modal-content>
+      <p *ngIf="!isPopup" class="popup-body">Quotation status has been updated</p>
+      <p *ngIf="isPopup" class="popup-body">It seems your session is expired! Login and try again.</p>
+    </modal-content>
+  
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup(); Quotation.close()">Close</button>
+    </modal-footer>
+  </modal>

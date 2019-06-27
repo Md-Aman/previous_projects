@@ -1,0 +1,68 @@
+<span *ngIf="!comingFromOtherPage" class="_close-mat" routerLink="/secure/manage-riskpal/question" (click)="closeModal();"></span>
+<span *ngIf="comingFromOtherPage" class="_close-mat" (click)="closeModal();"></span>
+
+<div class="centeredLayout material-popup">
+    <div class="subSet ">
+  
+        <h2>Question</h2>
+        <p>Fill out Question details below:</p>
+    </div>
+  
+    <form [formGroup]="formGroup" (submit)="submit(formGroup.value)">
+      <!-- <div class="accord relative ">
+        <span>Question Information</span>
+        <i class="arrowUp"></i>
+      </div> -->
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Question</label>
+              <textarea class="form-control" cols="95" rows="10" formControlName="question"></textarea>
+            </div>
+        </div>
+      </div>
+
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Mitigation Advice</label>
+              <textarea class="form-control textarea-miti" cols="95" rows="40"   formControlName="best_practice_advice" 
+              [(ngModel)]="question.best_practice_advice"></textarea>
+              <!-- <ck-editor name="editor1"  formControlName="best_practice_advice" skin="moono-lisa" 
+              language="en" [(ngModel)]="question.best_practice_advice"></ck-editor> -->
+
+              <!-- <textarea class="form-control" cols="95" rows="10" formControlName="best_practice_advice"></textarea> -->
+            </div>
+        </div>
+      </div>
+
+      <div class="accord-content">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Select Risk Label</label>
+              <ng-select 
+                [items]="categories" 
+                [multiple]="true" 
+                [closeOnSelect]="false" 
+                labelForId="categoryName"
+                bindLabel="categoryName"
+                formControlName="category_id">
+              </ng-select>
+            </div>
+        </div>
+      </div>
+
+      
+    
+      <div class="subSet">
+          <div class="right _btn mg-bottom-25">
+              <a *ngIf="!comingFromOtherPage" class="prev" (click)="closeModal();" routerLink="/secure/manage-riskpal/question">Previous</a>
+              <a *ngIf="comingFromOtherPage" class="prev" (click)="closeModal()">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

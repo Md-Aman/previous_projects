@@ -1,0 +1,43 @@
+
+
+
+/* ..... */
+.box{
+    height: 150px;
+    width:  480px;	 
+    background-color: #FFFFFF;
+    padding: 0px;
+    
+}
+.popup-body{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 14px;
+    /* font-weight: 700; */
+    text-align: center;
+  }
+.title{
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 16px;
+    /* font-weight: 700; */
+
+}
+
+.glyphicon.glyphicon-remove{
+    opacity: 0.5;
+}
+.glyphicon.glyphicon-remove:hover{
+    opacity: 1.0;
+    color: #030303;
+    border-radius: 45%;
+    cursor: pointer;
+}
+.btn-default {	
+    border: 1px solid lightgrey;
+    margin-top: 3%;
+  }
+  .hr1{
+    margin-top: 0%;
+    margin-bottom: 1%;
+    border: 0;
+    border-top: 1px solid #eee;
+}

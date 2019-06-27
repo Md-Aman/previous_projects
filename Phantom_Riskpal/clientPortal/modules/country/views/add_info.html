@@ -1,0 +1,58 @@
+<section class="content-header" ng-init="getAllCountries()">
+  <!-- <form>
+   <div style="margin-top: 44px;" class="input-group input-group-sm col-lg-3 pull-right box-tools">
+   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by country name" ng-model="keyword"
+     autocomplete="false" >
+     <div class="input-group-btn">
+           <button class="btn btn-default" ng-click="filter(keyword)"><i class="fa fa-search"></i></button>
+       </div>
+ </div>
+ </form> -->
+  <ol class="breadcrumb">
+    <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </li>
+    <li class="active">Country Page</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title"><span>Information by client super admin</span></h3>
+    </div>
+    <div class="box-body">
+      <form class="form-horizontal" name="form" novalidate>
+        <div class="clearfix">
+          <div class="col-md-2"></div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="" class="control-label">Country</label>
+              <div class="">
+                 <select class="form-control" name="country" id="country" ng-model="countryinfo.country" required>
+                      <option ng-selected="true">Select Country</option>
+                      <option ng-repeat="option in countryArr" value="{{option.name}}">{{option.name}}</option>
+                    </select>
+                    <span class="text-danger" ng-show="newsAgenciesForm.country.$dirty &&  newsAgenciesForm.country.$error.required">Country is required</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="control-label">Country Information</label>
+              <div class="">
+                <textarea ui-tinymce="tinymceOptions" name="information" ng-model="countryinfo.information" rows="15" required></textarea>
+                <span ng-show="form.$submitted || form.information.$touched">
+                <span class="text-danger" ng-show="form.information.$error.required">Information is required.</span>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button ng-disabled="form.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="addInformation(countryinfo);">Add</button>
+              <a ui-sref="main.list_email_template" class="btn btn-sm btn-warning pull-right">Back</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="box-footer">
+  </div>
+</section>

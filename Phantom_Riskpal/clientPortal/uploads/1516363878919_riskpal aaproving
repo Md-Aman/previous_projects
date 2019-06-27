@@ -1,0 +1,287 @@
+
+http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+
+u-bisht@yopmail.com
+p-Amxnpunv8m
+
+trav
+Email :aajkal@yopmail.com
+Password :ff2ACqDt 
+
+staging approving manager
+
+Email :ron@yopmail.com
+Password :fre8vmy4yB
+ 
+Admin
+stagging.riskpal.co.uk/admin
+1-----u-sanchay@yopmail.com
+p-Remote123@
+
+2-----Email :ronqwe123@yopmail.com
+Password :Jj2JxGL0O7 
+
+traveller
+stagging.riskpal.co.uk/traveller
+u-david@yopmail.com
+
+p-Remote123@
+stagging.riskpal.co.uk/super_admin
+u-david@yopmail.com
+p-Test@12
+
+
+local admin
+
+u-mondayadmin1@yopmail.com
+p-Password@hb01
+
+
+
+
+approving manager local
+Email :newap@yopmail.com
+Password :
+zLlGACJOJy
+
+
+
+
+
+local admin new-
+
+Email :hemant1@yopmail.com
+Password :kDFaMlyfN3 
+ 
+co-admin
+Email :bosko@yopmail.com
+Password :oGryI8kj 
+
+
+
+Naxmo----
+
+key >>>01657db3
+secret >> 09d6c5ae616cd919
+
+curl -X POST  https://rest.nexmo.com/sms/json \
+-d api_key=01657db3 \
+-d api_secret=09d6c5ae616cd919 \
+-d to=919410591255 \
+-d from="NEXMO" \
+-d text="Hello from Nexmo"
+
+
+Hello client admin, new
+
+your account has been created by super admin, please check the below credentials 
+
+Email :newcsa@yopmail.com
+Password :6H5OqpqCqm 
+
+
+
+Hello client admin, asdasd
+
+your account has been created by super admin, please check the below credentials 
+
+Email :main123@yopmail.com
+Password :
+wqk56A24dP 
+
+Thanks,
+RiskPal Team
+
+
+LIVE Credentials------
+ACCOUNT SID
+AC9a603e7bad9862b769917565fa111b92
+Used to exercise the REST API
+AUTH TOKEN
+
+c6644cac22d8513c1c733975ec6a315a
+Request a Secondary Token
+Keep this somewhere safe and secure
+
+
+TEST ACCOUNT 
+SID------
+ACb342e5f46a8b35dc47b03f01fa44554a
+Used to exercise the REST API
+TEST AUTHTOKEN
+
+37ca638791092eab3307418f5aa3c36e
+Keep this somewhere safe and secure
+
+Your new Phone Number is +14243611363
+
+
+
+
+admin-->>
+
+Email :bisht01@yopmail.com
+Password :LkBdNBJ9k0 
+
+
+
+traveller-->>
+
+Email :bishttraveller@yopmail.com
+Password :DiHodgpN 
+
+
+Approving Manager-->
+
+Email :approvingmanager@yopmail.com
+Password :FJ2cd7wL2e 
+
+
+http://git.riskpal.co.uk/
+
+
+
+Hello, kl
+
+your account has been created by approving manager, please check the below credentials 
+
+Email :asdasdkle@yopmail.com
+Password :kE5krpgE 
+
+Hello, Mohit
+
+your account has been created by approving manager, please check the below credentials 
+
+Email :mohit123@yopmail.com
+Password :k5uBD0qw 
+
+{ 
+    "_id" : ObjectId("59ed806573d2ef0f1014e69e"), 
+    "updatedAt" : ISODate("2017-12-08T09:35:43.201+0000"), 
+    "createdAt" : ISODate("2017-10-23T05:38:45.106+0000"), 
+    "company_name" : "Monday Test Company", 
+    "email" : "mondayadmin1@yopmail.com", 
+    "password" : "Qm6pJ1tpIDWWpkAYLanxpw==", 
+    "admin" : true, 
+    "duoToken" : "", 
+    "client_admin" : true, 
+    "country" : "India", 
+    "type_of_client" : "basic", 
+    "no_of_approving_manager_account" : NumberInt(5), 
+    "no_of_co_admin_account" : NumberInt(2), 
+    "no_of_traveller_account" : NumberInt(10), 
+    "primary_address" : "sdsa", 
+    "primary_firstname" : "mondayawd", 
+    "primary_lastname" : "admin", 
+    "primary_mobile_number" : "545435435435", 
+    "primary_zip_code" : "5656645", 
+    "secondary_firstname" : "mondayawdawd", 
+    "secondary_lastname" : "testadmin", 
+    "secondary_zip_code" : "4564565", 
+    "secondary_address" : "dfdsfsfdsff", 
+    "secondary_mobile_number" : "656456546879", 
+    "secondary_email" : "mondayadmin2@yopmail.com", 
+    "sector_name" : "Media", 
+    "sector_id" : ObjectId("59e5f4e1077ea11d27c8ddb1"), 
+    "passport_data" : [
+
+    ], 
+    "department" : [
+        ObjectId("5a1beda10d67992ef239fe38")
+    ], 
+    "mobile_number" : [
+
+    ], 
+    "duoVerified" : false, 
+    "status" : "Active", 
+    "is_deleted" : false, 
+    "__v" : NumberInt(0), 
+    "otp" : "A9Pr5l"
+}
+
+Hello client admin, Hemant
+
+your account has been created by super admin, please check the below credentials 
+
+Email :bisht95@yopmail.com
+Password :oijclHG9kb 
+
+
+Hello client admin, Naresh
+
+your account has been created by super admin, please check the below credentials 
+
+Email :naresh95@yopmail.com
+Password :Poi798Akpk 
+
+Thanks,
+RiskPal Team
+
+
+https://eu-west-2.console.aws.amazon.com/ec2/v2/home?region=eu-west-2
+
+shivanshs@smartdatainc.net
+Password@ss01
+
+
+
+slack
+u-Hemant
+p- Password@hb01
+
+Hello Approving Manager, rohit
+
+your account has been created by organization admin, please check the below credentials 
+
+Email :rohit@yopmail.com
+Password :07DxPKgLi1 
+
+Thanks,
+RiskPal Team
+
+
+
+Hello Approving Manager, ravi
+
+your account has been created by organization admin, please check the below credentials 
+
+Email :ravi123@yopmail.com
+Password :k9mOwLnL54 
+
+Thanks,
+RiskPal Team
+
+
+Hello Approving Manager, mahesh
+
+your account has been created by organization admin, please check the below credentials 
+
+Email :mahesh123@yopmail.com
+Password :v72gnH5adn 
+
+Thanks,
+RiskPal Team
+
+Hello, monday
+
+your account has been created by organization admin, please check the below credentials 
+
+Email :mondaytraveller@yopmail.com
+Password :p4h8idJN 
+
+Thanks,
+RiskPal Team
+
+http://34.214.77.166/users/sign_in 
+u-bisht.hemant
+p-Password@hb01
+
+
+git commands
+1) git checkout develop //in the morning 
+2) git pull origin develop
+3) git checkout -b feture-name-you-are-working-on
+4) git commit -am "Comments & Messges"
+5) git push origin feture-name-you-are-working-on
+
+creat

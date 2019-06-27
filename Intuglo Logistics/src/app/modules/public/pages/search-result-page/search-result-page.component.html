@@ -1,0 +1,43 @@
+<navbar></navbar>
+<searchbox-navbar></searchbox-navbar>
+<div id="result_list" class="subSet search-result-list relative centered90">
+  <div class="left result-filter">
+    <result-filter></result-filter>  
+  </div>
+  <div class="right search-summary">
+    <div><search-summary></search-summary></div>
+    {{ngNextStart()}}
+    <div *ngFor="let item of searchCollection"> 
+      <search-result *ngFor="let item of searchResultCollection | slice:i:loopIndex;  let x = index" [searchResult]='item'></search-result>
+      <div class="col-md-12 fixed-ads-padding"> {{ngNextEnd()}} </div>
+    </div>
+  </div>    
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12 col-lg-12" style="padding: 0px;">
+    <div id="result_list" class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <search-summary></search-summary>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <result-filter></result-filter>
+        </div>
+        <div class="col-md-9">
+          <result-sorting></result-sorting> {{ngNextStart()}}
+          <div *ngFor="let item of searchCollection"> 
+            <search-result *ngFor="let item of searchResultCollection | slice:i:loopIndex;  let x = index" [test]='item'></search-result>
+
+            <div class="col-md-12 fixed-ads-padding"> {{ngNextEnd()}}
+              <fixed-ads ></fixed-ads>
+            </div>
+          </div> 
+        </div>
+      </div>
+      <result-pagination></result-pagination>
+    </div>
+  </div>
+</div> -->

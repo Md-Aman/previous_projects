@@ -1,0 +1,7 @@
+node_modules/
+.gitlab-ci.yml
+.idea/
+.scannerwork/
+.DS_Store
+package-lock.json
+clientPortal/pdf/

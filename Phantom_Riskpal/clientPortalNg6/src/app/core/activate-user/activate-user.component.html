@@ -1,0 +1,52 @@
+<div class="backgroundBg">
+  <div class="subSet">
+      <div class="loginPanel">
+        <img src="../../../assets/images/logo.png">
+        <p class="text-center"> Activate User </p>
+
+        <div class="card-body _upd">
+          <form [formGroup]="resetPasswordForm" (ngSubmit)="submit()">
+            <div class="form-group" [customErrorMessages]="customErrorMessages">
+              <label>New Password</label>
+              <input type="password" formControlName="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }"
+              />
+              <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                <!-- <div *ngIf="f.Password.errors.required">Password is required</div> -->
+                <div *ngIf="f.Password.errors.pattern">Must contain one lower & uppercase letter, and one non-alpha character (a number or a symbol.)</div>
+                <!-- <div *ngIf="f.Password.errors.minlength">Password must be at least 6 characters</div> -->
+              </div>
+            </div>
+            <div class="form-group" [customErrorMessages]="customErrorMessages">
+              <div class="subSet">
+                <label class="left">Confirm New Password</label>
+              </div>
+              <input type="password" formControlName="ConfirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ConfirmPassword.errors }"
+              />
+              <!-- <div *ngIf="submitted && f.ConfirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.ConfirmPassword.errors.required">Password is required</div>
+                <div *ngIf="f.ConfirmPassword.errors.minlength">Must contain one lower & uppercase letter, and one non-alpha character (a number or a symbol.)</div>
+              </div> -->
+            </div>
+
+            <!-- <div class="form-group">
+              <div class="subSet">
+                <label class="left">Mobile Number</label>
+              </div>
+              <int-phone-prefix 
+                  formControlName="mobile_number"></int-phone-prefix>
+              
+              <div *ngIf="submitted && f.mobile_number.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile_number.errors.required">Mobile Number is required</div>
+              </div>
+            </div> -->
+
+            <button [disabled]="loading" type="submit" class="btn btn-secondary btn-sm btn-block _custom">Save</button>
+            <!-- <div class="loading"> -->
+            <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+            <!-- </div> -->
+          </form>
+        </div>
+        <!-- <a class="login" routerLink="/login">Login</a> -->
+      </div>
+  </div>
+</div>

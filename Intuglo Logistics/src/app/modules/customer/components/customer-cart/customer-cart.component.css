@@ -1,0 +1,34 @@
+.dashboard-layout { background: #fff;}
+.dashboard-layout h2 { padding: 30px; color: #333333; font-size: 20px; font-weight: 400; margin: 0; text-transform: capitalize;}
+.dashboard-layout .content-area { background: #F8F9FC; padding: 30px;}
+.dashboard-layout .content-area .download { margin-bottom: 10px; margin-top: -30px;}
+.dashboard-layout .content-area .download .btn-download { background: url(../../../../../assets/img/icon-download.svg) left center no-repeat; font-size: 14px; color: #D2421F; font-weight: 100; text-transform: uppercase; cursor: pointer; padding: 5px 10px 5px 24px; background-size: 16px;}
+.dashboard-layout .content-area .company-address { margin-bottom: 10px;}
+.dashboard-layout .content-area .company-address p { font-size: 14px; color: #333333; font-weight: 100; margin: 0 0 5px 0; }
+.dashboard-layout .content-area .custom-table { border: 1px solid #E1E1E1;}
+.dashboard-layout .content-area .custom-table table { border-collapse: collapse;}
+.dashboard-layout .content-area .custom-table table tr { background: #fff;}
+.dashboard-layout .content-area .custom-table table tr:nth-child(odd) { background: #eaf1f8;}
+.dashboard-layout .content-area .custom-table table th { font-size: 14px; color: #333; font-weight: 500; padding: 15px;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(224,224,225,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(224,224,225,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e1', GradientType=0 );}
+.dashboard-layout .content-area .custom-table table td .btn-delete { background: url(../../../../../assets/img/icon-delete.svg) center center no-repeat; width: 16px; height: 16px; cursor: pointer; display: block;}
+.dashboard-layout .content-area .custom-table table td { font-size: 14px; color: #333; font-weight: 100; padding: 15px;}
+.dashboard-layout .content-area .custom-table.right { width: 300px; position: relative; top: -1px;}
+.dashboard-layout .content-area .custom-table.right table td {font-weight: 600;}
+.text-center { text-align: center;}
+.text-right { text-align: right;}
+table tr>td { vertical-align: text-top; padding-left: 15px; text-transform: none; }
+.default-buttons { margin-top: 10px;}
+.default-buttons .btn-primary { display: inline-block; text-align: center; background: #F58220; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #ffffff; cursor: pointer; margin-right: 5px; border: 1px solid #F58220; padding: 0 10px;}
+.default-buttons .btn-primary:disabled { opacity: .8; cursor: no-drop;}
+.default-buttons .btn-secondary { display: inline-block; text-align: center; background: transparent; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #F58220; cursor: pointer; margin-right: 5px; border: 1px solid #F58220; padding: 0 10px;}
+.empty-message { padding: 30px; font-size: 14px; color: #000; text-align: center; background: #f1f4f8; }
+:host >>> .modal-header .close { display: none;}
+.transaction-fee { position: absolute; margin: 10px auto; text-align: center; width: calc(100% - 300px);}

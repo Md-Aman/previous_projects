@@ -1,0 +1,18 @@
+<div class="subSet _header">
+  <div class="left _breadcrumb">
+    <span class="_n" [routerLink]="['/secure/dashboard']">Dashboard</span>
+    <ng-container *ngFor="let menu of breadCrum">
+      <span> / </span>
+      <span class="_b" [routerLink]="menu.url">{{menu.name}}</span>
+    </ng-container>
+   
+
+  </div>
+  <div class="right action">
+    <div class="left _upd">
+      <span class="_dashboard left" [routerLink]="['/secure/dashboard']"></span>
+      <span (click)="userProfile()" class="_user left"></span>
+    </div>
+    <span class="logout" (click)="logout()">Logout</span>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<div class="box">
+  <span (click)="onCloseCancel()" class="cross"></span>
+  <h2>Quotation Details</h2>
+  <div class="form-group">
+    <label>Quotation Id</label>
+    <input class="form-control input-sm" value={{quotationDetails.quotation_id}} readonly>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Supplier Quotation Reference No.</label>
+      <input class="form-control input-sm" value={{quotationDetails.quote_ref_no}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Quotation For</label>
+      <input class="form-control input-sm" value={{quotationDetails.shipper_type}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Vessel/Flight No.</label>
+    <input class="form-control input-sm" value={{quotationDetails.vessel_no}} readonly>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>ETD</label>
+      <input class="form-control input-sm" value={{quotationDetails.departure_date}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>ETA</label>
+      <input class="form-control input-sm" value={{quotationDetails.arrival_date}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Departure Port/Terminal</label>
+      <input class="form-control input-sm" value={{quotationDetails.port_name_departure}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Arrival Port/Terminal</label>
+      <input class="form-control input-sm" value={{quotationDetails.port_name_arrival}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Custom Broker</label>
+      <input class="form-control input-sm" value={{quotationDetails.agent_name}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Container Types</label>
+      <input class="form-control input-sm" value={{quotationDetails.container_types}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Shipment Types</label>
+      <input class="form-control input-sm" value={{quotationDetails.shipment_type_id}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Incoterms</label>
+      <input class="form-control input-sm" value={{quotationDetails.incoterm_code}} readonly>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <h2 id="form-title" style="margin-right: 587px; margin-top: 0px; margin-bottom: 0px;">container boxes for sale</h2>
+    <h2 id="form-title" style="margin-left: 200px; margin-top: 0px; margin-bottom: 0px;">air space load for sale</h2>
+  </div> -->
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <h2 id="form-title">Container boxes for sale</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Quantity</label>
+          <input class="form-control input-sm" value={{quotationDetails.container_box_count}} readonly>
+        </div>
+        <div class="col-md-6">
+          <label>Size</label>
+          <input class="form-control input-sm" value={{quotationDetails.container_box_size}} readonly>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2 id="form-title">Air space load for sale</h2>
+      <div class="row">
+        <!-- Previous requirements
+        <div class="col-md-6">
+          <label>Quantity</label>
+          <input class="form-control input-sm" value={{quotationDetails.air_space_count}} readonly>
+        </div> -->
+        <div class="col-md-12">
+          <label>Size</label>
+          <input class="form-control input-sm" value={{quotationDetails.air_space_size}} readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Cargo Transit Time</label>
+      <input class="form-control input-sm" value={{quotationDetails.cargo_transit_duration}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Number of Transit Port Terminal</label>
+      <input class="form-control input-sm" value={{quotationDetails.number_of_transit_ports}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Halal Consolidation Warehouse At Departure</label>
+      <input class="form-control input-sm" value={{quotationDetails.halal_consolidation}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Halal Un-Stuffing Warehouse At Arrival</label>
+      <input class="form-control input-sm" value={{quotationDetails.halal_unstuffing}} readonly>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label>Consolidation Warehouse At Departure</label>
+      <input class="form-control input-sm" value={{quotationDetails.consolidation}} readonly>
+    </div>
+    <div class="col-md-6">
+      <label>Un-Stuffing Warehouse At Arrival</label>
+      <input class="form-control input-sm" value={{quotationDetails.unstuffing}} readonly>
+    </div>
+  </div>
+</div>

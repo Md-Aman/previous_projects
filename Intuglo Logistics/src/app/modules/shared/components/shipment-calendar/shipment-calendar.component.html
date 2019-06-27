@@ -1,0 +1,59 @@
+<h2 class="cal-title">Vessel Calendar</h2>
+<div class="calendar-main">
+  <div class="subSet">
+    <div class="subSet top-bar">
+      <div class="left prev"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="monthChanged(viewDate);activeDayIsOpen = false">
+      </div>
+      <h4 class="date-calendar">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h4>
+      <div class="right next" 
+        mwlCalendarNextView 
+        [view]="view" 
+        [(viewDate)]="viewDate"
+        (viewDateChange)="monthChanged(viewDate);activeDayIsOpen = false">
+      </div>
+      <div style="display: none"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+        (click)="monthChanged(viewDate)" id='todayCalendar'>
+        Today
+      </div>
+    </div>
+    <div class="calendarView__landing" [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)">
+      </mwl-calendar-month-view>
+    </div>
+  </div>
+
+  <h6 class="msg">{{viewDate | date:"LLL yyyy"}} - {{events.length}} Vessels available</h6>
+  
+  <div class="vessels-list" *ngIf="vessels.length > 0">
+    <span class="cross" (click)="vessels = []"></span>
+    <h4>{{viewDate | date:"dd LLL yyyy"}} | <span>Available Vessels</span></h4>
+    <div (click)="selectVesselForParent(vessel);" class="vessels-gray cursor-pointer subSet" *ngFor="let vessel of vessels; let i=index;">
+      <div class="wid-30 left">
+        <div class="desc">
+          <p>{{vessel.etd}}</p>
+          <p class="text-center">-</p>
+          <p>{{vessel.eta}}</p>
+        </div>
+      </div>
+      <div class="wid-70 left">
+        <div class="desc">
+          <p>{{vessel.port_name_arrival}}</p>
+          <p>{{vessel.port_name_departure}}</p>
+          <p class="gray">Vessel # {{vessel.vessel_no}}</p>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+  

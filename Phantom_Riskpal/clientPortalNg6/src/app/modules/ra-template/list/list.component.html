@@ -1,0 +1,34 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true}"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Risk Assessment Templates</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" routerLink="/secure/ra-template/create/template-details">
+    <img class="left" src="../../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW RISK</span>
+      <span class="_b">Assessment Template</span>
+    </div>
+  </div>
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="1">Added by</option></select>
+    <select><option value="1">All dates</option></select>
+    <form [formGroup]="searchRaTemplateForm" (submit)="searchRaTemplate(searchRaTemplateForm.value.searchKey)">
+    <div class="relative">
+        <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Templates...">
+        <span (click)="searchRaTemplate(_search.value)" class="_search-icon"></span>
+      </div>
+    </form>
+  </div>
+  <div class="_tableData">
+    <app-simple-table 
+    [rows]="rows" 
+    [columns]="columns" 
+    [page]="page" 
+    [messages]="messages"
+    (emitEventChange)="receiveEvent($event)">
+    </app-simple-table>
+  </div>
+</div>

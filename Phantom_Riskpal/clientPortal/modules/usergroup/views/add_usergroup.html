@@ -1,0 +1,821 @@
+<style>
+  .main_menu{
+      font-weight: bold !important; 
+  }
+
+</style>
+
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getAllClients();">
+    <h1>
+          User Group
+      </h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li class="active">Create Usergroup</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+      <section class="col-lg-12">
+      <form role="form" name="user_form" novalidate class="form-horizontal">
+       
+              <div class="box box-primary" >
+                     <div class="box-header with-border">
+              </div>
+              <div class="box-body"  > 
+                <div class="form-group col-sm-3">
+                <div class="box-header">
+                  <h3 class="box-title">Create Usergroup
+                  </h3>
+                </div>
+              </div>
+
+              
+               
+                <div class="row">
+                  <div class="form-group col-sm-12">
+                        <div class="col-sm-1"></div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-12 text-left">Group name</label>
+                      <div class="col-sm-12">
+                       <input type="text" class="form-control" id="groupname" name="groupname" placeholder="Enter Group Name" required ng-model="usergroup.groupname" maxlength="50" />
+                      <span class="text-danger" ng-show="user_form.groupname.$dirty &&  user_form.groupname.$error.required">Group name is required</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-sm-7">
+                        <label class="col-sm-4  text-right">Group type :</label></br>
+                        
+                          <div class="col-sm-4">
+                          
+                            <input type="radio" ng-value="'default'" ng-model="usergroup.typeof_group">
+                            <label class="text-left">Default Group</label>
+                          </div>
+                          <div class="col-sm-4">
+                          
+                            <input type="radio" ng-value="'client'" ng-model="usergroup.typeof_group">
+                            <label>Client Group</label>
+                        
+                        </div>
+
+                        
+                    </div>
+
+                </div>
+                    
+                </div>
+
+                <div class="row"  ng-show="usergroup.typeof_group =='client'">
+                        <div class="form-group col-sm-12">
+                                <div class="col-sm-1"></div>
+                            <div class="form-group col-sm-4">
+                              <label class="col-sm-12 text-left">Client</label>
+                              <div class="col-sm-12">
+                                    <select class="form-control" name="client" id="client" ng-model="usergroup.client" ng-required="usergroup.typeof_group =='client'">
+                                            <option ng-selected="true" value="0">Select client</option>
+                                            <option ng-repeat="option in clientArr" value="{{option}}">{{option.company_name}}</option>
+                                          </select>
+                                          <span class="text-danger" ng-show="user_form.client.$dirty &&  user_form.client.$error.required">Client is required</span>
+                              </div>
+                            </div>
+                            </div>
+                            </div>
+                              
+                            
+                             
+                </div>
+
+                <div class="row ">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                      
+                       
+                        <table class="table table-bordered table-align-center" ng-table="tableParams" >
+                                <thead>
+                                    <tr >
+                                      
+                                        <th style="text-align:left;width:250px" >Menus
+                                        </th>
+                                        <th style="text-align:left;">PERMISSION
+                                           
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                      
+                                                <td class="main_menu">My Travel </td>
+                                                <td>
+                                                    <div class="demo-checkbox">
+        
+                                                        <input type="checkbox" id="mytravel" ng-model="usergroup.mytravel" ng-true-value="1" ng-false-value="0" ng-click="mytravelall()"
+                                                            class="filled-in chk-col-green permission" /> <label
+                                                            for="mytravel"></label>
+        
+                                                    </div>
+                                                </td>
+        
+                                            </tr>
+        
+                                            <tr>
+                                               
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessments
+                                                    </td>
+                                                <td><div class="demo-checkbox">
+        
+                                                        <input type="checkbox" id="riskassessment" ng-model="usergroup.riskassessment"  ng-true-value="1" ng-false-value="0"
+                                                            class="filled-in chk-col-green permission" /> <label
+                                                            for="riskassessment"></label>
+        
+                                                    </div></td>
+        
+                                            </tr>
+
+                                            <tr>
+                                               
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessment for Others
+                                                    </td>
+                                                <td><div class="demo-checkbox">
+        
+                                                        <input type="checkbox" id="riskassessmentothers" ng-model="usergroup.riskassessmentothers"  ng-true-value="1" ng-false-value="0"
+                                                            class="filled-in chk-col-green permission" /> <label
+                                                            for="riskassessment"></label>
+        
+                                                    </div></td>
+        
+                                            </tr>
+
+
+                                            <tr>
+                                       
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check in 
+                                                        </td>
+                                                    <td><div class="demo-checkbox">
+            
+                                                            <input type="checkbox" id="checkinlog" ng-model="usergroup.checkinlog"  ng-true-value="1" ng-false-value="0"
+                                                                class="filled-in chk-col-green permission" /> <label
+                                                                for="checkinlog"></label>
+            
+                                                        </div></td>
+            
+                                                </tr>
+                                                <tr>
+                                   
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact 
+                                                            </td>
+                                                        <td><div class="demo-checkbox">
+                
+                                                                <input type="checkbox" id="contact" ng-model="usergroup.contact" ng-true-value="1" ng-false-value="0"
+                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                    for="contact"></label>
+                
+                                                            </div></td>
+                
+                                                    </tr>
+
+                                                    <tr>
+                                   
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accidents/Incidents 
+                                                            </td>
+                                                        <td><div class="demo-checkbox">
+                
+                                                                <input type="checkbox" id="accidents" ng-model="usergroup.accidents"  ng-true-value="1" ng-false-value="0"
+                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                    for="accidents"></label>
+                
+                                                            </div></td>
+                
+                                                    </tr>
+
+                                                    <tr>
+                                       
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country List
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="countrylist" ng-model="usergroup.countrylist"  ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="countrylist"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+                                                        <tr>
+                                           
+                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suppliers 
+                                                                    </td>
+                                                                <td><div class="demo-checkbox">
+                        
+                                                                        <input type="checkbox" id="suppliers" ng-model="usergroup.suppliers" ng-true-value="1" ng-false-value="0"
+                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                            for="suppliers"></label>
+                        
+                                                                    </div></td>
+                        
+                                                            </tr>
+    
+                                                            <tr>
+                                           
+                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reports
+                                                                    </td>
+                                                                <td><div class="demo-checkbox">
+                        
+                                                                        <input type="checkbox" id="reports" ng-model="usergroup.reports"  ng-true-value="1" ng-false-value="0"
+                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                            for="reports"></label>
+                        
+                                                                    </div></td>
+                        
+                                                            </tr>
+    
+
+
+
+
+
+
+                                    <tr>
+                                      
+                                        <td class="main_menu">Track & Connect </td>
+                                        <td>
+                                            <div class="demo-checkbox">
+
+                                                <input type="checkbox" id="trackmanage" ng-model="usergroup.trackmanage" ng-true-value="1" ng-false-value="0" ng-click="trackmanageall()"
+                                                    class="filled-in chk-col-green permission" /> <label
+                                                    for="trackmanage"></label>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                       
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View Live Travel
+                                            </td>
+                                        <td><div class="demo-checkbox">
+
+                                                <input type="checkbox" id="currenttravel" ng-model="usergroup.currenttravel"  ng-true-value="1" ng-false-value="0"
+                                                    class="filled-in chk-col-green permission" /> <label
+                                                    for="currenttravel"></label>
+
+                                            </div></td>
+
+                                    </tr>
+                                   
+                                        <tr>
+                                       
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessment Pending
+                                                    </td>
+                                                <td><div class="demo-checkbox">
+        
+                                                        <input type="checkbox" id="riskassessments" ng-model="usergroup.riskassessments"   ng-true-value="1" ng-false-value="0"
+                                                            class="filled-in chk-col-green permission" /> <label
+                                                            for="riskassessment"></label>
+        
+                                                    </div></td>
+        
+                                            </tr>
+                                            <tr>
+                                       
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessment Override
+                                                    </td>
+                                                <td><div class="demo-checkbox">
+        
+                                                        <input type="checkbox" id="riskassessmentsoverride" ng-model="usergroup.riskassessmentsoverride"   ng-true-value="1" ng-false-value="0"
+                                                            class="filled-in chk-col-green permission" /> <label
+                                                            for="riskassessmentsoverride"></label>
+        
+                                                    </div></td>
+        
+                                            </tr>
+                                            <tr>
+                                                           
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Communicate
+                                                        </td>
+                                                    <td><div class="demo-checkbox">
+            
+                                                            <input type="checkbox" id="communicate" ng-model="usergroup.communicate"   ng-true-value="1" ng-false-value="0"
+                                                                class="filled-in chk-col-green permission" /> <label
+                                                                for="communicate"></label>
+            
+                                                        </div></td>
+            
+                                                </tr>
+                                                <tr>
+                                   
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accidents/Incidents 
+                                                        </td>
+                                                    <td><div class="demo-checkbox">
+            
+                                                            <input type="checkbox" id="taccidents" ng-model="usergroup.taccidents"  ng-true-value="1" ng-false-value="0"
+                                                                class="filled-in chk-col-green permission" /> <label
+                                                                for="taccidents"></label>
+            
+                                                        </div></td>
+            
+                                                </tr>
+
+
+
+                                            
+                                                                                                      <tr>
+                                       
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medical Info Requests
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="medical" ng-model="usergroup.medical"  ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="medical"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+
+                                                     
+                    
+                                                       
+
+
+                                                        <tr>
+                                      
+                                                            <td class="main_menu"> User Information</td>
+                                                            <td>
+                                                                <div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="userinfo" ng-model="usergroup.userinfo" ng-true-value="1" ng-false-value="0" ng-click="userinfoall()"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="userinfo"></label>
+                    
+                                                                </div>
+                                                            </td>
+                    
+                                                        </tr>
+                    
+                                                        <tr>
+                                                           
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create & Edit Users
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="createusers" ng-model="usergroup.createusers"   ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="createusers"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+                                                        <tr>
+                                                           
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit User Group 
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="editusergroup" ng-model="usergroup.editusergroup"  ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="editusergroup"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+                                                        <tr>
+                                                           
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bulk upload user base
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="bulkupload" ng-model="usergroup.bulkupload"   ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /><label
+                                                                        for="bulkupload"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+
+
+                                                        <tr>
+                                      
+                                                            <td class="main_menu">Customise</td>
+                                                            <td>
+                                                                <div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="managesystem" ng-model="usergroup.managesystem" ng-true-value="1" ng-false-value="0" ng-click="managesystemall()"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="managesystem"></label>
+                    
+                                                                </div>
+                                                            </td>
+                    
+                                                        </tr>
+                    
+                                                        <tr>
+                                                           
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Departments
+                                                                </td>
+                                                            <td><div class="demo-checkbox">
+                    
+                                                                    <input type="checkbox" id="departments" ng-model="usergroup.departments"   ng-true-value="1" ng-false-value="0"
+                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                        for="departments"></label>
+                    
+                                                                </div></td>
+                    
+                                                        </tr>
+                                                       
+                                                            <tr>
+                                                           
+                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessment Templates 
+                                                                        </td>
+                                                                    <td><div class="demo-checkbox">
+                            
+                                                                            <input type="checkbox" id="riskassessmenttemplates" ng-model="usergroup.riskassessmenttemplates"  ng-true-value="1" ng-false-value="0"
+                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                for="riskassessmenttemplates"></label>
+                            
+                                                                        </div></td>
+                            
+                                                                </tr>
+                                                                
+                                                                    <tr>
+                                                           
+                                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Labels/Questions
+                                                                                </td>
+                                                                            <td><div class="demo-checkbox">
+                                    
+                                                                                    <input type="checkbox" id="labels" ng-model="usergroup.labels"  ng-true-value="1" ng-false-value="0"
+                                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                                        for="labels"></label>
+                                    
+                                                                                </div></td>
+                                    
+                                                                        </tr>
+                                                                        <!-- <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk Assessment Timer 
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="timer" ng-model="usergroup.timer"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="timer"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr> -->
+                    
+                                                                            <!-- <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country Risk Content 
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="countryrisk" ng-model="usergroup.countryrisk"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="countryrisk"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr> -->
+                                                                            <!-- <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity Type
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="activitytype" ng-model="usergroup.activitytype"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="activitytype"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr> -->
+                                                                            <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suppliers
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="csuppliers" ng-model="usergroup.csuppliers"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="csuppliers"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr>
+                                                                            <!-- <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource Library
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="resourcelib" ng-model="usergroup.resourcelib"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="resourcelib"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr> -->
+                                                                            <tr>
+                                                           
+                                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country Information
+                                                                                        </td>
+                                                                                    <td><div class="demo-checkbox">
+                                            
+                                                                                            <input type="checkbox" id="countryinfo" ng-model="usergroup.countryinfo"  ng-true-value="1" ng-false-value="0"
+                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                for="countryinfo"></label>
+                                            
+                                                                                        </div></td>
+                                            
+                                                                                </tr>
+                                                                                <tr>
+                                                               
+                                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country Threat Ratings
+                                                                                        </td>
+                                                                                    <td><div class="demo-checkbox">
+                                            
+                                                                                            <input type="checkbox" id="countrythreatcategories" ng-model="usergroup.countrythreatcategories"  ng-true-value="1" ng-false-value="0"
+                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                for="countrythreatcategories"></label>
+                                            
+                                                                                        </div></td>
+                                            
+                                                                                </tr>
+
+                                                                            <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email Templates
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="emailtemplates" ng-model="usergroup.emailtemplates"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="emailtemplates"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr>
+                                                                            <tr>
+                                                           
+                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit Content
+                                                                                    </td>
+                                                                                <td><div class="demo-checkbox">
+                                        
+                                                                                        <input type="checkbox" id="editcontent" ng-model="usergroup.editcontent"  ng-true-value="1" ng-false-value="0"
+                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                            for="editcontent"></label>
+                                        
+                                                                                    </div></td>
+                                        
+                                                                            </tr>
+
+                                                                            <tr>
+                                      
+                                                                                    <td class="main_menu"> Analytics</td>
+                                                                                    <td>
+                                                                                        <div class="demo-checkbox">
+                                            
+                                                                                            <input type="checkbox" id="analytics" ng-model="usergroup.analytics" ng-true-value="1" ng-false-value="0" ng-click="analyticsall()"
+                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                for="analytics"></label>
+                                            
+                                                                                        </div>
+                                                                                    </td>
+                                            
+                                                                                </tr>
+
+                                                                               
+                                                                                    <tr>
+                                                                                   
+                                                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Travel data
+                                                                                                </td>
+                                                                                            <td><div class="demo-checkbox">
+                                                    
+                                                                                                    <input type="checkbox" id="traveldata" ng-model="usergroup.traveldata"   ng-true-value="1" ng-false-value="0"
+                                                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                                                        for="traveldata"></label>
+                                                    
+                                                                                                </div></td>
+                                                    
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                   
+                                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supplier data
+                                                                                                    </td>
+                                                                                                <td><div class="demo-checkbox">
+                                                        
+                                                                                                        <input type="checkbox" id="supplierdata" ng-model="usergroup.supplierdata"   ng-true-value="1" ng-false-value="0"
+                                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                                            for="supplierdata"></label>
+                                                        
+                                                                                                    </div></td>
+                                                        
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                   
+                                                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accident data
+                                                                                                        </td>
+                                                                                                    <td><div class="demo-checkbox">
+                                                            
+                                                                                                            <input type="checkbox" id="accidentdata" ng-model="usergroup.accidentdata"   ng-true-value="1" ng-false-value="0"
+                                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                                for="accidentdata"></label>
+                                                            
+                                                                                                        </div></td>
+                                                            
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                   
+                                                                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Management data
+                                                                                                            </td>
+                                                                                                        <td><div class="demo-checkbox">
+                                                                
+                                                                                                                <input type="checkbox" id="managementdata" ng-model="usergroup.managementdata"   ng-true-value="1" ng-false-value="0"
+                                                                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                                                                    for="managementdata"></label>
+                                                                
+                                                                                                            </div></td>
+                                                                
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                   
+                                                                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource Library
+                                                                                                                </td>
+                                                                                                            <td><div class="demo-checkbox">
+                                                                    
+                                                                                                                    <input type="checkbox" id="analyticsresoucre" ng-model="usergroup.analyticsresoucre"   ng-true-value="1" ng-false-value="0"
+                                                                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                                                                        for="analyticsresoucre"></label>
+                                                                    
+                                                                                                                </div></td>
+                                                                    
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                   
+                                                                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Training & Medical
+                                                                                                                    </td>
+                                                                                                                <td><div class="demo-checkbox">
+                                                                        
+                                                                                                                        <input type="checkbox" id="training" ng-model="usergroup.training"   ng-true-value="1" ng-false-value="0"
+                                                                                                                            class="filled-in chk-col-green permission" /> <label
+                                                                                                                            for="training"></label>
+                                                                        
+                                                                                                                    </div></td>
+                                                                        
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                   
+                                                                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App usage
+                                                                                                                        </td>
+                                                                                                                    <td><div class="demo-checkbox">
+                                                                            
+                                                                                                                            <input type="checkbox" id="appusage" ng-model="usergroup.appusage"   ng-true-value="1" ng-false-value="0"
+                                                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                                                for="appusage"></label>
+                                                                            
+                                                                                                                        </div></td>
+                                                                            
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                   
+                                                                                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User data
+                                                                                                                            </td>
+                                                                                                                        <td><div class="demo-checkbox">
+                                                                                
+                                                                                                                                <input type="checkbox" id="userdata" ng-model="usergroup.userdata"   ng-true-value="1" ng-false-value="0"
+                                                                                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                                                                                    for="userdata"></label>
+                                                                                
+                                                                                                                            </div></td>
+                                                                                
+                                                                                                                    </tr>
+
+                                                                            <tr>
+                                      
+                                                                                    <td class="main_menu"> Resource Library</td>
+                                                                                    <td>
+                                                                                        <div class="demo-checkbox">
+                                            
+                                                                                            <input type="checkbox" id="resourcelib" ng-model="usergroup.resourcelib" ng-true-value="1" ng-false-value="0" ng-click="resourceliball()"
+                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                for="resourcelib"></label>
+                                            
+                                                                                        </div>
+                                                                                    </td>
+                                            
+                                                                                </tr>
+                                            
+                                                                                <tr>
+                                                                                   
+                                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View
+                                                                                        </td>
+                                                                                    <td><div class="demo-checkbox">
+                                            
+                                                                                            <input type="checkbox" id="resourcelibview" ng-model="usergroup.resourcelibview"   ng-true-value="1" ng-false-value="0"
+                                                                                                class="filled-in chk-col-green permission" /> <label
+                                                                                                for="resourcelibview"></label>
+                                            
+                                                                                        </div></td>
+                                            
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                   
+                                                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit Library
+                                                                                            </td>
+                                                                                        <td><div class="demo-checkbox">
+                                                
+                                                                                                <input type="checkbox" id="resourcelibedit" ng-model="usergroup.resourcelibedit"   ng-true-value="1" ng-false-value="0"
+                                                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                                                    for="resourcelibedit"></label>
+                                                
+                                                                                            </div></td>
+                                                
+                                                                                    </tr>
+
+
+                                                                                    <tr>
+                                      
+                                                                                        <td class="main_menu"> My Profile</td>
+                                                                                        <td>
+                                                                                            
+                                                                                        </td>
+                                                
+                                                                                    </tr>
+                                                
+                                                                                    <tr>
+                                                                                       
+                                                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emergency Details
+
+                                                                                            </td>
+                                                                                        <td><div class="demo-checkbox">
+                                                
+                                                                                                <input type="checkbox" id="myprofileemrgncy" ng-model="usergroup.myprofileemrgncy"   ng-true-value="1" ng-false-value="0"
+                                                                                                    class="filled-in chk-col-green permission" /> <label
+                                                                                                    for="myprofileemrgncy"></label>
+                                                
+                                                                                            </div></td>
+                                                
+                                                                                    </tr>
+    
+                                                                                    <tr>
+                                                                                       
+                                                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medical Information
+
+                                                                                                </td>
+                                                                                            <td><div class="demo-checkbox">
+                                                    
+                                                                                                    <input type="checkbox" id="myprofilemedical" ng-model="usergroup.myprofilemedical"   ng-true-value="1" ng-false-value="0"
+                                                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                                                        for="myprofilemedical"></label>
+                                                    
+                                                                                                </div></td>
+                                                    
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                       
+                                                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Training Records
+
+                                                                                                </td>
+                                                                                            <td><div class="demo-checkbox">
+                                                    
+                                                                                                    <input type="checkbox" id="myprofiletraining" ng-model="usergroup.myprofiletraining"   ng-true-value="1" ng-false-value="0"
+                                                                                                        class="filled-in chk-col-green permission" /> <label
+                                                                                                        for="myprofiletraining"></label>
+                                                    
+                                                                                                </div></td>
+                                                    
+                                                                                        </tr>
+                                                                          
+                                                       
+
+
+
+                                   
+                              
+                                </tbody>
+                            </table>
+                        
+                    </div>
+
+                </div>
+                
+                    
+            </div>
+        </div>
+        
+              <div class="box-footer text-center" >
+                    <button  ng-disabled="user_form.$invalid" type="button" class="btn btn-primary" ng-click="saveUsergroup(usergroup);">Create Usergroup</button>
+
+                </div>
+          </form>
+        </div>
+     </section>
+  
+  

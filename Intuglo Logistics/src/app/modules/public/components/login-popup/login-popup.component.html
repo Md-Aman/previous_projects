@@ -1,0 +1,39 @@
+<div class="subSet relative login-popup">
+  <span (click)="onCloseCancel()" class="login-popup-close"></span>
+  <div class="left width50">
+    <div class="login-section">
+      <p class="login-intuglo">Login</p>
+      <div *ngIf="!validUser" class="alert alert-danger">
+        <span *ngFor="let item of errorHandling">{{item}}</span>
+      </div>
+      <form>
+        <div class="form-group">
+          <label for="username" class="email-address-password">Email address</label>
+          <input type="email" [(ngModel)]="userEmail" name="email" placeholder="Your email here" class="form-control"
+            [invalidTooltip]="{required: 'This field is required', pattern: 'Please enter valid email'}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="email-address-password">Password</label>
+          <input type="password" name="password" [(ngModel)]="password" placeholder="********" class="form-control">
+        </div>
+
+        <div>
+          <a href="#" class="forget-password">Forget your password</a>
+          <a class="login" (click)="verifiedUser()">Log In</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <span class="sprt"></span>
+  <div class="left width50">
+    <div class="signup">
+      <p class="welcome-to-www-intug">New user? Register</p>
+      <p class="choose-option">Please choose one of the option below</p>
+      <a href="#" class="btn-customer-partner" (click)="openSignupDialog();shareUserTypeCustomer();">Customer</a>
+      <a href="#" class="btn-customer-partner" (click)="openSignupDialog();shareUserTypeSupplier();">Logistic Partner</a>
+      <a href="#" class="btn-customer-partner">Custom Agent</a>
+    </div>
+  </div>
+</div>

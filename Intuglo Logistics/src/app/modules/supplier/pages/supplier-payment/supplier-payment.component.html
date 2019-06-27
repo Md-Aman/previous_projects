@@ -1,0 +1,28 @@
+<!-- <supplier-payment-list></supplier-payment-list> -->
+<supplier-navbar (controlSideBar)="receiveDataFromHeader($event)"></supplier-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <supplier-left-menu [sideBar]="isSideBarOpen" [fromPayments]='isOpen'></supplier-left-menu>
+    </ng-sidebar>
+
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>Payment</h2>
+        <div class="content-area">
+            <!-- <div>
+                <supplier-payment-country-list (shareDataToSupplierQuotation)="receiveCountryId($event)"></supplier-payment-country-list>
+            </div>
+            <div>
+                <supplier-payment-list-filter (shareVesselInfoToQuotationTable)="receiveVesselInfo($event)" [selectedCountry]="selectedCountry"></supplier-payment-list-filter>
+            </div>
+            <div>
+                <supplier-payment-action-button></supplier-payment-action-button>
+            </div> -->
+            <div>
+                <supplier-payment-list [filterVesselFromQuotation]="filterVesselFromQuotation"></supplier-payment-list>
+            </div>
+        </div>
+    </div>
+
+</ng-sidebar-container>

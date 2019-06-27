@@ -1,0 +1,186 @@
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12" style="padding: 0px;">
+            <div class="box box-primary box-solid">
+    <div class="box-header">
+      <h3 class="box-title">Add Contingencies</h3>
+    </div>
+   <form role="form" name="contingenciesForm" novalidate class="form-horizontal form-border">
+    <div class="box-body">
+      <div class="">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="travellerFirstName">
+              <h4>What medical provision/skill is there to treat a casualty at point of injury?</h4></label>
+            <input class="form-control" name="provision" autocomplete="off" name="medical_provision" ng-model="contingencies.medical_provision" type="text" placeholder="Medical Provision" required>
+            <span class="text-danger" ng-show="contingenciesForm.medical_provision.$dirty &&  contingenciesForm.medical_provision.$error.required">Medical provision is required</span>
+          </div>
+        </div>
+      </div>
+      <div class="">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="DateofBirth">
+                <h4>Local hospital information</h4></label>
+              <input class="form-control" autocomplete="off" name="detail_nearest_hospital" ng-model="contingencies.detail_nearest_hospital" type="text" placeholder="Local hospital information" required>
+              <span class="text-danger" ng-show="contingenciesForm.detail_nearest_hospital.$dirty &&  contingenciesForm.detail_nearest_hospital.$error.required">Detail Nearest Hospital is required</span>
+            </div>
+          </div>
+        </div>
+  
+      <div class="">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="DateofBirth">
+              <h4>Method of evacuation to nearest hospital (self drive/ambulance etc)</h4></label>
+            <input class="form-control" autocomplete="off" name="method_of_evacuation" ng-model="contingencies.method_of_evacuation" type="text" placeholder="Method of evacuation" required>
+            <span class="text-danger" ng-show="contingenciesForm.method_of_evacuation.$dirty &&  contingenciesForm.method_of_evacuation.$error.required">Method of evacuation is required</span>
+          </div>
+        </div>
+      </div>
+           <div class="">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="DateofBirth">
+              <h4>Medical Evacuation Company</h4></label>
+            <input class="form-control" autocomplete="off" name="medevac_company" ng-model="contingencies.medevac_company" type="text" placeholder="Medical Evacuation Company" required>
+            <span class="text-danger" ng-show="contingenciesForm.medevac_company.$dirty &&  contingenciesForm.medevac_company.$error.required">Medical Evacuation Company is required</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-left: 20px;">
+        <label for="DateofBirth">
+          <h4>Specialist kit being taken</h4></label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="contingencies.sat_phone_number" />Sat Phone/ Number
+            <span> 
+             <input ng-if="contingencies.sat_phone_number"  ng-model="contingencies.no_of_satellite_phone" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+             </span>
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="contingencies.tracker_id" /> Tracker/ID <span> 
+            <input ng-if="contingencies.tracker_id"  ng-model="contingencies.no_of_tracker" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+             </span>
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="contingencies.first_aid_kit" /> First Aid Kit
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="contingencies.personal_protective_equipment" /> Personal Protective Equipment
+          </label>
+        </div>
+      </div>
+      <div style="clear: both;"></div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="DateofBirth">
+              <h4>Want to share this information with traveller</h4></label>
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" ng-model="contingencies.contingency_preview" id="myonoffswitch" checked>
+              <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+  <div class="box-footer" style="float: right;">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="backFromStep2();"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addRaContingencyByClientAdmin(contingencies);">Next<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+</section>
+</div>
+</section>
+<style>
+.onoffswitch {
+  position: relative;
+  width: 90px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 20px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "Yes";
+  padding-left: 10px;
+  background-color: #00bc8c;
+  color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+  content: "No";
+  padding-right: 10px;
+  background-color: red;
+  color: #FFFFFF;
+  text-align: right;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 56px;
+  border: 2px solid #999999;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+
+</style>

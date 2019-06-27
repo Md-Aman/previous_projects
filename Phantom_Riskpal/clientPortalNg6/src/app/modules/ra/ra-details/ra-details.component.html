@@ -1,0 +1,129 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true}"></ngx-loading>
+<form [formGroup]="raDetailsForm" (submit)="submitForm(raDetailsForm.value)">
+
+  <div class="accord-content">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Project Name</label>
+        <input type="text" formControlName="projectName" class="form-control">
+      </div>
+      <div class="form-group col-md-3">
+        <label>From</label>
+        <div class="relative _updCal">
+          <input type="text" #dp1="bsDatepicker" formControlName="dateFrom" class="form-control" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+            bsDatepicker>
+          <span class="arrow" (click)="dp1.toggle()" [attr.aria-expanded]="dp1.isOpen"></span>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label>To</label>
+        <div class="relative _updCal">
+          <input type="text" #dp2="bsDatepicker" [minDate]="raDetailsForm.value.dateFrom" formControlName="dateTo" class="form-control"
+            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" bsDatepicker>
+          <span class="arrow" (click)="dp2.toggle()" [attr.aria-expanded]="dp2.isOpen"></span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Department</label>
+        <ng-select [items]="departments" [multiple]="true" [closeOnSelect]="false" bindLabel="department_name" formControlName="department">
+          <ng-template ng-header-tmp>
+            <span type="button" (click)="selectAllDepartment()" class="btn btn-sm btn-secondary">Select all</span>
+            &nbsp;
+            <span type="button" (click)="unSelectAllDepartment()" class="btn btn-sm btn-secondary">Unselect all</span>
+          </ng-template>
+        </ng-select>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="checkboxBlock">
+          <label>Are you travelling</label>
+          <div class="relative">
+            <input class="_customCheckbox" formControlName="travelingCheckbox" type="checkbox">
+            <label></label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4" *ngIf="raDetailsForm.value.travelingCheckbox == false">
+        <label>Select traveller in charge </label>
+        <ng-select [items]="primaryTravelers" (change)="filterTravelerIncharge($event._id)" [multiple]="false" [closeOnSelect]="true" bindLabel="name"
+          formControlName="primaryTraveler">
+        </ng-select>
+      </div>
+    </div>
+
+    <div formArrayName="country">
+      <div class="row">
+        <ng-container *ngFor="let coun of raDetailsForm.get('country')['controls']; let i=index">
+          <ng-container [formGroupName]="i">
+            <div class="form-group col-md-3">
+              <label>Country</label>
+              <ng-select [items]="countries" [virtualScroll]="true" [searchFn]="customSearchFn" [multiple]="false" bindLabel="name" [closeOnSelect]="true" formControlName="country">
+              </ng-select>
+            </div>
+            <div class="form-group col-md-1">
+              <label></label>
+              <button *ngIf="raDetailsForm.get('country')['controls'].length > 1" type="button" class="btn btn-sm btn-danger _cross-field pull-left"
+                (click)="deleteCountry(i)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="_table no-border-margin" *ngIf="!maxCountry">
+          <div class="createNew" (click)="addCountry()">
+            <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+            <div class="left desc">
+              <span>ADD COUNTRY</span>
+            </div>
+          </div>
+        </div>
+
+        <span *ngIf="maxCountry">Max Country Limit Reached.</span>
+      </div>
+    </div>
+
+    <div class="row other-traveller">
+      <div class="form-group col-md-3">
+        <label>Other Travellers</label>
+        <ng-select [items]="otherTravelerWithFilter" (change)="filterOtherTraveler($event)" [multiple]="true" [closeOnSelect]="false" bindLabel="name" formControlName="otherTraveler">
+        </ng-select>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Approving Manager</label>
+        <ng-select [items]="approvingManagerArray" [multiple]="false" [closeOnSelect]="true" bindLabel="name" formControlName="approvingManager">
+        </ng-select>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="form-group col-md-12">
+        <label>Task Description</label>
+        <textarea class="form-control" rows="3" formControlName="taskDescription"></textarea>
+      </div>
+      <div class="form-group col-md-12" [customErrorMessages]="customErrorMessages2000">
+        <label>Itinerary Description</label>
+        <textarea class="form-control" rows="5" formControlName="itineraryDescription"></textarea>
+      </div>
+
+    </div>
+
+    <div class="subSet">
+      <div class="right _btn fixed">
+        <button type="submit" class="cont">
+          <span *ngIf="isUpdateRa else create">
+            Save & Continue
+          </span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<ng-template #create>
+  <span>Create Risk Assessment</span>
+</ng-template>

@@ -1,0 +1,129 @@
+<!-- Content Header (Page header) -->
+<!-- <section class="content-header" ng-init="getRaAnswers();">
+    <ol class="breadcrumb">
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+    </ol>
+</section> -->
+<!-- Main content -->
+<section class="content" ng-init="getRaAnswers();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+  <!-- <div class="box box-primary"> -->
+  <div >
+    <div ng-if="showLoader" class="col-lg-6 pull-right">
+      <div loader-css="ball-pulse"></div>
+    </div>
+    <!-- form start -->
+    <form role="form" name="questionnaireForm" novalidate class="form-horizontal">
+      <!--ng-if="showLoader" -->
+      <div >
+        <!--<div dir-paginate="ques in questionnaire |  itemsPerPage:2 ">-->
+        <div class="small-box bg-aqua" style="box-shadow: none">
+          <div class="inner" style="padding-bottom: 15px !important">
+            <div class="">
+                <div class="col-sm-12" style="font-size: 13px; color: #000; margin-bottom: 20px; font-family: 'Helvetica Neue', Helvetica,Arial,sans-serif; text-align: center;"><span style="color: red;">*</span>Please select relevant risks by using the tick box on the right side of each question. Review the advice and add additional measures that you will undertake during your trip.</div>
+              
+              
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="form-group col-sm-12" >
+          <div class="pull-right box-tools">
+          <button  type="button" class="btn btn-sm btn-primary" ng-click="addrisklabel()">Add Risk Labels & Questions</button>
+  
+          </div>
+        </div>
+        
+        <div class="col-sm-12" ng-repeat="ques in questionnaire track by $index">
+          <div class="clearfix"></div>
+          <div class="panel panel-primary">
+            <div class="panel-heading panel-heading-set">
+              <div class="row">
+              <div class="col-sm-10">
+                <p style="color: #FFF;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; " ng-bind-html="ques.question"></p>
+              </div>
+              <div class="col-sm-2">
+                <input  type="checkbox" class="form-control checkbox-set" id="ticked_{{$index}}" name="ticked_{{$index}}" ng-model="questionnaire[$index].ticked"  ng-click="addQuestionToRaTickbox(questionnaire[$index])"/>
+              </div>
+            </div>
+            </div>
+            <div class="panel-body">
+              <label class="label-for-best" style="">Best Practice Advice</label>
+              <p ng-bind-html="ques.best_practice_advice" style="color: #000; padding-left: 10px;"></p>
+              <h4 style="color: #000;"><b>Additional Information / Specific Mitigation</b></h4>
+             <div class="row">
+              <div class="col-sm-12">
+
+              <textarea   style="background-color: white;"  ng-model="questionnaire[$index].specific_mitigation" class="form-control" placeholder="Additional Information / Specific Mitigation"></textarea>
+              <span class="text-danger" ng-show="questionnaireForm.specific_mitigation_{{$index}}.$dirty &&  questionnaireForm.specific_mitigation_{{$index}}.$error.required">Specific Mitigation is required</span>
+            </div>
+            </div>
+            </div>
+            <!--panel body closed -->
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="form-group col-sm-12" >
+        <div class="pull-right box-tools">
+        <button  type="button" class="btn btn-sm btn-primary" ng-click="addrisklabel()">Add Risk Labels & Questions</button>
+
+        </div>
+      </div>
+      <div class="row">
+      <div class="form-group col-sm-12">
+        <div class="pull-right box-tools" >
+              <div ng-if="questionnaire.length == 0" style="text-align: center;font-size: 14px;color: red">No questions found for this category</div>
+
+        <span ng-if="questionnaire.length > 0" >
+            <button type="button" class="btn btn-sm btn-primary" ng-click="addQuestionToRa(questionnaire,'save')">Save And Return Later</button>
+
+        </span>
+        <span  >
+          <button  type="button" class="btn btn-sm btn-primary" ng-click="backToStep1()">Back</button>
+        </span>
+      <span  ng-if="questionnaire.length > 0"
+        <button ng-disabled="questionnaireForm.$invalid" style="" type="button" class="btn btn-sm btn-primary" ng-click="addQuestionToRa(questionnaire,'next');">Next</button>
+      </span>
+    
+     
+      <span  ng-if="questionnaire.length == 0">
+        <button ng-disabled="questionnaireForm.$invalid" style="" type="button" class="btn btn-sm btn-primary" ng-click="addquestionnexttab()">Next</button>
+      </span>
+    </div>
+    </div>
+    </div>
+    </form>
+  </div>
+  <!--   </div> -->
+</section>
+<!-- /.content -->
+<style>
+/*.box.box-primary {
+  border-top-color: #3c8dbc;
+  border-left-color: #3c8dbc;
+  border-right-color: #3c8dbc;
+  border-bottom-color: #3c8dbc;
+}
+
+.box {
+  position: relative;
+  background: #ffffff;
+  border-top: 2px solid #c1c1c1;
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+  border-bottom: 1px solid #c1c1c1;
+  margin-bottom: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: -11px;
+  width: 100%;
+  box-shadow: 43 34px 19px rgba(0, 0, 0, 0.1);
+}*/
+
+</style>

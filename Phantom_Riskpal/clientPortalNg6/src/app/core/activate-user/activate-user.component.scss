@@ -1,0 +1,40 @@
+@import 'styles.scss';
+
+.backgroundBg { background: url(../../../assets/images/bg.jpg) center center no-repeat; height: 100vh;}
+.loginPanel { background: #fff; width: 460px; margin: 100px auto; padding: 30px; border-radius: 4px; text-align: center;
+    img { margin-top: 20px;}
+    p {margin-top: 20px;}
+}
+.cyan { background: #087483; height: 100vh;
+    ul { margin-top:20px; margin-right: 20px; text-align: right;
+        li { list-style: none; display: inline-block;
+            a { text-decoration: none; font-size: 11px; font-weight: normal; color: #fff; padding: 0 10px;;}
+            a.anchor { border:1px solid #fff; line-height: 40px; display: block; font-size: 12px; font-weight: 600;}
+        }
+    }
+    .tablet { position: absolute; top: 80px; right: 0; width: 52vw;}
+}
+.card-body {text-align: left;}
+._custom { background: $buttonColor; border: 0; height: 45px; border-radius: 0; font-size: 13px; font-weight: bold;}
+.bullet { width: 70px; margin: auto;
+    span { background: rgba(112, 112, 112, 0.2); border-radius: 20px; width: 26px; height: 8px; margin-right: 5px; cursor: pointer;}
+    .active { background: #707070;}
+}
+.d-flex { margin: 10px 0;
+    li { color: #0D2234; font-size: 12px; font-weight: normal;}
+    .active { border-bottom: 2px solid #0D2234; font-weight: bold;}
+}
+
+.loading {
+    position: relative;
+  }
+.login{
+    height: 45px; border-radius: 0; font-size: 13px; font-weight: bold;  
+}
+
+._upd {
+    .form-group {
+        small { font-size: 12px; color: #8F96A0;}
+        label { font-size: 15px; font-family: roboto; font-weight: 400; margin-bottom: 8px;}
+    }
+}

@@ -1,0 +1,46 @@
+@charset "~bootstrap/dist/css/bootstrap.css";
+
+.form-control { margin-bottom: 10px; border: 1px solid #dadada; box-shadow: none; border-radius: 0; display: block; width: 100%; height: 36px; padding: 0px 10px; font-size: 14px; line-height: 1.42857143; color: #333; background-color: #fff; background-image: none; transition: border-color ease-in-out 0.15s;}
+.form-control.textarea { height: 100px; padding: 10px;}
+.form-group { margin-bottom: 0;}
+.font-color { font-size: 14px; color: #333; font-weight: 400; margin-bottom: 10px; position: relative; display: block;}
+.font-color .tag { font-size: 12px; position: absolute; top: 5px; right: 0;}
+.required::after { content:" *"; font-weight: 700; font-size: 16px; color: red; }
+
+.data-table { background-color: #EBEBEB; margin-top: 20px; padding: 10px;}
+.data-table .custom-table { padding: 10px;}
+.data-table .custom-table { border-collapse: collapse;}
+.data-table .custom-table th { font-size: 14px; color: #333; font-weight: 400;}
+.data-table .custom-table td { font-size: 14px; color: #333; font-weight: 400; padding: 10px 10px 10px 0; vertical-align: baseline;}
+.title { margin: 0 0 10px 0; font-size: 14px;}
+.fileSection { height: 36px; cursor: pointer; margin-bottom: 20px; background: #fff; display: block; border: 1px solid #DADADA; position: relative;}
+.fileSection #upload-file-selector { opacity: 0; width: 100%;}
+.fileSection .upload { margin: 0; background: url(../../../../../assets/img/icon-upload.svg) 10px center no-repeat; font-size: 14px; color: #f58220; text-transform: uppercase; text-align: center; cursor: pointer; position: absolute; right: 0; top: -1px; font-weight: 400; padding: 0 10px 0 36px; background-size: 16px; border: 1px solid #f58220; line-height: 34px;}
+.fileSection > span { margin: 7px 0 0 10px; display: block; font-weight: normal; font-size: 14px;}
+
+#quotationName.truncate { width: calc(100% - 150px);}
+.terms-condition { color: #333; margin-bottom: 20px; font-weight: 400;}
+#form-title { color: #333; font-size: 20px; font-weight: 400; margin: 0 0 10px 0; }
+.btn-delete { background: url(../../../../../assets/img/icon-delete-1.svg) center center no-repeat; width: 20px; height: 20px; cursor: pointer; display: inline-block; background-size: 15px; position: relative; top: 3px;}
+.btn-add { background: url(../../../../../assets/img/icon-add.svg) center center no-repeat; width: 20px; height: 20px; cursor: pointer; display: inline-block; background-size: 14px; position: relative; top: 3px;}
+.heading { font-size: 20px; color: #333; font-weight: 400; margin-top: 40px;}
+
+input[type="date"]::-webkit-inner-spin-button { display: none; opacity: 0 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(/../../../../../../assets/img/calender-icon.PNG) center/80% no-repeat;
+    height: 25px; width: 20px; color: rgba(0, 0, 0, 0); opacity: 0.6
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover { background: url(/../../../../../../assets/img/calender-icon.PNG) center/80% no-repeat; opacity: 1; }
+.has-error[_ngcontent-c4] .help-block[_ngcontent-c4], .has-error[_ngcontent-c4] .control-label[_ngcontent-c4], .has-error[_ngcontent-c4] .radio[_ngcontent-c4], .has-error[_ngcontent-c4] .checkbox[_ngcontent-c4], .has-error[_ngcontent-c4] .radio-inline[_ngcontent-c4], .has-error[_ngcontent-c4] .checkbox-inline[_ngcontent-c4], .has-error.radio[_ngcontent-c4] label[_ngcontent-c4], .has-error.checkbox[_ngcontent-c4] label[_ngcontent-c4], .has-error.radio-inline[_ngcontent-c4] label[_ngcontent-c4], .has-error.checkbox-inline[_ngcontent-c4] label[_ngcontent-c4] {
+    color: #ffffff;}
+.checkbox-style >>> .mat-checkbox-inner-container { height: 13px !important; width: 13px !important; }
+.infotext { display: inline; margin: 8px -6px 6px 4px; font-size: 12px; }
+.group { display: flex; margin-bottom: -8px; }
+.underline-label { font-size: 13px; margin-top: 28px; }
+.has-error { font-size: 9px; }
+.help-block { display: block; margin-top: 5px; margin-bottom: -5px !important; color: #737373; }
+.inputfile-box { position: relative; }
+.inputfile { display: none; }
+
+.btn-primary-style { background: #F58220; color: #fff; padding: 0 10px; min-width: 120px; line-height: 34px; border: 1px solid #F58220; display: inline-block; font-size: 14px; text-transform: uppercase; cursor: pointer; text-align: center; vertical-align: bottom; font-weight: 100; margin: 0 0 20px 0; }
+:host >>> .alert { padding: 10px;}

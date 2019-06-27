@@ -1,0 +1,363 @@
+<section class="content">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <div class="row">
+    <section class="col-lg-12" style="padding: 0px;">
+      <div class="box box-primary box-solid">
+        <div class="box-header">
+          <h3 class="box-title">Add Communications</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" name="communicationForm" novalidate class="form-horizontal form-border">
+          <div class="box-body">
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-12 text-left">List additional local numbers</label>
+                </div>
+              </div>
+              <div class="form-group col-sm-12" ng-repeat=" detailsData in  details_of_team track by $index">
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-12 text-left">Name</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="name" ng-model="details_of_team[$index].name" type="text" placeholder="Name" required maxlength="50">
+                    <span class="text-danger" ng-show="communicationForm.name.$dirty &&  communicationForm.name.$error.required">Name is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-12 text-left">Local Number</label>
+                  <div class="col-sm-12 width-input-100">
+                    <input class="form-control" name="local_number" type="tel" international-phone-number ng-model="details_of_team[$index].local_number" placeholder=" ">
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-12 text-left">IMEI</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="imei" ng-model="details_of_team[$index].imei" type="text" placeholder="IMEI" required>
+                    <span class="text-danger" ng-show="communicationForm.imei.$dirty &&  communicationForm.imei.$error.required">IMEI is required</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-primary margin-top-set" ng-show="$first" title="Add Team Member" ng-click="addDetailsOfTeam()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button class="btn btn-sm btn-danger margin-top-set" ng-show="$last && $index != 0" title="Remove Team Member" ng-click="removeDetailsOfTeam()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+              </div>
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-12  text-left">List any additional local emergency contacts</label>
+                </div>
+              </div>
+              <div class="form-group col-sm-12" ng-repeat=" emergencyContactData in  emergency_contact track by $index">
+                <div class="form-group col-sm-6">
+                  <label class="col-sm-12 text-left">Name</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="name" ng-model="emergency_contact[$index].name" type="text" placeholder="Name" required maxlength="50">
+                    <span class="text-danger" ng-show="communicationForm.name.$dirty &&  communicationForm.name.$error.required">Name is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="col-sm-12 text-left">Role</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="role" ng-model="emergency_contact[$index].role" type="text" placeholder="Role" required>
+                    <span class="text-danger" ng-show="communicationForm.role.$dirty &&  communicationForm.role.$error.required">Role is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="col-sm-12 text-left">Number</label>
+                  <div class="col-sm-12 width-input-100">
+                    <input class="form-control" name="number" type="tel" international-phone-number ng-model="emergency_contact[$index].number" placeholder=" ">
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="col-sm-12 text-left">Email</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" autocomplete="off" name="email" ng-model="emergency_contact[$index].email" type="text" placeholder="Email" required ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                    <span class="text-danger" ng-show="communicationForm.email.$dirty &&  communicationForm.email.$error.required">Email is required</span>
+                    <span class="text-danger" ng-show="communicationForm.email.$dirty &&  communicationForm.email.$error.pattern">Email is not valid</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-primary margin-top-set" ng-show="$first" title="Add Local Contact" ng-click="addEmergencyContact()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button class="btn btn-sm btn-danger margin-top-set" ng-show="$last && $index != 0" title="Remove Local Contact" ng-click="removeEmergencyContact()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+              </div>
+
+              
+                            <!--call in schedule-->
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-12">
+                                    <label class="col-sm-8 ">Check-in Schedule</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-4">
+                                    <label class="col-sm-4 ">No. of Check-ins</label>
+                                    <div class="col-sm-6"> 
+                                        <select name="no_of_checkin" id="no_of_checkin" class="js-states form-control" ng-model="communication.no_of_checkin"
+                                            ng-selected="communication.no_of_checkin == option" ng-change="timebox(communication.no_of_checkin)">
+                                            <option value="" selected disabled hidden>select </option>
+                                            <option value="0">0</option>
+
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-8"  ng-if="communication.no_of_checkin > 0">
+                                    <label class="col-sm-4 ">Time Zone for Check-in </label>
+                                    <div class="col-sm-6">
+                                        <select name="timezone" id="timezone" class="js-states form-control" ng-model="communication.timezone" ng-selected="communication.timezone == option">
+                                            <option value="" disabled selected="selected">Select Your Time Zone</option>
+
+                                            <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
+                                            <option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
+                                            <option value="-10:00">(GMT -10:00) Hawaii</option>
+                                            <option value="-09:50">(GMT -9:30) Taiohae</option>
+                                            <option value="-09:00">(GMT -9:00) Alaska</option>
+                                            <option value="-08:00">(GMT -8:00) Pacific Time (US & Canada)</option>
+                                            <option value="-07:00">(GMT -7:00) Mountain Time (US & Canada)</option>
+                                            <option value="-06:00">(GMT -6:00) Central Time (US & Canada), Mexico City</option>
+                                            <option value="-05:00">(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima</option>
+                                            <option value="-04:50">(GMT -4:30) Caracas</option>
+                                            <option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                                            <option value="-03:50">(GMT -3:30) Newfoundland</option>
+                                            <option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                                            <option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
+                                            <option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
+                                            <option value="+00:00">(GMT +0:00) Western Europe Time, London, Lisbon, Casablanca</option>
+                                            <option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+                                            <option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
+                                            <option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                                            <option value="+03:50">(GMT +3:30) Tehran</option>
+                                            <option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                                            <option value="+04:50">(GMT +4:30) Kabul</option>
+                                            <option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                                            <option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                                            <option value="+05:75">(GMT +5:45) Kathmandu, Pokhara</option>
+                                            <option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                                            <option value="+06:50">(GMT +6:30) Yangon, Mandalay</option>
+                                            <option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                                            <option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                                            <option value="+08:75">(GMT +8:45) Eucla</option>
+                                            <option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                                            <option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
+                                            <option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                                            <option value="+10:50">(GMT +10:30) Lord Howe Island</option>
+                                            <option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                                            <option value="+11:50">(GMT +11:30) Norfolk Island</option>
+                                            <option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                                            <option value="+12:75">(GMT +12:45) Chatham Islands</option>
+                                            <option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
+                                            <option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+                            </div>
+                            <div class="form-group col-sm-12" ng-if="communication.no_of_checkin > 0" > 
+                                    <div class="form-group col-sm-6">
+                                            <label class="col-sm-6">Check In Times</label>
+                                            
+                                        </div>
+                            </div>
+
+
+                            <div class="form-group col-sm-12" > 
+
+                                    <div class="form-group col-sm-3" ng-repeat="call_in_schedule in call_intime track by $index">
+                                            <div class="col-sm-3">
+                                    <input   name="call_in_time" ng-model="call_intime[$index].call_in_time" type="text" placeholder="call in time" value>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group col-sm-12" ng-if="communication.no_of_checkin > 0">
+                                <div class="form-group col-sm-4">
+                                    <label class="col-sm-4 ">Point Of Contact</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" autocomplete="off" name="point_of_contact" ng-model="communication.point_of_contact" type="text"
+                                            placeholder="Point Of Contact" required>
+                                        <span class="text-danger" ng-show="communicationForm.point_of_contact.$dirty &&  communicationForm.point_of_contact.$error.required">Point of contact is required</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label class="col-sm-4 ">Number</label>
+                                    <div class="col-sm-8">
+                                        <input required ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" maxlength="15" id="number" class="form-control"
+                                            autocomplete="off" name="number" type="tel" international-phone-number ng-model="communication.number" placeholder=" ">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label class="col-sm-4 ">Email</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" autocomplete="off" name="email1" ng-model="communication.email" type="text" placeholder="Email"
+                                            required ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                                        <span class="text-danger" ng-show="communicationForm.email1.$dirty &&  communicationForm.email1.$error.required">Email is required</span>
+                                        <span class="text-danger" ng-show="communicationForm.email1.$dirty &&  communicationForm.email1.$error.pattern">Email is not valid</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12" > 
+                                <div class="form-group col-sm-8">
+                                    <label class="col-sm-12 ">Overdue procedure (minutes/hours before concern; telephone cascade plan)
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12"  >
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" autocomplete="off" name="detail_an_overdue_procedure" ng-model="communication.detail_an_overdue_procedure"
+                                        type="text" placeholder="Overdue procedure" required>
+                                        </textarea>
+                                    <span class="text-danger" ng-show="communicationForm.detail_an_overdue_procedure.$dirty &&  communicationForm.detail_an_overdue_procedure.$error.required">Detail an overdue procedure is required</span>
+                                </div>
+                            </div>
+              <!-- <div class="col-sm-12">
+                <div class="form-group col-sm-8">
+                  <input type="checkbox" ng-model="communication.reminder_before_checkIn" name="reminder_before_checkIn"> Do you want to receive a text reminder 15 minutes before your check in time
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group col-sm-8">
+                  <input type="checkbox" ng-model="communication.want_your_poc"> Do you want your POC to receive a text reminder if you are X hours late with your check in
+                </div>
+              </div> -->
+              <div class="form-group col-sm-12">
+                <div class="col-sm-10">
+                  <label style="font-size: 20px;font-weight: 400"><i class="fa fa-share" aria-hidden="true"></i> Want to share this information with traveller</label>
+                  <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" ng-model="communication.communication_preview" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-11">
+                <div class="pull-right box-tools">
+                  <button type="button" class="btn btn-sm btn-primary" ng-click="backFromCommunication();"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+                  <!--ng-disabled="communicationForm.$invalid"-->
+                  <button type="button" class="btn btn-sm btn-primary" ng-click="addRaCommunicationByClientAdmin(communication)">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </form>
+        </div>
+    </section>
+    </div>
+</section>
+<style>
+.k-picker-wrap .k-icon {
+  cursor: pointer;
+  height: 21px;
+}
+
+.onoffswitch {
+  position: relative;
+  width: 90px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 20px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "Yes";
+  padding-left: 10px;
+  background-color: #00bc8c;
+  color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+  content: "No";
+  padding-right: 10px;
+  background-color: red;
+  color: #FFFFFF;
+  text-align: right;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 56px;
+  border: 2px solid #999999;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+
+</style>

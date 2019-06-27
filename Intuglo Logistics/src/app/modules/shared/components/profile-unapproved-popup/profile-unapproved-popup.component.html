@@ -1,0 +1,6 @@
+<div class="box">
+  <span (click)="onCloseCancel()" class="cross"></span>
+  <h3>Profile Approval Status</h3>
+  <p class="text-status" *ngIf="customagent">Your profile is not approved by admin. Please wait for admin approval to access to your dashboard.</p>
+  <p class="text-status" *ngIf="supplier">You are not allowed to create new quotation. Please wait for admin to approve your profile to create new quotation.</p>
+</div>

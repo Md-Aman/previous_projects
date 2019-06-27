@@ -1,0 +1,221 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+
+<form [formGroup]="medicalFormGroup" (submit)="submitForm(medicalFormGroup.value)">
+  <div class="accord relative">
+        <span>Information</span>
+        <i class="arrowUp"></i>
+  </div>
+  <div class="accord-content">
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Blood Group</label>
+            <select class="form-control" formControlName="BloodGroup">
+              <option value="" selected="selected">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Known Medical Conditions</label>
+            <input type="text" formControlName="MedicalCondition" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Prescribed Medication</label>
+            <input type="text" formControlName="PrescribedMedication" class="form-control">
+          </div>
+      </div>
+
+  </div>
+
+
+<div class="accord relative">
+      <span>Vaccinations</span>
+      <i class="arrowUp"></i>
+</div>
+<div class="accord-content">
+    <div class="row">
+        <div class="checkboxArea withInput form-group col-md-12">  
+            <div class="checkboxBlock">
+              <p>Diptheria/Tetanus/Polio </p>
+                <span>
+                  <input class="_customCheckbox" type="radio" name="DiptheriaTetanusPolio" [value]=1 formControlName="DiptheriaTetanusPolio" id="test1">
+                    <label for="test1"><span>Yes</span></label> &nbsp;
+                    <input class="_customCheckbox" type="radio" name="DiptheriaTetanusPolio" [value]=0 formControlName="DiptheriaTetanusPolio" id="test2">
+                    <label for="test2"><span>No</span></label>
+                </span>
+                <div class="relative _updCal" *ngIf="medicalFormGroup.value.DiptheriaTetanusPolio == 1">
+                    <input type="text" #dp1="bsDatepicker" formControlName="DiptheriaTetanusPolioDate"  class="form-control" bsDatepicker
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                    <span class="arrow" (click)="dp1.toggle()" [attr.aria-expanded]="dp1.isOpen"></span>
+                  </div>
+            </div>
+
+            <div class="checkboxBlock">
+                <p>HEPATITIS A</p>
+                  <span>
+                    <input class="_customCheckbox" name="HepatitisA" [value]=1 formControlName="HepatitisA" id="test3" type="radio" >
+                    <label for="test3"><span>Yes</span></label> &nbsp;
+                    <input class="_customCheckbox" name="HepatitisA" [value]=0 formControlName="HepatitisA" id="test4" type="radio" >
+                    <label for="test4"><span>No</span></label>
+                  </span>
+                  <div class="relative _updCal" *ngIf="medicalFormGroup.value.HepatitisA == 1">
+                      <input type="text" #dp2="bsDatepicker"  class="form-control" bsDatepicker formControlName="HepatitisADate"
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                      <span class="arrow" (click)="dp2.toggle()" [attr.aria-expanded]="dp2.isOpen"></span>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                  <p>HEPATITIS B</p>
+                    <span>
+                      <input class="_customCheckbox" name="HepatitisB" [value]=1 formControlName="HepatitisB" id="test5" type="radio" >
+                      <label for="test5"><span>Yes</span></label> &nbsp;
+                      <input class="_customCheckbox" name="HepatitisB" [value]=0 formControlName="HepatitisB" id="test6" type="radio" >
+                      <label for="test6"><span>No</span></label>
+                    </span>
+                    <div class="relative _updCal" *ngIf="medicalFormGroup.value.HepatitisB == 1">
+                        <input type="text" #dp3="bsDatepicker"  class="form-control" bsDatepicker formControlName="HepatitisBDate"
+                          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                        <span class="arrow" (click)="dp3.toggle()" [attr.aria-expanded]="dp3.isOpen"></span>
+                    </div>
+                </div>
+
+                <div class="checkboxBlock">
+                    <p>Japanese Encephalitis</p>
+                      <span>
+                        <input class="_customCheckbox" name="JapaneseEncephalitis" [value]=1 formControlName="JapaneseEncephalitis" id="test7" type="radio" >
+                        <label for="test7"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="JapaneseEncephalitis" [value]=0 formControlName="JapaneseEncephalitis" id="test8" type="radio" >
+                        <label for="test8"><span>No</span></label>
+                      </span>
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.JapaneseEncephalitis == 1">
+                          <input type="text" #dp4="bsDatepicker"  class="form-control" formControlName="JapaneseEncephalitisDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp4.toggle()" [attr.aria-expanded]="dp4.isOpen"></span>
+                      </div>
+                  </div>
+                  <div class="checkboxBlock">
+                    <p>Measles, Mumps & Rubella (MMR)</p>
+                      <span>
+                        <input class="_customCheckbox" name="MeasleMumps" [value]=1 formControlName="MeasleMumps" id="test9" type="radio" >
+                        <label for="test9"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="MeasleMumps" [value]=0 formControlName="MeasleMumps" id="test10" type="radio" >
+                        <label for="test10"><span>No</span></label>
+                      </span>
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.MeasleMumps == 1">
+                          <input type="text" #dp5="bsDatepicker"  class="form-control" formControlName="MeasleMumpsDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp5.toggle()" [attr.aria-expanded]="dp5.isOpen"></span>
+                      </div>
+                  </div>
+                  <p></p>
+                  <div class="checkboxBlock">
+                    <p>Meningococcal Infection</p>
+                      <span>
+                        <input class="_customCheckbox" [value]=1 formControlName="MeningococcalInfection" id="test11" type="radio" >
+                        <label for="test11"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" [value]=0 formControlName="MeningococcalInfection" id="test12" type="radio" >
+                        <label for="test12"><span>No</span></label>
+                      </span>
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.MeningococcalInfection == 1">
+                          <input type="text" #dp6="bsDatepicker"  class="form-control" formControlName="MeningococcalInfectionDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp6.toggle()" [attr.aria-expanded]="dp6.isOpen"></span>
+                      </div>
+                  </div>
+                  <div class="checkboxBlock">
+                    <p>Polio</p>
+                      <span>
+                        <input class="_customCheckbox" name="Polio" [value]=1 formControlName="Polio" id="test13" type="radio" >
+                        <label for="test13"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="Polio" [value]=0 formControlName="Polio" id="test14" type="radio" >
+                        <label for="test14"><span>No</span></label>
+                      </span>
+                      <!-- <input  type="number" class="t"> -->
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.Polio == 1">
+                          <input type="text" #dp7="bsDatepicker"  class="form-control" formControlName="PolioDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp7.toggle()" [attr.aria-expanded]="dp7.isOpen"></span>
+                      </div>
+                  </div>
+
+                  <div class="checkboxBlock">
+                    <p>Rabies</p>
+                      <span>
+                        <input class="_customCheckbox" name="Rabies" [value]=1 formControlName="Rabies" id="test15" type="radio" >
+                        <label for="test15"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="Rabies" [value]=0 formControlName="Rabies" id="test16" type="radio" >
+                        <label for="test16"><span>No</span></label>
+                      </span>
+                      <!-- <input  type="number" class="t"> -->
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.Rabies == 1">
+                          <input type="text" #dp8="bsDatepicker"  class="form-control" formControlName="RabiesDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp8.toggle()" [attr.aria-expanded]="dp8.isOpen"></span>
+                      </div>
+                  </div>
+
+                  <div class="checkboxBlock">
+                    <p>Tetanus</p>
+                      <span>
+                        <input class="_customCheckbox" name="Tetanus" [value]=1 formControlName="Tetanus" id="test17" type="radio" >
+                        <label for="test17"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="Tetanus" [value]=0 formControlName="Tetanus" id="test18" type="radio" >
+                        <label for="test18"><span>No</span></label>
+                      </span>
+                      <!-- <input  type="number" class="t"> -->
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.Tetanus == 1">
+                          <input type="text" #dp9="bsDatepicker"  class="form-control" formControlName="TetanusDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp9.toggle()" [attr.aria-expanded]="dp9.isOpen"></span>
+                      </div>
+                  </div>
+
+                  <div class="checkboxBlock">
+                    <p>Typhoid Fever</p>
+                      <span>
+                        <input class="_customCheckbox" name="TyphoidFever" [value]=1 formControlName="TyphoidFever" id="test19" type="radio" >
+                        <label for="test19"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="TyphoidFever" [value]=0 formControlName="TyphoidFever" id="test20" type="radio" >
+                        <label for="test20"><span>No</span></label>
+                      </span>
+                      <!-- <input  type="number" class="t"> -->
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.TyphoidFever == 1">
+                          <input type="text" #dp10="bsDatepicker"  class="form-control" formControlName="TyphoidFeverDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp10.toggle()" [attr.aria-expanded]="dp10.isOpen"></span>
+                      </div>
+                  </div>
+                  <!-- <p></p> -->
+                  <div class="checkboxBlock">
+                    <p>Yellow Fever</p>
+                      <span>
+                        <input class="_customCheckbox" name="YellowFever" [value]=1 formControlName="YellowFever" id="test21" type="radio" >
+                        <label for="test21"><span>Yes</span></label> &nbsp;
+                        <input class="_customCheckbox" name="YellowFever" [value]=0 formControlName="YellowFever" id="test22" type="radio" >
+                        <label for="test22"><span>No</span></label>
+                      </span>
+                      <!-- <input  type="number" class="t"> -->
+                      <div class="relative _updCal" *ngIf="medicalFormGroup.value.YellowFever == 1">
+                          <input type="text" #dp11="bsDatepicker"  class="form-control" formControlName="YellowFeverDate" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                          <span class="arrow" (click)="dp11.toggle()" [attr.aria-expanded]="dp11.isOpen"></span>
+                      </div>
+                  </div>
+        </div>
+    </div>
+</div>
+
+<div class="subSet">
+  <div class="right _btn fixed">
+      <a class="prev" (click)="navigatePrevTab()">Previous</a>
+      <button type="submit" class="cont">Save</button>
+    </div>
+</div>
+</form>

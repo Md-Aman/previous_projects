@@ -1,0 +1,15 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="backgroundBg">
+  <div class="subSet" *ngIf="!loading">
+      <div class="loginPanel">
+        <img src="../../../assets/images/logo.png">
+        <p class="text-center"> Access Emergency Information Record </p>
+
+        <div class="card-body _upd">
+            <p class="reset-pass">{{message}}
+            </p>
+        </div>
+        <!-- <a class="login" >aprove</a> -->
+      </div>
+  </div>
+</div>

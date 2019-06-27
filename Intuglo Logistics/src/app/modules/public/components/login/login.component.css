@@ -1,0 +1,49 @@
+.bg-with-shadow {	
+    height: 281px;	
+    width: 430.86px;	
+    border-radius: 3px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+}
+
+.input-field {	
+    box-sizing: border-box;	
+    height: 36px;
+    padding: 0 10px;
+    width: 100%;	
+    border: 1px solid #dadada;	
+    background-color: #FFFFFF;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    line-height: 2%;
+    margin-bottom: 0%;
+    font-size: 12px;
+}
+.required::after{
+    content:"*";
+    font-weight: 700;
+    font-size: 16px;
+    color: red;
+}
+.has-error{
+    font-size: 9px;
+}
+.help-block {
+    display: block;
+    margin-top: -1px;
+    margin-left: 21px;
+    color: #737373;
+    margin-left: 21px;
+}
+
+
+.login-section { padding: 20px; width:310px;}
+.login-intuglo { color: #333333; font-size: 20px; font-weight: 200; }
+.email-address-password { color: #333333; font-size: 14px; font-weight: 200;}
+.forget-password { color: #F58220; font-size: 14px; text-decoration: none; cursor: pointer; display: block; margin-bottom: 10px; font-weight: 300;}
+.login { display: inline-block; text-align: center; background: #F58220; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px;  color: #ffffff;}
+.login:hover { text-decoration: none;}

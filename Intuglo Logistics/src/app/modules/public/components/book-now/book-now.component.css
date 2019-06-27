@@ -1,0 +1,124 @@
+.row { margin: 0;}
+.row.upd { padding: 20px;}
+.row.upd .col-md-12 { padding: 0;}
+.box { width: 1060px; position: relative;}
+.wizard { margin-bottom: 20px; border-bottom: 1px solid #dadada; position: relative; margin-top: 40px;}
+.wizard ul { margin: 0; padding: 0;}
+.wizard li { list-style: none; display: inline-block; padding: 0 0 10px 0; min-width: 24.5%;}
+.wizard li.steps { color: #333; font-size: 16px; font-weight: 100; text-align: center;}
+.wizard li.steps.borderBtm { border-bottom:3px solid #F58220; position: relative; top: 1px;}
+.wizard .wizard-bullet { background: #F58220; width: 100%; height: 1px; position: absolute; top: -20px;}
+.wizard .wizard-bullet::before { content: " "; width: 12.5%; height: 1px; background: #fff; position: absolute; left: 0; top: 0; z-index: 0;}
+.wizard .wizard-bullet::after { content: " "; width: 12.5%; height: 1px; background: #fff; position: absolute; right: 0; top: 0; z-index: 0;}
+.wizard .wizard-bullet .wiz-1 { background: #fff; border: 1px solid #F58220; width: 28px; height: 28px; z-index: 1; position: absolute; bottom: -13px; left: calc(12.5% - 14px); border-radius: 50%; font-size: 14px; color: #F58220; line-height: 28px; text-align: center;}
+.wizard .wizard-bullet .wiz-1.active { background:#F58220; color:#fff;}
+.wizard .wizard-bullet .wiz-1:nth-child(2){ left: calc(37.5% - 14px);}
+.wizard .wizard-bullet .wiz-1:nth-child(3){ left: calc(62.5% - 14px);}
+.wizard .wizard-bullet .wiz-1:nth-child(4){ left: calc(87.5% - 14px);}
+.labelStyle { font-weight: 100; font-size: 14px; color: #333; text-transform: lowercase;}
+
+.form-group { margin-bottom: 6px; padding: 0 5px; position: relative;}
+:host >>> .form-control { border: 1px solid #dadada; box-shadow: none; border-radius: 0; display: block; width: 100%; height: 36px; padding: 0px 10px; font-size: 14px; line-height: 1.42857143; color: #333; background-color: #fff; background-image: none; transition: border-color ease-in-out 0.15s; }
+:host >>> .form-control:read-only { background-color: #f5f5f5;}
+:host >>> .form-control.textarea { height: 90px; padding: 10px;}
+:host >>> .form-control.textarea:read-only { background-color: #f5f5f5;}
+.btnContinue { line-height: 36px; background: #F58220; color: #fff; text-align: center; display: block; font-size: 14px; font-weight: 300; text-transform: uppercase; margin: 0; cursor: pointer; border: 1px solid #F58220; min-width: 120px; margin-right: 5px; margin-top: 10px; padding: 0 10px;}
+.arrow-back { line-height: 36px; background: #fff; color: #F58220; text-align: center; display: block; font-size: 14px; font-weight: 300; text-transform: uppercase; margin: 0; cursor: pointer; border: 1px solid #F58220; min-width: 120px; margin-left: 5px; margin-top: 10px; padding: 0 10px;}
+
+.consignee { padding: 20px;}
+.tableDivStyle { height: 600px; background: #f0f0f0; padding: 20px;}
+.tableDivStyle .order-details { color: #333; font-size: 20px; font-weight: 300;}
+.tableDivStyle .tableStyle {}
+.tableDivStyle .tableStyle th { font-size: 14px; font-weight: 400; color: #333; border-top: 0;}
+.tableDivStyle .tableStyle td { font-size: 14px; font-weight: 100; color: #333;}
+.tableDivStyle .tableStyle tr.tr { background: #dadada;}
+.tableDivStyle .tableStyle tr.tr td { font-weight: 400;}
+.input-group-addon:first-child { border-radius: 0;}
+
+.dialog-cross { z-index: 1; background: url(../../../../../assets/img/icon-dialog-close.svg) center center no-repeat; width: 24px; height: 24px; display: block; cursor: pointer; position: absolute; top: 10px; right: 10px;}
+.labelNote { color: #333; font-size: 11px; margin-left: 5px;}
+.termsCondition { color: #333; font-size: 11px;	font-weight: 300; margin-left: 5px;}
+
+.msg { padding: 0 5px;}
+.msg .thank-you { color: #333; font-size: 20px; font-weight: 100;  background: url(../../../../../assets/img/icon-done.svg) left center no-repeat; padding-left: 36px;}
+.msg .note { color: #333; font-size: 14px; font-weight: 100;}
+.label-style { color: #333;	font-size: 14px; font-weight: 100; text-transform: lowercase;}
+.cargo-ready { color: #333; font-size: 14px; font-weight: 100;}
+.cargo-pickup { background: transparent; border:0; color: #F58220; cursor: pointer; }
+
+.pad05 { padding: 0 5px;}
+
+.btnContinue-shipper{
+    right:    0;
+    margin-top: 7%;
+    float: right;
+    position: absolute;
+    margin-right: 18px;
+}
+
+.deprature-arrival{
+    color: #000000;	
+    font-size: 12px;	
+    font-weight: 545;	
+    line-height: 14px;
+    background-color: #D5DCDF;
+}
+
+.order-id{
+    color: #505050;	
+    font-family: Arial, Helvetica, sans-serif;	
+    font-size: 10px;	
+    font-weight: bold;	
+    line-height: 14px;
+}
+.order-id-input{
+    border: 1px solid #DDE3E8;	
+    border-radius: 3px;	
+    background-color: #FFFFFF;
+    width: 376px; 
+}
+
+.table-note{
+    color: #000000;	
+    font-family: Arial, Helvetica, sans-serif;	
+    font-size: 12px;	
+    font-weight: 500;	
+    line-height: 15px;
+    padding-top: 15px;
+}
+.alert {
+    padding: 3px;
+    margin-bottom: 8px;
+    margin-left: 18px;
+    margin-right: -11px;
+    margin-top: 2px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.has-error{
+    font-size: 9px;
+    margin: 0px;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #737373;
+}
+
+input.currency {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.required::after{
+    content:" *";
+    font-weight: 700;
+    font-size: 16px;
+    color: red;
+}

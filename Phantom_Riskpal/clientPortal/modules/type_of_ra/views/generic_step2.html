@@ -1,0 +1,52 @@
+<section class="content" ng-init="getAllRiskLabels();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-tools col-lg-12" style="margin-left: 4px;">
+                        <p class="text-center">Select Correct Risk Label</p>
+                        <a ui-sref="risk_assesment_generic.add_category">
+                            <button class="btn btn-sm btn-info">Create New Risk Label</button>
+                        </a>
+                        <a ui-sref="risk_assesment_generic.add_question" class="pull-right" style="margin-right: 6px;">
+                            <button class="btn btn-sm btn-info">New Question</button>
+                        </a>
+
+                        <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by question" ng-model="question"
+                                autocomplete="false" ng-change="getAllRiskLableOfQue(question)">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table " ng-table="tableParams">
+                        <tr ng-repeat="category in $data track by $index" ng-if="$index % 3 == 0">
+                            <td data-title="'Risk Labels'">
+                                <a ng-click="redirectToRiskQue(category._id);" style="cursor: pointer">{{category.categoryName}}</a></td>
+                            <td><a ng-click="redirectToRiskQue($data[$index+1]._id);" style="cursor: pointer">{{$data[$index+1].categoryName}}</a></td>
+                            <td><a ng-click="redirectToRiskQue($data[$index+2]._id);" style="cursor: pointer">{{$data[$index+2].categoryName}}</a></td>
+                        </tr>
+                        <tr ng-if="categories.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-12">
+                       <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ui-sref="risk_assesment_generic.generic_step4({ra_id:ra_id})" ng-disabled="questions.length == 0">Create RA</button>
+                    </div>
+                     <div class="pull-right">
+                        <button ng-if="!raData.is_created_compleletely"  type="button" class="btn btn-sm btn-primary" style="margin-right: 10px" ng-click="saveAndSubmitLater();">Save</button>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" style="margin-right: 10px"   ng-click="backToStepOne()">Back</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

@@ -1,0 +1,22 @@
+ul { 
+    display: inline-block;
+}
+
+li{
+    cursor: pointer;
+}
+
+h1{
+    font-weight: 700;
+    font-size: 26px;
+}
+.container-fluid{
+    padding-top: 15px;
+}
+
+.edit{
+    font-size: 50%;
+    border-bottom: 2px solid black;
+    font-weight: 700;
+    cursor: pointer;
+}

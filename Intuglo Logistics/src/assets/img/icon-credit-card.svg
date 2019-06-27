@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 29.273">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(0,0,0,0);
+        stroke: #9b9b9b;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #9b9b9b;
+      }
+    </style>
+  </defs>
+  <g id="Group_1197" data-name="Group 1197" transform="translate(-359 -218)">
+    <g id="if_credit_card_172588" transform="translate(357 209)">
+      <path id="Path_391" data-name="Path 391" class="cls-1" d="M38.455,10H7.545A4.813,4.813,0,0,0,3,14.545V33.076a4.2,4.2,0,0,0,4.2,4.2H38.8a4.2,4.2,0,0,0,4.2-4.2V14.405A4.692,4.692,0,0,0,38.455,10Z"/>
+      <rect id="Rectangle_1893" data-name="Rectangle 1893" class="cls-2" width="40" height="4.545" transform="translate(3 15.455)"/>
+    </g>
+  </g>
+</svg>

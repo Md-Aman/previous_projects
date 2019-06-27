@@ -1,0 +1,22 @@
+<div class="side-menu">
+  <ul class="menu-content">
+    <li class="menu-item"><span class="dashboard">Dashboard</span></li>
+    <li class="menu-item" tabindex="step = 'one'" [ngClass]="{selectedmenu : fromDashboard}" (click)="menuOrder()">Booking / Order</li>
+    <li class="menu-item" tabindex="step = 'two'" [ngClass]="{selectedmenu : fromQuotation || fromViewQuotation || fromModifyQuotation}" (click)="menuQuotation()">Quotations</li>
+    <li class="menu-item sub-menu" tabindex="step = 'twoone'" [ngClass]="{selectedmenu : fromNQ}" (click)="menuNewQuotation()">New Quotation Template</li>
+    
+    <li class="menu-item"><span class="customer">Customer Support</span></li>
+    <li class="menu-item" tabindex="step = 'three'" [ngClass]="{selectedmenu : fromHSwiki}" (click)="menuWiki()">HS Code Wiki</li>
+    <li class="menu-item" tabindex="step = 'four'" [ngClass]="{selectedmenu : stepFour}" (click)="menuLiveChat()">Live Chat</li>
+    <li class="menu-item" tabindex="step = 'five'" [ngClass]="{selectedmenu : stepFive}" (click)="menuTicket()">Ticket</li>
+
+    <li class="menu-item"><span class="report">Report</span></li>
+    <li class="menu-item" tabindex="step = 'six'" [ngClass]="{selectedmenu : stepSix}" (click)="menuBooking()">Bookings</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sixone'" [ngClass]="{selectedmenu : stepSixOne}" (click)="menuTransactionReport()">Transaction Report</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sixtwo'" [ngClass]="{selectedmenu : stepSixTwo}" (click)="menuBookingForm()">Booking Form</li>
+    <li class="menu-item" tabindex="step = 'Seven'" [ngClass]="{selectedmenu : fromPayments}" (click)="menuPayment()">Payments</li>
+    <li class="menu-item sub-menu" tabindex="step = 'sevenone'" [ngClass]="{selectedmenu : stepSevenOne}" (click)="menuPaymentList()">Payment List</li>
+    <li class="menu-item" tabindex="step = 'eight'" [ngClass]="{selectedmenu : stepEight}" (click)="menuCargo()">Cargo</li>
+    <li class="menu-item sub-menu" tabindex="step = 'eightone'" [ngClass]="{selectedmenu : stepEightOne}" (click)="menuPackingList()">Packing List</li>
+  </ul>
+</div>

@@ -1,0 +1,169 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getTravellerInfo();">
+    <h1>
+        Traveller's Medical Information
+        <!-- <small>New Contact</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Traveller's Medical Information</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-search"></i> Traveller's Medical Information
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <div ng-if="traveller.medical_info.length == 0 " style="margin-left: 20px">
+                    <h4>No Record found </h4>
+                </div>
+            </div>
+            <form role="form" name="newsRaForm" novalidate class="form-horizontal" ng-if="traveller.medical_info">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <h4 style="margin-left: 16px"> Traveller's Medical Information</h4>
+
+                            <label class="col-lg-2">Yellow Fever Vaccination Date  :- </label>
+                            <div class="col-sm-4">
+
+                             {{traveller.medical_info.yellow_fever_vaccination.startDate | date}}
+                                <!-- <input type="text" class="form-control" ng-model="traveller.medical_info.yellow_fever_vaccination.startDate"
+                                    disabled placeholder="Yellow Fever Vaccination Date " /> -->
+                              
+                            </div>
+                            <label class="col-lg-2">Yellow Fever Expiration Date :-</label>
+                            <div class="col-sm-4">
+                              {{traveller.medical_info.yellow_fever_vaccination.endDate | date}}
+                               <!--  <input type="text" class="form-control" ng-model="traveller.medical_info.yellow_fever_vaccination.endDate"
+                                    disabled placeholder="Yellow Fever Expiration Date " /> -->
+                            
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Hep A Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.hepA_vaccination.startDate | date}}
+                             <!--    <input type="text" class="form-control" ng-model="traveller.medical_info.hepA_vaccination.startDate"
+                                    disabled placeholder="Hep A Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Hep A Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.hepA_vaccination.endDate | date}}
+                              <!--   <input type="text" class="form-control" ng-model="traveller.medical_info.hepA_vaccination.endDate"
+                                    disabled placeholder="Hep A Expiration Date " /> -->
+                            </div>
+                        </div>
+
+                         <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Hep B Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.hepB_vaccination.startDate | date}}
+                               <!--  <input type="text" class="form-control" ng-model="traveller.medical_info.hepB_vaccination.startDate"
+                                    disabled placeholder="Hep B Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Hep B Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.hepB_vaccination.endDate | date}}
+                             <!--    <input type="text" class="form-control" ng-model="traveller.medical_info.hepB_vaccination.endDate"
+                                    disabled placeholder="Hep B Expiration Date " /> -->
+                            </div>
+                        </div>
+
+                         <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Tet dip polio Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.tet_dip_polio_vaccination.startDate | date}}
+                              <!--   <input type="text" class="form-control" ng-model="traveller.medical_info.tet_dip_polio_vaccination.startDate"
+                                    disabled placeholder="Tet dip polio Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Tet dip polio Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.tet_dip_polio_vaccination.endDate | date}}
+                              <!--   <input type="text" class="form-control" ng-model="traveller.medical_info.tet_dip_polio_vaccination.endDate"
+                                    disabled placeholder="Tet dip polio Expiration Date " /> -->
+                            </div>
+                        </div>
+                         <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Rabies Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.rabies_vaccination.startDate | date}}
+                              <!--   <input type="text" class="form-control" ng-model="traveller.medical_info.rabies_vaccination.startDate"
+                                    disabled placeholder="Rabies Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Rabies Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.rabies_vaccination.endDate | date}}
+                               <!--  <input type="text" class="form-control" ng-model="traveller.medical_info.rabies_vaccination.endDate"
+                                    disabled placeholder="Rabies Expiration Date " /> -->
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Cholera Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.cholera_vaccination.startDate | date}}
+                               <!--  <input type="text" class="form-control" ng-model="traveller.medical_info.cholera_vaccination.startDate"
+                                    disabled placeholder="Cholera Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Cholera Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.cholera_vaccination.endDate | date}}
+                                <!-- <input type="text" class="form-control" ng-model="traveller.medical_info.cholera_vaccination.endDate"
+                                    disabled placeholder="Cholera Expiration Date " /> -->
+                            </div>
+                        </div>
+                            <div class="form-group col-sm-12">
+                            <label class="col-lg-2">meningitis Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.meningitis_vaccination.startDate | date}}
+                               <!--  <input type="text" class="form-control" ng-model="traveller.medical_info.meningitis_vaccination.startDate"
+                                    disabled placeholder="meningitis Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">meningitis Expiration Date </label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.meningitis_vaccination.endDate | date}}
+                            <!--     <input type="text" class="form-control" ng-model="traveller.medical_info.meningitis_vaccination.endDate"
+                                    disabled placeholder="meningitis Expiration Date " /> -->
+                            </div>
+                        </div>
+                            <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Typhoid Vaccination Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.typhoid_vaccination.startDate | date}}
+                                <!-- <input type="text" class="form-control" ng-model="traveller.medical_info.typhoid_vaccination.startDate"
+                                    disabled placeholder="Typhoid Vaccination Date " /> -->
+                            </div>
+                            <label class="col-lg-2">Typhoid Expiration Date :-</label>
+                            <div class="col-sm-4">
+                            {{traveller.medical_info.typhoid_vaccination.endDate | date}}
+                           <!--      <input type="text" class="form-control" ng-model="traveller.medical_info.typhoid_vaccination.endDate"
+                                    disabled placeholder="Typhoid Expiration Date " /> -->
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Allergies</label>
+                            <div class="col-sm-10" ng-bind-html="traveller.medical_info.allergies">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-lg-2">Other Medical Info</label>
+                            <div class="col-sm-10" ng-bind-html="traveller.medical_info.other_medical_info">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+            </form>
+
+
+        </section>
+        </div>
+</section>

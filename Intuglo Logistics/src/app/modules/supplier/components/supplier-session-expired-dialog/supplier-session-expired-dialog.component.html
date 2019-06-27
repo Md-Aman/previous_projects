@@ -1,0 +1,51 @@
+<div class="container box">
+
+  <div class="row">
+    <div class="col-md-12">
+      <p class="title">Session Expired!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <p class="desc">Your session is expired. Please login to your account to continue.</p>
+    </div>
+    <!-- <div class="col-sm-2 col-md-2">
+      <div class="text-right">
+        <p (click)="onCloseCancel()" class="glyphicon glyphicon-remove"></p>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- <hr class="hr1"> -->
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+        <!-- This is the error section -->
+        <div *ngIf="!validUser" class="alert alert-danger">
+          <span *ngFor="let item of errorHandling">{{item}}</span>
+        </div>
+        <div *ngIf="supplierAccess">
+            <span> Your account is registered as Supplier </span>
+          </div>
+        <form>
+          <div class="form-group">
+            <label for="username" class="email-address-password">Email address</label>
+            <input type="email" [(ngModel)]="userEmail" name="email" placeholder="Your email here" class="form-control input-sm input-field"
+              [invalidTooltip]="{required: 'This field is required', pattern: 'Please enter valid email'}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+              required>
+          </div>
+  
+          <div class="form-group">
+            <label for="password" class="email-address-password">Password</label>
+            <input type="password" name="password" [(ngModel)]="password" placeholder="********" class="form-control input-sm input-field">
+          </div>
+  
+          <div>
+            <button class="primary-button" (click)="verifiedUser()"> Log In Now</button>
+            <button class="secondary-button" (click)="onCloseCancel()"> Log In Later</button>
+          </div>
+  
+        </form>
+    </div>
+  </div>
+</div>

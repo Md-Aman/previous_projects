@@ -1,0 +1,40 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true }"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Departments</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" (click)="openDepartmentForm()">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW</span>
+      <span class="_b">DEPARTMENT</span>
+    </div>
+  </div>
+  <div class="filterBy _upd">
+    <!-- <span>Filter by:</span>
+    <select><option value="1">Department Name</option></select>
+    <select><option value="1">Status</option></select> -->
+    <!-- <input class="_search" type="text" placeholder="Search Departments..." (input)="searchDept($event.target.value)"> -->
+    <form [formGroup]="searchDeptForm" (submit)="searchDept(searchDeptForm.value.searchKey)">
+    <div class="relative">
+      <input class="_search" formControlName="searchKey" #_search type="text" placeholder="Search Department...">
+      <span (click)="searchDept(_search.value)" class="_search-icon"></span>
+    </div>
+    </form>
+  </div>
+  <div class="_tableData">
+    <app-simple-table 
+    [rows]="rows" 
+    [columns]="columns" 
+    [page]="page" 
+    [colHead]="colHead"
+    [isCollapse]="isCollapse"
+    [messages]="messages"
+    (emitEventChange)="receiveEvent($event)">
+    </app-simple-table>
+  </div>
+</div>
+
+
+

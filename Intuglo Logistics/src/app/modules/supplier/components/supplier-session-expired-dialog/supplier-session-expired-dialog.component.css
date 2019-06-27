@@ -1,0 +1,6 @@
+.box { width:  480px; background: #FFFFFF; padding: 20px; }
+.title { font-size: 20px; color: #333; font-weight: 200;}
+.desc { font-size: 14px; color: #333; font-weight: 100;}
+.email-address-password { font-size: 14px; font-weight: 100; color: #333;}
+.primary-button { display: inline-block; text-align: center; background: #F58220; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #ffffff; cursor: pointer; margin-right: 5px; border:1px solid #F58220;}
+.secondary-button { display: inline-block; text-align: center; background: #fff; font-size: 14px; font-weight: 300; text-transform: uppercase; line-height: 36px; min-width: 120px; color: #F58220; cursor: pointer; margin-right: 5px; border:1px solid #F58220;}

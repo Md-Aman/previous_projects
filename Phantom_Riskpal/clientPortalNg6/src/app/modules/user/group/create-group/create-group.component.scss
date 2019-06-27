@@ -1,0 +1,25 @@
+.centeredLayout 
+{
+    ._custom-checkbox 
+    {
+        .checkboxBlock {
+            margin-bottom: 0;
+            margin-right: 10px;
+            span {
+                color: #0D2234;
+            }
+        }
+        .checkboxCells 
+        {
+            margin-left: 40px;
+        }
+        .disable {
+            label {
+                span {
+                    color: #dddddd;
+                }
+            }
+            
+        }
+    }
+}

@@ -1,0 +1,293 @@
+<style>
+    /* BASIC STYLINGS
+============================================================================= */
+    
+/*    body {
+        padding-top: 20px;
+    }*/
+    
+    pre {
+        margin-bottom: 20px;
+    }
+    /* form styling */
+    
+    #form-container {
+        background: #2f2f2f;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    
+    #form-container .page-header {
+        background: #151515;
+        margin: 0;
+        padding: 30px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    /* numbered buttons */
+    
+    #status-buttons {}
+    
+    #status-buttons a {
+        color: #FFF;
+        display: inline-block;
+        font-size: 12px;
+        margin-right: 10px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    #status-buttons a:hover {
+        text-decoration: none;
+    }
+    
+    #status-buttons span {
+        background: #3c8dbc;
+        display: block;
+        height: 30px;
+        margin: 0 auto 10px;
+        padding-top: 5px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    /* active buttons */
+    
+    #status-buttons a.active span {
+        background: #00BC8C;
+    }
+    /* ANIMATION STYLINGS
+============================================================================= */
+    
+    #signup-form {
+        position: relative;
+        min-height: 300px;
+        overflow: hidden;
+        padding: 30px;
+    }
+    /* basic styling for entering and leaving */
+    /* left and right added to ensure full width */
+    
+    #form-views.ng-enter,
+    #form-views.ng-leave {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        transition: 0.5s all ease;
+        -moz-transition: 0.5s all ease;
+        -webkit-transition: 0.5s all ease;
+    }
+    /* enter animation */
+    
+    #form-views.ng-enter {
+        -webkit-animation: slideInRight 0.5s both ease;
+        -moz-animation: slideInRight 0.5s both ease;
+        animation: slideInRight 0.5s both ease;
+    }
+    /* leave animation */
+    
+    #form-views.ng-leave {
+        -webkit-animation: slideOutLeft 0.5s both ease;
+        -moz-animation: slideOutLeft 0.5s both ease;
+        animation: slideOutLeft 0.5s both ease;
+    }
+    /* ANIMATIONS
+============================================================================= */
+    /* slide out to the left */
+    
+    @keyframes slideOutLeft {
+        to {
+            transform: translateX(-200%);
+        }
+    }
+    
+    @-moz-keyframes slideOutLeft {
+        to {
+            -moz-transform: translateX(-200%);
+        }
+    }
+    
+    @-webkit-keyframes slideOutLeft {
+        to {
+            -webkit-transform: translateX(-200%);
+        }
+    }
+    /* slide in from the right */
+    
+    @keyframes slideInRight {
+        from {
+            transform: translateX(200%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+    
+    @-moz-keyframes slideInRight {
+        from {
+            -moz-transform: translateX(200%);
+        }
+        to {
+            -moz-transform: translateX(0);
+        }
+    }
+    
+    @-webkit-keyframes slideInRight {
+        from {
+            -webkit-transform: translateX(200%);
+        }
+        to {
+            -webkit-transform: translateX(0);
+        }
+    }
+
+</style>
+<!-- Include Editor style. -->
+
+<section class="content-header">
+    <h1>
+        Risk Assessments
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active"> Risk Assessments</li>
+    </ol>
+</section>
+<div class="row" ng-init="getCountryListForRa();getAllQuestionnaireForRa();getAllDepartmentOfClient();getRiskQueDetail();getCurrencyList();">
+    <div class="col-sm-11 " style="margin-left: 5%;">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <!-- the links to our nested states using relative paths -->
+                <!-- add the active class if the state matches our ui-sref -->
+                <div id="status-buttons" class="text-center">
+                            <a ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step1'}" ng-click="sendToNewsRa()" style="cursor: pointer"><span>1</span> Create RA</a>
+                            <a ng-style="!( news_ra_id) && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-if="countrythreattest" ng-class="{active: individual_stepflag == 'individualcountry_step2'}" ng-click="backToStep1()" style="cursor: pointer" ><span>2</span> Country Profile  </a>
+
+
+                            <a ng-if="questiontest" ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step3'}" ng-click="redirectTonextTab()" style="cursor: pointer" ><span>{{!countrythreattest?2:3}}</span>Risks and Mitigation </a>
+
+                            <a  ng-if="supplierInformationtest"  ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step4'}" ng-click="goBackToSupplierPage()" style="cursor: pointer"><span>{{(!countrythreattest && !questiontest) ?2: (countrythreattest && !questiontest )?3: (!countrythreattest && questiontest )?3 : 4 }}</span> Logistics</a>
+
+                            <a ng-if="communicationstest" ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step5'}" ng-click="goBackToCommunicationPage()" style="cursor: pointer"><span>
+                            {{(!countrythreattest && !questiontest && !supplierInformationtest)?2:
+                            (countrythreattest && !questiontest && !supplierInformationtest)?3:
+                            (!countrythreattest && questiontest && !supplierInformationtest)?3: 
+                            (!countrythreattest && !questiontest && supplierInformationtest)?3: 
+                            (countrythreattest && questiontest && !supplierInformationtest)?4:
+                            (countrythreattest && !questiontest && supplierInformationtest)?4:
+                            (!countrythreattest && questiontest && supplierInformationtest)?4:5}}</span>  
+                            Communications </a>
+
+                            <a ng-if="contingenciestest" ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step6'}" ng-click="goBackToContingencyPage()" style="cursor: pointer"><span>{{
+                        (!countrythreattest && !questiontest && !supplierInformationtest && !communicationstest)?2:
+                        (countrythreattest && !questiontest && !supplierInformationtest && !communicationstest)?3:
+                        (!countrythreattest && questiontest && !supplierInformationtest && !communicationstest)?3:
+                        (!countrythreattest && !questiontest && supplierInformationtest && !communicationstest)?3:
+                        (!countrythreattest && !questiontest && !supplierInformationtest && communicationstest)?3:
+                        (countrythreattest && questiontest && !supplierInformationtest && !communicationstest)?4:
+                        (!countrythreattest && questiontest && supplierInformationtest && !communicationstest)?4:
+                        (!countrythreattest && !questiontest && supplierInformationtest && communicationstest)?4:
+                        (!countrythreattest && questiontest && !supplierInformationtest && communicationstest)?4:
+                        (countrythreattest && !questiontest && supplierInformationtest && !communicationstest)?4: 
+                        (countrythreattest && !questiontest && !supplierInformationtest && communicationstest)?4:
+                        (countrythreattest && questiontest && supplierInformationtest && !communicationstest)?5:
+                        (countrythreattest && !questiontest && supplierInformationtest && communicationstest)?5:
+                        (countrythreattest && questiontest && !supplierInformationtest && communicationstest)?5:
+
+                        (!countrythreattest && questiontest && supplierInformationtest && communicationstest)?5:6}}
+                            </span>Contingencies</a>
+
+                            <a ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step7'}" ng-click="goToAddAnyOtherInfo()" style="cursor: pointer"><span>{{
+                        (!countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?2:
+                        (countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?3:
+                        (!countrythreattest && questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?3:
+                        (!countrythreattest && !questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?3:
+                        (!countrythreattest && !questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?3:
+                        (!countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?3:
+                        (countrythreattest && questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                        (!countrythreattest && questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                        (!countrythreattest && !questiontest && supplierInformationtest && communicationstest && !contingenciestest)?4:
+                        (!countrythreattest && !questiontest && !supplierInformationtest && communicationstest && contingenciestest)?4:
+                        (countrythreattest && !questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                        (countrythreattest && !questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?4:
+                        (countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?4:
+                        (!countrythreattest && questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?4:
+                        (!countrythreattest && !questiontest && supplierInformationtest && !communicationstest && contingenciestest)?4:
+                        (!countrythreattest && questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?4:
+                        (countrythreattest && questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?5:
+                        (!countrythreattest && questiontest && supplierInformationtest && communicationstest && !contingenciestest)?5:
+                        (!countrythreattest && !questiontest && supplierInformationtest && communicationstest && contingenciestest)?5:
+                        (!countrythreattest && questiontest && !supplierInformationtest && communicationstest && contingenciestest)?5:
+                        (countrythreattest && !questiontest && supplierInformationtest && communicationstest && !contingenciestest)?5:
+                        (countrythreattest && !questiontest && supplierInformationtest && !communicationstest && contingenciestest)?5:
+                        (!countrythreattest && questiontest && supplierInformationtest && !communicationstest && contingenciestest)?5:
+                        (countrythreattest && !questiontest && !supplierInformationtest && communicationstest && contingenciestest)?5:
+                        (countrythreattest && questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?5:
+                        (countrythreattest && questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?5:
+
+
+
+                        (countrythreattest && questiontest && supplierInformationtest && communicationstest && !contingenciestest)?6:
+                        (countrythreattest && questiontest && supplierInformationtest && !communicationstest && contingenciestest)?6:
+                        (countrythreattest && questiontest && !supplierInformationtest && communicationstest && contingenciestest)?6:
+                        (countrythreattest && !questiontest && supplierInformationtest && communicationstest && contingenciestest)?6:
+                        (!countrythreattest && questiontest && supplierInformationtest && communicationstest && contingenciestest)?6:7}}
+                            </span>Any Other Details</a>
+                            <a ng-style="!news_ra_id && {'cursor':'not-allowed',
+                            'pointer-events': 'none'}" ng-class="{active: individual_stepflag == 'individualcountry_step8'}" ng-click="goToPreviewPage()" style="cursor: pointer"><span>{{
+                                    (!countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?3:
+                                    (countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                                    (!countrythreattest && questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                                    (!countrythreattest && !questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?4:
+                                    (!countrythreattest && !questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?4:
+                                    (!countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?4:
+                                    (countrythreattest && questiontest && !supplierInformationtest && !communicationstest && !contingenciestest)?5:
+                                    (!countrythreattest && questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?5:
+                                    (!countrythreattest && !questiontest && supplierInformationtest && communicationstest && !contingenciestest)?5:
+                                    (!countrythreattest && !questiontest && !supplierInformationtest && communicationstest && contingenciestest)?5:
+                                    (countrythreattest && !questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?5:
+                                    (countrythreattest && !questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?5:
+                                    (countrythreattest && !questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?5:
+                                    (!countrythreattest && questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?5:
+                                    (!countrythreattest && !questiontest && supplierInformationtest && !communicationstest && contingenciestest)?5:
+                                    (!countrythreattest && questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?5:
+
+                                    (countrythreattest && questiontest && supplierInformationtest && !communicationstest && !contingenciestest)?6:
+                                    (!countrythreattest && questiontest && supplierInformationtest && communicationstest && !contingenciestest)?6:
+                                    (!countrythreattest && !questiontest && supplierInformationtest && communicationstest && contingenciestest)?6:
+                                    (!countrythreattest && questiontest && !supplierInformationtest && communicationstest && contingenciestest)?6:
+                                    (countrythreattest && !questiontest && supplierInformationtest && communicationstest && !contingenciestest)?6:
+                                    (countrythreattest && !questiontest && supplierInformationtest && !communicationstest && contingenciestest)?6:
+                                    (!countrythreattest && questiontest && supplierInformationtest && !communicationstest && contingenciestest)?6:
+                                    (countrythreattest && !questiontest && !supplierInformationtest && communicationstest && contingenciestest)?6:
+                                    (countrythreattest && questiontest && !supplierInformationtest && communicationstest && !contingenciestest)?6:
+                                    (countrythreattest && questiontest && !supplierInformationtest && !communicationstest && contingenciestest)?6:
+
+
+
+                                    (countrythreattest && questiontest && supplierInformationtest && communicationstest && !contingenciestest)?7:
+                                    (countrythreattest && questiontest && supplierInformationtest && !communicationstest && contingenciestest)?7:
+                                    (countrythreattest && questiontest && !supplierInformationtest && communicationstest && contingenciestest)?7:
+                                    (countrythreattest && !questiontest && supplierInformationtest && communicationstest && contingenciestest)?7:
+                                    (!countrythreattest && questiontest && supplierInformationtest && communicationstest && contingenciestest)?7:8}}
+                        </span> Check & Submit </a>
+                </div>
+            </div>
+            <!-- use ng-submit to catch the form submission and use our Angular function -->
+            <!--<form id="signup-form" ng-submit="processForm()">-->
+            <!-- our nested state views will be injected here -->
+            <div id="form-views" ui-view></div>
+            <!--</form>-->
+
+        </div>
+
+
+    </div>
+</div>

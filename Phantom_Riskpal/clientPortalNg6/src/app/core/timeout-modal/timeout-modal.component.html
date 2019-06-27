@@ -1,0 +1,18 @@
+<div class="col-md-12">
+  <div>
+    <img class="logo" src="../../../assets/images/logo.png">
+  </div>
+  <div *ngIf="status" class="para text-center">
+    <span *ngIf="status?.active; else expired"> You will be logged out in
+      <p>
+        {{ status?.state }}
+      </p>
+      Seconds
+      <br> <br>Move mouse to continue!
+    </span>
+  </div>
+</div>
+
+<ng-template #expired>
+  {{ status?.state }}
+</ng-template>

@@ -1,0 +1,74 @@
+@import "styles.scss";
+
+.wrapper {
+    padding: 30px;
+    h2 {
+        font-size: 26px;
+        font-weight: bold;
+        color: $secondryColor;
+        background: url(../../../assets/images/icon-dashboard.svg) 0 0 no-repeat;  
+        padding: 0 0 0 34px;      
+    }
+    ._grid {
+        margin-top: 30px;
+        grid-template-rows: repeat(2,200px);
+        max-width: 960px;
+        margin: 60px auto;
+        display: grid;
+        grid-gap: 40px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+        ._section {
+            border-radius: 7px;
+            background: #fff;
+            border: 1px solid #DBE2E5;
+            box-shadow: 0 0 10px #E5E5E5;
+            text-align: center;
+            transition: all 1s;
+            position: relative;
+            cursor: pointer;
+
+            .notification {
+                background: url(../../../assets/images/icon-notification.svg) 0 0 no-repeat;
+                position: absolute;
+                top: -8px;
+                right: 0;
+                width: 64px;
+                height: 76px;
+
+                i { 
+                    font-size: 15px;
+                    position: absolute;
+                    top: 22px;
+                    color: #fff;
+                    width: inherit;
+                    text-align: center;
+                    left: 10px;
+                }
+            }
+            
+            svg { margin-top: 30px; margin-bottom: 20px;}
+            p { font-size: 12px; text-transform: uppercase; color: #0D2234;}
+
+            &:hover { transition: all 1s; box-shadow: 0px 10px 60px #aaacaf;
+                background: rgba(12,85,141,1);
+                background: -moz-linear-gradient(left, rgba(12,85,141,1) 0%, rgba(28,156,216,1) 100%);
+                background: -webkit-gradient(left top, right top, color-stop(0%, rgba(12,85,141,1)), color-stop(100%, rgba(28,156,216,1)));
+                background: -webkit-linear-gradient(left, rgba(12,85,141,1) 0%, rgba(28,156,216,1) 100%);
+                background: -o-linear-gradient(left, rgba(12,85,141,1) 0%, rgba(28,156,216,1) 100%);
+                background: -ms-linear-gradient(left, rgba(12,85,141,1) 0%, rgba(28,156,216,1) 100%);
+                background: linear-gradient(to right, rgba(12,85,141,1) 0%, rgba(28,156,216,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c558d', endColorstr='#1c9cd8', GradientType=1 );
+                
+                svg {
+                    .circle {
+                        stroke: #fff;
+                    }
+                    path { fill: #fff;}
+                }
+
+                p { color: #fff;}
+            }
+        }
+    }
+}

@@ -1,0 +1,127 @@
+.secondscreen{
+    padding-top:0px !important;
+    margin-top:0px !important;
+  	position:relative;
+    padding-bottom:0px !important;
+    margin-bottom:0px !important;
+}
+#result_list{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+    padding: 0px 0px 0px 0px !important;
+}
+@media (max-width: 720px) {
+    #cargocontainer{
+    height: 700px !important;
+    }
+    .navigationContainer{
+    margin-top:0vh !important;
+    padding:0px;
+    }
+    #firstscreen{
+    height: auto !important;
+    }
+}
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-fluid:before, .container-fluid:after {
+    content: " ";
+    display: table; 
+}
+.container-fluid:after {
+    clear: both;
+}  
+.row {
+margin-left: -15px;
+margin-right: -15px; 
+}
+.row:before, .row:after {
+    content: " ";
+    display: table; 
+}
+.row:after {
+    clear: both; 
+}
+
+.navigationContainer{
+    margin-top:5vh;padding:0px !important;
+}
+
+
+
+/* 
+Owner: M Irfan Qureshi
+Author: M Irfan Qureshi
+Modified: 4 September 2018
+Application: Intuglo
+Language: CSS Written by author - M Irfan Qureshi - aka iQ
+*/
+
+/* CSS iQ */
+.main-banner { background: #fff; min-height: 800px; max-height: 800px;}
+.main-banner::before { z-index: 0; transform: skewY(4deg); transform-origin: top right; top: 0; right: 0; left: 0; bottom: 0; position: absolute; width: 100%; height: 100%; content: ''; background: inherit;}
+.main-container { background: #F4F4F4; position: relative; padding: 50px 0 100px 0;}
+.main-container::before {z-index: 0; transform: skewY(4deg); transform-origin: top right; top: 0; right: 0; left: 0; bottom: 0; position: absolute; width: 100%; height: 100%; content: ''; background: inherit;}
+.main-container .content { z-index: 1;}
+.main-banner .banner-interactive { position: absolute; left: -70px; top: -100px; width: 830px;}
+.main-banner .vessel-interactive { position: absolute; left: -58px; top: 220px; width: 830px;}
+.main-banner .truck-interactive { position: absolute; left: 345px; top: 473px; width: 310px;}
+.menu-option { position: absolute; left: 100px; bottom: 100px;}
+.menu-option .menu-option-button { background: url(../../../../../assets/img/menu-option.svg) center center no-repeat; width: 40px; height: 40px; cursor: pointer; margin-right: 5px;}
+.menu-option .menu-options { height: 40px; background: #23376D; padding: 0 18px;}
+.menu-option .menu-options .option-left { background: url(../../../../../assets/img/menu-option-left.svg) center center no-repeat; width: 16px; height: 40px; display: inline-block; cursor: pointer;}
+.menu-option .menu-options .option-count { font-size: 14px; color: #fff; padding: 0 15px; display: inline-block; line-height: 40px; vertical-align: top;}
+.menu-option .menu-options .option-right { background: url(../../../../../assets/img/menu-option-right.svg) center center no-repeat; width: 16px; height: 40px; display: inline-block; cursor: pointer;}
+
+.slide-menu-wrapper { position: absolute; bottom: 100px; left: 145px; }
+.slide-menu-wrapper .menu-option-close { background: url(../../../../../assets/img/menu-close.svg) center center no-repeat; width: 40px; height: 40px; cursor: pointer; position: absolute; bottom: 0; left: -45px;}
+.slide-menu-wrapper .slided-menu-option { display: grid; grid-template-rows: repeat(1,140px); grid-template-columns: repeat(8,1fr); grid-gap: 5px;}
+.slide-menu-wrapper .slided-menu-option .menu-grid { text-align: center; background: rgba(227, 227, 227, 0.95); cursor: pointer; min-width: 128px;}
+.slide-menu-wrapper .slided-menu-option .menu-grid img { width: 42px; height: 42px; margin-top: 30px; margin-bottom: 20px;}
+.slide-menu-wrapper .slided-menu-option .menu-grid p { text-align: center; margin: 0; font-size: 14px; color: #333;}
+
+.banner-interactive-fadein { animation: fade-in 1s forwards;
+    -webkit-animation: fade-in 1s forwards;
+    -moz-animation: fade-in 1s forwards;
+    -o-animation: fade-in 1s forwards; }
+.vessel-interactive-slidein { animation: slide-in-truck 2s forwards;
+    -webkit-animation: slide-in-truck 2s forwards;
+    -moz-animation: slide-in-truck 2s forwards;
+    -o-animation: slide-in-truck 2s forwards; }
+.truck-interactive-slidein { animation: slide-in-truck 3s forwards;
+    -webkit-animation: slide-in-truck 3s forwards;
+    -moz-animation: slide-in-truck 3s forwards;
+    -o-animation: slide-in-truck 3s forwards; }
+.slide-navigation-slidein { animation: slide-in-truck 1s forwards;
+    -webkit-animation: slide-in-truck 1s forwards;
+    -moz-animation: slide-in-truck 1s forwards;
+    -o-animation: slide-in-truck 1s forwards; }
+
+/* Keyframe animation */
+@keyframes slide-in-truck {
+    0% { transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        -ms-transform: translateX(-100%); opacity: 0;}
+    50% { transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        -ms-transform: translateX(0%); opacity: 0.5;}
+    100% { transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        opacity: 1;}
+}
+@keyframes fade-in {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+/* Keyframe animation */
+
+/* CSS iQ */

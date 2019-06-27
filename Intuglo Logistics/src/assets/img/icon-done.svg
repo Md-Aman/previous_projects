@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #7ed3b6;
+      }
+
+      .cls-2 {
+        fill: #7ed3b6;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="No_-_Check" data-name="No - Check" transform="translate(-833 -771)">
+    <g id="Ellipse_110" data-name="Ellipse 110" class="cls-1" transform="translate(833 771)">
+      <circle class="cls-3" cx="12.5" cy="12.5" r="12.5"/>
+      <circle class="cls-4" cx="12.5" cy="12.5" r="12"/>
+    </g>
+    <path id="Checkbox" class="cls-2" d="M4.929,8.571,0,3.643l1-1L4.929,6.5l6.5-6.5,1,1Z" transform="translate(839.429 779.572)"/>
+  </g>
+</svg>

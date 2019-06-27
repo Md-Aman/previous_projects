@@ -1,0 +1,55 @@
+<div class="dashboard-layout">
+  <h2>HS Code Wiki</h2>
+  <div class="content-area">
+    <div class="search-area">
+      <span>Search Keyword</span>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <span class="btn-search">Search</span>
+    </div>
+    <div class="material-table">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="hs_code_header">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Header</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.hs_code_header}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hs_code_sub">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Sub</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.hs_code_sub}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hs_code_item">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Item</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.hs_code_item}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="unit">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Unit</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.Unit}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="old_hs">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Old HS</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.OLD_HS}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tax_import">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Import</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.tax_import}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tax_export">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Export</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.tax_export}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="gst_percentage">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Gst</mat-header-cell>
+          <mat-cell *matCellDef="let hswiki"> {{hswiki.gst_percentage}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

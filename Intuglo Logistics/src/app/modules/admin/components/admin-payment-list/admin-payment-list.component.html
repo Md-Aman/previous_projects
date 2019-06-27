@@ -1,0 +1,121 @@
+<div class="card">
+  <div class="row">
+      <div class="col-md-6">
+          <label class="label-control">Country</label>
+          <select name="selectedCountry" class="form-control" [(ngModel)]="selectedData" (change)="checkResources()">
+              <option  *ngFor="let country of countryList" [ngValue]="country">{{country.country_name}}</option>
+          </select>
+      </div>
+      <div class="col-md-6">
+        <label class="label-control">Select Month</label>
+      <!-- <mat-form-field>
+              <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp
+                              startView="multi-year"                           
+                              panelClass="example-month-picker"
+                              (change)="checkResources()"
+                              (yearSelected)="chosenYearHandler($event)"
+                              (monthSelected)="chosenMonthHandler($event, dp)"
+                              (selectedChanged)="onDate($event, dp)">
+              </mat-datepicker>
+            </mat-form-field> -->
+            <div class="input-group">
+              <input type="text" class="form-control" value="{{selectedDate | date:'MMMM-yyyy' }}" readonly>
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit" (click)="displayCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </div>
+            </div> 
+            <div class="customDatePicker" *ngIf="customCal">
+              <dl-date-time-picker 
+              *ngIf="showCalendar"
+              [(maxView)]="maxView" 
+              [(minView)]="minView" 
+              [(startView)]="startView"
+              [(minuteStep)]="minuteStep"
+              [(ngModel)]="selectedDate"
+              (change)="onCustomDateChange($event)">
+            </dl-date-time-picker>
+          </div>
+      </div>
+  </div>
+
+  <div class="card-action-button" *ngIf="displayCountryName"> <!--  -->
+      <div id="test" > 
+          <button class="btn-select"  [ngClass]="{'active': selectedIndex == button}" 
+          *ngFor="let button of filtershipmentRoutes; let i = button"
+          (click)="onClickFindRoutes(button)" 
+          > {{button}} </button>
+          
+      </div>
+  </div> 
+</div>
+
+<!--Routes -->
+<div class="row">
+  <div class="col-md-6">
+      <label class="label-control">Route</label>
+      <select class="form-control" [(ngModel)]="selectedRoute" (change)="onSelectedRoutes()">
+          <option *ngFor="let route of filterRoutes" [ngValue]="route">{{route.portName}}</option>
+      </select> 
+  </div>
+  <div class="col-md-6">
+      <label class="label-control">Vessel/Flight</label>
+      <select class="form-control" [(ngModel)]="selectedVessel">
+          <option *ngFor="let vessel of filterVessels" [ngValue]="vessel">{{vessel.vessel_name}}</option>
+      </select>
+  </div>
+</div>
+<button type="submit" class="primary-btn mt-5" (click)="getPaymentList()">filter</button> <!--(click)="onFilter()" -->
+
+
+<!--Results, payment list -->
+<div>
+  <h2> Results </h2>
+</div>
+<div class="subSet download">
+  <span class="right btn-download" *ngIf="displayGenerateButton" (click)="onGenerateReport()">Download</span>
+</div>
+<div class="flex-table" *ngIf="displayTable">
+    <table width="100%" >
+      <thead>
+        <tr>
+          <th>No</th>
+          <ng-container > 
+            <th>Booking Date</th>
+            <th>Booking Time</th>
+            <th>Supplier Name</th>
+            <th>Quotation ID</th>
+          </ng-container>
+          <ng-container >
+            <th>Order ID</th>
+            <th>Customer Name</th>
+          </ng-container>
+          <ng-container >
+            <th>Final Amount</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody > 
+        <tr *ngFor="let item of PaymentDetails; let i=index">
+          <ng-container >
+            <td>{{i+1}}</td>
+            <td>{{item.booking_date}}</td>
+          </ng-container>
+          <ng-container >
+            <td>{{item.created_on}}</td>
+            <td>{{item.supplier_name}}</td>
+            <td>{{item.quotation_id}}</td>
+            <td>{{item.order_id}}</td>
+          </ng-container>
+          <ng-container >
+            <td>{{item.customer_name}}</td>
+            <td>{{item.closing_price_total}}</td>
+          </ng-container>
+         
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 
+    

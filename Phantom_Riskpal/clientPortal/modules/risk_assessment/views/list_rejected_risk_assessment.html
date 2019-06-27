@@ -1,0 +1,78 @@
+<section class="content-header">
+    <h1>
+       Rejected Risk Assessment(s)
+        <!--<small>List</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Submitted Risk Assessment(s)</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllRejectedRiskAssessment();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <!--<div class="pull-right box-tools">
+                        <a ui-sref="main.add_type_of_ra">
+                            <button class="btn btn-sm btn-info">New Risk Assessment</button>
+                        </a>
+                    </div>-->
+                    <!-- /. tools -->
+                    <h3 class="box-title">Rejected Risk Assessment(s)</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by ra name" ng-model="keyword"
+                            autocomplete="false" ng-change="getAllRejectedRiskAssessment(keyword)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="newsRaData in $data">
+                            <td data-title="'RA Type'" sortable="''">{{newsRaData.types_of_ra_id.ra_name}}</td>
+                            <td data-title="'Project Name'" sortable="'project_name'">{{newsRaData.project_name}}</td>
+                            <td data-title="'Project Code'" sortable="'project_code'">{{newsRaData.project_code}}</td>
+                            <td data-title="'Department'" sortable="'department'">{{newsRaData.departments.toString()}}</td>
+                            <td data-title="'Date Of Project'" sortable="'date_of_ra'">{{newsRaData.date_of_ra.startDate | date:'MMM dd, yyyy'}} - {{newsRaData.date_of_ra.endDate | date:'MMM dd, yyyy'}}</td>
+                            <!--<td data-title="'Description Of Task'" sortable="'description_of_task'">{{newsRaData.description_of_task}}</td>-->
+                            <td data-title="'Traveller Name'">{{newsRaData.traveller_id.firstname}}{{newsRaData.traveller_id.lastname}}</td>
+                            <td data-title="'Country'"><div ng-repeat="countryObj in newsRaData.country">{{countryObj.name}}</div></td>
+                            <td data-title="'Status'" align="center" class="actions">
+                                <a ng-class="{'btn btn-xs btn-success': newsRaData.is_approve,
+                                'btn btn-xs btn-danger': newsRaData.is_reject,
+                                'btn btn-xs btn-warning': newsRaData.is_more_info,
+                                'btn btn-xs btn-info': (!newsRaData.is_approve && !newsRaData.is_reject && !newsRaData.is_more_info)
+                                }"  title="Click to view">
+                                  
+
+                                 <!--  ui-sref="main.view_Ra_details({newsRa_id:newsRaData._id})" -->
+                                    <!--{{(newsRaData.is_approve == true || newsRaData.is_more_info == true || newsRaData.is_reject == true) ? 'Read' : 'Unread'}}-->
+                                   <!--  {{newsRaData.is_approve ? 'Approved' : newsRaData.is_more_info ? 'More Information Requested' : newsRaData.is_reject ? 'Rejected' : 'Submitted' }} -->
+
+                                    Rejected
+                                   <!--  </a> -->
+                                    <!--<a ng-if="newsRaData.is_approve == true" class="btn btn-xs btn-success" >
+                                 read
+                                </a>-->
+
+                            </td>
+                        </tr>
+                        <tr ng-if="newsRaData.length == 0">
+                            <td colspan="8" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content

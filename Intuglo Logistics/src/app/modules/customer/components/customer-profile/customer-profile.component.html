@@ -1,0 +1,321 @@
+<div class="cust-noti subSet">
+    <h2 id="form-title">Business Information</h2>
+    <div class="customer-profile subSet">
+        <form role="form" class="form-horizoontal" [formGroup]="form">
+            <div class="form-group col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="font-color required">Company Name</label>
+                        <input type="string"
+                            [ngClass]="{'error': form?.controls.cname?.errors?.required && profileSubmitted}"
+                            [(ngModel)]="companyName" 
+                            formControlName="cname" 
+                            value={{companyName}}
+                            placeholder="e.g. Siroi Solution SDN BHD" class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class=" font-color required">Company Registration No.</label>
+                        <input
+                            [ngClass]="{'error': form?.controls.cregistration?.errors?.required && profileSubmitted}" 
+                            type="string" [(ngModel)]="companyRegistrationNo" formControlName="cregistration" value={{companyRegistrationNo}}
+                            placeholder="e.g. 112345-L" class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class=" font-color required">Contact Person</label>
+                        <input type="string" [(ngModel)]="contactPerson" 
+                            [ngClass]="{'error': form?.controls.contactperson?.errors?.required && profileSubmitted}"
+                            formControlName="contactperson" value={{contactPerson}}
+                            placeholder="e.g. John Legend" class="form-control with">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class=" font-color required ">Office Address Line 1</label>
+                        <input type="string" [(ngModel)]="officialAddressLineOne" 
+                            formControlName="address1" value={{officialAddressLineOne}}
+                            [ngClass]="{'error': form?.controls.address1?.errors?.required && profileSubmitted}"
+                            placeholder="e.g. HBG Fluxr Digital SB 30-2 Jalan Elektron U16/F" 
+                            class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="font-color required ">City</label>
+                        <input type="string" [(ngModel)]="city" formControlName="city" 
+                        [ngClass]="{'error': form?.controls.city?.errors?.required && profileSubmitted}"
+                            value={{city}} placeholder="e.g. Shah Alam"
+                            class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="font-color required ">State</label>
+                        <input type="string" [(ngModel)]="state" formControlName="state"
+                            [ngClass]="{'error': form?.controls.state?.errors?.required && profileSubmitted}"
+                             value={{state}} placeholder="e.g. Selangor"
+                            class="form-control with">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="font-color ">Office Address Line 2</label>
+                        <input type="string" [(ngModel)]="officialAddressLineTwo" 
+                            value={{officialAddressLineTwo}}
+                            placeholder="e.g. Denai Alam" class="form-control with" 
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="font-color required ">Postal Code</label>
+                        <input type="tel" pattern="[0-9]*"
+                            [(ngModel)]="postalcode" formControlName="postalcode" 
+                            [ngClass]="{'error': form?.controls.postalcode?.errors?.required && profileSubmitted}"
+                                value={{postalcode}} placeholder="e.g. 40160, min/max 5 digits"
+                            class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="font-color required ">Country</label>
+                        <select class="form-control with" [(ngModel)]="selectedCountryCode" 
+                            [ngClass]="{'error': form?.controls.country?.errors?.required && profileSubmitted}"
+                            formControlName="country">
+                            <option *ngFor="let country of countries"
+                                 [ngValue]="country.country_code">{{country.country_name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class=" font-color required ">Official E-mail</label>
+                        <input type="url"
+                            [(ngModel)]="officialEmail" formControlName="officialemail"
+                            [ngClass]="{'error': form?.controls.officialemail?.errors?.required && profileSubmitted}" 
+                                value={{officialEmail}}
+                            placeholder="e.g. john@hbg.com " class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+
+                        <label class=" font-color required ">Office Phone</label>
+                        <input type="string" 
+                            [(ngModel)]="officialPhone" formControlName="officephone" 
+                            [ngClass]="{'error': form?.controls.officephone?.errors?.required && profileSubmitted}"
+                                value={{officialPhone}}
+                            placeholder="e.g. +60344567899" class="form-control with">
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class=" font-color ">Fax No
+                            <span></span>
+                        </label>
+                        <input type="string" 
+                            [(ngModel)]="faxNo" formControlName="faxNo" value={{faxNo}} 
+                            [ngClass]="{'error': form?.controls.faxNo?.errors?.minlength && profileSubmitted}"
+                                placeholder="e.g. +60344567899 ( min: 8 & max: 16 )"
+                            class="form-control with">
+                    </div>
+                    <div class="col-md-3">
+                        <label class=" font-color required ">Phone Number</label>
+                        <input type="string" 
+                            [(ngModel)]="phoneNumber" formControlName="phonenumber" 
+                            [ngClass]="{'error': form?.controls.phonenumber?.errors?.required && profileSubmitted}"
+                                value={{phoneNumber}} placeholder="e.g. +60123456789"
+                            class="form-control with">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class=" font-color required ">Company Website</label>
+                        <input type="url" [(ngModel)]="companyWebsite" 
+                            formControlName="companywebsite" value={{companyWebsite}}
+                            [ngClass]="{'error': form?.controls.companywebsite?.errors?.required && profileSubmitted}"
+                            placeholder="e.g. www.intuglo.com" class="form-control with">
+                    </div>
+                    <div class="col-md-6">
+                        <label class=" font-color required ">Industry Type</label>
+                        <select class="form-control with" [(ngModel)]="selectedIndustryID"
+                            [ngClass]="{'error': form?.controls.industrytype?.errors?.required && profileSubmitted}" 
+                            formControlName="industrytype">
+                            <option *ngFor="let industry of industries" 
+                                value="{{industry.industry_id}}">{{industry.industry_name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class=" font-color required ">Business Type</label>
+                        <select class="form-control with" [(ngModel)]="selectedBusinessID"
+                            [ngClass]="{'error': form?.controls.businesstype?.errors?.required && profileSubmitted}" 
+                            formControlName="businesstype">
+                            <option *ngFor="let business of businesses" 
+                                value="{{business.business_id}}">{{business.business_name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-color required ">Business Size</label>
+                        <select class="form-control with" 
+                            [ngClass]="{'error': form?.controls.naturebusiness?.errors?.required && profileSubmitted}"
+                            [(ngModel)]="businessNature" formControlName="naturebusiness">
+                            <option value="S">SME</option>
+                            <option value="M">Micro</option>
+                            <option value="C">Corporation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="font-color required">Business License Number</label>
+                        <input type="number" 
+                            [ngClass]="{'error': form?.controls.businesslicense?.errors?.required && profileSubmitted}"
+                            [(ngModel)]="licenseNumber" value={{licenseNumber}} formControlName="businesslicense"
+                            placeholder="e.g. 4016000" class="form-control with">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-color required ">Import/Export License</label>
+                        <input type="number"
+                            [ngClass]="{'error': form?.controls.importexport?.errors?.required && profileSubmitted}"
+                            [(ngModel)]="importerExporter" value={{importerExporter}} formControlName="importexport"
+                            placeholder="e.g. 4016000" class="form-control with">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class=" font-color ">Association / Club / Agent</label>
+                        <input type="string" [(ngModel)]="associationClub" value={{associationClub}} placeholder="Association/Club"
+                            class="form-control with" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="acc-info">Account Information</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="text-color">Notification Option</label>
+                        <select class="form-control with">
+                            <option selected>Email</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class=" text-color">Time Zone</label>
+                        <ng2-timezone-picker [(timezone)]="timezone" (change)="changeTimezone($event)"  guess="true" class="form-control with"></ng2-timezone-picker>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="font-color">Merchant ID</label>
+                        <input type="string" [(ngModel)]="merchantId" value={{merchantId}} class="form-control with"
+                            [ngModelOptions]="{standalone: true}" readonly>
+                    </div>
+                </div>
+
+                <div class="contain-space">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="acc-info">Change Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="font-color required">Current Password</label>
+                            <input type="password" [(ngModel)]="currentPassword" formControlName="oldPassword" class="form-control with">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="font-color required">New Password</label>
+                            <input type="password" [(ngModel)]="newPassword" formControlName="newPassword" class="form-control with">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="font-color required">Confirm Password</label>
+                            <input type="password" [(ngModel)]="confirmPassword" formControlName="newConfirmPassword" class="form-control with">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn-primary ld ld-ext-right running" (click)="changePassword()">Change password
+                                    <i class="ld ld-ring ld-spin"></i>
+                            </span>
+                            <ng4-loading-spinner> </ng4-loading-spinner>
+                            <!-- <span class="btn-secondry" (click)="openDialog()">Cancel</span> -->
+                            <span  class="btn-secondry">
+                                <button class="btn-secondry reset-button" (click)="blankInputField()">Reset</button>
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+
+                <div class="contain-space">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="acc-info">Manage Document</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="">
+                                <input type="file" id="documentUploader" style="display: none" accept=".pdf,.png" class="inputfile"
+                                    (change)="onFileChange($event)" formControlName="documentUpload">
+                                <label for="documentUploader" class="fileSection">
+                                    <span id="documentName" class="truncate upd"></span>
+                                    <span class="upload">Browse</span>
+                                </label>
+                            </div>
+                            <span type="submit" class="btn-primary" (click)="uploadDocument()">Upload</span>
+                            <span class="btn-secondry" (click)="resetInputField()">Reset</span>
+                        </div>
+                        <div class="col-md-6">
+                            Please upload the document belows for account opening:<br />
+                            1. SSM Incorporation Document (From 9, 24, 44 and 49)<br />
+                            2. Business License<br />
+                            3. Import / Export License (if any)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 list-doc" *ngIf="documentLength">
+                            <h4>List of Documents</h4>
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th width="85%">File Name</th>
+                                        <th width="10%" class="text-center">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let document of documents; let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{document.file_name}}</td>
+                                        <td>
+                                            <button type="button" (click)="deleteDocument(document.profile_documents_id)"
+                                                class="btn btn-xs btn-default">X</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span type="submit" class="btn-primary" (click)="updateProfile()">Update Profile</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <ngx-loading [show]="loading"></ngx-loading> -->

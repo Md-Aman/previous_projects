@@ -1,0 +1,354 @@
+<form [formGroup]="userFormGroup" (submit)="submit(userFormGroup.value)">
+  <!-- <div class="accord relative">
+        <span>Communications</span>
+        <i class="arrowUp"></i>
+  </div> -->
+  <!-- <div class="accord-content">
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Mobile 1 Number</label>
+            <input type="text" formControlName="firstname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Mobile 1 IMEI</label>
+            <input type="text" formControlName="lastname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Phone Make Model</label>
+            <input type="text" formControlName="email" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>MEID number</label>
+            <input type="text" formControlName="firstname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>MISC Information </label>
+            <input type="text" formControlName="lastname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Sat Phone Number</label>
+            <input type="text" formControlName="email" class="form-control">
+          </div>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Sat Phone IMEI</label>
+            <input type="text" formControlName="firstname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Tracker Details</label>
+            <input type="text" formControlName="lastname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Email Address</label>
+            <input type="text" formControlName="email" class="form-control">
+          </div>
+      </div>
+  </div> -->
+  <div class="accord relative">
+    <span>User Information</span>
+    <i class="arrowUp"></i>
+
+    <!-- <div class="upload-btn-wrapper pull-right">
+      <img class="img" *ngIf="!userDetails.image" src="https://image.flaticon.com/icons/png/128/126/126477.png"/>
+      <img class="img" *ngIf="userDetails.image" [src]="userDetails.image"/>
+      <input formControlName="image"
+         type="file"
+         accept="image/*"
+         (change)="fileChange($event)">
+    </div> -->
+  </div>
+  <div class="accord-content">
+    <div class="row">
+        <div class="form-group col-md-4">
+          <label>First Name</label>
+          <input type="text" formControlName="firstname" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastname" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Email Address</label>
+          <input [attr.disabled]="userId || id" type="email" formControlName="email" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+          <label>Mobile</label>
+            <int-phone-prefix *ngIf="!isUserMobileNo" [defaultCountry]="country"
+                    formControlName="mobile_number"></int-phone-prefix>
+            <int-phone-prefix *ngIf="isUserMobileNo"
+                    formControlName="mobile_number"></int-phone-prefix>
+            <!-- <international-phone-number [(ngModel)]="mobile_number" placeholder="Enter mobile number"
+              [maxlength]="20" [defaultCountry]="'in'" [required]="true" #phoneNumber="ngModel"
+              name="mobile_number" [ngModelOptions]="{standalone: true}"></international-phone-number> -->
+          <!-- <input type="text" class="form-control"> -->
+        </div>
+
+        <div class="form-group col-md-4" *ngIf="super_admin">
+          <label>Client</label>
+          <ng-select
+              (change)="getClientAndDepartmentUser($event); resetInputField($event)"
+              [items]="clients"
+              [multiple]="false"
+              [closeOnSelect]="true"
+              labelForId="clients"
+              bindValue="_id"
+              bindLabel="company_name"
+              formControlName="clients">
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                  <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  <span>{{item.company_name}}</span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                  <div>{{item.company_name}}</div>
+              </ng-template>
+            </ng-select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>User Group</label>
+          <ng-select
+              [items]="userGroups"
+              [multiple]="false"
+              [closeOnSelect]="false"
+              bindLabel="group_name"
+              labelForId="usergroups"
+              [attr.disabled]="id ? true: null"
+              bindLabel="group_name"
+              formControlName="usergroups">
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                  <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  <span>{{item.group_name}}</span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                  <div>{{item.group_name}}</div>
+              </ng-template>
+            </ng-select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Department</label>
+            <ng-select
+              [items]="departmentUser"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              labelForId="department"
+              bindLabel="department_name"
+              formControlName="department">
+
+            </ng-select>
+        </div>
+    <!-- </div>
+    <div class="row"> -->
+        <!-- <div class="form-group col-md-4">
+          <label>Date Of Birth</label>
+          <div class="relative _updCal">
+            <input type="text" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+               formControlName="dob" class="form-control" bsDatepicker>
+            <span class="arrow" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"></span>
+          </div>
+
+        </div>
+        <div class="form-group col-md-4">
+          <label>Gender</label>
+          <select class="form-control" formControlName="gender" id="gender" name="gender">
+            <option value="" selected="selected">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+
+        </div> -->
+
+    </div>
+  </div>
+
+  <!-- <div class="accord relative">
+      <span>Passport Information</span>
+      <i class="arrowUp"></i>
+    </div>
+    <div class="accord-content" formArrayName="passport_data">
+      <ng-container *ngFor="let passoprt of userFormGroup.get('passport_data')['controls']; let i=index">
+        <ng-container [formGroupName]="i">
+
+
+
+          <div class="row">
+            <div class="form-group col-md-4">
+                <label>Nationality</label>
+                <ng-select
+                    [items]="commonData.countries"
+                    [multiple]="false"
+                    [closeOnSelect]="true"
+                    labelForId="clients"
+                    bindValue="_id"
+                    bindLabel="name"
+                    [searchFn]="customSearchFn"
+                    formControlName="nationality">
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        <span>{{item.name}}</span>
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item">
+                        <div>{{item.name}}</div>
+                    </ng-template>
+                  </ng-select>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Passport Number</label>
+                <input type="text" formControlName="passport_number" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Issue Date</label>
+                <div class="relative _updCal">
+                  <input type="text" #dp1="bsDatepicker" formControlName="issuedate" class="form-control" bsDatepicker 
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <span class="arrow" (click)="dp1.toggle()" [attr.aria-expanded]="dp1.isOpen"></span>
+                </div>
+              </div>
+          </div>
+        <div class="row">
+
+            <div class="form-group col-md-4">
+              <label>Expiry Date</label>
+              <div class="relative _updCal">
+                <input type="text" #dp2="bsDatepicker" formControlName="expirydate" class="form-control" bsDatepicker
+                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <span class="arrow" (click)="dp2.toggle()" [attr.aria-expanded]="dp2.isOpen"></span>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label></label>
+                <button *ngIf="userFormGroup.get('passport_data')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin-top-set" title="Add Passport Details"
+                    (click)="deletePassportDataRow(i)"><i class="fa fa-remove" aria-hidden="true"></i></button>
+              </div>
+
+        </div>
+
+      </ng-container>
+    </ng-container>
+    <div class="row">
+      <div class="col-lg-12">
+          <button *ngIf="!maxPassportLimitReached" type="button" class="btn btn-sm btn-primary margin-top-set dp-block" title="Add Passport Details"
+          (click)="addNewPassportDataRow()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <span *ngIf="maxPassportLimitReached">Max Passport Limit Reached.</span>
+      </div>
+    </div>
+  </div> -->
+
+
+    <!-- emergency -->
+    <!-- <div class="accord relative">
+        <span>Emergency Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content">
+          <div class="row">
+              <div class="form-group col-md-4">
+                <label>Full Name</label>
+                <input type="text" formControlName="emg_full_name" class="form-control">
+              </div>
+              <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+                <label>Mobile Number</label>
+                <int-phone-prefix *ngIf="!isEmgMobileNo" formControlName="emg_mobile_number" [defaultCountry]="country"></int-phone-prefix>
+                <int-phone-prefix *ngIf="isEmgMobileNo" formControlName="emg_mobile_number"></int-phone-prefix> -->
+                <!-- <international-phone-number class="" [(ngModel)]="emg_mobile_number" placeholder="Enter phone number"
+                  [maxlength]="20" [defaultCountry]="'uk'" [required]="false"
+                  #phoneNumber="ngModel" name="emg_mobile_number" [ngModelOptions]="{standalone: true}"></international-phone-number> -->
+              <!-- </div>
+              <div class="form-group col-md-4">
+                <label>Email Address</label>
+                <input type="email" formControlName="emg_email" class="form-control">
+              </div>
+          </div>
+        <div class="row">
+
+            <div class="form-group col-md-4">
+              <label>Relationship to you</label>
+              <input type="text" formControlName="emg_relationship_to_you" class="form-control">
+            </div>
+        </div>
+      </div> -->
+
+
+       <!-- alternative emergency -->
+    <!-- <div class="accord relative">
+        <span>Alternative Emergency Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content">
+          <div class="row">
+              <div class="form-group col-md-4">
+                <label>Full Name</label>
+                <input type="text" formControlName="alt_emg_full_name" class="form-control">
+              </div>
+              <div class="form-group col-md-4" [customErrorMessages]="customErrorMessages">
+                <label>Mobile Number</label>
+                <int-phone-prefix *ngIf="!isAltEmgMobileNo" formControlName="alt_emg_mobile_number" [defaultCountry]="country"></int-phone-prefix>
+                <int-phone-prefix *ngIf="isAltEmgMobileNo" formControlName="alt_emg_mobile_number"></int-phone-prefix> -->
+                <!-- <international-phone-number class="" [(ngModel)]="alt_emg_mobile_number" placeholder="Enter phone number"
+                  [maxlength]="20" [defaultCountry]="'uk'" [required]="false"
+                  #phoneNumber="ngModel" name="alt_emg_mobile_number" [ngModelOptions]="{standalone: true}"></international-phone-number> -->
+              <!-- </div>
+              <div class="form-group col-md-4">
+                <label>Email Address</label>
+                <input type="email" formControlName="alt_emg_email" class="form-control">
+              </div>
+          </div>
+        <div class="row">
+
+            <div class="form-group col-md-4">
+              <label>Relationship to you</label>
+              <input type="text" formControlName="alt_emg_relationship_to_you" class="form-control">
+            </div>
+        </div>
+      </div> -->
+
+      <!-- proof of life-->
+       <!-- emergency -->
+    <!-- <div class="accord relative">
+        <span>Proof Of Life</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content">
+          <div class="row">
+              <div class="form-group col-md-4">
+                <label>Proof of life question</label> -->
+                <!-- <select formControlName="proof_of_life_question" class="form-control">
+                    <option *ngFor="let ug of preLoadedData.proofOfLife" value="ug._id">{{ug.question}}</option>
+                </select> -->
+                <!-- <ng-select
+                  [items]="commonData.proofOfLife"
+                  [multiple]="false"
+                  [closeOnSelect]="false"
+                  labelForId="proof_of_life_question"
+                  bindValue="_id"
+                  bindLabel="question"
+                  formControlName="proof_of_life_question">
+                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      <span>{{item.question}}</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                      <div>{{item.question}}</div>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Proof of life answer</label>
+                <input type="text" formControlName="proof_of_life_answer" class="form-control">
+              </div>
+          </div>
+      </div> -->
+
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <!-- <a class="prev" routerLink="/secure/user">Previous</a> -->
+              <button *ngIf="isUserIdExist" type="submit" class="cont">Save & Continue</button>
+              <button *ngIf="!isUserIdExist" type="submit" class="cont">Save</button>
+            </div>
+      </div>
+</form>
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>

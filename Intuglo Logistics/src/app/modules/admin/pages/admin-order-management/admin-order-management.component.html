@@ -1,0 +1,33 @@
+<admin-navbar (controlSideBar)="receiveDataFromHeader($event)"></admin-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+  <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+    <admin-left-menu [sideBar]="isSideBarOpen" [fromDashboard]='isOpen'></admin-left-menu>
+  </ng-sidebar>
+  <div class="dashboard-layout" ng-sidebar-content>
+    <h2>Order Management</h2>
+    <div class="content-area">
+      <div>
+        <admin-order-country-list (shareRouteTabToFirstFilter)="receiveRoute($event)" (shareCountryTabToAdminOrderList)="receiveCountryTabFromAdminCountryFilter($event)"></admin-order-country-list>
+      </div>
+      <div>
+        <admin-order-first-filter-list [selectedRoute]="selectedRoute" (shareVesselID)="receiveVessel($event)" (shareSupplierID)="receiveSupplier($event)"></admin-order-first-filter-list>
+      </div>     
+      <div>
+        <admin-order-second-filter-list (shareOrderID)="receiveFromOrderID($event)" ></admin-order-second-filter-list>
+      </div>     
+      <div>
+        <admin-order-action-top-menu (shareDataToAdminOrderActionButton)="receiveDataFromAdminOrderActionTopMenu($event)"></admin-order-action-top-menu>
+      </div>
+      <div>
+        <admin-order-action-button [hidden]="!isCheckedBooking" [step]="step" (hideAdminActionButtons)="getHideAdminActionButtons($event)"></admin-order-action-button>
+      </div>
+      <div>
+        <admin-order-list (shareContainerIdToAdminOrderList)="receiveDataFromAdminOrderList($event)" (shareDataToAdminOrderList)="receiveDataFromAdminOrderList($event)" [selectedQuotation]="selectedQuotation" [orderID]="orderID" [quotationID]="quotationID"></admin-order-list>
+      </div>
+      <div>
+          <admin-table-pagination  [vesselID]="vesselID" [supplierID]="supplierID" (shareQuotationId)="receiveQuotationId($event)"></admin-table-pagination>
+      </div>
+    </div>
+  </div>
+</ng-sidebar-container>

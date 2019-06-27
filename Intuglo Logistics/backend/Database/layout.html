@@ -1,0 +1,2620 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN' 'http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>Layout</title>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<style type='text/css'>
+body {
+    font-family: 'Segoe UI', 'Lucida sans', Dialog;
+    font-size: 13px;
+    color: #444;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    caption-side: top;
+    width: auto;
+    margin: 10px 15px 5px 20px;
+}
+
+
+.bordered td, .bordered th {
+   background-color: #F7F7FF;
+   border: 1px solid #D5D5D3;
+   padding: 5px 5px 5px 5px;
+  white-space:pre-wrap!important;
+}
+
+.bordered th {
+    background-color: #4d82b8;
+    border: none;
+    border-bottom: 1px solid #0b67cd;
+    padding: 3px 5px 3px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.section-header h2 {
+    background-color: #F7F7FF;
+    font-size: 18px;
+    font-weight: normal;
+    border-top: solid 1px #D5D5D3;
+    border-bottom: solid 1px #D5D5D3;
+    width: 95%;
+    margin: 5px 0px 5px 20px;
+    padding: 5px 0px 5px 0px;
+    color: #4d82b8;
+}
+.section-header div {
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 70%;
+}
+
+.section-header a {
+    text-decoration: none;
+}
+
+.page-header {
+    padding: 0px 10px 20px 0px;
+    margin: 0px 10px 10px 0px;
+    position: relative;
+    border-bottom: 1px solid #D5D5D3;
+    background-color: #F7F7FF;width: 100%;
+ }
+.page-header h1 {
+    color: #4d82b8;
+    font-size: 21px;
+    font-weight: normal;
+}
+
+.container {
+    margin: 10px 10px 10px 0px;
+}
+</style>
+
+<script>
+  function showhide(id)
+  {
+    if (document.getElementById)
+    {
+      obj = document.getElementById(id);
+      if (obj.style.display == "none"){ obj.style.display = ""; } else { obj.style.display = "none"; }
+    }
+  }
+</script>
+</head>
+
+<body>
+<div class='page-header'><h1>Layout</h1></div>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' text-rendering='optimizeLegibility'   width='1575' height='1595' viewbox='0 0 1575 1595' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ document.getElementById(el[i]).setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ document.getElementById(el[i]).setAttribute('class','scene'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#000000; font-family: Tahoma, 'Trebuchet MS', Dialog; font-size:11px; }
+  text:hover          { fill:#304ea4; font-weight:bold; }
+  text.highlight      { fill:#304ea4; font-weight:bold; }
+  text.colType        { fill:#b3b3b3; }
+  path                { stroke:#5c554f; stroke-width:1.25; fill:none; }
+  path.scene          { stroke-width:10; opacity:0;}
+  path.highlight      { stroke-width:7; stroke:#d9ce90; opacity:0.6;}
+  rect.table          { fill:#ffffff; stroke:#aaa; stroke-width:1;shape-rendering:crispEdges; filter:url(#shadow); }
+  line.delim          { stroke:#777; stroke-width:0.3; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; filter: url(#shadow);}
+  rect.grp            { stroke:#b1b1b1; stroke-width:1.7; }
+</style>
+<defs>
+  <pattern patternUnits='userSpaceOnUse' id='layoutBgA' width='10' height='20' x='0' y='0' viewBox='0 0 5 10'>  
+     <line x1='-2' y1='1' x2='7' y2='10' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='6' x2='7' y2='15' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='-4' x2='7' y2='5' stroke='#f3f3f3' stroke-width='.5'/>  
+  </pattern>  
+  <radialGradient id='layoutBgB' gradientUnits='userSpaceOnUse' cx='50%' cy='50%' r='75%' fx='46%' fy='22%'>
+     <stop offset='0%' stop-opacity='.2' stop-color='#f0f0f0' />  
+     <stop offset='100%' stop-color='#e7e7e7' />  
+  </radialGradient>
+  <linearGradient id='tableHeaderGradient2' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='-5%' stop-color='#b3b3f5'/> 
+          <stop offset='90%' stop-color='#ccccff'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient3' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='-5%' stop-color='#b3f5f5'/> 
+          <stop offset='90%' stop-color='#ccffff'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient4' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='-5%' stop-color='#f5b3b3'/> 
+          <stop offset='90%' stop-color='#ffcccc'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient1' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='-5%' stop-color='#f5d8b3'/> 
+          <stop offset='90%' stop-color='#f5d8b3'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient0' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='-5%' stop-color='#bef5b3'/> 
+          <stop offset='90%' stop-color='#bef5b3'/> 
+   </linearGradient>
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f8f6d1' />
+  </radialGradient>
+  <filter id='shadow' width='120%' height='120%'> 
+      <feOffset result='offOut' in='SourceGraphic' dx='1' dy='1' /> 
+      <feColorMatrix result='matrixOut' in='offOut' type='matrix' 
+      values='0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.3 0' /> 
+      <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' /> 
+      <feBlend in='SourceGraphic' in2='blurOut' mode='normal' /> 
+    </filter> 
+  <filter id='fkShadow' height='130%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+    <feMergeNode/> <!-- this contains the offset blurred image -->
+    <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#eefbf2' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#cff9cb' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 7,11 L 15,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+      <path d='M 0,0 L 7,11 L 15,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,15 L 7,3 L 15,15 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+      <path d='M 0,15 L 7,3 L 15,15' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fbea8e;stroke:#472106;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.5' y='7.7' style='font-size:8px;fill:#8a8a8a;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='view' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+     <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+     <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+     <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+  <marker id='arrow01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 15.000,3.750 L 7.500,2.500 L 7.500,7.500 L 15.000,3.750 z' style='fill:#5e554d;' />
+  </marker>
+  <marker id='arrow1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 15.000,3.750 L 7.500,2.500 L 7.500,7.500 L 15.000,3.750 z' style='fill:#5e554d;' />
+  </marker>
+  <marker id='foot01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
+    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
+  </marker>
+  <marker id='foot0p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
+    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
+  </marker>
+  <marker id='foot1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
+    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
+  </marker>
+  <marker id='foot1p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
+    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
+  </marker>
+</defs>
+
+<!-- ============= Desktop ============= -->
+<rect x='1' y='1' width='1573' height='1593' rx='7' ry='7' style='fill:#f7f7f7; stroke:#333333; stroke-width:0.5;'/>
+
+<!-- ============= Legend ============= -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='267' height='78' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <text x='20' y='30'>Layout</text> 
+  <text x='25' y='49' style='fill:#8a9d89; font-size:11px;'><tspan>HTML5 interactive image documentation.</tspan></text> 
+  <text x='25' y='63' style='fill:#8a9d89; font-size:11px;'><tspan>Move the mouse over tables to read the comments.</tspan></text> 
+  <text x='25' y='77' style='fill:#8a9d89; font-size:11px;'>Powered by <a xlink:href='http://www.dbschema.com' text-decoration='underline' style='fill:#97a496'>DbSchema</a></text> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- ============= Group 'Shipment' ============= -->
+<rect class='grp' style='fill:#ffcccc;stroke:#e0cece' x='299' y='10' width='662' height='650' />
+<text x='310' y='25'>Shipment</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='310' y='28' width='640' height='2' />
+
+<!-- ============= Group 'Lookup Tables' ============= -->
+<rect class='grp' style='fill:#99ff99;stroke:#cee0ce' x='614' y='700' width='932' height='485' />
+<text x='625' y='715'>Lookup Tables</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='625' y='718' width='910' height='2' />
+
+<!-- ============= Group 'logins' ============= -->
+<rect class='grp' style='fill:#ffffcc;stroke:#e0e0ce' x='29' y='685' width='452' height='440' />
+<text x='40' y='700'>logins</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='40' y='703' width='430' height='2' />
+
+<!-- ============= Group 'Notifications' ============= -->
+<rect class='grp' style='fill:#ccccff;stroke:#cecee0' x='1019' y='1285' width='167' height='140' />
+<text x='1030' y='1300'>Notifications</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='1030' y='1303' width='145' height='2' />
+
+<!-- ============= Group 'General' ============= -->
+<rect class='grp' style='fill:#c4e0f9;stroke:#ced8e0' x='239' y='1270' width='272' height='185' />
+<text x='250' y='1285'>General</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='250' y='1288' width='250' height='2' />
+
+<!-- ============= Fk 'users_fk_users' ============= -->
+<path id='users_fk_users'  onmouseover="hghl(['users_fk_users','intuglo_logistics.users.login_id','intuglo_logistics.logins.login_id'])" onmouseout="uhghl(['users_fk_users','intuglo_logistics.users.login_id','intuglo_logistics.logins.login_id'])" transform='translate(7,0)' class='scene' d='M 345 870 L 210,870' >
+	<title>Fk fk_users
+users ref logins ( login_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 345 870 L 210,870' ></path>
+<text x='311' y='865' transform='rotate(0 311,865)' title='Fk fk_users
+users ref logins ( login_id )' style='fill:#b6b696;'>login_id</text>
+<!-- ============= Fk 'users_fk_users_1' ============= -->
+<path id='users_fk_users_1'  onmouseover="hghl(['users_fk_users_1','intuglo_logistics.users.business_id','intuglo_logistics.businesses.business_id'])" onmouseout="uhghl(['users_fk_users_1','intuglo_logistics.users.business_id','intuglo_logistics.businesses.business_id'])" transform='translate(7,0)' class='scene' d='M 465 975 L 630,975' >
+	<title>Fk fk_users_1
+users ref businesses ( business_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 465 975 L 630,975' ></path>
+<text x='472' y='970' transform='rotate(0 472,970)' title='Fk fk_users_1
+users ref businesses ( business_id )' style='fill:#b6b696;'>business_id</text>
+<!-- ============= Fk 'users_fk_users_0' ============= -->
+<path id='users_fk_users_0'  onmouseover="hghl(['users_fk_users_0','intuglo_logistics.users.country_code','intuglo_logistics.countries.country_code'])" onmouseout="uhghl(['users_fk_users_0','intuglo_logistics.users.country_code','intuglo_logistics.countries.country_code'])" transform='translate(7,0)' class='scene' d='M 465 885 L 630,885' >
+	<title>Fk fk_users_0
+users ref countries ( country_code )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 465 885 L 630,885' ></path>
+<text x='472' y='880' transform='rotate(0 472,880)' title='Fk fk_users_0
+users ref countries ( country_code )' style='fill:#b6b696;'>country_code</text>
+<!-- ============= Fk 'suppliers_fk_suppliers' ============= -->
+<path id='suppliers_fk_suppliers'  onmouseover="hghl(['suppliers_fk_suppliers','intuglo_logistics.suppliers.login_id','intuglo_logistics.logins.login_id'])" onmouseout="uhghl(['suppliers_fk_suppliers','intuglo_logistics.suppliers.login_id','intuglo_logistics.logins.login_id'])" transform='translate(7,0)' class='scene' d='M 330 735 L 210,735' >
+	<title>Fk fk_suppliers
+suppliers ref logins ( login_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 330 735 L 210,735' ></path>
+<text x='296' y='730' transform='rotate(0 296,730)' title='Fk fk_suppliers
+suppliers ref logins ( login_id )' style='fill:#b6b696;'>login_id</text>
+<!-- ============= Fk 'notifications_fk_notifications' ============= -->
+<path id='notifications_fk_notifications'  onmouseover="hghl(['notifications_fk_notifications','intuglo_logistics.notifications.notification_status_id','intuglo_logistics.notification_status.notification_status_id'])" onmouseout="uhghl(['notifications_fk_notifications','intuglo_logistics.notifications.notification_status_id','intuglo_logistics.notification_status.notification_status_id'])" transform='translate(7,0)' class='scene' d='M 1125 1305 L 1125,1080' >
+	<title>Fk fk_notifications
+notifications ref notification_status ( notification_status_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 1125 1305 L 1125,1080' ></path>
+<text x='1127' y='1300' transform='rotate(270 1127,1300)' title='Fk fk_notifications
+notifications ref notification_status ( notification_status_id )' style='fill:#b6b696;'>notification_status_id</text>
+<!-- ============= Fk 'user_platforms_fk_user_platforms_0' ============= -->
+<path id='user_platforms_fk_user_platforms_0'  onmouseover="hghl(['user_platforms_fk_user_platforms_0','intuglo_logistics.user_platforms.platform_id','intuglo_logistics.platforms.platform_id'])" onmouseout="uhghl(['user_platforms_fk_user_platforms_0','intuglo_logistics.user_platforms.platform_id','intuglo_logistics.platforms.platform_id'])" transform='translate(7,0)' class='scene' d='M 255 1080 L 645,1080' >
+	<title>Fk fk_user_platforms_0
+user_platforms ref platforms ( platform_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 255 1080 L 645,1080' ></path>
+<text x='262' y='1075' transform='rotate(0 262,1075)' title='Fk fk_user_platforms_0
+user_platforms ref platforms ( platform_id )' style='fill:#b6b696;'>platform_id</text>
+<!-- ============= Fk 'user_platforms_fk_user_platforms' ============= -->
+<path id='user_platforms_fk_user_platforms'  onmouseover="hghl(['user_platforms_fk_user_platforms','intuglo_logistics.user_platforms.login_id','intuglo_logistics.logins.login_id'])" onmouseout="uhghl(['user_platforms_fk_user_platforms','intuglo_logistics.user_platforms.login_id','intuglo_logistics.logins.login_id'])" transform='translate(7,0)' class='scene' d='M 150 1005 L 150,930' >
+	<title>Fk fk_user_platforms
+user_platforms ref logins ( login_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 150 1005 L 150,930' ></path>
+<text x='152' y='1000' transform='rotate(270 152,1000)' title='Fk fk_user_platforms
+user_platforms ref logins ( login_id )' style='fill:#b6b696;'>login_id</text>
+<!-- ============= Fk 'containers_fk_containers' ============= -->
+<path id='containers_fk_containers'  onmouseover="hghl(['containers_fk_containers','intuglo_logistics.containers.quotation_id','intuglo_logistics.quotations.quotation_id'])" onmouseout="uhghl(['containers_fk_containers','intuglo_logistics.containers.quotation_id','intuglo_logistics.quotations.quotation_id'])" transform='translate(7,0)' class='scene' d='M 525 60 L 675,60' >
+	<title>Fk fk_containers
+containers ref quotations ( quotation_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 525 60 L 675,60' ></path>
+<text x='532' y='55' transform='rotate(0 532,55)' title='Fk fk_containers
+containers ref quotations ( quotation_id )' style='fill:#b6b696;'>quotation_id</text>
+<!-- ============= Fk 'quotations_fk_quotations' ============= -->
+<path id='quotations_fk_quotations'  onmouseover="hghl(['quotations_fk_quotations','intuglo_logistics.quotations.shipment_type_id','intuglo_logistics.shipment_types.shipment_type_id'])" onmouseout="uhghl(['quotations_fk_quotations','intuglo_logistics.quotations.shipment_type_id','intuglo_logistics.shipment_types.shipment_type_id'])" transform='translate(7,0)' class='scene' d='M 885 270 L 1012,270 Q 1020,270 1020,277 L 1020,720' >
+	<title>Fk fk_quotations
+quotations ref shipment_types ( shipment_type_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 885 270 L 1012,270 Q 1020,270 1020,277 L 1020,720' ></path>
+<text x='892' y='265' transform='rotate(0 892,265)' title='Fk fk_quotations
+quotations ref shipment_types ( shipment_type_id )' style='fill:#b6b696;'>shipment_type_id</text>
+<!-- ============= Fk 'quotations_fk_quotations_0' ============= -->
+<path id='quotations_fk_quotations_0'  onmouseover="hghl(['quotations_fk_quotations_0','intuglo_logistics.quotations.shipment_carrier_id','intuglo_logistics.shipment_carriers.shipment_carrier_id'])" onmouseout="uhghl(['quotations_fk_quotations_0','intuglo_logistics.quotations.shipment_carrier_id','intuglo_logistics.shipment_carriers.shipment_carrier_id'])" transform='translate(7,0)' class='scene' d='M 885 255 L 1147,255 Q 1155,255 1155,262 L 1155,720' >
+	<title>Fk fk_quotations_0
+quotations ref shipment_carriers ( shipment_carrier_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 885 255 L 1147,255 Q 1155,255 1155,262 L 1155,720' ></path>
+<text x='892' y='250' transform='rotate(0 892,250)' title='Fk fk_quotations_0
+quotations ref shipment_carriers ( shipment_carrier_id )' style='fill:#b6b696;'>shipment_carrier_id</text>
+<!-- ============= Fk 'quotations_fk_quotations_1' ============= -->
+<path id='quotations_fk_quotations_1'  onmouseover="hghl(['quotations_fk_quotations_1','intuglo_logistics.quotations.port_id_from','intuglo_logistics.ports.port_id'])" onmouseout="uhghl(['quotations_fk_quotations_1','intuglo_logistics.quotations.port_id_from','intuglo_logistics.ports.port_id'])" transform='translate(7,0)' class='scene' d='M 885 240 L 1312,240 Q 1320,240 1320,247 L 1320,720' >
+	<title>Fk fk_quotations_1
+quotations ref ports ( port_id_from -&gt; port_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 885 240 L 1312,240 Q 1320,240 1320,247 L 1320,720' ></path>
+<text x='892' y='235' transform='rotate(0 892,235)' title='Fk fk_quotations_1
+quotations ref ports ( port_id_from -&gt; port_id )' style='fill:#b6b696;'>port_id_from</text>
+<!-- ============= Fk 'quotations_fk_quotations_2' ============= -->
+<path id='quotations_fk_quotations_2'  onmouseover="hghl(['quotations_fk_quotations_2','intuglo_logistics.quotations.port_id_to','intuglo_logistics.ports.port_id'])" onmouseout="uhghl(['quotations_fk_quotations_2','intuglo_logistics.quotations.port_id_to','intuglo_logistics.ports.port_id'])" transform='translate(7,0)' class='scene' d='M 885 225 L 1327,225 Q 1335,225 1335,232 L 1335,720' >
+	<title>Fk fk_quotations_2
+quotations ref ports ( port_id_to -&gt; port_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 885 225 L 1327,225 Q 1335,225 1335,232 L 1335,720' ></path>
+<text x='892' y='220' transform='rotate(0 892,220)' title='Fk fk_quotations_2
+quotations ref ports ( port_id_to -&gt; port_id )' style='fill:#b6b696;'>port_id_to</text>
+<!-- ============= Fk 'quotations_fk_quotations_3' ============= -->
+<path id='quotations_fk_quotations_3'  onmouseover="hghl(['quotations_fk_quotations_3','intuglo_logistics.quotations.incoterm_code','intuglo_logistics.incoterms.incoterm_code'])" onmouseout="uhghl(['quotations_fk_quotations_3','intuglo_logistics.quotations.incoterm_code','intuglo_logistics.incoterms.incoterm_code'])" transform='translate(7,0)' class='scene' d='M 885 210 L 1432,210 Q 1440,210 1440,217 L 1440,720' >
+	<title>Fk fk_quotations_3
+quotations ref incoterms ( incoterm_code )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 885 210 L 1432,210 Q 1440,210 1440,217 L 1440,720' ></path>
+<text x='892' y='205' transform='rotate(0 892,205)' title='Fk fk_quotations_3
+quotations ref incoterms ( incoterm_code )' style='fill:#b6b696;'>incoterm_code</text>
+<!-- ============= Fk 'businesses_fk_businesses' ============= -->
+<path id='businesses_fk_businesses'  onmouseover="hghl(['businesses_fk_businesses','intuglo_logistics.businesses.industry_id','intuglo_logistics.industries.industry_id'])" onmouseout="uhghl(['businesses_fk_businesses','intuglo_logistics.businesses.industry_id','intuglo_logistics.industries.industry_id'])" transform='translate(7,0)' class='scene' d='M 765 990 L 810,990' >
+	<title>Fk fk_businesses
+businesses ref industries ( industry_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 765 990 L 810,990' ></path>
+<text x='772' y='985' transform='rotate(0 772,985)' title='Fk fk_businesses
+businesses ref industries ( industry_id )' style='fill:#b6b696;'>industry_id</text>
+<!-- ============= Fk 'quotation_handling_charges_fk_quotation_handling_charges' ============= -->
+<path id='quotation_handling_charges_fk_quotation_handling_charges'  onmouseover="hghl(['quotation_handling_charges_fk_quotation_handling_charges','intuglo_logistics.quotation_handling_charges.quotation_id','intuglo_logistics.quotations.quotation_id'])" onmouseout="uhghl(['quotation_handling_charges_fk_quotation_handling_charges','intuglo_logistics.quotation_handling_charges.quotation_id','intuglo_logistics.quotations.quotation_id'])" transform='translate(7,0)' class='scene' d='M 810 390 L 810,285' >
+	<title>Fk fk_quotation_handling_charges
+quotation_handling_charges ref quotations ( quotation_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 810 390 L 810,285' ></path>
+<text x='812' y='385' transform='rotate(270 812,385)' title='Fk fk_quotation_handling_charges
+quotation_handling_charges ref quotations ( quotation_id )' style='fill:#b6b696;'>quotation_id</text>
+<!-- ============= Fk 'custom_fk_custom' ============= -->
+<path id='custom_fk_custom'  onmouseover="hghl(['custom_fk_custom','intuglo_logistics.custom.order_id','intuglo_logistics.orders.order_id'])" onmouseout="uhghl(['custom_fk_custom','intuglo_logistics.custom.order_id','intuglo_logistics.orders.order_id'])" transform='translate(7,0)' class='scene' d='M 420 255 L 480,255' >
+	<title>Fk fk_custom
+custom ref orders ( order_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 420 255 L 480,255' ></path>
+<text x='427' y='250' transform='rotate(0 427,250)' title='Fk fk_custom
+custom ref orders ( order_id )' style='fill:#b6b696;'>order_id</text>
+<!-- ============= Fk 'packing_list_fk_packing_list' ============= -->
+<path id='packing_list_fk_packing_list'  onmouseover="hghl(['packing_list_fk_packing_list','intuglo_logistics.packing_list.order_id','intuglo_logistics.orders.order_id'])" onmouseout="uhghl(['packing_list_fk_packing_list','intuglo_logistics.packing_list.order_id','intuglo_logistics.orders.order_id'])" transform='translate(7,0)' class='scene' d='M 450 420 L 480,420' >
+	<title>Fk fk_packing_list
+packing_list ref orders ( order_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 450 420 L 480,420' ></path>
+<text x='457' y='415' transform='rotate(0 457,415)' title='Fk fk_packing_list
+packing_list ref orders ( order_id )' style='fill:#b6b696;'>order_id</text>
+<!-- ============= Fk 'orders_fk_orders' ============= -->
+<path id='orders_fk_orders'  onmouseover="hghl(['orders_fk_orders','intuglo_logistics.orders.order_status_id','intuglo_logistics.order_staus.status_id'])" onmouseout="uhghl(['orders_fk_orders','intuglo_logistics.orders.order_status_id','intuglo_logistics.order_staus.status_id'])" transform='translate(7,0)' class='scene' d='M 630 630 L 787,630 Q 795,630 795,637 L 795,720' >
+	<title>Fk fk_orders
+orders ref order_staus ( order_status_id -&gt; status_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 630 630 L 787,630 Q 795,630 795,637 L 795,720' ></path>
+<text x='637' y='625' transform='rotate(0 637,625)' title='Fk fk_orders
+orders ref order_staus ( order_status_id -&gt; status_id )' style='fill:#b6b696;'>order_status_id</text>
+<!-- ============= Fk 'orders_fk_orders_0' ============= -->
+<path id='orders_fk_orders_0'  onmouseover="hghl(['orders_fk_orders_0','intuglo_logistics.orders.hs_code_id','intuglo_logistics.hs_code.hs_code_id'])" onmouseout="uhghl(['orders_fk_orders_0','intuglo_logistics.orders.hs_code_id','intuglo_logistics.hs_code.hs_code_id'])" transform='translate(7,0)' class='scene' d='M 600 645 L 600,727 Q 600,735 607,735 L 615,735' >
+	<title>Fk fk_orders_0
+orders ref hs_code ( hs_code_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 600 645 L 600,727 Q 600,735 607,735 L 615,735' ></path>
+<text x='613' y='645' transform='rotate(90 613,645)' title='Fk fk_orders_0
+orders ref hs_code ( hs_code_id )' style='fill:#b6b696;'>hs_code_id</text>
+<!-- ============= Fk 'orders_fk_orders_2' ============= -->
+<path id='orders_fk_orders_2'  onmouseover="hghl(['orders_fk_orders_2','intuglo_logistics.orders.quotation_id','intuglo_logistics.quotations.quotation_id'])" onmouseout="uhghl(['orders_fk_orders_2','intuglo_logistics.orders.quotation_id','intuglo_logistics.quotations.quotation_id'])" transform='translate(7,0)' class='scene' d='M 630 225 L 675,225' >
+	<title>Fk fk_orders_2
+orders ref quotations ( quotation_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 630 225 L 675,225' ></path>
+<text x='637' y='220' transform='rotate(0 637,220)' title='Fk fk_orders_2
+orders ref quotations ( quotation_id )' style='fill:#b6b696;'>quotation_id</text>
+<!-- ============= Fk 'orders_fk_orders_1' ============= -->
+<path id='orders_fk_orders_1'  onmouseover="hghl(['orders_fk_orders_1','intuglo_logistics.orders.login_id','intuglo_logistics.logins.login_id'])" onmouseout="uhghl(['orders_fk_orders_1','intuglo_logistics.orders.login_id','intuglo_logistics.logins.login_id'])" transform='translate(7,0)' class='scene' d='M 480 615 L 202,615 Q 195,615 195,622 L 195,705' >
+	<title>Fk fk_orders_1
+orders ref logins ( login_id )</title>
+</path>
+<path class='defo' transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 480 615 L 202,615 Q 195,615 195,622 L 195,705' ></path>
+<text x='446' y='610' transform='rotate(0 446,610)' title='Fk fk_orders_1
+orders ref logins ( login_id )' style='fill:#b6b696;'>login_id</text>
+<!-- ============= Table 'logins' ============= -->
+<rect class='table' x='45' y='713' width='165' height='210' rx='7' ry='7' />
+<line class='delim' x1='45.500000' y1='739.500000' x2='209.500000' y2='739.500000'/>
+<line class='delim' x1='60.500000' y1='739.500000' x2='60.500000' y2='922.500000'/>
+<line class='delim' x1='198.500000' y1='739.500000' x2='198.500000' y2='922.500000'/>
+<path d='M 45.50 739.50 L 45.50 720.50 Q 45.50 713.50 52.50 713.50 L 202.50 713.50 Q 209.50 713.50 209.50 720.50 L 209.50 739.50 L45.50 739.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#logins'><text x='110' y='731'>logins</text><title>Table intuglo_logistics.logins</title></a>
+  <use id='nn' x='47' y='747' xlink:href='#nn'/><a xlink:href='#logins.login_id'><use id='pk' x='47' y='746' xlink:href='#pk'/><title>Pk pk_logins ( login_id ) </title></a>
+<a xlink:href='#logins.login_id'><text id='intuglo_logistics.logins.login_id' x='63' y='757' onmouseover="hghl(['suppliers_fk_suppliers','users_fk_users','user_platforms_fk_user_platforms','orders_fk_orders_1','orders_fk_orders_1'])" onmouseout="uhghl(['suppliers_fk_suppliers','users_fk_users','user_platforms_fk_user_platforms','orders_fk_orders_1','orders_fk_orders_1'])">login_id</text><title>login_id
+* int</title></a>
+<a xlink:href='#logins.login_id'><use id='ref' x='198' y='746' xlink:href='#ref'/><title>Referred by suppliers ( login_id ) 
+Referred by users ( login_id ) 
+Referred by user_platforms ( login_id ) 
+Referred by orders ( login_id ) 
+Referred by orders ( login_id ) </title></a>
+  <use id='nn' x='47' y='762' xlink:href='#nn'/><a xlink:href='#logins.email'><use id='unq' x='47' y='761' xlink:href='#unq'/><title>Unq idx_logins_email ( email ) </title></a>
+<a xlink:href='#logins.email'><text id='intuglo_logistics.logins.email' x='63' y='772'>email</text><title>email
+* varchar(255)</title></a>
+  <a xlink:href='#logins.password'><text id='intuglo_logistics.logins.password' x='63' y='787'>password</text><title>password
+varchar(255)</title></a>
+  <a xlink:href='#logins.user_type'><text id='intuglo_logistics.logins.user_type' x='63' y='802'>user_type</text><title>user_type
+tinyint default 2
+0 = admin
+1 = supplier
+2 = user</title></a>
+  <use id='nn' x='47' y='807' xlink:href='#nn'/><a xlink:href='#logins.is_active'><text id='intuglo_logistics.logins.is_active' x='63' y='817'>is_active</text><title>is_active
+* bit default 1</title></a>
+  <a xlink:href='#logins.created_on'><text id='intuglo_logistics.logins.created_on' x='63' y='832'>created_on</text><title>created_on
+datetime default CURRENT_TIMESTAMP</title></a>
+  <use id='nn' x='47' y='837' xlink:href='#nn'/><a xlink:href='#logins.created_by'><text id='intuglo_logistics.logins.created_by' x='63' y='847'>created_by</text><title>created_by
+* int default 0</title></a>
+  <a xlink:href='#logins.current_session'><text id='intuglo_logistics.logins.current_session' x='63' y='862'>current_session</text><title>current_session
+varchar(255)</title></a>
+  <use id='nn' x='47' y='867' xlink:href='#nn'/><a xlink:href='#logins.need_change_password'><text id='intuglo_logistics.logins.need_change_password' x='63' y='877'>need_change_password</text><title>need_change_password
+* bit default 0</title></a>
+  <a xlink:href='#logins.current_session'><text id='intuglo_logistics.logins.current_session' x='63' y='892'>current_session</text><title>current_session
+varchar(255)</title></a>
+  <use id='nn' x='47' y='897' xlink:href='#nn'/><a xlink:href='#logins.need_change_password'><text id='intuglo_logistics.logins.need_change_password' x='63' y='907'>need_change_password</text><title>need_change_password
+* bit default 0</title></a>
+
+<!-- ============= Table 'users' ============= -->
+<rect class='table' x='360' y='863' width='105' height='150' rx='7' ry='7' />
+<line class='delim' x1='360.500000' y1='889.500000' x2='464.500000' y2='889.500000'/>
+<line class='delim' x1='375.500000' y1='889.500000' x2='375.500000' y2='1012.500000'/>
+<line class='delim' x1='453.500000' y1='889.500000' x2='453.500000' y2='1012.500000'/>
+<path d='M 360.50 889.50 L 360.50 870.50 Q 360.50 863.50 367.50 863.50 L 457.50 863.50 Q 464.50 863.50 464.50 870.50 L 464.50 889.50 L360.50 889.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#users'><text x='395' y='881'>users</text><title>Table intuglo_logistics.users</title></a>
+  <use id='nn' x='362' y='897' xlink:href='#nn'/><a xlink:href='#users.user_id'><use id='pk' x='362' y='896' xlink:href='#pk'/><title>Pk pk_users ( user_id ) </title></a>
+<a xlink:href='#users.user_id'><text id='intuglo_logistics.users.user_id' x='378' y='907'>user_id</text><title>user_id
+* int</title></a>
+  <use id='nn' x='362' y='912' xlink:href='#nn'/><a xlink:href='#users.login_id'><use id='idx' x='362' y='911' xlink:href='#idx'/><title>idx_users ( login_id ) </title></a>
+<a xlink:href='#users.login_id'><text id='intuglo_logistics.users.login_id' x='378' y='922' onmouseover="hghl(['users_fk_users'])" onmouseout="uhghl(['users_fk_users'])">login_id</text><title>login_id
+* int</title></a>
+<a xlink:href='#users.login_id'><use id='fk' x='453' y='911' xlink:href='#fk'/><title>References logins ( login_id ) </title></a>
+  <use id='nn' x='362' y='927' xlink:href='#nn'/><a xlink:href='#users.user_name'><text id='intuglo_logistics.users.user_name' x='378' y='937'>user_name</text><title>user_name
+* varchar(255)</title></a>
+  <a xlink:href='#users.mobile_no'><text id='intuglo_logistics.users.mobile_no' x='378' y='952'>mobile_no</text><title>mobile_no
+varchar(50)</title></a>
+  <use id='nn' x='362' y='957' xlink:href='#nn'/><a xlink:href='#users.country_code'><use id='idx' x='362' y='956' xlink:href='#idx'/><title>fk_user_countries ( country_code ) </title></a>
+<a xlink:href='#users.country_code'><text id='intuglo_logistics.users.country_code' x='378' y='967' onmouseover="hghl(['users_fk_users_0'])" onmouseout="uhghl(['users_fk_users_0'])">country_code</text><title>country_code
+* char(2)</title></a>
+<a xlink:href='#users.country_code'><use id='fk' x='453' y='956' xlink:href='#fk'/><title>References countries ( country_code ) </title></a>
+  <a xlink:href='#users.business_id'><use id='idx' x='362' y='971' xlink:href='#idx'/><title>idx_users_1 ( business_id ) </title></a>
+<a xlink:href='#users.business_id'><text id='intuglo_logistics.users.business_id' x='378' y='982' onmouseover="hghl(['users_fk_users_1'])" onmouseout="uhghl(['users_fk_users_1'])">business_id</text><title>business_id
+int</title></a>
+<a xlink:href='#users.business_id'><use id='fk' x='453' y='971' xlink:href='#fk'/><title>References businesses ( business_id ) </title></a>
+  <a xlink:href='#users.address'><text id='intuglo_logistics.users.address' x='378' y='997'>address</text><title>address
+varchar(255)</title></a>
+
+<!-- ============= Table 'suppliers' ============= -->
+<rect class='table' x='345' y='713' width='105' height='90' rx='7' ry='7' />
+<line class='delim' x1='345.500000' y1='739.500000' x2='449.500000' y2='739.500000'/>
+<line class='delim' x1='360.500000' y1='739.500000' x2='360.500000' y2='802.500000'/>
+<line class='delim' x1='438.500000' y1='739.500000' x2='438.500000' y2='802.500000'/>
+<path d='M 345.50 739.50 L 345.50 720.50 Q 345.50 713.50 352.50 713.50 L 442.50 713.50 Q 449.50 713.50 449.50 720.50 L 449.50 739.50 L345.50 739.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#suppliers'><text x='372' y='731'>suppliers</text><title>Table intuglo_logistics.suppliers</title></a>
+  <use id='nn' x='347' y='747' xlink:href='#nn'/><a xlink:href='#suppliers.supplier_id'><use id='pk' x='347' y='746' xlink:href='#pk'/><title>Pk pk_suppliers ( supplier_id ) </title></a>
+<a xlink:href='#suppliers.supplier_id'><text id='intuglo_logistics.suppliers.supplier_id' x='363' y='757'>supplier_id</text><title>supplier_id
+* int</title></a>
+  <use id='nn' x='347' y='762' xlink:href='#nn'/><a xlink:href='#suppliers.login_id'><use id='idx' x='347' y='761' xlink:href='#idx'/><title>idx_suppliers ( login_id ) </title></a>
+<a xlink:href='#suppliers.login_id'><text id='intuglo_logistics.suppliers.login_id' x='363' y='772' onmouseover="hghl(['suppliers_fk_suppliers'])" onmouseout="uhghl(['suppliers_fk_suppliers'])">login_id</text><title>login_id
+* int</title></a>
+<a xlink:href='#suppliers.login_id'><use id='fk' x='438' y='761' xlink:href='#fk'/><title>References logins ( login_id ) </title></a>
+  <a xlink:href='#suppliers.supplier_name'><text id='intuglo_logistics.suppliers.supplier_name' x='363' y='787'>supplier_name</text><title>supplier_name
+varchar(255)</title></a>
+
+<!-- ============= Table 'notifications' ============= -->
+<rect class='table' x='1035' y='1313' width='135' height='90' rx='7' ry='7' />
+<line class='delim' x1='1035.500000' y1='1339.500000' x2='1169.500000' y2='1339.500000'/>
+<line class='delim' x1='1050.500000' y1='1339.500000' x2='1050.500000' y2='1402.500000'/>
+<line class='delim' x1='1158.500000' y1='1339.500000' x2='1158.500000' y2='1402.500000'/>
+<path d='M 1035.50 1339.50 L 1035.50 1320.50 Q 1035.50 1313.50 1042.50 1313.50 L 1162.50 1313.50 Q 1169.50 1313.50 1169.50 1320.50 L 1169.50 1339.50 L1035.50 1339.50 ' style='fill:url(#tableHeaderGradient1); stroke:none;' />
+<a xlink:href='#notifications'><text x='1070' y='1331'>notifications</text><title>Table intuglo_logistics.notifications</title></a>
+  <use id='nn' x='1037' y='1347' xlink:href='#nn'/><a xlink:href='#notifications.notification_id'><use id='pk' x='1037' y='1346' xlink:href='#pk'/><title>Pk pk_notifications ( notification_id ) </title></a>
+<a xlink:href='#notifications.notification_id'><text id='intuglo_logistics.notifications.notification_id' x='1053' y='1357'>notification_id</text><title>notification_id
+* int</title></a>
+  <use id='nn' x='1037' y='1362' xlink:href='#nn'/><a xlink:href='#notifications.notification_type_id'><text id='intuglo_logistics.notifications.notification_type_id' x='1053' y='1372'>notification_type_id</text><title>notification_type_id
+* int</title></a>
+  <use id='nn' x='1037' y='1377' xlink:href='#nn'/><a xlink:href='#notifications.notification_status_id'><use id='idx' x='1037' y='1376' xlink:href='#idx'/><title>idx_notifications ( notification_status_id ) </title></a>
+<a xlink:href='#notifications.notification_status_id'><text id='intuglo_logistics.notifications.notification_status_id' x='1053' y='1387' onmouseover="hghl(['notifications_fk_notifications'])" onmouseout="uhghl(['notifications_fk_notifications'])">notification_status_id</text><title>notification_status_id
+* int</title></a>
+<a xlink:href='#notifications.notification_status_id'><use id='fk' x='1158' y='1376' xlink:href='#fk'/><title>References notification_status ( notification_status_id ) </title></a>
+
+<!-- ============= Table 'user_platforms' ============= -->
+<rect class='table' x='135' y='1013' width='120' height='90' rx='7' ry='7' />
+<line class='delim' x1='135.500000' y1='1039.500000' x2='254.500000' y2='1039.500000'/>
+<line class='delim' x1='150.500000' y1='1039.500000' x2='150.500000' y2='1102.500000'/>
+<line class='delim' x1='243.500000' y1='1039.500000' x2='243.500000' y2='1102.500000'/>
+<path d='M 135.50 1039.50 L 135.50 1020.50 Q 135.50 1013.50 142.50 1013.50 L 247.50 1013.50 Q 254.50 1013.50 254.50 1020.50 L 254.50 1039.50 L135.50 1039.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#user_platforms'><text x='155' y='1031'>user_platforms</text><title>Table intuglo_logistics.user_platforms</title></a>
+  <use id='nn' x='137' y='1047' xlink:href='#nn'/><a xlink:href='#user_platforms.user_platform_id'><use id='pk' x='137' y='1046' xlink:href='#pk'/><title>Pk pk_user_platforms ( user_platform_id ) </title></a>
+<a xlink:href='#user_platforms.user_platform_id'><text id='intuglo_logistics.user_platforms.user_platform_id' x='153' y='1057'>user_platform_id</text><title>user_platform_id
+* int</title></a>
+  <use id='nn' x='137' y='1062' xlink:href='#nn'/><a xlink:href='#user_platforms.login_id'><use id='idx' x='137' y='1061' xlink:href='#idx'/><title>idx_user_platforms ( login_id ) </title></a>
+<a xlink:href='#user_platforms.login_id'><text id='intuglo_logistics.user_platforms.login_id' x='153' y='1072' onmouseover="hghl(['user_platforms_fk_user_platforms'])" onmouseout="uhghl(['user_platforms_fk_user_platforms'])">login_id</text><title>login_id
+* int</title></a>
+<a xlink:href='#user_platforms.login_id'><use id='fk' x='243' y='1061' xlink:href='#fk'/><title>References logins ( login_id ) </title></a>
+  <use id='nn' x='137' y='1077' xlink:href='#nn'/><a xlink:href='#user_platforms.platform_id'><use id='idx' x='137' y='1076' xlink:href='#idx'/><title>idx_user_platforms_0 ( platform_id ) </title></a>
+<a xlink:href='#user_platforms.platform_id'><text id='intuglo_logistics.user_platforms.platform_id' x='153' y='1087' onmouseover="hghl(['user_platforms_fk_user_platforms_0'])" onmouseout="uhghl(['user_platforms_fk_user_platforms_0'])">platform_id</text><title>platform_id
+* int</title></a>
+<a xlink:href='#user_platforms.platform_id'><use id='fk' x='243' y='1076' xlink:href='#fk'/><title>References platforms ( platform_id ) </title></a>
+
+<!-- ============= Table 'containers' ============= -->
+<rect class='table' x='375' y='38' width='150' height='150' rx='7' ry='7' />
+<line class='delim' x1='375.500000' y1='64.500000' x2='524.500000' y2='64.500000'/>
+<line class='delim' x1='390.500000' y1='64.500000' x2='390.500000' y2='187.500000'/>
+<line class='delim' x1='513.500000' y1='64.500000' x2='513.500000' y2='187.500000'/>
+<path d='M 375.50 64.50 L 375.50 45.50 Q 375.50 38.50 382.50 38.50 L 517.50 38.50 Q 524.50 38.50 524.50 45.50 L 524.50 64.50 L375.50 64.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#containers'><text x='421' y='56'>containers</text><title>Table intuglo_logistics.containers</title></a>
+  <use id='nn' x='377' y='72' xlink:href='#nn'/><a xlink:href='#containers.container_id'><use id='pk' x='377' y='71' xlink:href='#pk'/><title>Pk pk_containers ( container_id ) </title></a>
+<a xlink:href='#containers.container_id'><text id='intuglo_logistics.containers.container_id' x='393' y='82'>container_id</text><title>container_id
+* int</title></a>
+  <a xlink:href='#containers.container_no'><text id='intuglo_logistics.containers.container_no' x='393' y='97'>container_no</text><title>container_no
+varchar(30)</title></a>
+  <use id='nn' x='377' y='102' xlink:href='#nn'/><a xlink:href='#containers.quotation_id'><use id='idx' x='377' y='101' xlink:href='#idx'/><title>idx_containers ( quotation_id ) idx_containers ( quotation_id ) </title></a>
+<a xlink:href='#containers.quotation_id'><text id='intuglo_logistics.containers.quotation_id' x='393' y='112' onmouseover="hghl(['containers_fk_containers'])" onmouseout="uhghl(['containers_fk_containers'])">quotation_id</text><title>quotation_id
+* varchar(100)</title></a>
+<a xlink:href='#containers.quotation_id'><use id='fk' x='513' y='101' xlink:href='#fk'/><title>References quotations ( quotation_id ) </title></a>
+  <a xlink:href='#containers.total_cbm'><text id='intuglo_logistics.containers.total_cbm' x='393' y='127'>total_cbm</text><title>total_cbm
+int default 0</title></a>
+  <a xlink:href='#containers.is_halal'><text id='intuglo_logistics.containers.is_halal' x='393' y='142'>is_halal</text><title>is_halal
+bit default 0</title></a>
+  <a xlink:href='#containers.number_people_sharing'><text id='intuglo_logistics.containers.number_people_sharing' x='393' y='157'>number_people_sharing</text><title>number_people_sharing
+int default 0</title></a>
+  <a xlink:href='#containers.percentage_full'><text id='intuglo_logistics.containers.percentage_full' x='393' y='172'>percentage_full</text><title>percentage_full
+decimal(3,2) default 0.00</title></a>
+
+<!-- ============= Table 'quotations' ============= -->
+<rect class='table' x='690' y='38' width='195' height='240' rx='7' ry='7' />
+<line class='delim' x1='690.500000' y1='64.500000' x2='884.500000' y2='64.500000'/>
+<line class='delim' x1='705.500000' y1='64.500000' x2='705.500000' y2='277.500000'/>
+<line class='delim' x1='873.500000' y1='64.500000' x2='873.500000' y2='277.500000'/>
+<path d='M 690.50 64.50 L 690.50 45.50 Q 690.50 38.50 697.50 38.50 L 877.50 38.50 Q 884.50 38.50 884.50 45.50 L 884.50 64.50 L690.50 64.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#quotations'><text x='759' y='56'>quotations</text><title>Table intuglo_logistics.quotations</title></a>
+  <use id='nn' x='692' y='72' xlink:href='#nn'/><a xlink:href='#quotations.quotation_id'><use id='pk' x='692' y='71' xlink:href='#pk'/><title>Pk pk_quotations ( quotation_id ) </title></a>
+<a xlink:href='#quotations.quotation_id'><text id='intuglo_logistics.quotations.quotation_id' x='708' y='82' onmouseover="hghl(['containers_fk_containers','orders_fk_orders_2','quotation_handling_charges_fk_quotation_handling_charges','quotation_handling_charges_fk_quotation_handling_charges'])" onmouseout="uhghl(['containers_fk_containers','orders_fk_orders_2','quotation_handling_charges_fk_quotation_handling_charges','quotation_handling_charges_fk_quotation_handling_charges'])">quotation_id</text><title>quotation_id
+* varchar(100)</title></a>
+<a xlink:href='#quotations.quotation_id'><use id='ref' x='873' y='71' xlink:href='#ref'/><title>Referred by containers ( quotation_id ) 
+Referred by orders ( quotation_id ) 
+Referred by quotation_handling_charges ( quotation_id ) 
+Referred by quotation_handling_charges ( quotation_id ) </title></a>
+  <a xlink:href='#quotations.shipment_type_id'><use id='idx' x='692' y='86' xlink:href='#idx'/><title>idx_quotations ( shipment_type_id ) </title></a>
+<a xlink:href='#quotations.shipment_type_id'><text id='intuglo_logistics.quotations.shipment_type_id' x='708' y='97' onmouseover="hghl(['quotations_fk_quotations'])" onmouseout="uhghl(['quotations_fk_quotations'])">shipment_type_id</text><title>shipment_type_id
+int</title></a>
+<a xlink:href='#quotations.shipment_type_id'><use id='fk' x='873' y='86' xlink:href='#fk'/><title>References shipment_types ( shipment_type_id ) </title></a>
+  <a xlink:href='#quotations.supplier_quotation_reference'><text id='intuglo_logistics.quotations.supplier_quotation_reference' x='708' y='112'>supplier_quotation_reference</text><title>supplier_quotation_reference
+varchar(100)</title></a>
+  <a xlink:href='#quotations.cargo_transit_duration'><text id='intuglo_logistics.quotations.cargo_transit_duration' x='708' y='127'>cargo_transit_duration</text><title>cargo_transit_duration
+int
+counted in days</title></a>
+  <a xlink:href='#quotations.departure_date'><text id='intuglo_logistics.quotations.departure_date' x='708' y='142'>departure_date</text><title>departure_date
+date</title></a>
+  <a xlink:href='#quotations.number_of_transit_ports'><text id='intuglo_logistics.quotations.number_of_transit_ports' x='708' y='157'>number_of_transit_ports</text><title>number_of_transit_ports
+int</title></a>
+  <a xlink:href='#quotations.container_box_size'><text id='intuglo_logistics.quotations.container_box_size' x='708' y='172'>container_box_size</text><title>container_box_size
+int
+how many footers</title></a>
+  <a xlink:href='#quotations.port_id_from'><use id='idx' x='692' y='176' xlink:href='#idx'/><title>idx_quotations_1 ( port_id_from ) </title></a>
+<a xlink:href='#quotations.port_id_from'><text id='intuglo_logistics.quotations.port_id_from' x='708' y='187' onmouseover="hghl(['quotations_fk_quotations_1'])" onmouseout="uhghl(['quotations_fk_quotations_1'])">port_id_from</text><title>port_id_from
+int</title></a>
+<a xlink:href='#quotations.port_id_from'><use id='fk' x='873' y='176' xlink:href='#fk'/><title>References ports ( port_id_from -&gt; port_id ) </title></a>
+  <a xlink:href='#quotations.port_id_to'><use id='idx' x='692' y='191' xlink:href='#idx'/><title>idx_quotations_2 ( port_id_to ) </title></a>
+<a xlink:href='#quotations.port_id_to'><text id='intuglo_logistics.quotations.port_id_to' x='708' y='202' onmouseover="hghl(['quotations_fk_quotations_2'])" onmouseout="uhghl(['quotations_fk_quotations_2'])">port_id_to</text><title>port_id_to
+int</title></a>
+<a xlink:href='#quotations.port_id_to'><use id='fk' x='873' y='191' xlink:href='#fk'/><title>References ports ( port_id_to -&gt; port_id ) </title></a>
+  <a xlink:href='#quotations.shipment_carrier_id'><use id='idx' x='692' y='206' xlink:href='#idx'/><title>idx_quotations_0 ( shipment_carrier_id ) </title></a>
+<a xlink:href='#quotations.shipment_carrier_id'><text id='intuglo_logistics.quotations.shipment_carrier_id' x='708' y='217' onmouseover="hghl(['quotations_fk_quotations_0'])" onmouseout="uhghl(['quotations_fk_quotations_0'])">shipment_carrier_id</text><title>shipment_carrier_id
+int</title></a>
+<a xlink:href='#quotations.shipment_carrier_id'><use id='fk' x='873' y='206' xlink:href='#fk'/><title>References shipment_carriers ( shipment_carrier_id ) </title></a>
+  <a xlink:href='#quotations.warehouse_departure_address'><text id='intuglo_logistics.quotations.warehouse_departure_address' x='708' y='232'>warehouse_departure_address</text><title>warehouse_departure_address
+varchar(255)</title></a>
+  <a xlink:href='#quotations.warehouse_arrival_address'><text id='intuglo_logistics.quotations.warehouse_arrival_address' x='708' y='247'>warehouse_arrival_address</text><title>warehouse_arrival_address
+varchar(255)</title></a>
+  <a xlink:href='#quotations.incoterm_code'><use id='idx' x='692' y='251' xlink:href='#idx'/><title>idx_quotations_3 ( incoterm_code ) </title></a>
+<a xlink:href='#quotations.incoterm_code'><text id='intuglo_logistics.quotations.incoterm_code' x='708' y='262' onmouseover="hghl(['quotations_fk_quotations_3'])" onmouseout="uhghl(['quotations_fk_quotations_3'])">incoterm_code</text><title>incoterm_code
+char(3)</title></a>
+<a xlink:href='#quotations.incoterm_code'><use id='fk' x='873' y='251' xlink:href='#fk'/><title>References incoterms ( incoterm_code ) </title></a>
+
+<!-- ============= Table 'shipment_carriers' ============= -->
+<rect class='table' x='1140' y='728' width='150' height='90' rx='7' ry='7' />
+<line class='delim' x1='1140.500000' y1='754.500000' x2='1289.500000' y2='754.500000'/>
+<line class='delim' x1='1155.500000' y1='754.500000' x2='1155.500000' y2='817.500000'/>
+<line class='delim' x1='1278.500000' y1='754.500000' x2='1278.500000' y2='817.500000'/>
+<path d='M 1140.50 754.50 L 1140.50 735.50 Q 1140.50 728.50 1147.50 728.50 L 1282.50 728.50 Q 1289.50 728.50 1289.50 735.50 L 1289.50 754.50 L1140.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#shipment_carriers'><text x='1168' y='746'>shipment_carriers</text><title>Table intuglo_logistics.shipment_carriers</title></a>
+  <use id='nn' x='1142' y='762' xlink:href='#nn'/><a xlink:href='#shipment_carriers.shipment_carrier_id'><use id='pk' x='1142' y='761' xlink:href='#pk'/><title>Pk pk_shipment_carrier ( shipment_carrier_id ) </title></a>
+<a xlink:href='#shipment_carriers.shipment_carrier_id'><text id='intuglo_logistics.shipment_carriers.shipment_carrier_id' x='1158' y='772' onmouseover="hghl(['quotations_fk_quotations_0'])" onmouseout="uhghl(['quotations_fk_quotations_0'])">shipment_carrier_id</text><title>shipment_carrier_id
+* int</title></a>
+<a xlink:href='#shipment_carriers.shipment_carrier_id'><use id='ref' x='1278' y='761' xlink:href='#ref'/><title>Referred by quotations ( shipment_carrier_id ) </title></a>
+  <use id='nn' x='1142' y='777' xlink:href='#nn'/><a xlink:href='#shipment_carriers.shipment_carrier_name'><text id='intuglo_logistics.shipment_carriers.shipment_carrier_name' x='1158' y='787'>shipment_carrier_name</text><title>shipment_carrier_name
+* varchar(255)</title></a>
+  <use id='nn' x='1142' y='792' xlink:href='#nn'/><a xlink:href='#shipment_carriers.is_active'><text id='intuglo_logistics.shipment_carriers.is_active' x='1158' y='802'>is_active</text><title>is_active
+* bit default 1</title></a>
+
+<!-- ============= Table 'shipment_types' ============= -->
+<rect class='table' x='1005' y='728' width='120' height='90' rx='7' ry='7' />
+<line class='delim' x1='1005.500000' y1='754.500000' x2='1124.500000' y2='754.500000'/>
+<line class='delim' x1='1020.500000' y1='754.500000' x2='1020.500000' y2='817.500000'/>
+<line class='delim' x1='1113.500000' y1='754.500000' x2='1113.500000' y2='817.500000'/>
+<path d='M 1005.50 754.50 L 1005.50 735.50 Q 1005.50 728.50 1012.50 728.50 L 1117.50 728.50 Q 1124.50 728.50 1124.50 735.50 L 1124.50 754.50 L1005.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#shipment_types'><text x='1024' y='746'>shipment_types</text><title>Table intuglo_logistics.shipment_types</title></a>
+  <use id='nn' x='1007' y='762' xlink:href='#nn'/><a xlink:href='#shipment_types.shipment_type_id'><use id='pk' x='1007' y='761' xlink:href='#pk'/><title>Pk pk_shipment_types ( shipment_type_id ) </title></a>
+<a xlink:href='#shipment_types.shipment_type_id'><text id='intuglo_logistics.shipment_types.shipment_type_id' x='1023' y='772' onmouseover="hghl(['quotations_fk_quotations'])" onmouseout="uhghl(['quotations_fk_quotations'])">shipment_type_id</text><title>shipment_type_id
+* int</title></a>
+<a xlink:href='#shipment_types.shipment_type_id'><use id='ref' x='1113' y='761' xlink:href='#ref'/><title>Referred by quotations ( shipment_type_id ) </title></a>
+  <use id='nn' x='1007' y='777' xlink:href='#nn'/><a xlink:href='#shipment_types.shipment_type'><text id='intuglo_logistics.shipment_types.shipment_type' x='1023' y='787'>shipment_type</text><title>shipment_type
+* varchar(50)</title></a>
+  <use id='nn' x='1007' y='792' xlink:href='#nn'/><a xlink:href='#shipment_types.is_active'><text id='intuglo_logistics.shipment_types.is_active' x='1023' y='802'>is_active</text><title>is_active
+* bit default 1</title></a>
+
+<!-- ============= Table 'businesses' ============= -->
+<rect class='table' x='645' y='968' width='120' height='90' rx='7' ry='7' />
+<line class='delim' x1='645.500000' y1='994.500000' x2='764.500000' y2='994.500000'/>
+<line class='delim' x1='660.500000' y1='994.500000' x2='660.500000' y2='1057.500000'/>
+<line class='delim' x1='753.500000' y1='994.500000' x2='753.500000' y2='1057.500000'/>
+<path d='M 645.50 994.50 L 645.50 975.50 Q 645.50 968.50 652.50 968.50 L 757.50 968.50 Q 764.50 968.50 764.50 975.50 L 764.50 994.50 L645.50 994.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#businesses'><text x='674' y='986'>businesses</text><title>Table intuglo_logistics.businesses</title></a>
+  <use id='nn' x='647' y='1002' xlink:href='#nn'/><a xlink:href='#businesses.business_id'><use id='pk' x='647' y='1001' xlink:href='#pk'/><title>Pk pk_businesses ( business_id ) </title></a>
+<a xlink:href='#businesses.business_id'><text id='intuglo_logistics.businesses.business_id' x='663' y='1012' onmouseover="hghl(['users_fk_users_1'])" onmouseout="uhghl(['users_fk_users_1'])">business_id</text><title>business_id
+* int</title></a>
+<a xlink:href='#businesses.business_id'><use id='ref' x='753' y='1001' xlink:href='#ref'/><title>Referred by users ( business_id ) </title></a>
+  <use id='nn' x='647' y='1017' xlink:href='#nn'/><a xlink:href='#businesses.industry_id'><use id='idx' x='647' y='1016' xlink:href='#idx'/><title>idx_businesses ( industry_id ) </title></a>
+<a xlink:href='#businesses.industry_id'><text id='intuglo_logistics.businesses.industry_id' x='663' y='1027' onmouseover="hghl(['businesses_fk_businesses'])" onmouseout="uhghl(['businesses_fk_businesses'])">industry_id</text><title>industry_id
+* int</title></a>
+<a xlink:href='#businesses.industry_id'><use id='fk' x='753' y='1016' xlink:href='#fk'/><title>References industries ( industry_id ) </title></a>
+  <use id='nn' x='647' y='1032' xlink:href='#nn'/><a xlink:href='#businesses.business_name'><text id='intuglo_logistics.businesses.business_name' x='663' y='1042'>business_name</text><title>business_name
+* varchar(255)</title></a>
+
+<!-- ============= Table 'industries' ============= -->
+<rect class='table' x='825' y='983' width='105' height='75' rx='7' ry='7' />
+<line class='delim' x1='825.500000' y1='1009.500000' x2='929.500000' y2='1009.500000'/>
+<line class='delim' x1='840.500000' y1='1009.500000' x2='840.500000' y2='1057.500000'/>
+<line class='delim' x1='918.500000' y1='1009.500000' x2='918.500000' y2='1057.500000'/>
+<path d='M 825.50 1009.50 L 825.50 990.50 Q 825.50 983.50 832.50 983.50 L 922.50 983.50 Q 929.50 983.50 929.50 990.50 L 929.50 1009.50 L825.50 1009.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#industries'><text x='851' y='1001'>industries</text><title>Table intuglo_logistics.industries</title></a>
+  <use id='nn' x='827' y='1017' xlink:href='#nn'/><a xlink:href='#industries.industry_id'><use id='pk' x='827' y='1016' xlink:href='#pk'/><title>Pk pk_industries ( industry_id ) </title></a>
+<a xlink:href='#industries.industry_id'><text id='intuglo_logistics.industries.industry_id' x='843' y='1027' onmouseover="hghl(['businesses_fk_businesses'])" onmouseout="uhghl(['businesses_fk_businesses'])">industry_id</text><title>industry_id
+* int</title></a>
+<a xlink:href='#industries.industry_id'><use id='ref' x='918' y='1016' xlink:href='#ref'/><title>Referred by businesses ( industry_id ) </title></a>
+  <use id='nn' x='827' y='1032' xlink:href='#nn'/><a xlink:href='#industries.industry_name'><text id='intuglo_logistics.industries.industry_name' x='843' y='1042'>industry_name</text><title>industry_name
+* varchar(255)</title></a>
+
+<!-- ============= Table 'notification_status' ============= -->
+<rect class='table' x='1110' y='998' width='135' height='75' rx='7' ry='7' />
+<line class='delim' x1='1110.500000' y1='1024.500000' x2='1244.500000' y2='1024.500000'/>
+<line class='delim' x1='1125.500000' y1='1024.500000' x2='1125.500000' y2='1072.500000'/>
+<line class='delim' x1='1233.500000' y1='1024.500000' x2='1233.500000' y2='1072.500000'/>
+<path d='M 1110.50 1024.50 L 1110.50 1005.50 Q 1110.50 998.50 1117.50 998.50 L 1237.50 998.50 Q 1244.50 998.50 1244.50 1005.50 L 1244.50 1024.50 L1110.50 1024.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#notification_status'><text x='1130' y='1016'>notification_status</text><title>Table intuglo_logistics.notification_status</title></a>
+  <use id='nn' x='1112' y='1032' xlink:href='#nn'/><a xlink:href='#notification_status.notification_status_id'><use id='pk' x='1112' y='1031' xlink:href='#pk'/><title>Pk pk_notification_status ( notification_status_id ) </title></a>
+<a xlink:href='#notification_status.notification_status_id'><text id='intuglo_logistics.notification_status.notification_status_id' x='1128' y='1042' onmouseover="hghl(['notifications_fk_notifications'])" onmouseout="uhghl(['notifications_fk_notifications'])">notification_status_id</text><title>notification_status_id
+* int</title></a>
+<a xlink:href='#notification_status.notification_status_id'><use id='ref' x='1233' y='1031' xlink:href='#ref'/><title>Referred by notifications ( notification_status_id ) </title></a>
+  <use id='nn' x='1112' y='1047' xlink:href='#nn'/><a xlink:href='#notification_status.notification_status'><text id='intuglo_logistics.notification_status.notification_status' x='1128' y='1057'>notification_status</text><title>notification_status
+* varchar(50)</title></a>
+
+<!-- ============= Table 'payment_types' ============= -->
+<rect class='table' x='1290' y='998' width='120' height='90' rx='7' ry='7' />
+<line class='delim' x1='1290.500000' y1='1024.500000' x2='1409.500000' y2='1024.500000'/>
+<line class='delim' x1='1305.500000' y1='1024.500000' x2='1305.500000' y2='1087.500000'/>
+<line class='delim' x1='1398.500000' y1='1024.500000' x2='1398.500000' y2='1087.500000'/>
+<path d='M 1290.50 1024.50 L 1290.50 1005.50 Q 1290.50 998.50 1297.50 998.50 L 1402.50 998.50 Q 1409.50 998.50 1409.50 1005.50 L 1409.50 1024.50 L1290.50 1024.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#payment_types'><text x='1310' y='1016'>payment_types</text><title>Table intuglo_logistics.payment_types</title></a>
+  <use id='nn' x='1292' y='1032' xlink:href='#nn'/><a xlink:href='#payment_types.payment_type_id'><use id='pk' x='1292' y='1031' xlink:href='#pk'/><title>Pk pk_payment_types ( payment_type_id ) </title></a>
+<a xlink:href='#payment_types.payment_type_id'><text id='intuglo_logistics.payment_types.payment_type_id' x='1308' y='1042'>payment_type_id</text><title>payment_type_id
+* int</title></a>
+  <a xlink:href='#payment_types.payment_type'><text id='intuglo_logistics.payment_types.payment_type' x='1308' y='1057'>payment_type</text><title>payment_type
+varchar(100)</title></a>
+  <use id='nn' x='1292' y='1062' xlink:href='#nn'/><a xlink:href='#payment_types.is_active'><text id='intuglo_logistics.payment_types.is_active' x='1308' y='1072'>is_active</text><title>is_active
+* bit default 1</title></a>
+
+<!-- ============= Table 'config' ============= -->
+<rect class='table' x='1425' y='968' width='105' height='105' rx='7' ry='7' />
+<line class='delim' x1='1425.500000' y1='994.500000' x2='1529.500000' y2='994.500000'/>
+<line class='delim' x1='1440.500000' y1='994.500000' x2='1440.500000' y2='1072.500000'/>
+<line class='delim' x1='1518.500000' y1='994.500000' x2='1518.500000' y2='1072.500000'/>
+<path d='M 1425.50 994.50 L 1425.50 975.50 Q 1425.50 968.50 1432.50 968.50 L 1522.50 968.50 Q 1529.50 968.50 1529.50 975.50 L 1529.50 994.50 L1425.50 994.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#config'><text x='1459' y='986'>config</text><title>Table intuglo_logistics.config
+This is a key and value pairs table which is used to store the application settings and configurations.</title></a>
+  <use id='nn' x='1427' y='1002' xlink:href='#nn'/><a xlink:href='#config.config_id'><use id='pk' x='1427' y='1001' xlink:href='#pk'/><title>Pk pk_config ( config_id ) </title></a>
+<a xlink:href='#config.config_id'><text id='intuglo_logistics.config.config_id' x='1443' y='1012'>config_id</text><title>config_id
+* int</title></a>
+  <use id='nn' x='1427' y='1017' xlink:href='#nn'/><a xlink:href='#config.config_key'><use id='unq' x='1427' y='1016' xlink:href='#unq'/><title>Unq idx_config_key ( config_key ) </title></a>
+<a xlink:href='#config.config_key'><text id='intuglo_logistics.config.config_key' x='1443' y='1027'>config_key</text><title>config_key
+* varchar(255)
+the setting and configuration items is stored in this column</title></a>
+  <use id='nn' x='1427' y='1032' xlink:href='#nn'/><a xlink:href='#config.config_value'><text id='intuglo_logistics.config.config_value' x='1443' y='1042'>config_value</text><title>config_value
+* varchar(255)
+the value of each setting stored in this column</title></a>
+  <a xlink:href='#config.updated_on'><text id='intuglo_logistics.config.updated_on' x='1443' y='1057'>updated_on</text><title>updated_on
+datetime default CURRENT_TIMESTAMP
+stores the datetime that this record is updated</title></a>
+
+<!-- ============= Table 'news' ============= -->
+<rect class='table' x='255' y='1298' width='90' height='135' rx='7' ry='7' />
+<line class='delim' x1='255.500000' y1='1324.500000' x2='344.500000' y2='1324.500000'/>
+<line class='delim' x1='270.500000' y1='1324.500000' x2='270.500000' y2='1432.500000'/>
+<line class='delim' x1='333.500000' y1='1324.500000' x2='333.500000' y2='1432.500000'/>
+<path d='M 255.50 1324.50 L 255.50 1305.50 Q 255.50 1298.50 262.50 1298.50 L 337.50 1298.50 Q 344.50 1298.50 344.50 1305.50 L 344.50 1324.50 L255.50 1324.50 ' style='fill:url(#tableHeaderGradient4); stroke:none;' />
+<a xlink:href='#news'><text x='283' y='1316'>news</text><title>Table intuglo_logistics.news</title></a>
+  <use id='nn' x='257' y='1332' xlink:href='#nn'/><a xlink:href='#news.news_id'><use id='pk' x='257' y='1331' xlink:href='#pk'/><title>Pk pk_news_0 ( news_id ) </title></a>
+<a xlink:href='#news.news_id'><text id='intuglo_logistics.news.news_id' x='273' y='1342'>news_id</text><title>news_id
+* int</title></a>
+  <use id='nn' x='257' y='1347' xlink:href='#nn'/><a xlink:href='#news.news_title'><text id='intuglo_logistics.news.news_title' x='273' y='1357'>news_title</text><title>news_title
+* varchar(255)</title></a>
+  <a xlink:href='#news.news_text'><text id='intuglo_logistics.news.news_text' x='273' y='1372'>news_text</text><title>news_text
+varchar(4000)</title></a>
+  <a xlink:href='#news.created_on'><text id='intuglo_logistics.news.created_on' x='273' y='1387'>created_on</text><title>created_on
+datetime default CURRENT_TIMESTAMP</title></a>
+  <a xlink:href='#news.created_by'><text id='intuglo_logistics.news.created_by' x='273' y='1402'>created_by</text><title>created_by
+int</title></a>
+  <a xlink:href='#news.image_link'><text id='intuglo_logistics.news.image_link' x='273' y='1417'>image_link</text><title>image_link
+varchar(255)</title></a>
+
+<!-- ============= Table 'announcements' ============= -->
+<rect class='table' x='360' y='1298' width='135' height='135' rx='7' ry='7' />
+<line class='delim' x1='360.500000' y1='1324.500000' x2='494.500000' y2='1324.500000'/>
+<line class='delim' x1='375.500000' y1='1324.500000' x2='375.500000' y2='1432.500000'/>
+<line class='delim' x1='483.500000' y1='1324.500000' x2='483.500000' y2='1432.500000'/>
+<path d='M 360.50 1324.50 L 360.50 1305.50 Q 360.50 1298.50 367.50 1298.50 L 487.50 1298.50 Q 494.50 1298.50 494.50 1305.50 L 494.50 1324.50 L360.50 1324.50 ' style='fill:url(#tableHeaderGradient4); stroke:none;' />
+<a xlink:href='#announcements'><text x='386' y='1316'>announcements</text><title>Table intuglo_logistics.announcements</title></a>
+  <use id='nn' x='362' y='1332' xlink:href='#nn'/><a xlink:href='#announcements.announcements_id'><use id='pk' x='362' y='1331' xlink:href='#pk'/><title>Pk pk_news ( announcements_id ) </title></a>
+<a xlink:href='#announcements.announcements_id'><text id='intuglo_logistics.announcements.announcements_id' x='378' y='1342'>announcements_id</text><title>announcements_id
+* int</title></a>
+  <use id='nn' x='362' y='1347' xlink:href='#nn'/><a xlink:href='#announcements.announcements_title'><text id='intuglo_logistics.announcements.announcements_title' x='378' y='1357'>announcements_title</text><title>announcements_title
+* varchar(255)</title></a>
+  <a xlink:href='#announcements.announcements_text'><text id='intuglo_logistics.announcements.announcements_text' x='378' y='1372'>announcements_text</text><title>announcements_text
+varchar(4000)</title></a>
+  <a xlink:href='#announcements.created_on'><text id='intuglo_logistics.announcements.created_on' x='378' y='1387'>created_on</text><title>created_on
+datetime default CURRENT_TIMESTAMP</title></a>
+  <a xlink:href='#announcements.created_by'><text id='intuglo_logistics.announcements.created_by' x='378' y='1402'>created_by</text><title>created_by
+int</title></a>
+  <a xlink:href='#announcements.image_link'><text id='intuglo_logistics.announcements.image_link' x='378' y='1417'>image_link</text><title>image_link
+varchar(255)</title></a>
+
+<!-- ============= Table 'platforms' ============= -->
+<rect class='table' x='660' y='1073' width='105' height='90' rx='7' ry='7' />
+<line class='delim' x1='660.500000' y1='1099.500000' x2='764.500000' y2='1099.500000'/>
+<line class='delim' x1='675.500000' y1='1099.500000' x2='675.500000' y2='1162.500000'/>
+<line class='delim' x1='753.500000' y1='1099.500000' x2='753.500000' y2='1162.500000'/>
+<path d='M 660.50 1099.50 L 660.50 1080.50 Q 660.50 1073.50 667.50 1073.50 L 757.50 1073.50 Q 764.50 1073.50 764.50 1080.50 L 764.50 1099.50 L660.50 1099.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#platforms'><text x='687' y='1091'>platforms</text><title>Table intuglo_logistics.platforms</title></a>
+  <use id='nn' x='662' y='1107' xlink:href='#nn'/><a xlink:href='#platforms.platform_id'><use id='pk' x='662' y='1106' xlink:href='#pk'/><title>Pk pk_platforms ( platform_id ) </title></a>
+<a xlink:href='#platforms.platform_id'><text id='intuglo_logistics.platforms.platform_id' x='678' y='1117' onmouseover="hghl(['user_platforms_fk_user_platforms_0'])" onmouseout="uhghl(['user_platforms_fk_user_platforms_0'])">platform_id</text><title>platform_id
+* int</title></a>
+<a xlink:href='#platforms.platform_id'><use id='ref' x='753' y='1106' xlink:href='#ref'/><title>Referred by user_platforms ( platform_id ) </title></a>
+  <use id='nn' x='662' y='1122' xlink:href='#nn'/><a xlink:href='#platforms.platform_name'><text id='intuglo_logistics.platforms.platform_name' x='678' y='1132'>platform_name</text><title>platform_name
+* varchar(100)</title></a>
+  <use id='nn' x='662' y='1137' xlink:href='#nn'/><a xlink:href='#platforms.is_active'><text id='intuglo_logistics.platforms.is_active' x='678' y='1147'>is_active</text><title>is_active
+* bit default 1</title></a>
+
+<!-- ============= Table 'incoterms' ============= -->
+<rect class='table' x='1425' y='728' width='105' height='105' rx='7' ry='7' />
+<line class='delim' x1='1425.500000' y1='754.500000' x2='1529.500000' y2='754.500000'/>
+<line class='delim' x1='1440.500000' y1='754.500000' x2='1440.500000' y2='832.500000'/>
+<line class='delim' x1='1518.500000' y1='754.500000' x2='1518.500000' y2='832.500000'/>
+<path d='M 1425.50 754.50 L 1425.50 735.50 Q 1425.50 728.50 1432.50 728.50 L 1522.50 728.50 Q 1529.50 728.50 1529.50 735.50 L 1529.50 754.50 L1425.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#incoterms'><text x='1451' y='746'>incoterms</text><title>Table intuglo_logistics.incoterms
+shipment contracts which are refered as incoterms</title></a>
+  <use id='nn' x='1427' y='762' xlink:href='#nn'/><a xlink:href='#incoterms.incoterm_code'><use id='pk' x='1427' y='761' xlink:href='#pk'/><title>Pk pk_incoterms ( incoterm_code ) </title></a>
+<a xlink:href='#incoterms.incoterm_code'><text id='intuglo_logistics.incoterms.incoterm_code' x='1443' y='772' onmouseover="hghl(['quotations_fk_quotations_3'])" onmouseout="uhghl(['quotations_fk_quotations_3'])">incoterm_code</text><title>incoterm_code
+* char(3)
+stores the 3-character code for each incoterm</title></a>
+<a xlink:href='#incoterms.incoterm_code'><use id='ref' x='1518' y='761' xlink:href='#ref'/><title>Referred by quotations ( incoterm_code ) </title></a>
+  <a xlink:href='#incoterms.description'><text id='intuglo_logistics.incoterms.description' x='1443' y='787'>description</text><title>description
+varchar(255)
+incoterm description</title></a>
+  <use id='nn' x='1427' y='792' xlink:href='#nn'/><a xlink:href='#incoterms.is_active'><text id='intuglo_logistics.incoterms.is_active' x='1443' y='802'>is_active</text><title>is_active
+* bit default 1
+specifies if this incoterm is available for user or not
+1- available
+0- not available</title></a>
+  <use id='nn' x='1427' y='807' xlink:href='#nn'/><a xlink:href='#incoterms.updated_on'><text id='intuglo_logistics.incoterms.updated_on' x='1443' y='817'>updated_on</text><title>updated_on
+* datetime default CURRENT_TIMESTAMP
+last updated timestamp</title></a>
+
+<!-- ============= Table 'ports' ============= -->
+<rect class='table' x='1305' y='728' width='105' height='105' rx='7' ry='7' />
+<line class='delim' x1='1305.500000' y1='754.500000' x2='1409.500000' y2='754.500000'/>
+<line class='delim' x1='1320.500000' y1='754.500000' x2='1320.500000' y2='832.500000'/>
+<line class='delim' x1='1398.500000' y1='754.500000' x2='1398.500000' y2='832.500000'/>
+<path d='M 1305.50 754.50 L 1305.50 735.50 Q 1305.50 728.50 1312.50 728.50 L 1402.50 728.50 Q 1409.50 728.50 1409.50 735.50 L 1409.50 754.50 L1305.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#ports'><text x='1342' y='746'>ports</text><title>Table intuglo_logistics.ports</title></a>
+  <use id='nn' x='1307' y='762' xlink:href='#nn'/><a xlink:href='#ports.port_id'><use id='pk' x='1307' y='761' xlink:href='#pk'/><title>Pk pk_ports ( port_id ) </title></a>
+<a xlink:href='#ports.port_id'><text id='intuglo_logistics.ports.port_id' x='1323' y='772' onmouseover="hghl(['quotations_fk_quotations_1','quotations_fk_quotations_2'])" onmouseout="uhghl(['quotations_fk_quotations_1','quotations_fk_quotations_2'])">port_id</text><title>port_id
+* int</title></a>
+<a xlink:href='#ports.port_id'><use id='ref' x='1398' y='761' xlink:href='#ref'/><title>Referred by quotations ( port_id_from -&gt; port_id ) 
+Referred by quotations ( port_id_to -&gt; port_id ) </title></a>
+  <use id='nn' x='1307' y='777' xlink:href='#nn'/><a xlink:href='#ports.port_name'><text id='intuglo_logistics.ports.port_name' x='1323' y='787'>port_name</text><title>port_name
+* varchar(255)
+port display name</title></a>
+  <use id='nn' x='1307' y='792' xlink:href='#nn'/><a xlink:href='#ports.country_code'><text id='intuglo_logistics.ports.country_code' x='1323' y='802'>country_code</text><title>country_code
+* char(2)
+code of country which the port belongs to</title></a>
+  <use id='nn' x='1307' y='807' xlink:href='#nn'/><a xlink:href='#ports.is_active'><text id='intuglo_logistics.ports.is_active' x='1323' y='817'>is_active</text><title>is_active
+* bit default 1
+specifies if this port is available for user or not
+1- available
+0- not available</title></a>
+
+<!-- ============= Table 'countries' ============= -->
+<rect class='table' x='645' y='878' width='105' height='75' rx='7' ry='7' />
+<line class='delim' x1='645.500000' y1='904.500000' x2='749.500000' y2='904.500000'/>
+<line class='delim' x1='660.500000' y1='904.500000' x2='660.500000' y2='952.500000'/>
+<line class='delim' x1='738.500000' y1='904.500000' x2='738.500000' y2='952.500000'/>
+<path d='M 645.50 904.50 L 645.50 885.50 Q 645.50 878.50 652.50 878.50 L 742.50 878.50 Q 749.50 878.50 749.50 885.50 L 749.50 904.50 L645.50 904.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#countries'><text x='672' y='896'>countries</text><title>Table intuglo_logistics.countries</title></a>
+  <use id='nn' x='647' y='912' xlink:href='#nn'/><a xlink:href='#countries.country_code'><use id='pk' x='647' y='911' xlink:href='#pk'/><title>Pk pk_countries ( country_code ) </title></a>
+<a xlink:href='#countries.country_code'><text id='intuglo_logistics.countries.country_code' x='663' y='922' onmouseover="hghl(['users_fk_users_0','users_fk_users_0','users_fk_users_0'])" onmouseout="uhghl(['users_fk_users_0','users_fk_users_0','users_fk_users_0'])">country_code</text><title>country_code
+* char(2)
+ISO Alpha-2 Country Code</title></a>
+<a xlink:href='#countries.country_code'><use id='ref' x='738' y='911' xlink:href='#ref'/><title>Referred by users ( country_code ) 
+Referred by users ( country_code ) 
+Referred by users ( country_code ) </title></a>
+  <a xlink:href='#countries.country_name'><text id='intuglo_logistics.countries.country_name' x='663' y='937'>country_name</text><title>country_name
+varchar(100)
+Country Name</title></a>
+
+<!-- ============= Table 'quotation_handling_charges' ============= -->
+<rect class='table' x='795' y='398' width='150' height='120' rx='7' ry='7' />
+<line class='delim' x1='795.500000' y1='424.500000' x2='944.500000' y2='424.500000'/>
+<line class='delim' x1='810.500000' y1='424.500000' x2='810.500000' y2='517.500000'/>
+<line class='delim' x1='933.500000' y1='424.500000' x2='933.500000' y2='517.500000'/>
+<path d='M 795.50 424.50 L 795.50 405.50 Q 795.50 398.50 802.50 398.50 L 937.50 398.50 Q 944.50 398.50 944.50 405.50 L 944.50 424.50 L795.50 424.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#quotation_handling_charges'><text x='799' y='416'>quotation_handling_charges</text><title>Table intuglo_logistics.quotation_handling_charges
+to store the list of handling charges for each quotation</title></a>
+  <use id='nn' x='797' y='432' xlink:href='#nn'/><a xlink:href='#quotation_handling_charges.charges_id'><use id='pk' x='797' y='431' xlink:href='#pk'/><title>Pk pk_quoutation_handling_charges ( charges_id ) </title></a>
+<a xlink:href='#quotation_handling_charges.charges_id'><text id='intuglo_logistics.quotation_handling_charges.charges_id' x='813' y='442'>charges_id</text><title>charges_id
+* int</title></a>
+  <use id='nn' x='797' y='447' xlink:href='#nn'/><a xlink:href='#quotation_handling_charges.quotation_id'><use id='idx' x='797' y='446' xlink:href='#idx'/><title>idx_quotation_handling_charges ( quotation_id ) idx_quotation_handling_charges ( quotation_id ) </title></a>
+<a xlink:href='#quotation_handling_charges.quotation_id'><text id='intuglo_logistics.quotation_handling_charges.quotation_id' x='813' y='457' onmouseover="hghl(['quotation_handling_charges_fk_quotation_handling_charges'])" onmouseout="uhghl(['quotation_handling_charges_fk_quotation_handling_charges'])">quotation_id</text><title>quotation_id
+* varchar(100)
+refers to quotation id that this charge is assigned to</title></a>
+<a xlink:href='#quotation_handling_charges.quotation_id'><use id='fk' x='933' y='446' xlink:href='#fk'/><title>References quotations ( quotation_id ) </title></a>
+  <use id='nn' x='797' y='462' xlink:href='#nn'/><a xlink:href='#quotation_handling_charges.handling_charges_id'><use id='idx' x='797' y='461' xlink:href='#idx'/><title>idx_quotation_handling_charges_0 ( handling_charges_id ) </title></a>
+<a xlink:href='#quotation_handling_charges.handling_charges_id'><text id='intuglo_logistics.quotation_handling_charges.handling_charges_id' x='813' y='472'>handling_charges_id</text><title>handling_charges_id
+* varchar(255)
+description of handling charges</title></a>
+  <use id='nn' x='797' y='477' xlink:href='#nn'/><a xlink:href='#quotation_handling_charges.amount'><text id='intuglo_logistics.quotation_handling_charges.amount' x='813' y='487'>amount</text><title>amount
+* decimal(10,2) default 0.00
+amount of charges</title></a>
+  <use id='nn' x='797' y='492' xlink:href='#nn'/><a xlink:href='#quotation_handling_charges.port_type'><text id='intuglo_logistics.quotation_handling_charges.port_type' x='813' y='502'>port_type</text><title>port_type
+* char(1)
+determines if handling charge is for arrival port of departure port:
+A- arrival
+D- departure</title></a>
+
+<!-- ============= Table 'custom' ============= -->
+<rect class='table' x='315' y='233' width='105' height='105' rx='7' ry='7' />
+<line class='delim' x1='315.500000' y1='259.500000' x2='419.500000' y2='259.500000'/>
+<line class='delim' x1='330.500000' y1='259.500000' x2='330.500000' y2='337.500000'/>
+<line class='delim' x1='408.500000' y1='259.500000' x2='408.500000' y2='337.500000'/>
+<path d='M 315.50 259.50 L 315.50 240.50 Q 315.50 233.50 322.50 233.50 L 412.50 233.50 Q 419.50 233.50 419.50 240.50 L 419.50 259.50 L315.50 259.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#custom'><text x='347' y='251'>custom</text><title>Table intuglo_logistics.custom</title></a>
+  <use id='nn' x='317' y='267' xlink:href='#nn'/><a xlink:href='#custom.custom_id'><use id='pk' x='317' y='266' xlink:href='#pk'/><title>Pk pk_custom ( custom_id ) </title></a>
+<a xlink:href='#custom.custom_id'><text id='intuglo_logistics.custom.custom_id' x='333' y='277'>custom_id</text><title>custom_id
+* int</title></a>
+  <use id='nn' x='317' y='282' xlink:href='#nn'/><a xlink:href='#custom.order_id'><use id='idx' x='317' y='281' xlink:href='#idx'/><title>idx_custom ( order_id ) </title></a>
+<a xlink:href='#custom.order_id'><text id='intuglo_logistics.custom.order_id' x='333' y='292' onmouseover="hghl(['custom_fk_custom'])" onmouseout="uhghl(['custom_fk_custom'])">order_id</text><title>order_id
+* int</title></a>
+<a xlink:href='#custom.order_id'><use id='fk' x='408' y='281' xlink:href='#fk'/><title>References orders ( order_id ) </title></a>
+  <use id='nn' x='317' y='297' xlink:href='#nn'/><a xlink:href='#custom.total_custom'><text id='intuglo_logistics.custom.total_custom' x='333' y='307'>total_custom</text><title>total_custom
+* decimal(10,2) default 0.00</title></a>
+  <use id='nn' x='317' y='312' xlink:href='#nn'/><a xlink:href='#custom.total_received'><text id='intuglo_logistics.custom.total_received' x='333' y='322'>total_received</text><title>total_received
+* decimal(10,2) default 0.00</title></a>
+
+<!-- ============= Table 'packing_list' ============= -->
+<rect class='table' x='315' y='398' width='135' height='90' rx='7' ry='7' />
+<line class='delim' x1='315.500000' y1='424.500000' x2='449.500000' y2='424.500000'/>
+<line class='delim' x1='330.500000' y1='424.500000' x2='330.500000' y2='487.500000'/>
+<line class='delim' x1='438.500000' y1='424.500000' x2='438.500000' y2='487.500000'/>
+<path d='M 315.50 424.50 L 315.50 405.50 Q 315.50 398.50 322.50 398.50 L 442.50 398.50 Q 449.50 398.50 449.50 405.50 L 449.50 424.50 L315.50 424.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#packing_list'><text x='351' y='416'>packing_list</text><title>Table intuglo_logistics.packing_list</title></a>
+  <use id='nn' x='317' y='432' xlink:href='#nn'/><a xlink:href='#packing_list.packing_list_id'><use id='pk' x='317' y='431' xlink:href='#pk'/><title>Pk pk_packing_list ( packing_list_id ) </title></a>
+<a xlink:href='#packing_list.packing_list_id'><text id='intuglo_logistics.packing_list.packing_list_id' x='333' y='442'>packing_list_id</text><title>packing_list_id
+* int</title></a>
+  <use id='nn' x='317' y='447' xlink:href='#nn'/><a xlink:href='#packing_list.order_id'><use id='idx' x='317' y='446' xlink:href='#idx'/><title>idx_packing_list ( order_id ) </title></a>
+<a xlink:href='#packing_list.order_id'><text id='intuglo_logistics.packing_list.order_id' x='333' y='457' onmouseover="hghl(['packing_list_fk_packing_list'])" onmouseout="uhghl(['packing_list_fk_packing_list'])">order_id</text><title>order_id
+* int</title></a>
+<a xlink:href='#packing_list.order_id'><use id='fk' x='438' y='446' xlink:href='#fk'/><title>References orders ( order_id ) </title></a>
+  <a xlink:href='#packing_list.packing_description'><text id='intuglo_logistics.packing_list.packing_description' x='333' y='472'>packing_description</text><title>packing_description
+varchar(255)</title></a>
+
+<!-- ============= Table 'order_staus' ============= -->
+<rect class='table' x='780' y='728' width='165' height='75' rx='7' ry='7' />
+<line class='delim' x1='780.500000' y1='754.500000' x2='944.500000' y2='754.500000'/>
+<line class='delim' x1='795.500000' y1='754.500000' x2='795.500000' y2='802.500000'/>
+<line class='delim' x1='933.500000' y1='754.500000' x2='933.500000' y2='802.500000'/>
+<path d='M 780.50 754.50 L 780.50 735.50 Q 780.50 728.50 787.50 728.50 L 937.50 728.50 Q 944.50 728.50 944.50 735.50 L 944.50 754.50 L780.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#order_staus'><text x='830' y='746'>order_staus</text><title>Table intuglo_logistics.order_staus</title></a>
+  <use id='nn' x='782' y='762' xlink:href='#nn'/><a xlink:href='#order_staus.status_id'><use id='pk' x='782' y='761' xlink:href='#pk'/><title>Pk pk_order_staus ( status_id ) </title></a>
+<a xlink:href='#order_staus.status_id'><text id='intuglo_logistics.order_staus.status_id' x='798' y='772' onmouseover="hghl(['orders_fk_orders'])" onmouseout="uhghl(['orders_fk_orders'])">status_id</text><title>status_id
+* int</title></a>
+<a xlink:href='#order_staus.status_id'><use id='ref' x='933' y='761' xlink:href='#ref'/><title>Referred by orders ( order_status_id -&gt; status_id ) </title></a>
+  <use id='nn' x='782' y='777' xlink:href='#nn'/><a xlink:href='#order_staus.order_status_description'><text id='intuglo_logistics.order_staus.order_status_description' x='798' y='787'>order_status_description</text><title>order_status_description
+* varchar(255)</title></a>
+
+<!-- ============= Table 'hs_code' ============= -->
+<rect class='table' x='630' y='728' width='120' height='135' rx='7' ry='7' />
+<line class='delim' x1='630.500000' y1='754.500000' x2='749.500000' y2='754.500000'/>
+<line class='delim' x1='645.500000' y1='754.500000' x2='645.500000' y2='862.500000'/>
+<line class='delim' x1='738.500000' y1='754.500000' x2='738.500000' y2='862.500000'/>
+<path d='M 630.50 754.50 L 630.50 735.50 Q 630.50 728.50 637.50 728.50 L 742.50 728.50 Q 749.50 728.50 749.50 735.50 L 749.50 754.50 L630.50 754.50 ' style='fill:url(#tableHeaderGradient3); stroke:none;' />
+<a xlink:href='#hs_code'><text x='666' y='746'>hs_code</text><title>Table intuglo_logistics.hs_code
+lookup table to store the HS Code information</title></a>
+  <use id='nn' x='632' y='762' xlink:href='#nn'/><a xlink:href='#hs_code.hs_code_id'><use id='pk' x='632' y='761' xlink:href='#pk'/><title>Pk pk_hs_code ( hs_code_id ) </title></a>
+<a xlink:href='#hs_code.hs_code_id'><text id='intuglo_logistics.hs_code.hs_code_id' x='648' y='772' onmouseover="hghl(['orders_fk_orders_0'])" onmouseout="uhghl(['orders_fk_orders_0'])">hs_code_id</text><title>hs_code_id
+* int</title></a>
+<a xlink:href='#hs_code.hs_code_id'><use id='ref' x='738' y='761' xlink:href='#ref'/><title>Referred by orders ( hs_code_id ) </title></a>
+  <use id='nn' x='632' y='777' xlink:href='#nn'/><a xlink:href='#hs_code.hs_code'><use id='unq' x='632' y='776' xlink:href='#unq'/><title>Unq idx_hs_code ( hs_code ) 
+the HS Code is unique</title></a>
+<a xlink:href='#hs_code.hs_code'><text id='intuglo_logistics.hs_code.hs_code' x='648' y='787'>hs_code</text><title>hs_code
+* int
+the 6 digit value for HS Code</title></a>
+  <a xlink:href='#hs_code.description'><text id='intuglo_logistics.hs_code.description' x='648' y='802'>description</text><title>description
+varchar(255)
+stores the defined hs code description by custom</title></a>
+  <a xlink:href='#hs_code.gst_percentage'><text id='intuglo_logistics.hs_code.gst_percentage' x='648' y='817'>gst_percentage</text><title>gst_percentage
+decimal(5,2)
+stores the percentage of gst related to each hs code category</title></a>
+  <use id='nn' x='632' y='822' xlink:href='#nn'/><a xlink:href='#hs_code.is_active'><text id='intuglo_logistics.hs_code.is_active' x='648' y='832'>is_active</text><title>is_active
+* bit default 1
+determines if the HS Code is available in system or not.
+1 = available
+0 = unavailable</title></a>
+  <a xlink:href='#hs_code.updated_on'><text id='intuglo_logistics.hs_code.updated_on' x='648' y='847'>updated_on</text><title>updated_on
+datetime default CURRENT_TIMESTAMP
+stores the datetime that this record is updated</title></a>
+
+<!-- ============= Table 'orders' ============= -->
+<rect class='table' x='495' y='203' width='135' height='435' rx='7' ry='7' />
+<line class='delim' x1='495.500000' y1='229.500000' x2='629.500000' y2='229.500000'/>
+<line class='delim' x1='510.500000' y1='229.500000' x2='510.500000' y2='637.500000'/>
+<line class='delim' x1='618.500000' y1='229.500000' x2='618.500000' y2='637.500000'/>
+<path d='M 495.50 229.50 L 495.50 210.50 Q 495.50 203.50 502.50 203.50 L 622.50 203.50 Q 629.50 203.50 629.50 210.50 L 629.50 229.50 L495.50 229.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#orders'><text x='543' y='221'>orders</text><title>Table intuglo_logistics.orders
+orders/bookings information</title></a>
+  <use id='nn' x='497' y='237' xlink:href='#nn'/><a xlink:href='#orders.order_id'><use id='pk' x='497' y='236' xlink:href='#pk'/><title>Pk pk_orders ( order_id ) </title></a>
+<a xlink:href='#orders.order_id'><text id='intuglo_logistics.orders.order_id' x='513' y='247' onmouseover="hghl(['custom_fk_custom','packing_list_fk_packing_list'])" onmouseout="uhghl(['custom_fk_custom','packing_list_fk_packing_list'])">order_id</text><title>order_id
+* int</title></a>
+<a xlink:href='#orders.order_id'><use id='ref' x='618' y='236' xlink:href='#ref'/><title>Referred by custom ( order_id ) 
+Referred by packing_list ( order_id ) </title></a>
+  <use id='nn' x='497' y='252' xlink:href='#nn'/><a xlink:href='#orders.login_id'><use id='idx' x='497' y='251' xlink:href='#idx'/><title>idx_orders_1 ( login_id ) </title></a>
+<a xlink:href='#orders.login_id'><text id='intuglo_logistics.orders.login_id' x='513' y='262' onmouseover="hghl(['orders_fk_orders_1'])" onmouseout="uhghl(['orders_fk_orders_1'])">login_id</text><title>login_id
+* int
+the login_id of the user who the order belongs to</title></a>
+<a xlink:href='#orders.login_id'><use id='fk' x='618' y='251' xlink:href='#fk'/><title>References logins ( login_id ) </title></a>
+  <a xlink:href='#orders.quotation_id'><use id='idx' x='497' y='266' xlink:href='#idx'/><title>idx_orders_2 ( quotation_id ) </title></a>
+<a xlink:href='#orders.quotation_id'><text id='intuglo_logistics.orders.quotation_id' x='513' y='277' onmouseover="hghl(['orders_fk_orders_2'])" onmouseout="uhghl(['orders_fk_orders_2'])">quotation_id</text><title>quotation_id
+varchar(100)
+the quotation_id of shippment which will handle this order</title></a>
+<a xlink:href='#orders.quotation_id'><use id='fk' x='618' y='266' xlink:href='#fk'/><title>References quotations ( quotation_id ) </title></a>
+  <a xlink:href='#orders.hs_code_id'><use id='idx' x='497' y='281' xlink:href='#idx'/><title>idx_orders_0 ( hs_code_id ) </title></a>
+<a xlink:href='#orders.hs_code_id'><text id='intuglo_logistics.orders.hs_code_id' x='513' y='292' onmouseover="hghl(['orders_fk_orders_0'])" onmouseout="uhghl(['orders_fk_orders_0'])">hs_code_id</text><title>hs_code_id
+int
+the hs_code_id of order</title></a>
+<a xlink:href='#orders.hs_code_id'><use id='fk' x='618' y='281' xlink:href='#fk'/><title>References hs_code ( hs_code_id ) </title></a>
+  <use id='nn' x='497' y='297' xlink:href='#nn'/><a xlink:href='#orders.order_status_id'><use id='idx' x='497' y='296' xlink:href='#idx'/><title>idx_orders ( order_status_id ) </title></a>
+<a xlink:href='#orders.order_status_id'><text id='intuglo_logistics.orders.order_status_id' x='513' y='307' onmouseover="hghl(['orders_fk_orders'])" onmouseout="uhghl(['orders_fk_orders'])">order_status_id</text><title>order_status_id
+* int
+the current status of order</title></a>
+<a xlink:href='#orders.order_status_id'><use id='fk' x='618' y='296' xlink:href='#fk'/><title>References order_staus ( order_status_id -&gt; status_id ) </title></a>
+  <a xlink:href='#orders.company_name'><text id='intuglo_logistics.orders.company_name' x='513' y='322'>company_name</text><title>company_name
+varchar(255)
+customer's company name</title></a>
+  <a xlink:href='#orders.contact_person'><text id='intuglo_logistics.orders.contact_person' x='513' y='337'>contact_person</text><title>contact_person
+varchar(255)
+name of contact person</title></a>
+  <a xlink:href='#orders.contact_number'><text id='intuglo_logistics.orders.contact_number' x='513' y='352'>contact_number</text><title>contact_number
+varchar(50)
+customer's contact number</title></a>
+  <a xlink:href='#orders.email'><text id='intuglo_logistics.orders.email' x='513' y='367'>email</text><title>email
+varchar(50)
+customer's email</title></a>
+  <a xlink:href='#orders.delivery_address'><text id='intuglo_logistics.orders.delivery_address' x='513' y='382'>delivery_address</text><title>delivery_address
+varchar(255)
+the address of place which the cargo is ship to</title></a>
+  <a xlink:href='#orders.four_digit_hs_code'><text id='intuglo_logistics.orders.four_digit_hs_code' x='513' y='397'>four_digit_hs_code</text><title>four_digit_hs_code
+varchar(4)
+the second section of hs code which has four digits</title></a>
+  <a xlink:href='#orders.cargo_description'><text id='intuglo_logistics.orders.cargo_description' x='513' y='412'>cargo_description</text><title>cargo_description
+varchar(255)
+description about cargo</title></a>
+  <a xlink:href='#orders.merchandise_value'><text id='intuglo_logistics.orders.merchandise_value' x='513' y='427'>merchandise_value</text><title>merchandise_value
+decimal(10,2)
+value of shipped goods</title></a>
+  <a xlink:href='#orders.weight'><text id='intuglo_logistics.orders.weight' x='513' y='442'>weight</text><title>weight
+int default 0
+the estimated weight of cargo in KG</title></a>
+  <a xlink:href='#orders.cbm'><text id='intuglo_logistics.orders.cbm' x='513' y='457'>cbm</text><title>cbm
+int default 0
+the estimated size of cargo in cubic meter</title></a>
+  <a xlink:href='#orders.booking_date'><text id='intuglo_logistics.orders.booking_date' x='513' y='472'>booking_date</text><title>booking_date
+date
+the date which the order is placed</title></a>
+  <a xlink:href='#orders.confirmation_date'><text id='intuglo_logistics.orders.confirmation_date' x='513' y='487'>confirmation_date</text><title>confirmation_date
+date
+the date which the booking is confirmed</title></a>
+  <a xlink:href='#orders.booking_price_a'><text id='intuglo_logistics.orders.booking_price_a' x='513' y='502'>booking_price_a</text><title>booking_price_a
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.booking_price_b'><text id='intuglo_logistics.orders.booking_price_b' x='513' y='517'>booking_price_b</text><title>booking_price_b
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.booking_price_gst'><text id='intuglo_logistics.orders.booking_price_gst' x='513' y='532'>booking_price_gst</text><title>booking_price_gst
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.booking_price_total'><text id='intuglo_logistics.orders.booking_price_total' x='513' y='547'>booking_price_total</text><title>booking_price_total
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.closing_price_a'><text id='intuglo_logistics.orders.closing_price_a' x='513' y='562'>closing_price_a</text><title>closing_price_a
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.closing_price_b'><text id='intuglo_logistics.orders.closing_price_b' x='513' y='577'>closing_price_b</text><title>closing_price_b
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.closing_price_gst'><text id='intuglo_logistics.orders.closing_price_gst' x='513' y='592'>closing_price_gst</text><title>closing_price_gst
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.closing_price_total'><text id='intuglo_logistics.orders.closing_price_total' x='513' y='607'>closing_price_total</text><title>closing_price_total
+decimal(10,2) default 0.00</title></a>
+  <a xlink:href='#orders.order_pdf_url'><text id='intuglo_logistics.orders.order_pdf_url' x='513' y='622'>order_pdf_url</text><title>order_pdf_url
+varchar(255)
+stores the location of generated receipt</title></a>
+
+</g></svg>
+
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_logins'); return(false);">Table logins</a></h2></div>
+<div id='logins'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='logins'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.login_id'>login&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.email'>email</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='logins.password'>password</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='logins.user_type'>user&#95;type</a></td>
+		<td> tinyint   DEFO 2 </td>
+		<td> 0 &#61; admin
+1 &#61; supplier
+2 &#61; user </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='logins.created_on'>created&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.created_by'>created&#95;by</a></td>
+		<td> int   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='logins.current_session'>current&#95;session</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.need_change_password'>need&#95;change&#95;password</a></td>
+		<td> bit   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='logins.current_session'>current&#95;session</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='logins.need_change_password'>need&#95;change&#95;password</a></td>
+		<td> bit   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;logins</td>
+		<td> ON login&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>U</td><td>idx&#95;logins&#95;email</td>
+		<td> ON email</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_users'); return(false);">Table users</a></h2></div>
+<div id='users'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='users'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='users.user_id'>user&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='users.login_id'>login&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='users.user_name'>user&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.mobile_no'>mobile&#95;no</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='users.country_code'>country&#95;code</a></td>
+		<td> char&#40; 2 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.business_id'>business&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.address'>address</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;users</td>
+		<td> ON user&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;users</td>
+		<td> ON login&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>fk&#95;user&#95;countries</td>
+		<td> ON country&#95;code</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;users&#95;1</td>
+		<td> ON business&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_users</td>
+		<td > ( login&#95;id ) ref <a href='#logins'>logins</a> (login&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_users_1</td>
+		<td > ( business&#95;id ) ref <a href='#businesses'>businesses</a> (business&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_users_0</td>
+		<td > ( country&#95;code ) ref <a href='#countries'>countries</a> (country&#95;code) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_suppliers'); return(false);">Table suppliers</a></h2></div>
+<div id='suppliers'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='suppliers'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='suppliers.supplier_id'>supplier&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='suppliers.login_id'>login&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='suppliers.supplier_name'>supplier&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;suppliers</td>
+		<td> ON supplier&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;suppliers</td>
+		<td> ON login&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_suppliers</td>
+		<td > ( login&#95;id ) ref <a href='#logins'>logins</a> (login&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_notifications'); return(false);">Table notifications</a></h2></div>
+<div id='notifications'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='notifications'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='notifications.notification_id'>notification&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='notifications.notification_type_id'>notification&#95;type&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='notifications.notification_status_id'>notification&#95;status&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;notifications</td>
+		<td> ON notification&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;notifications</td>
+		<td> ON notification&#95;status&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_notifications</td>
+		<td > ( notification&#95;status&#95;id ) ref <a href='#notification&#95;status'>notification&#95;status</a> (notification&#95;status&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_user_platforms'); return(false);">Table user_platforms</a></h2></div>
+<div id='user_platforms'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='user_platforms'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='user_platforms.user_platform_id'>user&#95;platform&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='user_platforms.login_id'>login&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='user_platforms.platform_id'>platform&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;user&#95;platforms</td>
+		<td> ON user&#95;platform&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;user&#95;platforms</td>
+		<td> ON login&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;user&#95;platforms&#95;0</td>
+		<td> ON platform&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_user_platforms_0</td>
+		<td > ( platform&#95;id ) ref <a href='#platforms'>platforms</a> (platform&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_user_platforms</td>
+		<td > ( login&#95;id ) ref <a href='#logins'>logins</a> (login&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_containers'); return(false);">Table containers</a></h2></div>
+<div id='containers'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='containers'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='containers.container_id'>container&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='containers.container_no'>container&#95;no</a></td>
+		<td> varchar&#40; 30 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='containers.quotation_id'>quotation&#95;id</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='containers.total_cbm'>total&#95;cbm</a></td>
+		<td> int   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='containers.is_halal'>is&#95;halal</a></td>
+		<td> bit   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='containers.number_people_sharing'>number&#95;people&#95;sharing</a></td>
+		<td> int   DEFO 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='containers.percentage_full'>percentage&#95;full</a></td>
+		<td> decimal&#40; 3&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;containers</td>
+		<td> ON container&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;containers</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;containers</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_containers</td>
+		<td > ( quotation&#95;id ) ref <a href='#quotations'>quotations</a> (quotation&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_quotations'); return(false);">Table quotations</a></h2></div>
+<div id='quotations'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='quotations'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='quotations.quotation_id'>quotation&#95;id</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.shipment_type_id'>shipment&#95;type&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.supplier_quotation_reference'>supplier&#95;quotation&#95;reference</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.cargo_transit_duration'>cargo&#95;transit&#95;duration</a></td>
+		<td> int   </td>
+		<td> counted in days </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.departure_date'>departure&#95;date</a></td>
+		<td> date   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.number_of_transit_ports'>number&#95;of&#95;transit&#95;ports</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.container_box_size'>container&#95;box&#95;size</a></td>
+		<td> int   </td>
+		<td> how many footers </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.port_id_from'>port&#95;id&#95;from</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.port_id_to'>port&#95;id&#95;to</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.shipment_carrier_id'>shipment&#95;carrier&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.warehouse_departure_address'>warehouse&#95;departure&#95;address</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.warehouse_arrival_address'>warehouse&#95;arrival&#95;address</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='quotations.incoterm_code'>incoterm&#95;code</a></td>
+		<td> char&#40; 3 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;quotations</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotations</td>
+		<td> ON shipment&#95;type&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotations&#95;0</td>
+		<td> ON shipment&#95;carrier&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotations&#95;1</td>
+		<td> ON port&#95;id&#95;from</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotations&#95;2</td>
+		<td> ON port&#95;id&#95;to</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotations&#95;3</td>
+		<td> ON incoterm&#95;code</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotations</td>
+		<td > ( shipment&#95;type&#95;id ) ref <a href='#shipment&#95;types'>shipment&#95;types</a> (shipment&#95;type&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotations_0</td>
+		<td > ( shipment&#95;carrier&#95;id ) ref <a href='#shipment&#95;carriers'>shipment&#95;carriers</a> (shipment&#95;carrier&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotations_1</td>
+		<td > ( port&#95;id&#95;from ) ref <a href='#ports'>ports</a> (port&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotations_2</td>
+		<td > ( port&#95;id&#95;to ) ref <a href='#ports'>ports</a> (port&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotations_3</td>
+		<td > ( incoterm&#95;code ) ref <a href='#incoterms'>incoterms</a> (incoterm&#95;code) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_shipment_carriers'); return(false);">Table shipment_carriers</a></h2></div>
+<div id='shipment_carriers'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='shipment_carriers'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_carriers.shipment_carrier_id'>shipment&#95;carrier&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_carriers.shipment_carrier_name'>shipment&#95;carrier&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_carriers.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;shipment&#95;carrier</td>
+		<td> ON shipment&#95;carrier&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_shipment_types'); return(false);">Table shipment_types</a></h2></div>
+<div id='shipment_types'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='shipment_types'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_types.shipment_type_id'>shipment&#95;type&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_types.shipment_type'>shipment&#95;type</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='shipment_types.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;shipment&#95;types</td>
+		<td> ON shipment&#95;type&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_businesses'); return(false);">Table businesses</a></h2></div>
+<div id='businesses'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='businesses'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='businesses.business_id'>business&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='businesses.industry_id'>industry&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='businesses.business_name'>business&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;businesses</td>
+		<td> ON business&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;businesses</td>
+		<td> ON industry&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_businesses</td>
+		<td > ( industry&#95;id ) ref <a href='#industries'>industries</a> (industry&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_industries'); return(false);">Table industries</a></h2></div>
+<div id='industries'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='industries'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='industries.industry_id'>industry&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='industries.industry_name'>industry&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;industries</td>
+		<td> ON industry&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_notification_status'); return(false);">Table notification_status</a></h2></div>
+<div id='notification_status'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='notification_status'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='notification_status.notification_status_id'>notification&#95;status&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='notification_status.notification_status'>notification&#95;status</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;notification&#95;status</td>
+		<td> ON notification&#95;status&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_payment_types'); return(false);">Table payment_types</a></h2></div>
+<div id='payment_types'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='payment_types'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='payment_types.payment_type_id'>payment&#95;type&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='payment_types.payment_type'>payment&#95;type</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='payment_types.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;payment&#95;types</td>
+		<td> ON payment&#95;type&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_config'); return(false);">Table config</a></h2></div>
+<div id='config'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='config'>Columns</a></th></tr>
+<tr><td colspan='3'>This is a key and value pairs table which is used to store the application settings and configurations&#46; </td></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='config.config_id'>config&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='config.config_key'>config&#95;key</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> the setting and configuration items is stored in this column </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='config.config_value'>config&#95;value</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> the value of each setting stored in this column </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='config.updated_on'>updated&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td> stores the datetime that this record is updated </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;config</td>
+		<td> ON config&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>U</td><td>idx&#95;config&#95;key</td>
+		<td> ON config&#95;key</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_news'); return(false);">Table news</a></h2></div>
+<div id='news'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='news'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='news.news_id'>news&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='news.news_title'>news&#95;title</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='news.news_text'>news&#95;text</a></td>
+		<td> varchar&#40; 4000 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='news.created_on'>created&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='news.created_by'>created&#95;by</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='news.image_link'>image&#95;link</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;news&#95;0</td>
+		<td> ON news&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_announcements'); return(false);">Table announcements</a></h2></div>
+<div id='announcements'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='announcements'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='announcements.announcements_id'>announcements&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='announcements.announcements_title'>announcements&#95;title</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='announcements.announcements_text'>announcements&#95;text</a></td>
+		<td> varchar&#40; 4000 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='announcements.created_on'>created&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='announcements.created_by'>created&#95;by</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='announcements.image_link'>image&#95;link</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;news</td>
+		<td> ON announcements&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_platforms'); return(false);">Table platforms</a></h2></div>
+<div id='platforms'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='platforms'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='platforms.platform_id'>platform&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='platforms.platform_name'>platform&#95;name</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='platforms.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;platforms</td>
+		<td> ON platform&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_incoterms'); return(false);">Table incoterms</a></h2></div>
+<div id='incoterms'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='incoterms'>Columns</a></th></tr>
+<tr><td colspan='3'>shipment contracts which are refered as incoterms </td></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='incoterms.incoterm_code'>incoterm&#95;code</a></td>
+		<td> char&#40; 3 &#41;   </td>
+		<td> stores the 3&#45;character code for each incoterm </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='incoterms.description'>description</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> incoterm description </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='incoterms.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td> specifies if this incoterm is available for user or not
+1&#45; available
+0&#45; not available </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='incoterms.updated_on'>updated&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td> last updated timestamp </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;incoterms</td>
+		<td> ON incoterm&#95;code</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_ports'); return(false);">Table ports</a></h2></div>
+<div id='ports'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='ports'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='ports.port_id'>port&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='ports.port_name'>port&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> port display name </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='ports.country_code'>country&#95;code</a></td>
+		<td> char&#40; 2 &#41;   </td>
+		<td> code of country which the port belongs to </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='ports.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td> specifies if this port is available for user or not
+1&#45; available
+0&#45; not available </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;ports</td>
+		<td> ON port&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_countries'); return(false);">Table countries</a></h2></div>
+<div id='countries'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='countries'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='countries.country_code'>country&#95;code</a></td>
+		<td> char&#40; 2 &#41;   </td>
+		<td> ISO Alpha&#45;2 Country Code </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='countries.country_name'>country&#95;name</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td> Country Name </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;countries</td>
+		<td> ON country&#95;code</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_quotation_handling_charges'); return(false);">Table quotation_handling_charges</a></h2></div>
+<div id='quotation_handling_charges'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='quotation_handling_charges'>Columns</a></th></tr>
+<tr><td colspan='3'>to store the list of handling charges for each quotation </td></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='quotation_handling_charges.charges_id'>charges&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='quotation_handling_charges.quotation_id'>quotation&#95;id</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td> refers to quotation id that this charge is assigned to </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='quotation_handling_charges.handling_charges_id'>handling&#95;charges&#95;id</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> description of handling charges </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='quotation_handling_charges.amount'>amount</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td> amount of charges </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='quotation_handling_charges.port_type'>port&#95;type</a></td>
+		<td> char&#40; 1 &#41;   </td>
+		<td> determines if handling charge is for arrival port of departure port&#58;
+A&#45; arrival
+D&#45; departure </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;quoutation&#95;handling&#95;charges</td>
+		<td> ON charges&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotation&#95;handling&#95;charges</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotation&#95;handling&#95;charges</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;quotation&#95;handling&#95;charges&#95;0</td>
+		<td> ON handling&#95;charges&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_quotation_handling_charges</td>
+		<td > ( quotation&#95;id ) ref <a href='#quotations'>quotations</a> (quotation&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_custom'); return(false);">Table custom</a></h2></div>
+<div id='custom'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='custom'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='custom.custom_id'>custom&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='custom.order_id'>order&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='custom.total_custom'>total&#95;custom</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='custom.total_received'>total&#95;received</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;custom</td>
+		<td> ON custom&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;custom</td>
+		<td> ON order&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_custom</td>
+		<td > ( order&#95;id ) ref <a href='#orders'>orders</a> (order&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_packing_list'); return(false);">Table packing_list</a></h2></div>
+<div id='packing_list'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='packing_list'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='packing_list.packing_list_id'>packing&#95;list&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='packing_list.order_id'>order&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='packing_list.packing_description'>packing&#95;description</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;packing&#95;list</td>
+		<td> ON packing&#95;list&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;packing&#95;list</td>
+		<td> ON order&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_packing_list</td>
+		<td > ( order&#95;id ) ref <a href='#orders'>orders</a> (order&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_order_staus'); return(false);">Table order_staus</a></h2></div>
+<div id='order_staus'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='order_staus'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='order_staus.status_id'>status&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='order_staus.order_status_description'>order&#95;status&#95;description</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;order&#95;staus</td>
+		<td> ON status&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_hs_code'); return(false);">Table hs_code</a></h2></div>
+<div id='hs_code'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='hs_code'>Columns</a></th></tr>
+<tr><td colspan='3'>lookup table to store the HS Code information </td></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='hs_code.hs_code_id'>hs&#95;code&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='hs_code.hs_code'>hs&#95;code</a></td>
+		<td> int   </td>
+		<td> the 6 digit value for HS Code </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='hs_code.description'>description</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> stores the defined hs code description by custom </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='hs_code.gst_percentage'>gst&#95;percentage</a></td>
+		<td> decimal&#40; 5&#44; 2 &#41;   </td>
+		<td> stores the percentage of gst related to each hs code category </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='hs_code.is_active'>is&#95;active</a></td>
+		<td> bit   DEFO 1 </td>
+		<td> determines if the HS Code is available in system or not&#46;
+1 &#61; available
+0 &#61; unavailable </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='hs_code.updated_on'>updated&#95;on</a></td>
+		<td> datetime   DEFO CURRENT_TIMESTAMP </td>
+		<td> stores the datetime that this record is updated </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;hs&#95;code</td>
+		<td> ON hs&#95;code&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>U</td><td>idx&#95;hs&#95;code</td>
+		<td> ON hs&#95;code</td>
+		<td> the HS Code is unique </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<br/><br/>
+<div class='section-header'><h2><a onclick="showhide('table_orders'); return(false);">Table orders</a></h2></div>
+<div id='orders'>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'><a name='orders'>Columns</a></th></tr>
+<tr><td colspan='3'>orders&#47;bookings information </td></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='orders.order_id'>order&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='orders.login_id'>login&#95;id</a></td>
+		<td> int   </td>
+		<td> the login&#95;id of the user who the order belongs to </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.quotation_id'>quotation&#95;id</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td> the quotation&#95;id of shippment which will handle this order </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.hs_code_id'>hs&#95;code&#95;id</a></td>
+		<td> int   </td>
+		<td> the hs&#95;code&#95;id of order </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='orders.order_status_id'>order&#95;status&#95;id</a></td>
+		<td> int   </td>
+		<td> the current status of order </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.company_name'>company&#95;name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> customer&#39;s company name </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.contact_person'>contact&#95;person</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> name of contact person </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.contact_number'>contact&#95;number</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td> customer&#39;s contact number </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.email'>email</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td> customer&#39;s email </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.delivery_address'>delivery&#95;address</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> the address of place which the cargo is ship to </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.four_digit_hs_code'>four&#95;digit&#95;hs&#95;code</a></td>
+		<td> varchar&#40; 4 &#41;   </td>
+		<td> the second section of hs code which has four digits </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.cargo_description'>cargo&#95;description</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> description about cargo </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.merchandise_value'>merchandise&#95;value</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   </td>
+		<td> value of shipped goods </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.weight'>weight</a></td>
+		<td> int   DEFO 0 </td>
+		<td> the estimated weight of cargo in KG </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.cbm'>cbm</a></td>
+		<td> int   DEFO 0 </td>
+		<td> the estimated size of cargo in cubic meter </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.booking_date'>booking&#95;date</a></td>
+		<td> date   </td>
+		<td> the date which the order is placed </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.confirmation_date'>confirmation&#95;date</a></td>
+		<td> date   </td>
+		<td> the date which the booking is confirmed </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.booking_price_a'>booking&#95;price&#95;a</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.booking_price_b'>booking&#95;price&#95;b</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.booking_price_gst'>booking&#95;price&#95;gst</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.booking_price_total'>booking&#95;price&#95;total</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.closing_price_a'>closing&#95;price&#95;a</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.closing_price_b'>closing&#95;price&#95;b</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.closing_price_gst'>closing&#95;price&#95;gst</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.closing_price_total'>closing&#95;price&#95;total</a></td>
+		<td> decimal&#40; 10&#44; 2 &#41;   DEFO 0.00 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='orders.order_pdf_url'>order&#95;pdf&#95;url</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td> stores the location of generated receipt </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;orders</td>
+		<td> ON order&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;orders</td>
+		<td> ON order&#95;status&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;orders&#95;0</td>
+		<td> ON hs&#95;code&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;orders&#95;1</td>
+		<td> ON login&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td>&nbsp;</td><td>idx&#95;orders&#95;2</td>
+		<td> ON quotation&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_orders</td>
+		<td > ( order&#95;status&#95;id ) ref <a href='#order&#95;staus'>order&#95;staus</a> (status&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_orders_0</td>
+		<td > ( hs&#95;code&#95;id ) ref <a href='#hs&#95;code'>hs&#95;code</a> (hs&#95;code&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_orders_2</td>
+		<td > ( quotation&#95;id ) ref <a href='#quotations'>quotations</a> (quotation&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td>fk_orders_1</td>
+		<td > ( login&#95;id ) ref <a href='#logins'>logins</a> (login&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+</body></html>

@@ -1,0 +1,81 @@
+<div class="relative">
+    <div class="_leftNav">
+        <app-sidenav (toggleMenuEmitter)="parentToggleMenu($event)"></app-sidenav>
+    </div>
+    <div class="subSet _wrapper">
+
+        <div *ngIf="toggleMenu" class="overlay subSet">
+            <div class="crossLine left">
+                <span class="cross" (click)="parentToggleMenu(false)"></span>
+            </div>
+            <div class="menuWraper left">
+                <div class="_searchBar">
+                    <input class="_search" type="text" placeholder="Search all pages...">
+                </div>
+                <!-- <div > -->
+                    <rpstaff *ngIf="currentUser.super_admin" (emitEvent)="receiveToggoleMenu($event)"></rpstaff>
+                <!-- </div> -->
+                <!-- <div > -->
+                        <user *ngIf="!currentUser.super_admin" (emitEvent)="receiveToggoleMenu($event)"></user>
+                <!-- </div> -->
+            </div>
+
+            <!-- <div *ngIf="!currentUser.super_admin">
+                            <app-user></app-user>
+                        </div> -->
+
+            <div class="profile right">
+                <ul class="sptr">
+                    <li>
+                        <img class="user" src="../../../assets/images/icon-user1.svg" alt="">
+                    </li>
+                    <li class="title">My Profile
+                        <span class="_my-profile-info">
+                            {{currentUser.email}} (
+                            <ng-container *ngIf="currentUser.super_admin">
+                                RPStaff
+                            </ng-container>
+                            <ng-container *ngIf="!currentUser.super_admin">
+                                {{ currentUser.roleId.group_name}}
+                            </ng-container>
+                            )
+                        </span>
+                    </li>
+                    <li>
+                        <a (click)="parentToggleMenu(false);" routerLink="/secure/profile/update">
+                            Personal Details
+                        </a>
+                    </li>
+                    <!-- <li><a href="#">Medical Information</a></li>
+                            <li><a href="#">Training Information</a></li> -->
+                    <li>
+                        <a (click)="parentToggleMenu(false);" routerLink="/secure/profile/change-password">Change Password</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="title">About Riskpal</li>
+                    <!-- <li><a href="#">How to use the platform</a></li> -->
+                    <li>
+                        <a routerLink="/secure/ra-template/list" *ngIf="checkSecurity('managesystem', 'riskassessmenttemplates')" [ngClass]="{'active': toggleChildSubMenu == 'childRaTemplate' }"
+                            (click)="getToggleSubMenus('customise', 'childRaTemplate', 'raTemplateList');parentToggleMenu(false);">
+                            View RA Templates
+                        </a>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>
+                        <img class="profileLogo" src="../../../assets/images/logo-profile.svg" alt="">
+                    </li>
+                    <li class="sb">+44 (0)782 864 9731</li>
+                    <li class="sb">info@hpriskmanagement.com</li>
+                    <li class="copy">© 2019 RiskPal. All rights reserved.</li>
+                </ul>
+            </div>
+        </div>
+
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+</div>

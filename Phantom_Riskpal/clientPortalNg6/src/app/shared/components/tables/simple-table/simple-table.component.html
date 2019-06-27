@@ -1,0 +1,148 @@
+<ngx-datatable
+#myTable
+  class="material"
+  [rows]="rows"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [externalPaging]="true"
+  [count]="page.count"
+  [offset]="page.offset"
+  [limit]="page.pageSize"
+  (page)='setPage($event)'
+  [messages]="messages">
+
+  <ngx-datatable-row-detail  [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+        <div class="collapseTable">
+            <table width="100%">
+                <thead>
+                  <tr>
+                    <th *ngFor="let col of colHead">{{col.name}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!row.ValueWithHtml">
+                            <td  *ngFor="let col of colHead">{{row[col.value]}}</td>  
+                    </tr>
+                  <tr *ngIf="row.ValueWithHtml">
+                    <td *ngFor="let col of colHead">
+                        <div class="best-practice-explan" [innerHTML]="row[col.value]"></div>
+                    </td> 
+                  </tr>
+                </tbody>
+                <span *ngIf="colHeadSub1.length > 0">
+                <thead>
+                    <tr>
+                        <th *ngFor="let col of colHeadSub1">{{col.name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td *ngFor="let col of colHeadSub1">{{row[col.value]}}</td>  
+                    </tr>
+                </tbody>
+            </span>
+              </table>
+       </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+  <!-- Column Templates -->
+   <ngx-datatable-column
+   *ngIf="isCollapse"
+    [width]="50"
+    [resizeable]="false"
+    [sortable]="false"
+    [draggable]="false"
+    [canAutoResize]="false"
+    headerClass="bg-blue"
+   >
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+      <a class="expansion-icon"
+        href="javascript:void(0)"
+        [class.datatable-icon-down]="!expanded"
+        [class.datatable-icon-up]="expanded"
+        title="Expand/Collapse Row"
+        (click)="toggleExpandRow(row)">
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column *ngFor="let col of columns" headerClass="bg-blue" [flexGrow]="col.size || 1" [prop]="col.name" [sortable]="true" 
+  [canAutoResize]="true" [draggable]="false" [cellClass]="cellClass" [resizeable]="true">
+      <ng-template  ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()">{{col.prop ? col.prop: col.name}}</span>
+      </ng-template>
+      <ng-template  let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a class="text-dec-none" *ngIf="row.routerLink && col.name == 'name'; else template" routerLink="{{row.routerLink}}">{{row.name}}</a>
+            <ng-template #template><span [innerHtml]="value"></span></ng-template>
+      </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column *ngIf="actions.length > 0" headerClass="bg-blue" name="Actions" sortable="false" prop="_id">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          {{column.name}}
+      </ng-template>
+      <ng-template *ngIf="actions.length >0"  let-row="row" let-value="value" ngx-datatable-cell-template>
+          <ng-container *ngFor="let act of actions">
+              <ng-container *ngIf="act.type =='download'">
+                  <span *ngIf="!checkRaStatus">
+                        <a  href="/clientPortal/pdf/{{row._id}}_traveller_newsRA.pdf" class="{{act.class}} left leftP" download  tooltip="{{act.text}}"></a>
+                  </span>
+                  <span *ngIf="checkRaStatus">
+                        <a *ngIf="row.status == 'Approved'" href="/clientPortal/pdf/{{row._id}}_traveller_newsRA.pdf" class="{{act.class}} left leftP" download  tooltip="{{act.text}}"></a>
+                  </span>
+              </ng-container>
+              <ng-container *ngIf="act.type !='download' && act.type !='resend_email' && act.type !='deactivate'">
+                  <span *ngIf="hideEditIcon && row.editIcon">
+                        <span *ngIf="!act?.confirm" (click)="emitEvent(row, act.type)" class="{{act.class}} left leftP"  tooltip="{{act.text}}">
+                                <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                        </span>
+                  </span>
+
+                  <span *ngIf="!hideEditIcon">
+                    <span *ngIf="!act?.confirm" (click)="emitEvent(row, act.type)" class="{{act.class}} left leftP"  tooltip="{{act.text}}">
+                      <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                    </span>
+                  </span>
+
+                    <span *ngIf="act?.confirm" (click)="confirmDialog(row, act.type)" class="{{act.class}} left leftP"  tooltip="{{act.text}}">
+                        <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                    </span>
+                </ng-container>
+
+                <ng-container *ngIf="act.type == 'deactivate'">
+                    <span *ngIf="row.status == 'Expired'">
+                        <span *ngIf="act?.confirm"  (click)="confirmDialog(row, act.type)" class="_activate left leftP"  tooltip="Activate">
+                                <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                        </span>
+                    </span>
+                    <span *ngIf="row.status == 'Active'">
+                        <span *ngIf="act?.confirm"  (click)="confirmDialog(row, act.type)" class="_deactivate left leftP"  tooltip="Deactivate">
+                                <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                        </span>
+                    </span>
+                </ng-container>
+
+                <ng-container *ngIf="act.type =='resend_email'">
+                    <span *ngIf="row.status == 'Inactive'">
+                        <span *ngIf="!act?.confirm" (click)="emitEvent(row, act.type)" class="{{act.class}} left leftP"  tooltip="{{act.text}}">
+                                <ng-container *ngIf="!act.icon">{{act.text}}</ng-container>
+                        </span>
+                    </span>
+                </ng-container>
+               
+            </ng-container>
+           <!-- <span class="mg-rt-5">
+            <span (click)="confirmDialog(row, 'delete')" class="_delete left leftP"></span>
+           </span>
+           <span class="mg-rt-5">
+                <span (click)="emitEvent(row, 'edit')" class="_edit left leftP"></span>
+            </span> -->
+      </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable> 
+
+<!-- <ng-container>
+
+</ng-container> -->

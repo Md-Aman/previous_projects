@@ -1,0 +1,38 @@
+<div class="centeredLayout">
+  <div class="subSet">
+    <p>Risk Assessment Template Name:</p>
+    <div *ngIf="isEdit == false">
+      <h1>{{templateName}}
+        <span class="small edit" *ngIf="options.selectedTab == 'templateDetails'" (click)="edit()">edit</span>
+      </h1>
+    </div>
+
+    <div *ngIf="isEdit == true">
+      <form [formGroup]="raTemplateNameForm">
+        <div class="row">
+          <div class="form-group col-md-8">
+            <input type="text" (blur)="templateNameSubmit()" formControlName="raTemplateName" class="form-control">
+          </div>
+          <!-- <div class="col-md-4">
+            <button type="submit" class="btn btn-success">Update RA Template Name</button>
+          </div> -->
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br>
+  <!-- [ngClass]="{'active': true}" -->
+  <div class="tabs">
+    <a href="#" class="tab" [routerLink]="['template-details']" [ngClass]="{'active': options.selectedTab == 'templateDetails'}">Template Details</a>
+    <a  class="tab" *ngIf="pages.countryrequired"  (click)="raTemplateNavigateStep('country')" [ngClass]="{'active': options.selectedTab == 'countryProfile'}">Country Profile</a>
+    <a  class="tab" *ngIf="pages.questionRequired"  (click)="raTemplateNavigateStep('risk')" [ngClass]="{'active': options.selectedTab == 'riskMitigation'}">Risk & Mitigation</a>
+    <a  class="tab" *ngIf="pages.supplierRequired"  (click)="raTemplateNavigateStep('supplier')" [ngClass]="{'active': options.selectedTab == 'supplier'}">Supplier</a>
+    <a  class="tab" *ngIf="pages.communicationRequired" (click)="raTemplateNavigateStep('communication')" [ngClass]="{'active': options.selectedTab == 'communication'}">Communication</a>
+    <a  class="tab" *ngIf="pages.contingenciesRequired"  (click)="raTemplateNavigateStep('contingency')" [ngClass]="{'active': options.selectedTab == 'contingency'}">Contingency</a>
+  </div>
+
+
+  <router-outlet></router-outlet>
+
+
+</div>

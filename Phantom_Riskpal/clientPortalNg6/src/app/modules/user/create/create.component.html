@@ -1,0 +1,22 @@
+<div class="centeredLayout">
+  <div class="subSet row">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+      <h2>User Information</h2>
+      <!-- <p>Fill out your personal details below:</p> -->
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <app-upload class="pull-right"></app-upload>
+    </div>
+
+
+
+
+  </div>
+  <div class="tabs">
+    <a href="#" class="tab" [routerLink]="['personal-details']" [ngClass]="{'active': selectedTab == 'account'}">Account Information</a>
+    <!-- <a href="#" [class.disabled]="!isShowTabs" class="tab" [routerLink]="['emergency-details']" [ngClass]="{'active': selectedTab == 'emergency'}">Emergency Details</a>
+    <a href="#" [class.disabled]="!isShowTabs" class="tab" [routerLink]="['medical-information']" [ngClass]="{'active': selectedTab == 'medical'}">Medical Information</a>
+    <a href="#" class="tab" [routerLink]="['training-information']" [ngClass]="{'active': selectedTab == 'training'}">Training Information</a> -->
+  </div>
+  <router-outlet></router-outlet>
+</div>

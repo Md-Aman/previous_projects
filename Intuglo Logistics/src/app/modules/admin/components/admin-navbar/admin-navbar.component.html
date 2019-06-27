@@ -1,0 +1,34 @@
+<mat-toolbar>
+  <div class="subSet menu-detail">
+    <div class="left nav-bar">
+      <span class="icon-style" (click)="toggleSideBar()"></span>
+      <a routerLink="/"><img src="../../../../../assets/img/intuglo-detail-logo.png" alt="Intuglo Logo"></a>  
+    </div>
+    <div class="left logistic relative">
+      <span class="srpt"></span>
+      <span class="logistics-menu" (click)="clickLogisticMenu()">Logistics</span>
+      <ul class="arrow-dialog" *ngIf="logisticMenu">
+        <li>Logistics</li>
+        <li>Warehouse</li>
+        <li>QC for Hire</li>
+        <li>Production Management</li>
+        <li>24/7 Online Exhibition</li>
+        <li>eProcurement</li>
+        <li>Market Validation</li>
+        <li>Market Management</li>
+      </ul>
+    </div>
+    <div class="right customer-name" (click)="clickedInside($event)">
+      <div (click)="clickDropdown()">
+          <span>Welcome {{session.userName}}</span>
+          <img alt="Intuglo" class="img-circle" src="../../../../../assets/img/avatar_2x.png">    
+      </div>
+      <div class="dropdown-content">
+        <ul *ngIf="display">
+          <li><a class="cursor-hand" (click)="landingPage()">Main Page</a></li>
+          <li><a (click)="sessionExpiry()" class="cursor-hand">Logout</a></li>
+        </ul>  
+      </div>
+    </div>
+  </div>  
+  </mat-toolbar>

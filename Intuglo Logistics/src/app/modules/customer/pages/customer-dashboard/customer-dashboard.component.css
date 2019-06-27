@@ -1,0 +1,6 @@
+.dashboard-layout { background: #fff;}
+.dashboard-layout h2 { padding: 30px; color: #333333; font-size: 20px; font-weight: 400; margin: 0; text-transform: capitalize;}
+.dashboard-layout .content-area { background: #F8F9FC; padding: 30px;}
+
+.ng-container { height: 88.5vh; background-color: #f1f4f8;}
+.animate-sidebar >>> .ng-sidebar--animate { background-color: #e7e9ef; width: 260px; height: 100%; z-index: 2;}

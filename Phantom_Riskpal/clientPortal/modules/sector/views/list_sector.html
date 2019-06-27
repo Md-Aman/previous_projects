@@ -1,0 +1,66 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Sector
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Sector</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllSector();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a ui-sref="main.add_sector">
+                            <button class="btn btn-sm btn-info">New Sector</button>
+                        </a>
+                    </div>
+                    <!-- /. tools -->
+                    <i class="fa fa-tags"></i>
+                    <h3 class="box-title">Sector</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by sector name" ng-model="sector_name"
+                            autocomplete="false" ng-change="getAllSector(sector_name)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="sector in $data">
+                            <td data-title="'Sector Name'" sortable="'sectorName'">{{sector.sectorName}}</td>
+                            <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(sector.status,sector._id)"><span 
+                                 ng-class="{'label label-success': sector.status == 'Active' , 'label label-danger': sector.status == 'Inactive'}"   
+                                >{{sector.status}}</span></a>
+                            </td>
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.update_sector({sector_id:sector._id})">
+                                    Edit
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deletesector(sector._id)">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="SectorData.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

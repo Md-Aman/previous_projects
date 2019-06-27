@@ -1,0 +1,6 @@
+.box { width: 450px; background: #FFFFFF; padding: 20px; position: relative;}
+.box p {color: #333333; font-size: 20px; font-weight: 200;}
+.box .booking-message {color: #333333; font-size: 14px; font-weight: 100;}
+.box .cross {position: absolute; top: 10px; right: 10px; background: url(../../../../../assets/img/icon-dialog-close.svg) center center no-repeat; width: 24px; height: 24px; cursor: pointer;}
+
+

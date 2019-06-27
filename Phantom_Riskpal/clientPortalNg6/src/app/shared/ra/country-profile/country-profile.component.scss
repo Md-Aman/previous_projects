@@ -1,0 +1,151 @@
+@import 'styles.scss';
+.uppercase{
+    text-transform: uppercase;
+}
+
+.green{
+    background: green;
+}
+.red{
+    background: red; 
+}
+
+.amber{
+    background: #e0c055;
+}
+
+.customClass{
+    font-family: "Times New Roman", Times, serif;
+    }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+      color: white;
+      background-color: black;
+      border-bottom: 1px solid darkblue;
+    }
+
+.nav-tabs .nav-link, .nav-tabs .nav-item.show .nav-link {
+    color: black;
+    background-color: white;
+    border-bottom: 1px solid darkblue;
+  }
+
+  .tabset ul{
+    border: 1ps solid darkblue;
+  }
+
+  .nav-tabs{
+    border:1px solid darkblue;
+    border-radius: 4px;
+  }
+  ._customTab .nav-tabs .nav-item .nav-link.active{
+    background: black;
+  }
+
+  .uppercase{
+      text-transform: uppercase;
+      font-weight: 700;
+  }
+
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .padding-left{
+      padding-left: 20px;
+  }
+
+  .text-color{
+    border-radius: 30px;
+    height: 14px;
+    font-family: sans-serif;
+    color: white !important;
+  }
+
+  .border-threat{
+      border-bottom: 1px solid lightgrey;
+      border-top: 1px solid lightgrey;
+  }
+  .mg-top-20 {
+    margin-top: 20px;
+  }
+  .threat {
+    list-style-type: none;
+    margin-top: 20px;
+    padding: 0;
+    width: 100%;
+    border-top: 1px solid #d1d5d9;
+    border-bottom: 1px solid #d1d5d9;
+    .threat-level {
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 9px;
+      text-decoration: none;
+    
+    }
+  }
+  
+  li {
+    float: left;
+  }
+  
+  
+  .border-right{
+    border-right: 1px solid lightgray;
+  }
+  .padding-right{
+      padding-right: 35px;
+  }
+  .padding-right-20px{
+    padding-right: 20px;
+  }
+
+.tab-content {
+  margin-top: 25px;
+  border-top: 1px solid #d1d5d9;
+  padding-top: 40px;
+}
+.country-name{
+  padding-bottom: 7%;
+  font-size: 16px;
+}
+.classification{
+  padding-bottom: 4%;
+  font-size: 16px;
+}
+._customTab .nav-tabs .nav-item .nav-link {font-size: 13px; font-family: $overpass; height: 33px; @include bold(bold);}
+
+.para{
+  font-weight: 300;
+  word-spacing: 2px;
+  font-family: Roboto,sans-serif;
+  text-align: justify;
+  color: #000;
+  line-height: 20px;
+}
+
+
+.selectedActive{
+  background: black;
+  color: white;
+}
+
+
+.country-list{ 
+  font-size: 13px;
+  font-family: "Overpass", sans-serif;
+  height: 33px;
+  font-weight: bold;
+  padding: 11px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+:host ::ng-deep .ngx-charts .bar {
+  cursor: default;
+}
+
+
+

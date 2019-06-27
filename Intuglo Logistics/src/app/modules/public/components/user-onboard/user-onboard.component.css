@@ -1,0 +1,8 @@
+.box { width: 450px; background-color: #FFFFFF; padding: 20px; position: relative;}
+.box .cross {background: url(../../../../../assets/img/icon-dialog-close.svg) center center no-repeat; width: 24px; height: 24px; cursor: pointer; position: absolute; top: 10px; right: 10px;}
+.box h2 { font-size: 20px; color: #333; font-weight: 100; margin: 0 0 20px 0;}
+.box .description {}
+.box .description p {font-size: 14px; color: #333; font-weight: 400;}
+.box .description .form-control { display: block; width: 100%; height: 36px; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; color: #333; background-color: #fff; background-image: none; border: 1px solid #dadada; border-radius: 0; box-shadow: none; transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
+.box .description .btn-primary { cursor: pointer; color: #fff; border: 1px solid #F58220; background-color: #F58220; line-height: 34px; min-width: 120px; display: inline-block; text-align: center; font-size: 14px; font-weight: 100; padding: 0 10px; margin: 20px 0 0 0;}
+.box .description .btn-primary:hover { text-decoration:none;}

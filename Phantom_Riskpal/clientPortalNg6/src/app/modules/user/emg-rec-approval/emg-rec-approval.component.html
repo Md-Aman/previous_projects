@@ -1,0 +1,38 @@
+<!-- Approve and share section -->
+<div>
+  <p class="title">
+    Emergency Information Approval
+  </p>
+  <hr>
+  <p class="mg-btm-10">Authorisation is needed to access Emergency Information. Please select a point of approval</p>
+  <div class="row" >
+    <div class="form-group col-md-12">
+      <label>Approving Managers</label>
+      
+      <ng-select 
+          [items]="approvingManagers"
+          [multiple]="false"
+          [closeOnSelect]="true"
+          [(ngModel)]="selectedApprovingManager" required>
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              <span>{{item.firstname}} {{item.lastname}}</span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div>{{item.firstname}}  {{item.lastname}}</div>
+            </ng-template>
+        </ng-select>
+    </div>
+    <div class="form-group col-md-12">
+      <label>Reason</label>
+      <textarea [(ngModel)]="reason" required rows="2" class="form-control"></textarea>
+    </div>
+  </div>
+
+  <hr class="mg-top-20">
+  <div class="text-center _btn">
+    <button class="cont"  (click)="askForApproval()">Submit</button> &nbsp;
+    <button class="cont request" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>
+<!-- Approve and share section ends -->

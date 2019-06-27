@@ -1,0 +1,26 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="centeredLayout">
+    <div class="subSet row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <h2>User Information</h2>
+            <p>Update your personal details below:</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <app-upload class="pull-right"></app-upload>
+        </div>
+    </div>
+    <app-create-rpstaff [id]="currentUser._id" *ngIf="currentUser.super_admin"></app-create-rpstaff>
+    <div *ngIf="!currentUser.super_admin">
+        <div class="tabs">
+            <a href="#" class="tab" (click)="tabSelected('account')" [routerLink]="['/secure/profile/update']" [ngClass]="{'active': selectedTab == 'account'}">Account Information</a>
+            <a href="#" class="tab" (click)="tabSelected('emergency')" [routerLink]="['/secure/profile/update']" [ngClass]="{'active': selectedTab == 'emergency'}">Emergency Details</a>
+            <a href="#" class="tab" (click)="tabSelected('medical')" [routerLink]="['/secure/profile/update']" [ngClass]="{'active': selectedTab == 'medical'}">Medical Information</a>
+            <a href="#" class="tab" (click)="tabSelected('training')" [routerLink]="['/secure/profile/update']" [ngClass]="{'active': selectedTab == 'training'}">Training Information</a>
+        </div>
+        <app-personal-details *ngIf="selectedTab == 'account'" [id]="currentUser._id"></app-personal-details>
+        <app-emergency-details *ngIf="selectedTab == 'emergency'" [profileId]="currentUser._id"></app-emergency-details>
+        <app-medical-information *ngIf="selectedTab == 'medical'" [profileId]="currentUser._id"></app-medical-information>
+        <app-training-information *ngIf="selectedTab == 'training'" [profileId]="currentUser._id"></app-training-information>
+
+    </div>
+</div>

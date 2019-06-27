@@ -1,0 +1,78 @@
+<div class="centeredLayout">
+    <div class="subSet ">
+  
+        <h2>{{country?.name}}</h2>
+    </div>
+    <div class="tabs">
+      <a class="tab active">Threat & Risk Level</a>
+    </div>
+    <form>
+      
+      <div class="accord-content ">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Country Threat Level Rating</label>
+              
+            </div>
+        </div>
+        <div class="row _c-brdr-mg">
+            <div class=" form-group col-md-12">
+                <span class="button">
+                    <input type="radio" name="threat_level" [(ngModel)]='threat_level'  value="red" id="red" />
+                    <label for="red" class="red">Red</label>
+
+                    <input type="radio" name="threat_level" [(ngModel)]='threat_level'  value="amber" id="amber" />
+                    <label for="amber" class="amber">Amber</label>
+
+                    <input type="radio" name="threat_level" [(ngModel)]='threat_level'  value="green" id="green" />
+                    <label for="green" class="green">Green</label>
+                  </span>
+                 
+                <!-- <div class="relative">
+                    <input class="_customCheckbox" formControlName="threat_level" value="1" type="checkbox">
+                    <label><span>Manage Risk Template / Customise</span></label>
+                  </div> -->
+              </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label>Country Threat Matrix</label>
+              
+            </div>
+        </div>
+        <div class="row">
+        
+          <div class="form-group col-md-3 col-lg-3 col-sm-4 col-xs-6" *ngFor="let val of riskCategory">
+            <label>{{val.categoryName}}</label>
+            <select class="form-control" (change)="changeThreatMatrix($event.target.value, val)" >
+              <option value="">Select Option</option>
+              <option [selected]="val.isSelected == item.name"
+                *ngFor="let item of [{name: 'Low'}, {name: 'Medium'}, {name: 'High'}]" [value]="item.name">{{item.name}}
+              </option>
+            </select>
+            <!-- <ng-select 
+              [items]="[{name: 'Low'}, {name: 'Medium'}, {name: 'Heigh'}]" 
+              [multiple]="false" 
+              [closeOnSelect]="false" 
+              labelForId="name"
+              bindLabel="name"
+              name="threat_matrix"
+              [(ngModel)]="threat_matrix">
+            </ng-select> -->
+          </div>
+      </div>
+
+      </div>
+       
+    
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <a class="prev" routerLink="/secure/manage-riskpal/country">Previous</a>
+              <button type="submit" (click)="submit()" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+      
+  </div>
+  

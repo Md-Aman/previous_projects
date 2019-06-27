@@ -1,0 +1,97 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Risk Assessment(s)
+        <!--<small>List</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Risk Assessment(s)</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getAllRiskAssessment();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <!--<div class="pull-right box-tools">
+                        <a ui-sref="main.add_type_of_ra">
+                            <button class="btn btn-sm btn-info">New Risk Assessment</button>
+                        </a>
+                    </div>-->
+                    <!-- /. tools -->
+                    <h3 class="box-title">Risk Assessment(s)</h3>
+                    <div class="input-group input-group-sm col-lg-4 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by RA Name/Country Name/Client Name" ng-model="keyword"
+                            autocomplete="false" ng-change="getAllRiskAssessment(keyword)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="types_of_ra in $data">
+                            <td data-title="'RA Name'" sortable="'ra_name'">{{types_of_ra.ra_name | capitalize}}</td>
+                            <td data-title="'Country Name'" sortable="'ra_name'">
+                                <span ng-repeat="(index, country) in types_of_ra.country">
+                                        {{country.name | capitalize}}
+                                        <span ng-if="types_of_ra.country.length - 1 > index">,</span>
+                                </span>
+                            </td>
+                            <td data-title="'Client Name'" sortable="'ra_name'">
+                                    {{types_of_ra.client_id.company_name}}
+                            </td>
+                            <td data-title="'Classification'" >
+                                <div  ng-repeat="country in types_of_ra.country">
+                                     <span ng-attr-title="{{country.name}}" 
+                                        ng-style="country.color == 'amber'? {'background-color':'#ffc200' }:
+                                        country.color =='red' ? { 'background-color': 'red' } : 
+                                        country.color == 'green' ? { 'background-color': 'green' }:
+                                        { 'background-color': 'gray' }">   {{country.color | capitalize}}
+                                    </span>
+                                </div>
+                                
+                            </td>
+
+                            <td data-title="'RA Type'" sortable="'is_generic'">{{types_of_ra.is_generic ? 'Generic' : types_of_ra.is_individual ? 'Individual' : 'NA'}}</td>
+                            <td data-title="'Status'" sortable="'status'">
+                                <a href="javascript:void(0)" ng-click="changeStatus(types_of_ra.status,types_of_ra._id)"><span 
+                                 ng-class="{'label label-success': types_of_ra.status == 'Active' , 'label label-danger': types_of_ra.status == 'Inactive'}"   
+                                >{{types_of_ra.status}}</span></a>
+
+                            </td> 
+                            <td data-title="'Actions'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="add_risk_assessment.update({ra_id:types_of_ra._id})">
+                                    Edit
+                                </a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteRa(types_of_ra._id)">
+                               Delete
+                                </a>
+                                <a class="btn btn-xs btn-primary" ui-sref="main.view_risk_assessment({ra_id:types_of_ra._id})">
+                                    View
+                                </a>
+                            </td>
+                            <!--<td data-title="'Categories Of RA'">
+                                <a class="btn btn-xs btn-info" ui-sref="main.list_categories({types_of_raId:types_of_ra._id})">
+                                    View Categories
+                                </a>
+                            </td>-->
+                        </tr>
+                        <tr ng-if="typeOfRaData.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->

@@ -1,0 +1,283 @@
+<div class="box">
+    <span (click)="onCloseCancel()" class="cross"></span>
+    <h2>Booking Details</h2>
+    <div class="subSet" *ngIf="bookingDetails">
+      <div class="wizard">
+        <div class="wizard-bullet">
+            <span class="wiz-1" [ngClass]="{ active : bookingDetailsWizard == 'isStepConsignor' }" (click)="onClickWizard('isStepConsignor')"></span>
+            <span class="wiz-1" [ngClass]="{ active : bookingDetailsWizard == 'isStepConsignee' }" (click)="onClickWizard('isStepConsignee')"></span>
+            <span class="wiz-1" [ngClass]="{ active : bookingDetailsWizard == 'isStepShipment' }" (click)="onClickWizard('isStepShipment')"></span>
+            <span class="wiz-1" [ngClass]="{ active : bookingDetailsWizard == 'isStepCargo' }" (click)="onClickWizard('isStepCargo')"></span>
+            <span class="wiz-1" [ngClass]="{ active : bookingDetailsWizard == 'isStepPayment' }" (click)="onClickWizard('isStepPayment')"></span>
+        </div>
+        <ul>
+          <li class="steps" [ngClass]="{ borderBtm : bookingDetailsWizard == 'isStepConsignor' }" (click)="onClickWizard('isStepConsignor')">Consignor's Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : bookingDetailsWizard == 'isStepConsignee' }" (click)="onClickWizard('isStepConsignee')">Consignee's Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : bookingDetailsWizard == 'isStepShipment' }" (click)="onClickWizard('isStepShipment')">Shipment Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : bookingDetailsWizard == 'isStepCargo' }" (click)="onClickWizard('isStepCargo')">Cargo Details</li>
+          <li class="steps" [ngClass]="{ borderBtm : bookingDetailsWizard == 'isStepPayment' }" (click)="onClickWizard('isStepPayment')">Payment</li>
+        </ul>
+      </div>
+      
+      <div class="subSet">
+          <!--Consignor's Details -->
+          <div *ngIf="bookingDetailsWizard == 'isStepConsignor'">
+            <div class="form-group">
+              <label>Company</label>
+              <input class="form-control input-sm" value={{bookingDetails.consignor_company_name}} readonly>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Contact Person</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_contact_person}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Shipper</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_shipper}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Contact Number</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_contact_number}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>E-mail</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_email}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Merchandise Value</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_merchandise_value}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Commercial Invoice Value</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignor_commercial_value}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Billing Address</label>
+                <textarea class="form-control input-group input-sm" value={{bookingDetails.consignor_billing_address}} readonly></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Ship to/Deliver to Address</label>
+                <textarea class="form-control input-group input-sm" value={{bookingDetails.consignor_delivery_address}} readonly></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- End of Consignor's Details -->
+        
+          <!-- Consignee's Details -->
+          <div *ngIf="bookingDetailsWizard == 'isStepConsignee'">
+            <div class="form-group">
+              <label>Company</label>
+              <input class="form-control input-sm" value={{bookingDetails.consignee_company_name}} readonly>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Contact Person</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_contact_person}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Shipper</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_shipper}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Contact Number</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_contact_number}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>E-mail</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_email}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 abc">
+                <label>Merchandise Value</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_merchandise_value}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Commercial Invoice Value</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.consignee_commercial_value}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Billing Address</label>
+                <textarea class="form-control" value={{bookingDetails.consignee_billing_address}} readonly></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Ship to/Deliver to Address</label>
+                <textarea class="form-control" value={{bookingDetails.consignee_delivery_address}} readonly></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- End of Consignee's Details -->
+        
+          <!-- Shippment Details -->
+          <div *ngIf="bookingDetailsWizard == 'isStepShipment'">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Quotation ID </label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.quotation_id}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Logistic Company</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.company_name}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>ETD</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.departure_date}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>ETA</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.arrival_date}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Port of Departure</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.port_from}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Port of Arrival</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.port_to}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label> Logistic Provider/ Freight Forwarder</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.logistic_provider}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label> Vessel/ Flight No.</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.vessel_no}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Custom Broker</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.custom_broker}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label> Billing of Loading</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.bill_of_loading}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Consolidation Warehouse at Departure</label>
+                <textarea class="form-control" value={{bookingDetails.warehouse_departure_address}} readonly></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Consolidation Warehouse at Arrival</label>
+                <textarea class="form-control" value={{bookingDetails.warehouse_arrival_address}} readonly></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- End of shipment Details -->
+        
+          <!-- Cargo Details -->
+          <div *ngIf="bookingDetailsWizard == 'isStepCargo'">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>6 Digit HS Code</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.hs_code_id}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Last 4 Digit HS Code</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.four_digit_hs_code}} readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Cargo Description</label>
+              <input class="form-control input-sm" value={{bookingDetails.cargo_description}} readonly>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Estimated CBM</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.cbm}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Estimated Weight (KG)</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.weight}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Packing Details</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.packing_type_description}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Quantity</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.quantity}} readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 ">
+                <label>Halal/ Non-halal</label>
+                <input class="form-control input-group input-sm" value={{halalStatus}} readonly>
+              </div>
+              <div class="col-md-6">
+                <label>Tracking Number</label>
+                <input class="form-control input-group input-sm" value={{bookingDetails.tracking_number}} readonly>
+              </div>
+            </div>
+          </div>
+
+          <!-- Peyment Details -->
+          <div *ngIf="bookingDetailsWizard == 'isStepPayment'">
+            <div class="form-group row">
+              <div class="tableDivStyle">
+                <label class="order-details"> Order Details </label>
+                <!-- Table starts from here -->
+                <div>
+                  <table class="table tableStyle">
+                    <tr>
+                      <th class="description">Description</th>
+                      <th class="header-unit">Unit</th>
+                      <th class="header-price">Price/Unit</th>
+                      <th class="header-total">Total</th>
+                    </tr>
+                    <tr>
+                      <td class="departure-arrival">Sea Freight Rate (CBM) </td>
+                      <td class="unit-element">{{bookingDetails.cbm}} </td>
+                      <td class="unit-element">{{partAPerCbm}} </td>
+                      <td class="total-data">{{bookingDetails.booking_price_a}}</td>
+                    </tr>
+                    <tr>
+                      <td class="departure-arrival">Document Charges at Departure Port ({{(bookingDetails.port_from)}}) </td>
+                      <td class="unit-element">1 </td>
+                      <td class="unit-element">{{bookingDetails.booking_price_bd}} </td>
+                      <td class="total-data">{{ bookingDetails.booking_price_bd}}</td>
+                    </tr>
+                    <tr>
+                      <td class="departure-arrival">Document Charges at Arrival Port ({{(bookingDetails.port_to)}}) </td>
+                      <td class="unit-element">1 </td>
+                      <td class="unit-element">{{bookingDetails.booking_price_ba}} </td>
+                      <td class="total-data">{{ bookingDetails.booking_price_ba}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">{{ bookingDetails.booking_price_tax_type}}</td>
+                      <td class="price-data">{{ bookingDetails.booking_price_tax_rate}}%</td>
+                      <td class="total-data">{{ bookingDetails.booking_price_tax_amount}}</td>
+                    </tr>
+                    <tr class="tr">
+                      <td class="freight-logistic">Total Amount</td>
+                      <td></td>
+                      <td class="bold"></td>
+                      <td class="total-amount"> {{ bookingDetails.booking_price_total}}</td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

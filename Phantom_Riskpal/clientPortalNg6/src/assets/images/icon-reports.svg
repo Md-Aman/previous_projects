@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewBox="0 0 104 104">
+  <g id="Group_1042" data-name="Group 1042" transform="translate(-804 -490.798)">
+    <g id="Ellipse_155" data-name="Ellipse 155" transform="translate(804 490.798)" fill="none" stroke="#1c9bd8" stroke-width="3">
+      <ellipse cx="52" cy="52" rx="52" ry="52" stroke="none"/>
+      <ellipse cx="52" cy="52" rx="50.5" ry="50.5" fill="none"/>
+    </g>
+    <path id="iconmonstr-printer-thin" d="M46.688,43.8H0V20.453H7.781V1H29.818l9.089,9.787v9.666h7.781ZM7.781,22.4H1.945V41.852h42.8V22.4H38.907v9.727H7.781ZM27.235,2.945H9.727V30.18H36.961V12.672H27.235Zm3.891,23.344H15.563V24.344H31.125Zm0-3.891H15.563V20.453H31.125Zm0-3.891H15.563V16.563H31.125ZM29.18,3.43v7.3h6.951Z" transform="translate(832 520.898)" fill="#0d2234" fill-rule="evenodd"/>
+  </g>
+</svg>

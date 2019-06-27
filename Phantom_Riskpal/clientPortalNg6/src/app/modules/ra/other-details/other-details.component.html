@@ -1,0 +1,81 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<form [formGroup]="otherDetailsForm" (submit)="submitForm(otherDetailsForm.value)">
+  <div class="accord-content">
+    <div class="accord relative">
+      <span>additional Information</span>
+      <i class="arrowUp"></i>
+    </div>
+    <div class="row padding">
+      <div class="form-group col-md-12">
+        <label>please provide any Information that you have missed or explain why sections of the risk assessment have been left
+          incomplete</label>
+        <textarea class="form-control" formControlName="relevantInfo" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>please detail any other risks not already identified</label>
+        <textarea class="form-control" formControlName="riskDetailed" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-5 _btn-upload">
+        <label>Upload Supporting Material</label>
+
+        <div class="upload-btn-wrapper">
+          <button class="btn">Choose Files</button>
+          <input type="file" multiple name="myfile" (change)="getFile($event)" accept=".pdf, image/png, image/jpeg" />
+          <span>{{documents.length > 0 ? documents.length : "No file Chosen"}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12 _btn-upload">
+        <p *ngFor="let file of documents;let i = index;" class="btn btn-group file"> &nbsp; &nbsp;
+          {{file.docName}} <span class="x-icon" (click)="deleteFile(file.fullName, i)">x</span>
+        </p>
+      </div>
+      <div class="col-md-12" *ngIf="isExceedLimit">
+        <p>Maximum 5 attachments allowed</p>
+      </div>
+    </div>
+
+  
+
+  </div>
+
+  <div class="subSet">
+    <div class="right _btn fixed">
+      <a class="prev" (click)="otherDetails('previous')">Previous</a>
+      <button type="submit" class="cont">Submit</button>
+    </div>
+  </div>
+</form>
+
+<!-- <p><span class="btn" (click)="generateGraph()">Generate Graph</span></p>
+<p *ngFor="let img of showImage">
+  <img [src]="img">
+</p> -->
+
+<!-- <div *ngIf="isApprovingManager" class="row center _btn">
+  <button class="cont" (click)="approveAndShare()">Approve and Share</button> &nbsp;
+  <button class="cont request" (click)="requestMoreInformation()">Request More Information</button> &nbsp;
+  <button class="cont forward" (click)="ForwardRaManagers()">Forward RA to Other Managers</button>
+</div> -->
+
+
+<!-- country graph behind the scene ); -->
+<!-- style="display:none;" -->
+<!-- <div class="row">
+  <div class="col-lg-12" *ngIf="isShowGraph" style="display:none;">
+      <div  class="graphs" *ngFor="let country of countryDetails">
+          <ngx-charts-bar-horizontal [view]=country.view [customColors]=country.customColors 
+          [results]=country.graphData [yAxis]="showYAxis"
+          [legend]="showLegend">
+        </ngx-charts-bar-horizontal>
+      </div>
+  </div>
+</div> -->

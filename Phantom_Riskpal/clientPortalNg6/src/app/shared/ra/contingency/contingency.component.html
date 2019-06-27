@@ -1,0 +1,194 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<form [formGroup]="contingencyForm" (submit)="submitForm(contingencyForm.value)">
+  <div class="accord relative">
+    <span>add contingencies</span>
+    <i class="arrowUp"></i>
+  </div>
+
+
+
+  <div class="accord-content">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label> What Medical Provisional/Skill is there to treat a Casualty at Point of Injury?</label>
+        <input type="text" formControlName="medicalSkill" class="form-control">
+      </div>
+    </div>
+    <div formArrayName="hospitalInformation">
+      <ng-container *ngFor="let local of contingencyForm.get('hospitalInformation')['controls']; let i=index">
+        <ng-container [formGroupName]="i">
+          <div class="row">
+            <div class="form-group col-md-11">
+              <label>Local Hospital Information</label>
+              <input type="text" formControlName="localHospitalInfo" class="form-control">
+            </div>
+            <div class="form-group col-md-1">
+              <label></label>
+              <button *ngIf="contingencyForm.get('hospitalInformation')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin pull-right"
+                (click)="deleteHospitalInformation(i)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <div class="row col-md-12">
+      <div class="_table no-border-margin" *ngIf="!maxHospitalInfoReached">
+        <div class="createNew" (click)="addHospitalInformation()">
+          <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+          <div class="left desc">
+            <span class="text-uppercase">Add Local Hospital Information</span>
+          </div>
+        </div>
+      </div>
+      <span *ngIf="maxHospitalInfoReached">Max Local Number Limit Reached.</span>
+    </div>
+
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label> Method of Evacuation to nearest Hospital (Self Drive/Ambulance etc)</label>
+        <input type="text" formControlName="methodOfEvacuation" class="form-control">
+      </div>
+    </div>
+    <div formArrayName="medicalEvacuationCompany">
+      <ng-container *ngFor="let local of contingencyForm.get('medicalEvacuationCompany')['controls']; let i=index">
+        <ng-container [formGroupName]="i">
+          <div class="row">
+            <div class="form-group col-md-11">
+              <label>Medical Evacuation Company</label>
+              <input type="text" formControlName="medicalCompany" class="form-control">
+            </div>
+            <div class="form-group col-md-1">
+              <label></label>
+              <button *ngIf="contingencyForm.get('medicalEvacuationCompany')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin pull-right"
+                (click)="deleteMedicalEvacuationCompany(i)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <div class="row col-md-12">
+      <div class="_table no-border-margin" *ngIf="!maxEvacuationCompany">
+        <div class="createNew" (click)="addMedicalEvacuationCompany()">
+          <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+          <div class="left desc">
+            <span class="text-uppercase">Add Medical Evacuation Company</span>
+          </div>
+        </div>
+      </div>
+      <span *ngIf="maxEvacuationCompany">Max Medical Evacuation Company Limit Reached.</span>
+    </div>
+
+    <div formArrayName="embassyLocation">
+      <ng-container *ngFor="let local of contingencyForm.get('embassyLocation')['controls']; let i=index">
+        <ng-container [formGroupName]="i">
+          <div class="row">
+            <div class="form-group col-md-11">
+              <label>Embassy Location</label>
+              <input type="text" formControlName="embassyLoc" class="form-control">
+            </div>
+            <div class="form-group col-md-1">
+              <label></label>
+              <button *ngIf="contingencyForm.get('embassyLocation')['controls'].length > 1" type="button" class="btn btn-sm btn-danger margin pull-right"
+                (click)="deleteEmbassyLocation(i)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="row col-md-12">
+      <div class="_table no-border-margin" *ngIf="!maxEmbassyLocation">
+        <div class="createNew" (click)="addEmbassyLocation()">
+          <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+          <div class="left desc">
+            <span class="text-uppercase">Add Embassy Location</span>
+          </div>
+        </div>
+      </div>
+      <span *ngIf="maxEmbassyLocation">Max Embassy Location Limit Reached.</span>
+    </div>
+
+  </div>
+  <!-- add continegcies accordion ends -->
+
+
+  <!-- Equipment Information starts -->
+  <div class="accord relative">
+    <span>Equipment Information</span>
+    <i class="arrowUp"></i>
+  </div>
+
+  <div class="accord-content checkboxArea">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <!-- <label>Check below whether you have the important items:</label> -->
+      </div>
+    </div>
+    <div class="row">
+        <div class="checkboxArea withInput form-group col-md-12">
+           
+            <div class="checkboxBlock">
+                <span>
+                  <input class="_customCheckbox" id="test1" [(ngModel)]="satPhoneNumber" type="checkbox" [ngModelOptions]="{standalone: true}" >
+                  <label for="test1"><span>Satellite Phone</span></label>
+                </span>
+                <input *ngIf="satPhoneNumber" type="number" class="t" [(ngModel)]="noOfSatellitePhone" [ngModelOptions]="{standalone: true}" >
+            </div>
+            <div class="checkboxBlock">
+                <span>
+                    <input class="_customCheckbox" id="test2"  [(ngModel)]="trackerId" type="checkbox" [ngModelOptions]="{standalone: true}"> 
+                    <label for="test2"><span>Tracker ID</span></label>
+                </span>
+                <input *ngIf="trackerId" type="text" class="t" [(ngModel)]="noOfTracker" [ngModelOptions]="{standalone: true}" >
+            </div>
+            <div class="checkboxBlock">
+                <span>
+                    <input class="_customCheckbox" id="test3" [(ngModel)]="firstAidKit" type="checkbox" [ngModelOptions]="{standalone: true}"> 
+                    <label for="test3"><span>First Aid Kit</span></label>
+                </span>
+                <input *ngIf="firstAidKit" type="text" class="t" [(ngModel)]="firstAidKitDetails" [ngModelOptions]="{standalone: true}" >
+            </div>
+            <div class="checkboxBlock">
+                <span>
+                    <input class="_customCheckbox" id="test4"  [(ngModel)]="personalProtectiveEquipment" type="checkbox" [ngModelOptions]="{standalone: true}"> 
+                    <label for="test4"><span>Personal Protective Equipment (PPE)</span></label>
+                </span>
+                <input *ngIf="personalProtectiveEquipment" type="text" class="t" [(ngModel)]="personalProtectiveEquipmentDetails" [ngModelOptions]="{standalone: true}" >
+            </div>
+          </div> 
+          
+    </div>
+
+    <div class="row padding-top-other">
+      <div class="form-group col-md-12">
+        <label>Additional Items</label>
+        <textarea class="form-control" formControlName="additionalItem" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specialist Evacuation Company ends -->
+
+
+  <div class="subSet">
+    <div class="right _btn fixed">
+      <a class="prev" (click)="contingency('previous')">Previous</a>
+      <button type="submit" class="cont">
+          <span *ngIf="raId !== null">
+              Save + Continue
+          </span>
+          <span *ngIf="raId === null">
+              Continue
+          </span>
+      </button>
+    </div>
+  </div>
+</form>

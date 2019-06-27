@@ -1,0 +1,113 @@
+<p class="see-freight">Sea Freight</p>
+<div *ngFor="let quotation of supplierQuotationSea | groupBy:'portName'; let index= index">
+  <mat-accordion>
+    <mat-expansion-panel class="booking-box" [expanded]="true" style="box-shadow: none;">
+      <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
+        <mat-panel-title>
+          <div class="panel-title-col">
+            <p class="heading"> {{ quotation.key }} </p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <!-- Table will go here.  -->
+
+      <div class="bg-color-expansion-model-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>ETD</th>
+              <th>Quotation Reference</th>
+              <th>Quotation ID</th>
+              <th>Shipper Type</th>
+              <th>Incoterms</th>
+              <th>Part A($)</th>
+              <th>Part B($)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of quotation.value;let i = index;">
+              <td>
+                <input type="checkbox" [(ngModel)]="item.checked" 
+                (click)="selectSeaQuotationSea(i,supplierQuotationSea,supplierQuotationAir)"
+                (click)="getQuotationId($event,item)">
+              </td>
+              <td>{{item.etd}}</td>
+              <td>{{item.quotationRef}}</td>
+              <td>{{item.quotation_id}}</td>
+              <td><span *ngIf="item.shipper_type == 'I'">Import</span>
+                <span *ngIf="item.shipper_type == 'E'">Export</span></td>
+              <td>{{item.incoterm_code}}</td>
+              <td>{{item.part_a}}</td>
+              <td>{{item.part_b}}</td>
+              <td>{{item.quotationStatus}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div class="no-rec-found" *ngIf="supplierQuotationSea?.length < 1">
+    No record found in Sea Freight. Please add New Quotation Template.
+</div>
+<p class="see-freight">Air Freight</p>
+<div *ngFor="let quotation of supplierQuotationAir | groupBy:'portName'; let index= index">
+  <mat-accordion>
+    <mat-expansion-panel class="booking-box" [expanded]="true" style="box-shadow: none;">
+      <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
+        <mat-panel-title>
+          <div class="panel-title-col">
+            <p class="port-names"> {{ quotation.key }} </p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+        <!-- Table will go here.  -->
+
+      <div class="bg-color-expansion-model-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+              </th>
+              <th>ETD</th>
+              <th>Quotation Reference</th>
+              <th>Quotation ID</th>
+              <th>Quote for</th>
+              <th>Incoterms</th>
+              <th>Part A($)</th>
+              <th>Part B($)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of quotation.value;let i = index;">
+              <td>
+                <input type="checkbox" [(ngModel)]="item.checked" 
+                (click)="selectSeaQuotationAir(i,supplierQuotationAir,supplierQuotationSea)" 
+                (click)="getQuotationId($event,item)">
+              </td>
+              <td>{{item.etd}}</td>
+              <td>{{item.quotationRef}}</td>
+              <td>{{item.quotation_id}}</td>
+              <td>
+                <span *ngIf="item.shipper_type == 'I'">Import</span>
+                <span *ngIf="item.shipper_type == 'E'">Export</span>
+              </td>
+              <td>{{item.incoterm_code}}</td>
+              <td>{{item.part_a}}</td>
+              <td>{{item.part_b}}</td>
+              <td>{{item.quotationStatus}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    </mat-expansion-panel>
+  </mat-accordion>   
+</div>
+<div class="no-rec-found" *ngIf="supplierQuotationAir?.length < 1">
+    No record found in Air Freight. Please add New Quotation Template.
+</div>

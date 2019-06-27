@@ -1,0 +1,82 @@
+<div class="row row-eq-height">
+  <div class="col-md-2">
+    <div class="row progressive-image supplierLogo">
+        <!-- for images change src to <img src={{supplier_logo}} /> -->
+        <!-- <img class="progressive-image-main" src="~/../../../../../../assets/img/avatar_2x.png"> -->
+        <img class="progressive-image-main" src={{searchResult.supplier_logo}}>
+    </div>
+    <div class="ratingbar">
+      <div test-v-34cbeed1="" class="star-rating">
+        <span *ngIf="searchResult.stars >= 1" class="glyphicon glyphicon-star" aria-hidden="false"></span>
+        <span *ngIf="searchResult.stars >= 2" class="glyphicon glyphicon-star" aria-hidden="false"></span>
+        <span *ngIf="searchResult.stars >= 3" class="glyphicon glyphicon-star" aria-hidden="false"></span>
+        <span *ngIf="searchResult.stars >= 4" class="glyphicon glyphicon-star" aria-hidden="false"></span>
+        <span *ngIf="searchResult.stars >= 5" class="glyphicon glyphicon-star" aria-hidden="false"></span>
+
+        <span *ngIf="searchResult.stars <= 0" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span *ngIf="searchResult.stars <= 1" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span *ngIf="searchResult.stars <= 2" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span *ngIf="searchResult.stars <= 3" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span *ngIf="searchResult.stars <= 4" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="hscontainer">
+      <span class="hs hs1"><a id="hs">HS</a></span> <span class="hs hs2"><a id="hs">HS</a></span> <span class="hs hs3"><a id="hs">HS</a></span>
+      <span class="hs hs4"><a id="hs">HS</a></span> <span class="hs hs5"><a id="hs">HS</a></span>
+    </div>
+    <div class="frieghtContainer">
+        <span class="badge-halal" [ngStyle]="{'background':getBackground(searchResult.halal_status)}">{{ searchResult.halal_status }}</span> 
+        <img *ngIf="searchResult.shipment_type=='Ship'" class="frieght-container-img" src="~/../../../../../../assets/img/ships.png" >
+        <img *ngIf="searchResult.shipment_type=='Flight'" class="frieght-container-img" src="~/../../../../../../assets/img/plane.svg" >
+    </div>
+  </div>
+  <div class="col-md-7 search_item_middle">
+    <div class="row">
+      <div class="col-md-12">
+        <p id="orange" class="arrival-destination-badge">
+          <span>{{searchResult.port_from}}</span>, 
+          <span>{{searchResult.port_to}}</span>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 para">
+        <p>ETD: <span class="semi">{{ searchResult.departure_date }}</span> <span>|</span> ETA: <span class="semi">{{ searchResult.arrival_date }}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 para">
+        <p>Supplier Name: <span class="semi">{{ searchResult.supplier_name }}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 para">
+        <p>Quotation ID: <span class="semi"> {{ searchResult.quotation_id}}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 para upd">
+        <p>         
+          <span class="icon-sharing" aria-hidden="true"></span>
+          Current Sharing: <span class="text-share semi"> {{ searchResult.number_people_sharing }} </span>
+          <span class="icon-space"></span>
+          Available Space: <span class="text-share semi">{{ searchResult.remaining_cbm }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="priceParentContainer">
+      <div class="priceContainer">
+        <p class="desc" id="white">Price avg. to date</p>
+        <p class="price" id="black"><span>{{ searchResult.total_price_without_tax | currency:'RM'  }}</span></p>
+        <div class="divider"></div>
+        <p class="desc" id="white">Est price full on board</p>
+        <p class="price" id="white28"><span>{{ searchResult.estimated_price | currency:'RM' }}</span></p>
+      </div>
+      <div class="booknowContainer">
+        <p class="booknow" (click)="openDialog(searchResult.container_id, searchResult.total_part_a, searchResult.charges_at_arrival, searchResult.charges_at_departure, searchResult.tax_type, searchResult.tax_rate, searchResult.tax_amount, searchResult.total_price_without_tax, searchResult.total_price_with_tax)">Book Now</p >
+      </div>
+    </div>
+  </div>
+</div>

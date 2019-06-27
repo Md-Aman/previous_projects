@@ -1,0 +1,70 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true }"></ngx-loading>
+<span class="_close-mat" (click)="closeModal();"></span>
+
+<div class="row">
+  <div class="col-md-12 subSet">
+    <h1> Create or Assign a new Supplier </h1>
+    <p class="paragraph">Choose from a list of existing suppliers or create a new one. </p>
+  </div>
+</div>
+
+<div class="mg-top-20 _custom-tabs supplier" >
+  <div class="tabs supp">
+    <!-- <a href="#" class="tab" [routerLink]="['template-details']" [ngClass]="{'active': options.selectedTab == 'templateDetails'}">Template Details</a> -->
+    <a  class="tab supptab"  (click)="changeTab('newSupplier')" [ngClass]="{'active': selectedTab == 'newSupplier'}" >New supplier</a>
+    <a  class="tab supptab"  (click)="changeTab('featuredSuppliers')" [ngClass]="{'active': selectedTab == 'featuredSuppliers'}">Featured Suppliers</a>
+  </div>
+
+  <div class="padding" *ngIf="selectedTab == 'newSupplier'">
+    <app-supplier-form [isUpdateBreadCrum]="isUpdateBreadCrum"></app-supplier-form>
+  </div>
+
+  <div class="padding"  *ngIf="selectedTab == 'featuredSuppliers'">
+    <app-collapsable-table
+    [rows]="rows" 
+    [columns]="columns" 
+    [page]="page" 
+    [columnMode]="'force'"
+    [raTemplateStepSupplier]="raTemplateStepSupplier"
+    (shareDataToParent)="receiveDataFromChild($event)"
+    *ngIf="rows.length > 0"
+    >
+    </app-collapsable-table>
+  </div>
+
+    <!-- <tabset>
+        <tab heading="New supplier">
+          <div class="padding">
+            <app-supplier-form></app-supplier-form>
+          </div>
+        </tab>
+        <tab heading="Featured Suppliers" [active]="true" >
+            <div class="padding">
+                <app-collapsable-table
+                [rows]="rows" 
+                [columns]="columns" 
+                [page]="page" 
+                [columnMode]="'force'"
+                [raTemplateStepSupplier]="raTemplateStepSupplier"
+                (shareDataToParent)="receiveDataFromChild($event)"
+                >
+                </app-collapsable-table>
+              </div> -->
+              <!-- <div class="padding"   *ngIf="isDataLoaded === false">
+                  <app-collapsable-table
+                  [rows]="rows" 
+                  [columns]="columns" 
+                  [page]="page" 
+                  [columnMode]="'force'"
+                  [raTemplateStepSupplier]="raTemplateStepSupplier"
+                  (shareDataToParent)="receiveDataFromChild($event)"
+                  >
+                  </app-collapsable-table>
+                </div> -->
+              <!-- [supplierTable]="supplierTable" -->
+        <!-- </tab>
+      </tabset> -->
+      
+</div>
+
+<!-- <button class="btn btn-success pull-right" (click)="closeModal()"> Close </button> -->

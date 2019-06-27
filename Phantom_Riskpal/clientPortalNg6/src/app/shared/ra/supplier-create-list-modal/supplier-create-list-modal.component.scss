@@ -1,0 +1,52 @@
+@import 'styles.scss';
+
+
+h1{
+    font-weight: 700;
+    font-size: 25px;
+}
+.paragraph{
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+
+.customClass{
+    font-family: "Times New Roman", Times, serif;
+    }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+      color: black;
+      border-bottom: 3px solid black;
+    }
+
+.nav-tabs .nav-link, .nav-tabs .nav-item.show .nav-link {
+    color: grey;
+  }
+
+//   .padding{
+//     // padding: 4% 0 0 0 !important;
+//   }
+  .nav-tab {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+.tab-content {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+}
+.nav-link {
+    outline: none;
+}
+datatable-header-cell {
+    padding-left: 0 !important;
+}
+
+.supp { 
+    padding-left:  21px;
+}
+.supptab{
+    font-size: 15px !important;
+}

@@ -1,0 +1,120 @@
+<!-- <div class="dashboard-layout">
+  <h2>Custom Declaration</h2>
+  <div class="content-area">
+      <form role="form" class="form-horizoontal subSet" [formGroup]="form" (ngSubmit)="updateProfile()">
+          <div class="cust-noti">
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Vessel/Flight:</label>
+                    <select class="form-control with" [(ngModel)]="selectedCountryCode" formControlName="country">
+                      <option *ngFor="let country of countries" [ngValue]="country.country_code">{{country.country_name}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Quotation:</label>
+                    <select class="form-control with" [(ngModel)]="selectedCountryCode" formControlName="country">
+                      <option *ngFor="let country of countries" [ngValue]="country.country_code">{{country.country_name}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">OrderID:</label>
+                    <select class="form-control with" [(ngModel)]="selectedCountryCode" formControlName="country">
+                      <option *ngFor="let country of countries" [ngValue]="country.country_code">{{country.country_name}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">ETD:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">ETA:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Departure Port:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Port of Arrival:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Logistic Provider:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Vessel/FlightNo:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Declaration Parties:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Bill of Lading:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">6 Digit HS Code:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Last 4 Digit HS Code:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Cargo Description:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Estimated CBM:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Estimated Weight:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Packing Details:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Quantity:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="font-color required ">Halal/Non-Halal:</label>
+                    <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-color required ">Container:</label>
+                  <input type="number" [(ngModel)]="postalcode" formControlName="postalcode" value={{postalcode}} placeholder="e.g. 40160" class="form-control with">
+                </div>
+              </div>
+            </div>
+          
+        </form>
+  </div>
+</div> -->

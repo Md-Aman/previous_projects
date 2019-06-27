@@ -1,0 +1,186 @@
+<div class="flex-table">
+  <div class="custom-slider">
+    <ng-template #prevTemplate>
+      <span class="tab-left"></span>
+    </ng-template>
+    <ng-template #nextTemplate>
+      <span class="tab-right"></span>
+    </ng-template>
+
+    <div class="tabbed"
+    ng2-carouselamos
+    [items]="listOfItems"
+    [$item]="itemTemplate"
+    [$prev]="prevTemplate"
+    [$next]="nextTemplate"
+    (onSelectedItem)="$event.item; $event.index"></div>
+    <!-- (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index" -->
+    <ng-template let-item let-i="index" #itemTemplate>
+        <p [ngClass]="{ active : bookingType == item.info }" (click)="showIt(item.info)">{{item.name}}</p>
+    </ng-template>
+    <!-- <ul class="tabbed subSet">
+      <li [ngClass]="{ active : bookingType == item.info }" (click)="showIt(item.info)">Booking Information</li>
+      <li [ngClass]="{ active : bookingType == 'companyInformation' }" (click)="showIt('companyInformation')">Company Information</li>
+      <li [ngClass]="{ active : bookingType == 'destination' }" (click)="showIt('destination')">Destination</li>
+      <li [ngClass]="{ active : bookingType == 'cargoInformation' }" (click)="showIt('cargoInformation')">Cargo Information</li>
+      <li [ngClass]="{ active : bookingType == 'declarationCargoValue' }" (click)="showIt('declarationCargoValue')">Declaration of Cargo Value</li>
+      <li [ngClass]="{ active : bookingType == 'bookingPrice' }" (click)="showIt('bookingPrice')">Booking Price</li>
+      <li [ngClass]="{ active : bookingType == 'finalClosing' }" (click)="showIt('finalClosing')">Final Closing Price</li>
+      <li [ngClass]="{ active : bookingType == 'tracking' }" (click)="showIt('tracking')">Tracking</li>
+      <li [ngClass]="{ active : bookingType == 'paymentCustomer' }" (click)="showIt('paymentCustomer')">Payment from Customer</li>
+      <li [ngClass]="{ active : bookingType == 'notificationAction' }" (click)="showIt('notificationAction')">Notifications Actions by Operators</li>
+      <li [ngClass]="{ active : bookingType == 'trackingCustom' }" (click)="showIt('trackingCustom')">Tracking - Custom Clearance</li>
+    </ul> -->
+  </div>
+  <table width="100%" onload="fixedcol()" [mfData]="tableList" #mf="mfDataTable" [mfRowsOnPage]="3">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Order ID</th>
+        <ng-container *ngIf="bookingType == 'bookingInformation'">
+          <th>Booking Date</th>
+          <th>Time of Booking Confirm</th>
+          <th>Container Id</th>
+          <th>Assigned Container by Depot</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'companyInformation'">
+          <th>Company Name</th>
+          <th>Email Address</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'destination'">
+          <th>ETD</th>
+          <th>ETA</th>
+          <th>Departure Port/Terminal</th>
+          <th>Arrival Port/Terminal</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'cargoInformation'">
+          <th>HS Code</th>
+          <th>Halal/Non-Halal</th>
+          <th>Cargo Packing</th>
+          <th>Weight</th>
+          <th>CBM</th>
+          <th>Tracking Number</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'declarationCargoValue'">
+          <th>Merchant Value</th>
+          <th>Commercial Invoice Value</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'bookingPrice'">
+          <th>Part A</th>
+          <th>Part B</th>
+          <th>GST</th>
+          <th>Total</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'finalClosing'">
+          <th>Part A</th>
+          <th>Part B</th>
+          <th>GST</th>
+          <th>Total</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'tracking'">
+          <th>Status</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'paymentCustomer'">
+          <th>Booking Price Blocked</th>
+          <th>Final Price Payment</th>
+          <th>Balance Released</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'notificationAction'">
+          <th>Booking Received Notification</th>
+          <th>Cargo Movement Changes</th>
+          <th>Reminder to Allow Block or Credit</th>
+          <th>Inform Final Payment</th>
+          <th>Notify Cargo Clearing Custom</th>
+          <th>Notify to Pay Up Custom Tax & Duties</th>
+          <th>Inform that Your Order Is Completed</th>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'trackingCustom'">
+          <th>Buyer Documentation</th>
+          <th>Custom Declaration Form</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody *ngIf="hasBooking">
+      <tr *ngFor="let orders of rawJsonOrdersDetails; let index = index">
+        <td header-class="ng-table-fixedcolumn">
+          <input type="checkbox" [(ngModel)]="orders.checked" (click)="updateSelection(index, rawJsonOrdersDetails);" (click)="getOrderIdAndButtonCode($event,orders.order_id, orders.cargo_status_code, orders.button_code);">
+        </td>
+        <td header-class="ng-table-fixedcolumn">{{orders.order_id}}</td>
+        <ng-container *ngIf="bookingType == 'bookingInformation'">
+          <td header-class="ng-table-fixedcolumn">{{orders.booking_date}}</td>
+          <td header-class="ng-table-fixedcolumn">{{orders.confirmation_date}}</td>
+          <td header-class="ng-table-fixedcolumn">{{orders.container_id}}</td>
+          <td>{{orders.container_no}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'companyInformation'">
+          <td>{{orders.company_name}}</td>
+          <td>{{orders.official_email}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'destination'">
+          <td>{{orders.ETD}}</td>
+          <td>{{orders.ETA}}</td>
+          <td>{{orders.portFrom}}</td>
+          <td>{{orders.portTo}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'cargoInformation'">
+          <td>{{orders.hs_code}}</td>
+          <td>{{orders.halal_status}}</td>
+          <td>{{orders.packing_details}}</td>
+          <td>{{orders.weight}}</td>
+          <td>{{orders.cbm}}</td>
+          <td nowrap>{{orders.tracking_number}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'declarationCargoValue'">
+          <td nowrap>{{orders.merchant_value}}</td>
+          <td nowrap>{{orders.commercial_value}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'bookingPrice'">
+          <td nowrap>{{orders.booking_price_a}}</td>
+          <td nowrap>{{orders.booking_price_b}}</td>
+          <td nowrap>{{orders.booking_price_gst}}</td>
+          <td nowrap>{{orders.booking_price_total}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'finalClosing'">
+          <td nowrap>{{orders.closing_price_a}}</td>
+          <td nowrap>{{orders.closing_price_b}}</td>
+          <td nowrap>{{orders.closing_price_gst}}</td>
+          <td nowrap>{{orders.closing_price_total}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'tracking'">
+          <td nowrap>{{orders.cargo_status_description}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'paymentCustomer'">
+          <td nowrap>{{orders.booking_price_blocked}}</td>
+          <td nowrap>{{orders.final_price_payment}}</td>
+          <td nowrap>{{orders.balance_released}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'notificationAction'">
+          <td nowrap>{{orders.booking_received_notification}}</td>
+          <td>
+            <select><option value="0">Action</option></select>
+          </td>
+          <td>
+            <select><option value="0">Action</option></select>
+          </td>
+          <td>
+            <select><option value="0">Action</option></select>
+          </td>
+          <td>{{orders.notify_cargo_clearing}}</td>
+          <td>
+            <select><option value="0">Action</option></select>
+          </td>
+          <td>{{orders.notify_order_completed}}</td>
+        </ng-container>
+        <ng-container *ngIf="bookingType == 'trackingCustom'">
+          <td>
+            <select><option value="0">Action</option></select>
+          </td>
+          <td>{{orders.custom_declaration_form}}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!hasBooking">
+      <tr header-class="ng-table-fixedcolumn" nowrap>{{failure_message}}</tr>
+    </tbody>
+  </table>
+</div>

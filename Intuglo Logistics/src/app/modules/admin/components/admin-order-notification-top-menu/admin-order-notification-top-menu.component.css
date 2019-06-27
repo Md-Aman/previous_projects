@@ -1,0 +1,64 @@
+.top-menu-area{
+    background-color: #F6F8F8;
+    height: 58px;
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+.top-menu-list{
+    padding-left: 26px;
+    padding-top: 16px;
+}
+
+ul li{
+    display:inline;
+  }
+
+li{
+    list-style: none;
+}
+
+.tab{
+    height: 19px;		
+    color: #7F8FA4;	
+    font-family: "Open Sans",open-sans,sans-serif;	
+    font-size: 12px;	
+    font-weight: 400;	
+    line-height: 19px;
+}
+
+.tabselected{
+    height: 19px;		
+    color: #354052;	
+    font-family: "Open Sans",open-sans,sans-serif;	
+    font-size: 12px;	
+    font-weight: 500;	
+    padding-bottom: 20px;
+    border-bottom:3px solid #2EA2F8;
+}
+
+/* This class is to remove on click button shadow  */
+.btn:active,
+.btn:focus,
+.btn.active,
+.btn:active:focus {
+   background-image: none;
+   outline: 0;
+   -webkit-box-shadow: none;
+   box-shadow: none;
+}
+
+#form-title{
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #647FC9;
+    width: 1137px;
+    padding: 9px;
+    padding-left: 35px;
+    font-size: 16px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: -15px;
+}

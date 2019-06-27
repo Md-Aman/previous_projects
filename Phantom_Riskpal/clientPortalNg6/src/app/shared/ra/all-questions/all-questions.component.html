@@ -1,0 +1,64 @@
+<span class="_close-mat" (click)="closeModal();"></span>
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red',fullScreenBackdrop:true }"></ngx-loading>
+<div class="row">
+  <div class="col-md-12 subSet">
+    <h1> Search all Questions & Risk Labels </h1>
+    <!-- <p *ngIf="riskLabel.type === 'raTemplate'" class="paragraph">Choose the questions you would like to assign to the Risk Assessment template: </p> -->
+  </div>
+</div>
+
+
+<div class="filterBy">
+  <span>Filter by:</span>
+  <div class="_prop">
+    <ng-select (change)="selectedLabel($event._id)" [ngModel]="selection" [items]="riskLabels" [multiple]="false" [clearable]="false" [closeOnSelect]="true" bindLabel="categoryName" placeholder="Risk Label">
+    </ng-select>
+  </div>
+  <!-- <select>
+    <option>Risk Label</option>
+    <option *ngFor="let label of riskLabels" value="label._id">{{label.categoryName}}</option>
+  </select> -->
+  <div class="relative">
+    <!-- <input class="_search" [(ngModel)]="search" (keyup)="searchQuestion()" #_search type="text" placeholder="Search Keywords..."> -->
+    <input class="_search" #_search type="text" placeholder="Search Keywords..."> 
+    <span  class="_search-icon"></span>
+  </div>
+</div>
+
+<div class="_tableData padding-top" *ngIf="questionsBasedOnLabel.length > 0">
+    <app-collapsable-table
+    [rows]="rows" 
+    [columns]="columns" 
+    [page]="page" 
+    [columnMode]="'force'"
+    [riskMitigationTable]="riskMitigationTable"
+    (shareDataToParent)="receiveLabelDataFromChild($event)"
+    >
+    </app-collapsable-table>
+</div>
+
+<div class="row _customTab" *ngIf="allQuestionsFromSearch.length > 0"> 
+  <div class="col-md-12">
+    <accordion class="relative" *ngFor="let label of riskLabelData;let i = index">
+      <accordion-group  #grp *ngIf="label.rows.length > 0" [isOpen]="label.isOpen">
+          <div accordion-heading class="btn btn-link" > {{label.categoryName}}
+              <i class="pull-right" [ngClass]="grp?.isOpen ? 'arrowUp': 'arrowDown'"></i>
+          </div>
+          <div class="table-padding" *ngIf="label.rows.length > 0">
+              <app-collapsable-table
+              [rows]="label.rows" 
+              [columns]="columns" 
+              [page]="label.page" 
+              [columnMode]="'force'"
+              [isModal]="isModal"
+              [isExpandRow]="isExpandRow"
+              [dataFromSearch]="dataFromSearch"
+              (shareDataToParent)="receiveDataFromChildOnSearch($event)"
+              >
+              </app-collapsable-table>
+            </div>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>
+

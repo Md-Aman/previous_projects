@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="row">
+    <div class="col-md-4 group-first">
+      <label class="label-control">Country</label>
+      <select class="form-control" (change)="OnClickSelectedCountry($event.target.value)">
+          <option value="0">Select value</option>
+        <option *ngFor="let country of countryList" value={{country.country_departure}}>{{country.country_departure}}</option>
+      </select>
+    </div>
+    <div class="col-md-4 group-first">
+      <label class="label-control">Route</label>
+      <select class="form-control" (click)="OnChangeSelectedRoute($event.target.value)">
+        <option value="0">Select value</option>
+        <option *ngFor="let route of routeList">{{route.country_code}}</option>
+      </select>
+    </div>
+    <div class="col-md-2 group-first">
+      <button type="button" (click)="shareRouteDetails()" class="btnDisplayed">Display</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red', fullScreenBackdrop:true }"></ngx-loading>
+
+<div class="subSet _table">
+    <p class="para">Create a new supplier or assign one to the template from the existing featured Suppliers:</p>
+    <br>
+
+    <div class="padding">
+      <app-collapsable-table
+      [rows]="rows" 
+      [columns]="columns" 
+      [page]="page" 
+      [columnMode]="'force'"
+      [supplierTableBody]="supplierTableBody"
+      [messages]="messages"
+      (shareDataToParent)="receiveDataFromChild($event)"
+      >
+      </app-collapsable-table>
+    </div>
+    <br> 
+
+  <div class="subSet createNew" (click)="openModal()">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>Assign Supplier</span>
+      <!-- <span class="_b">Assign Supplier</span> -->
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="subSet">
+  <div class="right _btn fixed">
+    <a class="prev" (click)="supplier('previous', false)">Previous</a>
+    <button type="submit" class="cont" (click)="supplier('next', true)">
+      <span *ngIf="raId !== null">
+          Save + Continue
+      </span>
+      <span *ngIf="raId === null">
+          Continue
+      </span>
+     
+    </button>
+  </div>
+</div>

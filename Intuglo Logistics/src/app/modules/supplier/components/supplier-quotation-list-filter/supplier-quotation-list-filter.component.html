@@ -1,0 +1,17 @@
+<div class="card row">
+  <div class="col-md-6">
+    <label class="label-control">Route:</label>
+    <select class="form-control" [ngModel]="firstRoute" (change)="onSelectRoutes($event.target.value)">
+      <option *ngFor="let route of supplierQuotationRoute | unique:'portName'">{{route.portName}}</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="label-control">Vessel/Flight:</label>
+    <select class="form-control" [ngModel]="firstVessel" (change)="sendFilterInfo($event.target.value)">
+      <option *ngFor="let vess of supplierQuotationVessel" value={{vess.vessel_id}}>{{vess.vessel_no}}</option>
+    </select>
+  </div>    
+  <!-- <div class="col-md-2 padding-top-2">
+    <button class="button-style" (click)="sendFilterInfo()">DISPLAY</button>
+  </div> -->
+</div>

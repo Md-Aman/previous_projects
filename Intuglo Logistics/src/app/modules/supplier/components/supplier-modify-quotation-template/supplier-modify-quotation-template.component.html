@@ -1,0 +1,444 @@
+<form role="form" [formGroup]="form" (ngSubmit)="updateQuotation()">
+    <div class="padding-50-top-30">
+      <div class="row">
+        <div class="form-group col-md-6">
+          
+          <label class="font-color required">Supplier Quotation Reference No.</label>
+          <input type="string" placeholder="Quotation Reference" class="form-control with" [(ngModel)]="quotationNo" formControlName="referenceNo"
+          value={{quotationNo}}>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required">Quotation For</label>
+          <select name="selectedQuotationFor" placeholder="Quotation" class="form-control with" [(ngModel)]="selectedQuotationFor" formControlName="quotationFor">
+            <option value="E">Exporter</option>
+            <option value="I">Importer</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="form-group col-md-12">
+            <label class="font-color required">Vessel/Flight No.</label>
+            <!-- <input type="string" placeholder="Vessel/Flight No." class="form-control with" name="vesselFlightNo" 
+            [(ngModel)]="vesselFlightNo" formControlName="vesselFlightNo" value={{vesselFlightNo}}> -->
+            <select class="form-control with" (change)="onSelectVessel(true)" [(ngModel)]="vesselFlightNo" formControlName="vesselFlightNo">
+              <option *ngFor="let vessel of vesselList" value={{vessel.vessel_id}}>{{vessel.vessel_no}}</option>
+            </select>
+        </div>
+      </div>
+  
+      <div class="row" *ngIf="!isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">ETD</label>
+          <div>
+            <span>
+              <input type="string" class="form-control with" [(ngModel)]="departDate" value={{departDate}} formControlName="etd">
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required ">ETA</label>
+          <div>
+            <span>
+              <input type="string" class="form-control with" [(ngModel)]="arrivalDate" value={{arrivalDate}} formControlName="eta">
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">ETD</label>
+          <div>
+            <span>
+              <input type="string" class="form-control with" [(ngModel)]="departDate" formControlName="etd">
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required ">ETA</label>
+          <div>
+            <span>
+              <input type="string" class="form-control with" [(ngModel)]="arrivalDate" formControlName="eta">
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="!isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Departure Port/Terminal</label>
+              <input type="string" formControlName="departurePort" placeholder="MYPKG, Port Klang, Malaysia"
+              class="form-control" [(ngModel)]="port_id_departure" value={{selectedDeparturePortId}}> 
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required">Arrival Port/Terminal</label>
+              <input type="string" formControlName="arrivalPort" placeholder="MYPKG, Port Klang, Malaysia"
+              class="form-control" [(ngModel)]="port_id_arrival" value={{selectedArrivalPortId}}>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Departure Port/Terminal</label>
+              <input type="string" formControlName="departurePort" placeholder="MYPKG, Port Klang, Malaysia"
+              class="form-control" value="{{selectedDeparturePort}}"> 
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required">Arrival Port/Terminal</label>
+              <input type="string" formControlName="arrivalPort" placeholder="MYPKG, Port Klang, Malaysia"
+              class="form-control" value={{selectedArrivalPort}}>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="form-group col-md-6">
+            <label class="font-color required">Custom Broker</label>
+            <select name="customBroker" class="form-control with" [(ngModel)]="customBroker" formControlName="customBroker">
+              <option *ngFor="let agent of customAgentList" value={{agent.custom_agent_id}}>{{agent.agent_name}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group col-md-6">
+            <label class="font-color required">Container Types</label>
+            <select name="Container Types" class="form-control with" [(ngModel)]="selectedContainerType" formControlName="containerTypes">
+              <option value="standard">20-Standard Dry Container</option>
+              <option value="high">20-High Cube Dry Container</option>
+            </select>
+        </div>  
+    
+      </div>
+    
+    
+      <div class="text-right">
+        <h2 id="form-title" style="margin-left: 209px; margin-top: 0px; margin-bottom: 0px;">container boxes for sale</h2>
+      </div>
+    
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Shipment Types</label>
+          <select class="form-control with" [(ngModel)]="selectedShipmentType" formControlName="shipmentTypes">
+            <option *ngFor="let shipment of shipsValues" [ngValue]="shipment.shipment_type_id">{{shipment.shipment_type}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="font-color required">Quantity</label>
+          <input type="number" min="0" placeholder="1" class="form-control with" name="containerQuantity" 
+          [(ngModel)]="containerQuantity"  formControlName="containerQuantity" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+          min="0" oninput="this.value = Math.abs(this.value)" value={{containerQuantity}}>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="font-color required">Size</label>
+          <div class="group">
+            <input type="number" min="0" placeholder="1" class="form-control with" name="containerSize" value={{containerSize}} 
+            [(ngModel)]="containerSize"  formControlName="containerSize" min="0" oninput="this.value = Math.abs(this.value)">
+            <span class="infotext">CBM</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="text-right">
+        <h2 id="form-title" style="margin-left: 196px; margin-top: 0px; margin-bottom: 0px;">air space load for sale</h2>
+      </div>
+    
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Incoterms</label>
+          <select class="form-control with" [(ngModel)]="selectedIncoterms" formControlName="incoterms">
+            <option *ngFor="let incoterm of incotermValues" [ngValue]="incoterm.incoterm_code">{{incoterm.description}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="font-color required">Quantity</label>
+          <input type="number" min="0" placeholder="1" class="form-control with" name="airSpaceQuantity" 
+          [(ngModel)]="airSpaceQuantity"  formControlName="airSpaceQuantity" step="1" min="0" oninput="this.value = Math.abs(this.value)"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57" value={{airSpaceQuantity}}>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="font-color required">Size</label>
+          <div class="group">
+            <input type="number" min="0" placeholder="1" class="form-control with" name="airSpaceSize" 
+            [(ngModel)]="airSpaceSize"  formControlName="airSpaceSize" min="0" oninput="this.value = Math.abs(this.value)" value={{airSpaceSize}}>
+            <span class="infotext">TONS</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+           <div class="form-group col-md-6">
+            <label class="font-color required">Cargo Transit Time</label>
+            <select name="cargo_transit_time" class="form-control with" [(ngModel)]="selectedTransitTime" 
+            formControlName="transitTime">
+              <option value="5">5 days</option>
+              <option value="10">10 days</option>
+              <option value="11">11 days</option>
+              <option value="15">15 days</option>
+            </select>
+          </div>
+    
+           <div class="form-group col-md-6">
+            <label class="font-color required" >Number of Transit Port/Terminal</label>
+            <select name="number_of_transit_port" class="form-control with" name="noTransitPort" 
+            [(ngModel)]="selectedNumberTransit" formControlName="noTransitPort">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>   
+      </div>
+    
+    
+      <div class="row">
+        <div class="col-md-6">
+          <label class="font-color">Halal Consolidation Warehouse At Departure</label>
+          <textarea placeholder="Halal Consolidation" class="form-control with" style="width: 92%; height: 89%;" [(ngModel)]="halalConsolidation"
+            name="halalConsolidation" [ngModelOptions]="{standalone: true}" value={{halalConsolidation}}></textarea>
+        </div>
+        <div class="col-md-6">
+          <label class="font-color">Halal Un-Stuffing Warehouse At Arrival</label>
+          <textarea placeholder="Halal Un-Stuffing" class="form-control with" style="height: 89%;" [(ngModel)]="halalUnStuffing"
+            name="halalUnStuffing" [ngModelOptions]="{standalone: true}" value={{halalUnStuffing}}></textarea>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-md-6">
+          <label class="font-color">Consolidation Warehouse At Departure</label>
+          <textarea placeholder="Consolidation" class="form-control with" style="width: 93%; height: 89%;" [(ngModel)]="consolidationWarehouse"
+            name="consolidationWarehouse" [ngModelOptions]="{standalone: true}" value={{consolidationWarehouse}}></textarea>
+        </div>
+        <div class="col-md-6">
+          <label class="font-color">Un-Stuffing Warehouse At Arrival</label>
+          <textarea placeholder="Un-Stuffing" class="form-control with" style="height: 89%;" 
+          [(ngModel)]="unStuffing" name="unStuffing" [ngModelOptions]="{standalone: true}" value={{unStuffing}}></textarea>
+        </div>
+      </div>
+    <br><br>
+  <div style="margin-left: -2%;">
+    <!-- Table FIRST starts here -->
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Sea Freight Charges (per CBM)</th>
+            <th>(in USD)</th>
+            <!-- <th>Per Item</th> -->
+            <th></th>
+          </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let po of formData.controls; let i = index">
+              <td><input type="string" class="form-control with input-table-1" [formControl]="po.controls.freight" [(ngModel)]="myModel.partA[i].freight"></td>
+              <td><input type="number" class="form-control with input-table-2" [formControl]="po.controls.usd" [(ngModel)]="myModel.partA[i].usd" oninput="this.value = Math.abs(this.value)"></td>
+              <!-- <td><input type="string" class="form-control with input-table-3" [formControl]="po.controls.item" [(ngModel)]="myModel.partA[i].item"></td> -->
+              <td>
+                  <button (click)="deletePartA(i)" class="btn fa fa-trash" aria-hidden="true"></button>
+              </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="add">
+                    <button (click)="addPartA($event)" class="btn fa fa-plus" aria-hidden="true"></button>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td><b>Total Part A</b></td>
+                <td><input type="number" class="form-control with sum input-table-2" readonly [value]="sumPartA()"></td>
+            </tr> -->
+      
+            </tbody>
+      </table>
+    </div>
+
+    <!-- Table SECOND starts here -->
+    <div class="col-md-12">
+      <div class="text-left">
+        <h2 id="form-title" style="margin-top: 5%; margin-left: 1.5%;">LOCAL HANDLING CHARGES AT DEPARTURE PORT</h2>
+      </div>
+      <table class="table" style="margin-top:1%;">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <!-- <th>Supplier / Port / Authority</th> -->
+            <th>(in USD)</th>
+            <th>Unit of Measure</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let po of formDataB.controls; let i = index">
+              <td>
+                <input type="string" class="form-control with input-table-1" [formControl]="po.controls.desc" [(ngModel)]="myModel.partB[i].desc">
+                  <!-- <option *ngFor="let charges of quotationCharges" [ngValue]="charges.charges_id">{{charges.charges_description}}</option> -->
+              </td>
+              <!-- <td>
+                <select name="port" class="form-control with input-table-2" [formControl]="po.controls.supplier" [(ngModel)]="myModel.partB[i].supplier">
+                  <option value="S">Supplier</option>
+                  <option value="P">Port</option>
+                  <option value="A">Authority</option>
+                </select>
+              </td> -->
+              <td><input type="number" min="0" class="form-control with input-table-3" [formControl]="po.controls.price" [(ngModel)]="myModel.partB[i].price" oninput="this.value = Math.abs(this.value)"></td>
+              <td>
+                <select name="unit_measure" class="form-control with input-table-4" [formControl]="po.controls.unit" [(ngModel)]="myModel.partB[i].unit">
+                  <option *ngFor="let measure of measureUnit" [ngValue]="measure.unit_of_measure_id">{{measure.unit_of_measure_description}}</option>
+              </select>
+              </td>
+              <!-- <td><input type="hidden" [formControl]="po.controls.port" [(ngModel)]="myModel.partB[i].port" value={{locationD}}></td> -->
+              <td>
+                  <button (click)="deletePartB(i)" class="btn fa fa-trash" aria-hidden="true"></button>
+              </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="add">
+                    <button (click)="addPartB($event)" class="btn fa fa-plus" aria-hidden="true"></button>
+                </td>
+            </tr>
+            </tbody>
+      </table>
+    </div>
+
+    <!-- Table THIRD starts here -->
+    <div class="col-md-12">
+      <div class="text-left">
+        <h2 id="form-title" style="margin-top: -1%; margin-left: 1.5%;">LOCAL HANDLING CHARGES AT ARRIVAL PORT</h2>
+      </div>
+      <table class="table" style="margin-top:1%;">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <!-- <th>Supplier / Port / Authority</th> -->
+            <th>(in USD)</th>
+            <th>Unit of Measure</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let po of formDataB2.controls; let i = index">
+                <td>
+                  <input type="string" class="form-control with input-table-1" [formControl]="po.controls.desc2" [(ngModel)]="myModel.partB2[i].desc2">
+                    <!-- <option *ngFor="let charges of quotationCharges" [ngValue]="charges.charges_id">{{charges.charges_description}}</option> -->
+                </td>
+                <!-- <td>
+                  <select name="port" class="form-control with input-table-2" [formControl]="po.controls.supplier2" [(ngModel)]="myModel.partB2[i].supplier2">
+                    <option value="S">Supplier</option>
+                    <option value="P">Port</option>
+                    <option value="A">Authority</option>
+                  </select>
+                </td> -->
+                <td><input type="number" min="0" class="form-control with input-table-3" [formControl]="po.controls.price2" [(ngModel)]="myModel.partB2[i].price2" oninput="this.value = Math.abs(this.value)"></td>
+                <td>
+                   <select name="unit_measure" class="form-control with input-table-4" [formControl]="po.controls.unit2" [(ngModel)]="myModel.partB2[i].unit2">
+                      <option *ngFor="let measure of measureUnit" [ngValue]="measure.unit_of_measure_id">{{measure.unit_of_measure_description}}</option>
+                  </select>
+                </td>
+                <!-- <td><input type="hidden" [formControl]="po.controls.port2" [(ngModel)]="myModel.partB2[i].port2" value={{locationA}}></td> -->
+                <td>
+                    <button (click)="deletePartB2(i)" class="btn fa fa-trash" aria-hidden="true"></button>
+                </td>
+              </tr>
+              <tr>
+                  <td colspan="5" class="add">
+                      <button (click)="addPartB2($event)" class="btn fa fa-plus" aria-hidden="true"></button>
+                  </td>
+              </tr>
+                  </tbody>
+      </table>
+    </div>
+
+      <div class="row">
+        <div class="form-group col-md-4 align">
+            <label class="font-color required">Upload Quotation</label>
+            <!-- <div *ngIf="!isUpload">
+              <div class="inputfile-box">
+                  <input type="file" id="quotationUploader" class="inputfile" [(ngModel)]="file_name" value={{file_name}} (change)="onFileChange($event)" formControlName="quotationUpload">
+                  <label for="quotationUploader">
+                    <span id="quotationName" class="file-box"></span>
+                    <span class="file-button">
+                      <i class="fa fa-upload" aria-hidden="true"></i>
+                      Select File
+                    </span>
+                  </label>
+                  <span class="remove-button" #quotationName (click)="onFileReset()">
+                      <i class="fa fa-remove" aria-hidden="true"></i>
+                      Remove File
+                  </span>
+              </div>
+          </div> -->
+          <div *ngIf="isUpload">
+              <span class="download-button" (click)="onDownloadFile()">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                  Download File
+                </span>
+              <span class="remove-button" style="margin-right: 88px; margin-top: 30px;" (click)="onDeleteFile()">
+                  <i class="fa fa-remove" aria-hidden="true"></i>
+                  Delete File
+              </span>
+          </div>
+            <div *ngIf="!isUpload">
+                <div class="inputfile-box">
+                    <input type="file" formControlName="quotationUpload" id="quotationUploader" class="inputfile" [(ngModel)]="file_name" value={{file_name}} (change)="onFileChange($event)" accept=".pdf,.doc,.docx">
+                    <label for="quotationUploader">
+                      <span id="quotationName" class="file-box"></span>
+                      <span class="file-browse">
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+                        Select File
+                      </span>
+                    </label>
+                    <span class="remove-button" #quotationName (click)="onFileReset()">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                        Remove File
+                    </span>
+                </div>
+            </div>      
+
+          <!-- <div class="col-md-3">
+            <label class="font-color required">HBG RISK RATE</label>
+            <div class="group">
+              <input type="string" placeholder="HBG Risk Rate" class="form-control with">
+              <span class="infotext">%</span>
+            </div> -->
+          </div>
+          <!-- <div class="col-md-3">
+            <label href="#" class="underline-label uppercase">
+              <u>view risk factor</u>
+            </label>
+          </div> -->
+        </div>
+
+        <!-- Table FOURTH starts here -->
+        <div class="col-md-6">
+          <!-- <div class="text-left">
+            <h2 id="form-title" class="uppercase title-estimated">estimated final pricing at full load</h2>
+          </div>
+          <table class="table" style="margin-top: 1%;">
+            <thead>
+              <tr>
+                <th class="input-table-1"></th>
+                <th class="input-table-2">(in USD)</th>
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr>
+                <td class="input-table-1">Part A (average)</td>
+                <td class="input-table-2"><input class="form-control with input-table-2" readonly [value]="sumPartA()"></td>
+              </tr>
+              <tr>
+                <td class="input-table-1">Part B (per share)</td>
+                <td class="input-table-2"><input class="form-control with input-table-2" readonly [value]="sumPartB2()"></td>
+              </tr>
+            </tbody>
+          </table> -->
+<br><br><br>
+          <label class="terms-condition uppercase">
+            <mat-checkbox class="checkbox-style" (change)="statusAgreed()"></mat-checkbox> i agree with the terms and conditions
+          </label>
+
+          <div class="row">
+            <div class="col-md-2">
+              <button type="submit" [ngClass]="{ 'btn disabled' : !isAgreed}" [disabled]="!isAgreed" class="btn btn-primary uppercase" style="margin-top:18%;">SAVE</button>
+            </div>
+          </div>
+        </div>
+  </div></div>
+  </form>

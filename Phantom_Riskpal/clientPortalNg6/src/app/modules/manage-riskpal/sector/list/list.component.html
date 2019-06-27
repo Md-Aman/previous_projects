@@ -1,0 +1,32 @@
+<ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+<div class="subSet wrapper">
+  <h2>Manage Sector</h2>
+</div>
+<div class="subSet _table">
+  <div class="subSet createNew" [routerLink]="['/secure/manage-riskpal/sector/create']">
+    <img class="left" src="../../../../assets/images/icon-create-new.svg" alt="">
+    <div class="left desc">
+      <span>CREATE NEW</span>
+      <span class="_b">Sector</span>
+    </div>
+  </div>
+  <div class="filterBy">
+    <span>Filter by:</span>
+    <select><option value="">Role</option></select>
+    <!-- <select><option value="">Role</option></select>
+    <select><option value="">Active / Inactive</option></select> -->
+    <div class="relative">
+      <input class="_search" #_search type="text" placeholder="Search Sector...">
+      <span (click)="onSearch(_search.value)" class="_search-icon"></span>
+    </div>
+    
+  </div>
+  <div class="_tableData">
+      <app-simple-table 
+        [rows]="rows" 
+        [columns]="columns" 
+        [page]="page" 
+        (emitEventChange)="receiveEvent($event)">
+      </app-simple-table>
+  </div> 
+</div>

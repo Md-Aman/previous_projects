@@ -1,0 +1,9 @@
+<div class="box">
+  <span (click)="onCloseCancel()" class="cross"></span>
+  <div class="description">
+    <h2>Your Profile is Incomplete</h2>
+    <p>You are required to complete your profile to place any order</p>
+    <p>Click the button below to complete your profile</p>
+    <a (click)="onCloseCancel()" routerLink="/customer/profile" class="btn-primary">Go to Profile</a>
+  </div>
+</div>

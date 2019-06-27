@@ -1,0 +1,102 @@
+# Table Routes #
+ CREATE TABLE intuglo_logistics.routes ( 
+	port_id_from           int NOT NULL COMMENT 'port departure',
+	port_id_to				int NOT NULL COMMENT 'port arival',
+	route_id           	int  NOT NULL AUTO_INCREMENT,
+	CONSTRAINT pk_route PRIMARY KEY ( route_id )
+ );
+ 
+ALTER TABLE intuglo_logistics.routes ADD CONSTRAINT fk_routes_0 FOREIGN KEY ( port_id_from ) REFERENCES intuglo_logistics.ports( port_id ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE intuglo_logistics.routes ADD CONSTRAINT fk_routes_1 FOREIGN KEY ( port_id_to ) REFERENCES intuglo_logistics.ports( port_id ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ CREATE TABLE intuglo_logistics.vessel ( 
+	vessel_id           int NOT NULL AUTO_INCREMENT,
+	vessel_no			int NOT NULL,
+	route_id           	int  NOT NULL,
+	etd					date   COMMENT 'is estimated arrival date (ETA)' ,
+	eta					date   COMMENT 'is estimated arrival date (ETD)' ,
+	vessel_name			varchar(255) COMMENT 'vessel names'
+	CONSTRAINT pk_vessel PRIMARY KEY ( vessel_id )
+ );
+
+ALTER TABLE intuglo_logistics.vessel ADD CONSTRAINT fk_vessel_0 FOREIGN KEY ( route_id ) REFERENCES intuglo_logistics.routes( route_id ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+CREATE INDEX idx_routes ON intuglo_logistics.routes ( route_id );
+CREATE INDEX idx_vessel ON intuglo_logistics.vessel ( vessel_id );
+
+
+CREATE VIEW `route_vessel_view` AS
+    SELECT 
+        `vessel`.`vessel_id` AS `vessel_id`,
+        `vessel`.`vessel_no` AS `vessel_no`,
+        `vessel`.`eta` AS `eta`,
+        `vessel`.`etd` AS `etd`,
+        `vessel`.`vessel_name` AS `vessel_name`,
+        `routes`.`route_id` AS `route_id`,
+        `routes`.`port_id_to` AS `port_id_departure`,
+        `routes`.`port_id_from` AS `port_id_arrival`,
+        `dep`.`port_name` AS `port_name_departure`,
+        `arv`.`port_name` AS `port_name_arrival`,
+        `dep`.`country_code` AS `country_code_departure`,
+        `arv`.`country_code` AS `country_code_arrival`,
+        `ctd`.`country_name` AS `country_code_dep_name`,
+        `cta`.`country_name` AS `country_code_arvl_name`
+    FROM`vessel`
+        LEFT JOIN `routes` ON `routes`.`route_id` = `vessel`.`route_id`
+        LEFT JOIN `ports` `dep` ON `routes`.`port_id_from` = `dep`.`port_id`
+        LEFT JOIN `ports` `arv` ON `routes`.`port_id_to` = `arv`.`port_id`
+        LEFT JOIN `countries` `ctd` ON `ctd`.`country_code` = `dep`.`country_code`
+        LEFT JOIN `countries` `cta` ON `cta`.`country_code` = `arv`.`country_code`;
+
+ALTER TABLE `intuglo_logistics`.`quotations` ADD COLUMN `vessel_id` INT(11) NULL AFTER `file_name`;
+
+ALTER TABLE intuglo_logistics.quotations ADD CONSTRAINT fk_quotations_6 FOREIGN KEY ( vessel_id ) REFERENCES intuglo_logistics.vessel( vessel_id ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+CREATE VIEW `admin_quotation_list_view` AS
+    SELECT 
+        `q`.`supplier_login_id` AS `supplier_login_id`,
+        `s`.`supplier_name` AS `supplier_name`,
+        `q`.`quotation_id` AS `quotation_id`,
+        `q`.`quote_ref_no` AS `quotationRef`,
+        `q`.`part_a` AS `part_a`,
+        `q`.`part_b` AS `part_b`,
+        `i`.`incoterm_code` AS `incoterm_code`,
+        `qs`.`quotation_status_description` AS `quotationStatus`,
+        CONCAT(`rv`.`port_name_departure`,
+                ' - ',
+                `rv`.`port_name_arrival`) AS `portName`,
+        `q`.`shipper_type` AS `shipper_type`,
+        `q`.`shipment_type_id` AS `freight`,
+        `q`.`departure_date` AS `departure_date`,
+        `q`.`vessel` AS `vessel`,
+        CONCAT(`rv`.`country_code_departure`,
+                '-',
+                `rv`.`country_code_arrival`) AS `country`,
+        `q`.`arrival_date` AS `arrival_date`,
+        `c`.`container_no` AS `container_no`,
+        `qs`.`quotation_status_id` AS `quotation_status_id`,
+        `rv`.`vessel_id` AS `vessel_id`,
+        `rv`.`port_id_departure` AS `port_id_from`,
+        `rv`.`port_id_arrival` AS `port_id_to`,
+        `rv`.`eta` AS `eta`,
+        `rv`.`etd` AS `etd`,
+        `rv`.`vessel_no` AS `vessel_no`,
+        `rv`.`vessel_name` AS `vessel_name`,
+        `rv`.`route_id` AS `route_id`,
+        `rv`.`port_name_departure` AS `port_name_departure`,
+        `rv`.`port_name_arrival` AS `port_name_arrival`,
+        `rv`.`country_code_departure` AS `country_code_departure`,
+        `rv`.`country_code_arrival` AS `country_code_arrival`,
+        `rv`.`country_code_dep_name` AS `country_code_dep_name`,
+        `rv`.`country_code_arvl_name` AS `country_code_arvl_name`
+    FROM
+        `quotations` `q`
+        LEFT JOIN `incoterms` `i` ON `q`.`incoterm_code` = `i`.`incoterm_code`
+        LEFT JOIN `quotation_status` `qs` ON `q`.`quotation_status` = `qs`.`quotation_status_id`
+        LEFT JOIN `containers` `c` ON `q`.`quotation_id` = `c`.`container_id`
+        LEFT JOIN `suppliers` `s` ON `q`.`supplier_login_id` = `s`.`login_id`
+        LEFT JOIN `route_vessel_view` `rv` ON `rv`.`vessel_id` = `q`.`vessel_id`
+    WHERE
+        qs`.`quotation_status_id` = 'ACTIVE';

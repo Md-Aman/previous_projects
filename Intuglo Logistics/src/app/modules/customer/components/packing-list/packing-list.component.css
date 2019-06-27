@@ -1,0 +1,43 @@
+.container{
+    max-width: 800px;
+  }
+  .h3{
+    font-family: serif,sans-serif,Verdana,Helvetica;
+  }
+  .form-group {
+    margin-bottom: 5px;
+  }
+  label{
+    font-weight: 530;
+    font-size: 12px;
+  }
+  .font-format{
+    font-weight: 550;
+  }
+  .input-sm{
+    height: 26px;
+  }
+  p{
+    margin: 10px 0px 0px 0px;
+  }
+  textarea{
+    resize: none;
+  }
+  .glyphicon.glyphicon-remove{
+    opacity: 0.5;
+  }
+  .glyphicon.glyphicon-remove:hover{
+    opacity: 1.0;
+    color: #030303;
+    border-radius: 45%;
+    cursor: pointer;
+  }
+
+  #form-title{
+    color: black;
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}

@@ -1,0 +1,389 @@
+<form role="form" [formGroup]="form" (ngSubmit)="updateQuotation()">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="font-color required">Supplier Quotation Reference No.</label>
+        <input [readOnly]="disableView" type="string" placeholder="Quotation Reference" class="form-control with" [(ngModel)]="quotationNo" formControlName="referenceNo">
+      </div>
+      <div class="form-group col-md-6">
+        <label class="font-color required">Quotation For</label>
+        <select [attr.disabled]="disableView? true: null" name="selectedQuotationFor" placeholder="Quotation" class="form-control with" [(ngModel)]="selectedQuotationFor"
+          formControlName="quotationFor">
+          <option value="E">Exporter</option>
+          <option value="I">Importer</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" *ngIf="isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Departure Port/Terminal</label>
+          <input [readOnly]="disableView" ng2-auto-complete formControlName="departurePort" 
+            [source]="portsValues" [list-formatter]="autocomplePortListFormatter"
+            value-property-name="port_id" display-property-name="port_name" 
+            placeholder="Departure Port" class="form-control"
+            min-chars="2" [accept-user-input]="false" tab-to-select="true" 
+            (focus)="old=selectedDeparturePort"
+            (change)="changeEvent(old,$event, 'departurePort')"
+            [(ngModel)]="selectedDeparturePort">
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required">Arrival Port/Terminal</label>
+          <input [readOnly]="disableView" ng2-auto-complete formControlName="arrivalPort" 
+            [source]="portsValues" [list-formatter]="autocomplePortListFormatter"
+            value-property-name="port_id" display-property-name="port_name" 
+            placeholder="Arrival Port" class="form-control" min-chars="2"
+            [accept-user-input]="false" tab-to-select="true" 
+            (focus)="old=selectedArrivalPort"
+            (change)="changeEvent(old,$event)"
+            [(ngModel)]="selectedArrivalPort" >
+        </div>
+      </div>
+      <!-- <div class="row" *ngIf="!isSelected">
+        <div class="form-group col-md-6">
+          <label class="font-color required">Departure Port/Terminal</label>
+          <input [readOnly]="disableView" type="string" formControlName="departurePort"
+             placeholder="MYPKG, Port Klang, Malaysia" class="form-control" 
+             value="{{selectedDeparturePort}}">
+        </div>
+        <div class="form-group col-md-6">
+          <label class="font-color required">Arrival Port/Terminal</label>
+          <input [readOnly]="disableView" type="string" formControlName="arrivalPort" 
+            placeholder="MYPKG, Port Klang, Malaysia" class="form-control" 
+            value={{selectedArrivalPort}}>
+        </div>
+      </div> -->
+      <div class="row">
+          <!-- <div class="form-group col-md-6">
+            <label class="font-color required">ETD</label>
+            <div>
+              <span>
+                <input [readOnly]="disableView" type="string" [readonly]="true" 
+                  class="form-control with" value={{departDate}} formControlName="etd">
+              </span>
+            </div>
+          </div> -->
+          <div class="col-md-6 relative">
+              <shipment-calendar (selectedVesselFromCalendarChange)="selectedVesselFromCalendarParent($event)" 
+                  [departurePortTerminal]="selectedDeparturePort"
+                  [arrivalPortTerminal]="selectedArrivalPort" class="modifiedCalendar" 
+                  [hidden]="shipmentCalendarHidden" [hiddenChanges]="shipmentCalendarHidden"
+                  [fromPage]="'adminOrderList'">
+              </shipment-calendar>
+              <div class="form-group has-feedback" (click)="toggleShipmentCalendar()">
+                  <label class="control-label uppercase required">ETD</label>
+                  <input  [(ngModel)]="departDate" readonly type="text" 
+                  class="form-control cursor-pointer" placeholder="ETD" formControlName="etd">
+                  <i  class="fa fa-calendar form-control-feedback cursor-pointer"></i>
+              </div>
+           </div>
+          <div class="form-group col-md-6">
+            <label class="font-color required ">ETA</label>
+            <div>
+              <span>
+                <input type="string" [readonly]="true" class="form-control with" 
+                  value={{arrivalDate}} formControlName="eta">
+              </span>
+            </div>
+          </div>
+        </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="font-color required">Vessel/Flight No.</label>
+        <input type="string" placeholder="Vessel/Flight No." class="form-control with" 
+          name="vesselFlightNo" readonly
+          value={{vesselFlightNo}} formControlName="vesselFlightNo">
+        <!-- <select [attr.disabled]="disableView? true: null" (change)="onSelectVessel(false)" class="form-control with" [(ngModel)]="vesselFlightNo" formControlName="vesselFlightNo">
+          <option *ngFor="let vessel of vesselList" value={{vessel.vessel_id}}>{{vessel.vessel_no}}</option>
+        </select> -->
+      </div>
+    </div>
+
+    
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="font-color required">Custom Broker</label>
+        <select [attr.disabled]="disableView? true: null" class="form-control with" [(ngModel)]="customBroker" formControlName="customBroker">
+          <option value="0">N/A</option>
+          <option *ngFor="let agent of customAgentList" value={{agent.custom_agent_id}}>{{agent.agent_name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="font-color required">Container Type</label>
+        <select [attr.disabled]="disableView? true: null" class="form-control with" [(ngModel)]="selectedContainerType" formControlName="containerTypes">
+          <option *ngFor="let container of containerTypeValues" [value]="container.container_id">{{container.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="font-color required">Shipment Types</label>
+        <select [attr.disabled]="disableView? true: null" class="form-control with" [(ngModel)]="selectedShipmentType" formControlName="shipmentTypes">
+          <option *ngFor="let shipment of shipmentTypes" [ngValue]="shipment.shipment_type_id">{{shipment.shipment_type}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="font-color required">Quantity  <span class="tag">(boxes for sale)</span></label>
+        <input [readOnly]="disableView" type="number" placeholder="1" class="form-control with" [(ngModel)]="containerQuantity" formControlName="containerQuantity"
+          step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="0" oninput="this.value = Math.abs(this.value)">
+      </div>
+      <div class="form-group col-md-3">
+        <label class="font-color required">Size
+            <control-messages [patternValue]="'xxx.xx'" [control]="form.controls.containerSize" class="pull-right error-msg messages text-right text-danger"></control-messages>
+        </label>
+        <div class="group">
+          <input [readOnly]="disableView" type="text" placeholder="1" class="form-control with" [(ngModel)]="containerSize" formControlName="containerSize">
+          <span class="infotext">CBM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="font-color required">Incoterms</label>
+        <select [attr.disabled]="disableView? true: null" class="form-control with" [(ngModel)]="selectedIncoterms" formControlName="incoterms">
+          <option *ngFor="let incoterm of incotermValues" [ngValue]="incoterm.incoterm_code">{{incoterm.description}}</option>
+        </select>
+      </div>
+      <!-- <div class="form-group col-md-3">
+        <label class="font-color required">Quantity <span class="tag">(Air space load for sale)</span></label>
+        <input [readOnly]="disableView" type="number" min="0" placeholder="1" class="form-control with" [(ngModel)]="airSpaceQuantity" formControlName="airSpaceQuantity"
+          step="1" min="0" oninput="this.value = Math.abs(this.value)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+      </div> -->
+      <div class="form-group col-md-6">
+        <label class="font-color required">Max Weight Per Container
+            <control-messages [patternValue]="'xxxx.xx'" [control]="form.controls.airSpaceSize" class="pull-right error-msg messages text-right text-danger"></control-messages>
+        </label>
+        <div class="group">
+          <input [readOnly]="disableView" type="text" placeholder="1" class="form-control with" name="airSpaceSize" [(ngModel)]="airSpaceSize" formControlName="airSpaceSize">
+          <span class="infotext">KG</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="font-color required">Cargo Transit Time</label>
+        <select [attr.disabled]="disableView? true: null" name="cargo_transit_time" class="form-control with" [(ngModel)]="selectedTransitTime" formControlName="transitTime">
+          <option value="5">5 days</option>
+          <option value="10">10 days</option>
+          <option value="11">11 days</option>
+          <option value="15">15 days</option>
+          <option value="20">20 days</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="font-color required">Number of Transit Port/Terminal</label>
+        <select [attr.disabled]="disableView? true: null" name="number_of_transit_port" class="form-control with" name="noTransitPort" [(ngModel)]="selectedNumberTransit"
+          formControlName="noTransitPort">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <label class="font-color">Halal Consolidation Warehouse At Departure</label>
+        <textarea [readOnly]="disableView" placeholder="Halal Consolidation" class="form-control with textarea" [(ngModel)]="halalConsolidation"
+          name="halalConsolidation" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label class="font-color">Halal Un-Stuffing Warehouse At Arrival</label>
+        <textarea [readOnly]="disableView" placeholder="Halal Un-Stuffing" class="form-control with textarea" [(ngModel)]="halalUnStuffing" name="halalUnStuffing"
+          [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label class="font-color">Consolidation Warehouse At Departure</label>
+        <textarea [readOnly]="disableView" placeholder="Consolidation" class="form-control with textarea" [(ngModel)]="consolidationWarehouse"
+          name="consolidationWarehouse" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label class="font-color">Un-Stuffing Warehouse At Arrival</label>
+        <textarea [readOnly]="disableView" placeholder="Un-Stuffing" class="form-control with textarea" [(ngModel)]="unStuffing" name="unStuffing"
+          [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+    </div>
+
+    <div class="row data-table">
+      <table width="100%" class="custom-table">
+        <thead>
+          <tr>
+            <th class="required">Sea/Air Freight Charges (per Container) </th>
+            <th class="required">(in USD)</th>
+            <!-- <th>Per Item</th> -->
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let po of formData.controls; let i = index">
+            <td>
+              <input [readOnly]="disableView" type="string" id="parta{{i}}" class="form-control with " [formControl]="po.controls.charges_description" [(ngModel)]="myModel.partA[i].charges_description">
+            </td>
+            <td>
+              <input [readOnly]="disableView" type="number" class="form-control with" [formControl]="po.controls.amount" [(ngModel)]="myModel.partA[i].amount" oninput="this.value = Math.abs(this.value)">
+            </td>
+            <!-- <td><input type="string" class="form-control with input-table-3" [formControl]="po.controls.item" [(ngModel)]="myModel.partA[i].item"></td> -->
+            <td *ngIf="!disableView">
+              <span (click)="deletePartA(i)" class="btn-delete"></span>
+              <span (click)="addPartA($event)" class="btn-add"></span>
+            </td>
+          </tr>
+          <!-- <tr>
+            <td><b>Total Part A</b></td>
+            <td><input type="number" class="form-control with sum input-table-2" readonly [value]="sumPartA()"></td>
+        </tr> -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table SECOND starts here -->
+    <div class="row data-table">
+      <h2 id="form-title">Local Handling Charges at Departure Port</h2>
+      <table width="100%" class="custom-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <!-- <th>Supplier / Port / Authority</th> -->
+            <th>(in USD)</th>
+            <th>Unit of Measure</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let po of formDataBDeparture.controls; let i = index">
+            <td>
+              <input id="partBD{{i}}" [readOnly]="disableView" type="string" class="form-control with" [formControl]="po.controls.charges_description" [(ngModel)]="myModel.partBDeparture[i].charges_description">
+              <!-- <option *ngFor="let charges of quotationCharges" [ngValue]="charges.charges_id">{{charges.charges_description}}</option> -->
+            </td>
+            <!-- <td>
+                <select name="port" class="form-control with input-table-2" [formControl]="po.controls.supplier" [(ngModel)]="myModel.partB[i].supplier">
+                  <option value="S">Supplier</option>
+                  <option value="P">Port</option>
+                  <option value="A">Authority</option>
+                </select>
+              </td> -->
+            <td>
+              <input [readOnly]="disableView" type="number" min="0" class="form-control with" [formControl]="po.controls.amount" [(ngModel)]="myModel.partBDeparture[i].amount" oninput="this.value = Math.abs(this.value)">
+            </td>
+            <td>
+              <select  [attr.disabled]="disableView? true: null" name="unit_measure" class="form-control with" [formControl]="po.controls.unitDeparture" [(ngModel)]="myModel.partBDeparture[i].unit_of_measure_id">
+                <option *ngFor="let measure of measureUnit" [value]="measure.unit_of_measure_id">{{measure.unit_of_measure_description}}</option>
+              </select>
+            </td>
+            <!-- <td [formControl]="po.controls.charges_location" [(ngModel)]="myModel.partBDeparture[i].charges_location" value="D"></td> -->
+            <!-- <td><input type="hidden" [formControl]="po.controls.port" [(ngModel)]="myModel.partB[i].port" value={{locationD}}></td> -->
+            <td *ngIf="!disableView">
+              <span (click)="deletePartBDeparture(i)" class="btn-delete"></span>
+              <span (click)="addPartBDeparture($event)" class="btn-add"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table THIRD starts here -->
+    <div class="row data-table">
+      <h2 id="form-title">Local Handling Charges at Arrival Port</h2>
+      <table width="100%" class="custom-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <!-- <th>Supplier / Port / Authority</th> -->
+            <th>(in USD)</th>
+            <th>Unit of Measure</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let po of formDataBArrival.controls; let i = index">
+            <td>
+              <input id="partBA{{i}}" [readOnly]="disableView" type="string" class="form-control with" [formControl]="po.controls.charges_description" [(ngModel)]="myModel.partBArrival[i].charges_description">
+              <!-- <option *ngFor="let charges of quotationCharges" [ngValue]="charges.charges_id">{{charges.charges_description}}</option> -->
+            </td>
+            <!-- <td>
+                  <select name="port" class="form-control with input-table-2" [formControl]="po.controls.supplier2" [(ngModel)]="myModel.partB2[i].supplier2">
+                    <option value="S">Supplier</option>
+                    <option value="P">Port</option>
+                    <option value="A">Authority</option>
+                  </select>
+                </td> -->
+            <td>
+              <input [readOnly]="disableView" type="number" min="0" class="form-control with" [formControl]="po.controls.amount" [(ngModel)]="myModel.partBArrival[i].amount" oninput="this.value = Math.abs(this.value)">
+            </td>
+            <td>
+              <select [attr.disabled]="disableView? true: null" name="unit_measure" class="form-control with" [formControl]="po.controls.unitDeparture" [(ngModel)]="myModel.partBArrival[i].unit_of_measure_id">
+                <option *ngFor="let measure of measureUnit" [ngValue]="measure.unit_of_measure_id">{{measure.unit_of_measure_description}}</option>
+              </select>
+            </td>
+            <td [formControl]="po.controls.charges_location" [(ngModel)]="myModel.partBArrival[i].charges_location" value="A"></td>
+            <!-- <td><input type="hidden" [formControl]="po.controls.port2" [(ngModel)]="myModel.partB2[i].port2" value={{locationA}}></td> -->
+            <td *ngIf="!disableView">
+              <span (click)="deletePartBArrival(i)" class="btn-delete"></span>
+              <span (click)="addPartBArrival($event)" class="btn-add"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="heading" *ngIf="(uploaded_file_name == '' || uploaded_file_name == null) && !disableView" [ngClass]="{'required': !uploaded_file_name}">Upload Quotation</label>
+        <div class="inputfile-box">
+          <ng-container *ngIf="!disableView">
+              <ng-container *ngIf="uploaded_file_name == '' || uploaded_file_name == null">
+                <input [readOnly]="disableView" type="file" id="quotationUploader" formControlName="quotationUpload" class="inputfile" [(ngModel)]="file_name" value="file_name"
+                        (change)="onFileChange($event)" accept=".pdf,.doc,.docx">
+                <label for="quotationUploader" class="fileSection">
+                  <span id="quotationName" class="truncate">{{file_name}}</span>
+                  <span class="upload">Select File</span>
+                </label>
+              </ng-container>
+              <span *ngIf="file_name || uploaded_file_name" class="btn-primary-style" #quotationName (click)="onFileReset()">Remove File</span>
+          </ng-container>
+          <span *ngIf="uploaded_file_name" class="btn-primary-style" (click)="download()">Download</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label *ngIf="!disableView" class="terms-condition uppercase">
+                <h2 class="title">Terms and conditions</h2>
+                <div class="scrollbar scrollbar-warning">
+                  <div>{{termsAndCondition}}</div>
+                </div>
+              <!-- <input type="checkbox" name="statusAgreed" formControlName="statusAgreed" /> -->
+              <mat-checkbox formControlName="statusAgreed" class="checkbox-style" (change)="statusAgreed()"></mat-checkbox>
+               I agree with the terms and conditions
+            </label>
+            <div class="row" *ngIf="(!form.valid || !isAgreed || !formCalc.controls.partA.valid) && !disableView">
+              <div class="col-lg-12 col-md-12">
+                <div class="alert alert-danger">
+                  Please fill all required fields.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2" *ngIf="!disableView">
+                <ng-container *ngIf="!isAgreed || !form.valid || !formCalc.controls.partA.valid">
+                    <button type="button" [ngClass]="{ 'disabled' :  true}" [disabled]="true" class="btn-primary-style">Save</button>
+                </ng-container>
+                <ng-container *ngIf="isAgreed && form.valid && formCalc.controls.partA.valid">
+                    <button type="submit" class="btn-primary-style">Save</button>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+    </div>
+</form>

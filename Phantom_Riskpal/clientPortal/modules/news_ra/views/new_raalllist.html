@@ -1,0 +1,244 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+          RA
+          <small>List</small>
+      </h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li class="active">RA list</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content" ng-init="getAllclientnewsRa()">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+      <section class="col-lg-12">
+        <div class="box">
+          <div class="box-header">
+            <div class="pull-right box-tools">
+            </div>
+            <i class="fa fa-file"></i>
+            <h3 class="box-title">RAs</h3>
+            <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="keyword" autocomplete="false" ng-change="getAllnewsRa(keyword)">
+              <div class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="box-body">
+            <table class="table table-bordered" ng-table="tableParams">
+              <tr ng-repeat="newsRaData in $data">
+                <td data-title="'RA Type'" sortable="''">
+                
+                {{newsRaData.types_of_ra_id.ra_name | capitalize}}</td>
+                <td data-title="'Project Name'" sortable="'project_name'"><a  ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" >{{newsRaData.project_name | capitalize}}</a></td>
+                <!-- <td data-title="'Department'" sortable="'department'">{{newsRaData.departmentArr.toString() | capitalize}}</td> -->
+                <td data-title="'Approving Manager'" sortable="'approvingManager'">{{newsRaData.approvingArr.toString() | capitalize}}</td>
+                <td data-title="'Date Of Project'" sortable="'startdate'">{{newsRaData.startdate | date:'MMM dd, yyyy'}} - {{newsRaData.enddate | date:'MMM dd, yyyy'}}
+                </td>
+                <td data-title="'Traveller Name'">{{newsRaData.traveller_id.firstname}} {{newsRaData.traveller_id.lastname | capitalize}}</td>
+                <td data-title="'Country'">{{newsRaData.countryArr.toString() | capitalize}}</td>
+                <td data-title="'Status'" align="center" class="actions">
+                  <a ng-if="newsRaData.is_approve" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" class="btn btn-xs btn-success" style="cursor: pointer">
+                                  Approved
+                                  </a>
+                  <a class="btn btn-xs btn-danger" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="newsRaData.is_reject">
+                                  Rejected
+                                 </a>
+                  <a class="btn btn-xs btn-warning" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="newsRaData.is_more_info">
+                                  More Information Requested
+                                 </a>
+                  <a class="btn btn-xs btn-info" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="newsRaData.semi_approve && !newsRaData.userExists && !newsRaData.is_approve && !newsRaData.is_modified">
+                                  Unread
+                                 </a>
+                  <a class="btn btn-xs btn-info" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="!newsRaData.semi_approve && !newsRaData.userExists && !newsRaData.is_reject && !newsRaData.is_approve && !newsRaData.is_more_info && !newsRaData.is_modified">
+                                  Unread
+                                 </a>
+
+                  <a class="btn btn-xs btn-info" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="!newsRaData.semi_approve && !newsRaData.userExists && !newsRaData.is_reject && !newsRaData.is_approve && !newsRaData.is_more_info && newsRaData.is_modified">
+                                    Modified
+                                   </a>
+                  <a class="btn btn-xs btn-info" ui-sref="main.view_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-if="!newsRaData.is_approve && newsRaData.semi_approve && newsRaData.userExists">
+                                  Referred
+                                 </a>
+
+                </td>
+                <td data-title="'Medical Information'">
+                  <a ng-disabled="newsRaData.is_reject" class="btn btn-xs btn-primary" ng-click="medicalInfoModal(newsRaData);">{{ filter_expression | filter : expression : medical_request : _id}}Request Medical Info</a>
+                  <!-- <a class="btn btn-xs btn-primary" ng-click="getMedicalInfoByRequest(newsRaData.traveller_id._id)">View Travellers</a> -->
+                </td>
+
+              <td data-title="'Action'">
+                <a class="btn btn-xs btn-info" ui-sref="main.edit_pendingRa_details({newsRa_id:newsRaData._id})" style="cursor: pointer" ng-disabled="newsRaData.is_approve || newsRaData.is_reject">  
+                  <!-- ng-disabled="newsRaData.is_approve || newsRaData.is_reject"> -->
+                    Edit
+                   </a>
+            </td>
+            <td data-title="'Download'"><a ng-if="newsRaData.is_submitted == true" ng-href="/pdf/{{newsRaData._id}}_traveller_newsRA.pdf" download="{{newsRaData._id}}_traveller_newsRA.pdf"><img src='../images/pdf.png' width="40" height="30"></a></td>
+
+              </tr>
+              <tr ng-if="newsRaData.length == 0">
+                <td colspan="10" align="center">No Record Found!</td>
+              </tr>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </section>
+    </div>
+  </section>
+  <script type="text/ng-template" id="myModalContent.html">
+    <!-- template for modal -->
+    <div class="modal-header">
+      <h3 class="modal-title">Terms and Conditions</h3>
+    </div>
+    <form role="form" name="userForm" novalidate class="form-horizontal">
+      <div class="modal-body">
+        <!---->
+        <div ng-if="showLoader" class="col-lg-7 pull-right">
+          <div loader-css="ball-pulse"></div>
+        </div>
+        <div class="row">
+          <section class="col-lg-12">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+                <tr>
+                  <td id="MSOZoneCell_WebPartWPQ2" valign="top" class="s4-wpcell-plain">
+                    <table class="s4-wpTopTable" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td valign="top">
+                            <div webpartid="58913fbf-6125-458f-a8c0-57aa5d0f3a50" haspers="false" id="WebPartWPQ2" width="100%" class="ms-WPBody noindex" allowdelete="false" style="">
+                              <div class="c-center-491">
+                                <div class="cen-con">
+                                  <div class="center-c-491">
+                                    <div class="c-s-content intro">
+                                      <p>This site is owned and operated by <span class="color-blue"><a href="/">MAX BUPA HEALTH INSURANCE COMPANY LIMITED </a>(Max Bupa)</span>, a company incorporated under the Companies Act, 1956 and registered under the Insurance Act, 1938 to carry on health insurance business.
+                                      </p>
+                                      <h5>Terms of Use</h5>
+                                      <p>By visiting this website you unconditionally agree to be fully bound by its terms and conditions. The information, content and services contained in this website and the terms and conditions are subject to change at any time at the sole discretion of Max Bupa and without any prior notice. Information provided on the website should not be treated as an offer, solicitation, invitation, advice regarding any insurance product or services of Max Bupa.. The use of this website by any one is subject to its terms and conditions, applicable Indian laws and government notifications, rules, regulations and guidelines issued by the Insurance Regulatory and Development Authority and other regulatory/governmental /statutory bodies. By visiting this site, you agree to permit Max Bupa to communicate with you, from time to time, about its products and services, unless you decide to unsubscribe from receipt of such communications by following instructions stated therein.
+                                      </p>
+                                      <h5>No Warranty</h5>
+                                      <p>Max Bupa has taken due care and caution in compilation of content for its web site. However, Max Bupa does not guarantee the accuracy, adequacy or completeness of any information on this web site and is not responsible for any errors or omissions or for the results obtained from the use of such information. The information contained in this website, are provided "as is," "as available" basis. Max Bupa disclaims any financial liability whatsoever to any user on account of the use of information provided on its website. The information contained is neither intended nor implied to be a substitute for professional medical advice, medical diagnosis or treatment.</p>
+                                      <p>This web site may also provide links to other websites operated by advertisers and third parties. These will allow you to leave www.maxbupa.com. The linked sites are not under the control of Max Bupa and Max Bupa has not reviewed and/or approved these sites. Max Bupa shall not be responsible for the content or omissions of any linked site or any links contained in a linked site. The inclusion of any linked site does not imply any direct or indirect endorsement by Max Bupa of the site. Max Bupa disclaims all responsibility for any inaccuracy, error, falsity, omission and/or non-compliance in any material appearing on any linked site. Third party links shall be governed by their respective website usage agreements.
+                                      </p>
+                                      <p>The availability of the information and guidance as part of the website does not constitute a recommendation by Max Bupa, of any medical practice, particular medicine, or to buy any policies etc., discussed therein by Max Bupa, any of their personnel or any advisor. You shall be solely responsible for any decisions, which you arrive at after your own evaluation of the policies / products of Max Bupa and your need for the same post consultation with any of your advisors. While reasonable care would be taken to ensure completeness, accuracy, etc., of the information/services provided, neither Max Bupa nor any of their personnel shall in any circumstance be liable for any loss or damage caused by your reliance on information obtained through the website. It is your sole responsibility to evaluate the completeness, accuracy or usefulness of any opinion, guidance or other content made available on the website and you should consult your own legal counsel, business advisor, medical advisor and tax advisor as to the legal, business, medical, tax and related matters concerning any policies with respect to which guidance is sought or given at the website.</p>
+                                      <h5>Intellectual Property</h5>
+                                      <p>'Max' and Max Logo are registered trademarks of Max India Limited and 'Bupa' and the HEARTBEAT logo are the registered service marks of The British United Provident Association Limited. All these marks are being used by Max Bupa under license. Other trademarks, service marks and logos may be the property of their respective owners. Unless otherwise stated, Max Bupa and/or its licensors are the owners of the copyright and database rights in this website, including content data, design, graphics, text, images, software and underlying source codes.
+                                      </p>
+                                      <p>The trademarks, logos, slogans and service marks displayed on this website, whether registered and unregistered, are proprietary to Max Bupa and/or others. Unless expressly stated in writing, Max Bupa does not grant any authority, right or license to use or display any trademarks, logos, slogans and service marks displayed on this website. Max Bupa reserves its right to seek appropriate legal remedy for any violation or breach of any intellectual property rights including but not limited to unauthorized use of any trademarks, logos, slogans, service marks and contents of this website.</p>
+                                      <h5>Limitation of liability</h5>
+                                      <p>MAX BUPA SHALL NOT, UNDER ANY CIRCUMSTANCES, BE LIABLE FOR ANY SPECIAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL OR PUNITIVE DAMAGES OF ANY KIND OR CHARACTER, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS OR REVENUES, LOSS OF PRODUCT AND LOSS OF USE ARISING OUT OF OR RELATED TO ANY FAILURE OF PERFORMANCE, ERROR, OMISSION, INTERRUPTION, DEFECT, DELAY IN OPERATION OR TRANSMISSION, COMPUTER VIRUS OR LINE OR SYSTEM FAILURE.</p>
+                                      <h5>Data Protection</h5>
+                                      <p><b>Confidentiality:</b> Max Bupa shall take all reasonable precautions to preserve the confidentiality and prevent any corruption or loss, damage or destruction of the data and information provided by you. All personal medical information will be kept confidential. It will only be disclosed to those involved with your treatment or care, or organization, which may be responsible for meeting your treatment expenses, or their agents. However, Max Bupa reserves the right to perform statistical analyses on the data and information without indentifying any individual to understand user behavior and characteristics and to inform advertisers of such information as well as the number of users that have been exposed to or clicked on their advertising banners. Max Bupa will provide only aggregated data from these analyses to third parties.</p>
+                                      <p><b>Password:</b> Certain services on the website may require authentication procedures. You would be able to access such services by using the user ID and the password. Max Bupa shall take reasonable care to ensure the security of and to prevent unauthorized access to the services, which are part of the website, however you will be the sole and exclusive owner of user ID and the password. You shall ensure the confidentiality and protection of the user ID and the password and shall ensure that the password/s is/are not revealed to any third party or recorded in any written or electronic form. You shall change the password at regular intervals. In addition to user ID and password, Max Bupa may, at its discretion, require you to adopt such other means of authentication including but not limited to digital certification and / or Smart Cards and/or Two Factor Authentication like Public or Private Keys / Risk Engine / Challenge Questions. Internet per se is susceptible to a number of frauds, misuse, hacking and other actions that could affect payment instructions / other instructions to the bank through the payment gateway. Max Bupa shall aim to provide security to prevent the same, there cannot be any guarantee from such internet frauds, hacking and other actions that could affect payment instructions / other instructions including result in delay or failure in processing the instructions. Max Bupa shall not be responsible for the same.
+                                      </p>
+                                      <p>Payment transaction at a cybercafe/shared computer terminal is risky and you shall not use the services of a cybercafe/shared computer terminal to do any such transactions.</p>
+                                      <p><b>Cookies:</b> Max Bupa may use "cookies" (Cookies are small data files that a website stores on computer.) for storing visitor preferences, profiling visitors and tracking visitor behavior on this website. By visiting this website you acknowledge, accept and expressly authorize Max Bupa for the placement of cookies on your computer.</p>
+                                      <h5>Payment instruction</h5>
+                                      <p>When Max Bupa receives a transaction instruction from you through the payment mode, Max Bupa will be entitled to debit any payment plus any charges payable for the transaction from the account you have specified. Max Bupa shall not be liable if any transaction does not fructify or may not be completed or for any failure on part of the bank or the credit card agency to perform any of its obligations.</p>
+                                      <p>Max Bupa shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any transaction, on account of the cardholder having exceeded the preset limit mutually agreed by the cardholder with the card issuing entity from time to time.</p>
+                                      <p>Evidence of transactionIn respect of any transactions which may be permitted by Max Bupa via its website from time to time, Max Bupa's own records of such transactions, maintained through computer systems or otherwise, shall be accepted as conclusive evidence and binding on you for all purposes. More particularly, the record of Max Bupa generated by the transaction(s), including the recording of the time of the transaction(s), shall be conclusive proof of the genuineness and accuracy of such transactions.
+                                      </p>
+                                      <h5>Force Majure</h5>
+                                      <p>Max Bupa shall not be liable if any transaction does not materialize or may not be completed or for any failure on its part to perform any of its obligations under these terms and conditions or those applicable specifically to any services, if the same is prevented, hindered or delayed by a Force Majeure and in such case its obligations shall be suspended for so long as the Force Majeure event continues. "Force Majeure" means any event due to any cause beyond the reasonable control of the Max Bupa, including without limitations, sabotage, fire, flood, explosion, acts of god, civil commotion, strikes or industrial action of any kind, riots, insurrection, war, acts of government, faults or failures in telecommunication, unavailability of any communication systems, breach, or virus in the processes or payment or delivery mechanism, computer hacking, computer crashes, malfunctioning in the computer terminal or the systems getting affected by any malicious, unauthorized access to computer data and storage devices, destructive or corrupting code or program, mechanical or technical errors/failures or power shut down, etc.</p>
+                                      <h5>Indemnity</h5>
+                                      <p>You shall indemnify, defend and hold harmless Max Bupa (including its officers, directors, employees, affiliates, group/promoter companies, agents, representatives or subcontractors) from any and all claims and losses imposed on, incurred by or asserted as a result of or related to:</p>
+                                      <p>(a) your access and use of this website;
+                                        <br>(b) any non-compliance with the terms and conditions hereof;
+                                        <br>(c) any third party actions related to your receipt and use of the information, whether authorized or unauthorized;
+                                        <br>(d) misuse of your user ID and password;
+                                        <br>(e) any unauthorized use of, this website by you or someone using your computer.
+                                      </p>
+                                      <p>You shall be liable to pay any and all costs, damages and expenses, including, but not limited to, reasonable attorneys' fees and costs awarded against or otherwise incurred by or in connection with or arising from any such claim, suit, action or proceeding attributable to any such claim.</p>
+                                      <h5>Jurisdiction</h5>
+                                      <p>Usage of this website and these terms and conditions shall always be governed by Indian laws and all disputes shall be subject to exclusive jurisdiction of courts at New Delhi.
+                                      </p>
+                                      <h5>Corporate Information</h5>
+                                      <p><span class="color-blue">Max Bupa Health Insurance Company Limited</span>
+                                        <br><b>Registered Office:</b> Max House, 1 Dr. Jha Marg, Okhla, New Delhi 110020
+                                        <br><b>Corporate Office:</b> B-1/I-2, Mohan Cooperative Industrial Estate Mathura Road, New Delhi 110044
+                                      </p>
+                                      <p>If you have any questions you may contact us at 011-3300-3333</p>
+                                      <p><i>Copyright (c) 2010 Max Bupa Health Insurance Company Limited. All rights reserved.</i> </p>
+                                      <div class="clr"></div>
+                                    </div>
+                                  </div>
+                                  <div class="center-b-green-first-491">&nbsp;</div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="form-group col-sm-5">
+              <label class="col-sm-12 text-left">Terms & Conditions</label>
+              <div class="col-sm-8">
+                <input type="checkbox" style="    width: 30px;
+                height: 30px;    min-height: 46px;" class="checkbox" id="terms_and_conditions" name="terms_and_conditions" required ng-model="traveller.terms_and_conditions" />
+                <span class="text-danger" ng-show="userForm.terms_and_conditions.$dirty &&  userForm.terms_and_conditions.$error.required">Please accept the terms and conditions</span>
+              </div>
+            </div>
+            <div class="form-group col-sm-7">
+              <div class="pull-right box-tools">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group col-sm-12">
+          <button ng-disabled="userForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right: 16px;" ng-click="viewTravellerMedicalInfo(traveller);">Accept</button>
+          <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </script>
+  <script type="text/ng-template" id="medicalInfoModal.html">
+    <div class="modal-header">
+      <h3 class="modal-title">Request For Travellers Medical Information</h3>
+    </div>
+    <div class="modal-body" >
+      <form name="newsRaForm">
+        <div ng-if="showLoader" class="col-lg-7 pull-right">
+          <div loader-css="ball-pulse"></div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <table id="t01" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Traveller Name</th>
+                  <th>Request Medical Information</th>
+                </tr>
+              </thead>{{travelerMedinfoStatuss}}
+              <tbody ng-repeat="traveller in raData.travellerTeamArr">
+                <tr>
+                    <td>{{traveller.firstname | capitalize }} {{traveller.lastname}}</td>
+                    <td ng-repeat="approvingdata in traveller.Medical_request_by_approving_manager">
+                    <button class="btn btn-primary" ng-if="approvingdata.status==1" ng-click="openTermsCondition(traveller._id,raData._id);cancel()"> Request</button>
+                    <button class="btn btn-warning"  ng-if="approvingdata.status==2 && approvingdata.approving_manager==approvingManagerData._id" disabled>Pending</button>
+                    <button class="btn btn-success" ng-if="approvingdata.status==3  && approvingdata.approving_manager==approvingManagerData._id" ng-click="getMedicalInfoByRequest(traveller._id,cancel())">View</button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+    </div>
+  </script>
+  

@@ -1,0 +1,48 @@
+@import 'styles.scss';
+
+h1{
+    font-weight: 700;
+    font-size: 26px;
+}
+
+._tableData {}
+
+.border-bottom{
+    border-bottom: 1px solid grey;
+}
+.padding-top{
+ padding-top: 15px;
+}
+
+hr {
+    clear:both;
+    display:block;
+    width: 75%;               
+    border: 1px solid lightgray;
+  }
+
+.assign{
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+.paragraph{
+    font-size: 14px;
+    padding-top: 10px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+._question-assign {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    color: #eaeaeb;
+    border-radius: 6px;
+}
+._hr {
+    border-bottom: 1px solid #e5e5e5;
+    width: 100%;
+}
+.mg-top-10 {
+    margin-top: 10px;
+}

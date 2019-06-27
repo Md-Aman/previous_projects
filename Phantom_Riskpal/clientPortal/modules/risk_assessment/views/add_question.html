@@ -1,0 +1,51 @@
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <!-- /. tools -->
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Add Question
+                    </h3>
+                    <div class="pull-right box-tools">
+                    </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="questionnaireForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                                <div class="form-group col-sm-11">
+                                    <label class="col-sm-2 control-label">Question</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="question" id="question" rows="10" cols="50" ng-model="questionnaire.question" tabindex="2" required>
+                                        </textarea>
+                                        <span class="text-danger" ng-show="questionnaireForm.question.$dirty &&  questionnaireForm.question.$error.required">Question is required</span>
+                                    </div>
+                                </div>
+                               
+                            <div class="form-group col-sm-11">
+                                <label class="col-sm-2 control-label">Best Practice Advice</label>
+                                <div class="col-sm-10">
+                                    <textarea name="description" id="editor1" rows="10" cols="95" ng-model="questionnaire.best_practice_advice" tabindex="3">
+                                        </textarea>
+                                    <span class="text-danger" ng-show="questionnaireForm.best_practice_advice.$dirty &&  questionnaireForm.best_practice_advice.$error.required">Best Practice Advice is required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-11">
+                            <div class="pull-right box-tools">
+                                <button ng-disabled="questionnaireForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right:-12px;"
+                                    ng-click="addQuestionByClient(questionnaire);">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+        </section>
+    </div>
+</section>

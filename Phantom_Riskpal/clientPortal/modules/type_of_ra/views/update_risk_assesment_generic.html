@@ -1,0 +1,138 @@
+<!-- Main content -->
+<section class="content">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <div class="row">
+    <section class="col-lg-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-tags"></i> Add Sector Risk Assessment
+                    </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" name="raForm" novalidate class="form-horizontal">
+          <div class="box-body">
+            <div class="row">
+              <div class="form-group col-sm-7">
+                <label class="col-sm-4 control-label">RA Name</label>
+                <div class="col-sm-8">
+                  <!-- ng-pattern="/^[a-zA-Z]+[a-zA-Z' /]*$/" -->
+                  <input type="text" class="form-control" id="ra_name" name="ra_name" placeholder="Enter RA Name" required ng-model="typesOfRa.ra_name" maxlength="50" autocomplete="off" />
+                  <span class="text-danger" ng-show="raForm.ra_name.$dirty &&  raForm.ra_name.$error.required">Name of RA is required</span>
+                  <!-- <span class="text-danger" ng-show="raForm.ra_name.$dirty &&  raForm.ra_name.$error.pattern">Name of RA is not valid </span> -->
+                </div>
+              </div>
+              <!--     <div class="form-group col-sm-7">
+                                <label class="col-sm-4 control-label">Sector</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="sector" id="sector" ng-model="typesOfRa.sector" required>
+                                        <option ng-selected="true">Select Sector</option>
+                                        <option ng-repeat="option in sectorArr" value="{{option}}" ng-selected="typesOfRa.sector == option._id">{{option.sectorName}}</option>
+                                    </select>
+                                </div>
+                            </div> -->
+              <div class="form-group col-sm-7">
+                <label class="col-sm-4 control-label">sector</label>
+                <div class="col-sm-8">
+                  <div isteven-multi-select input-model="sectorArr" output-model="typesOfRa.sectorName" button-label="sectorName" item-label="sectorName" output-properties="_id" tick-property="ticked" data-toggle="tooltip" data-placement="top" title="Select sectorName" data-trigger="hover" tabindex="6"></div>
+                  <span class="text-danger" ng-show="categoryForm.sectorName.$dirty &&  categoryForm.sectorName.$error.required">Risk Label is required</span>
+                </div>
+              </div>
+              <div class="form-group col-sm-7">
+              <div style="margin-left: 20px;">
+                <span style="font-size: 20px;font-weight: 400"> Check these pages if you want them to appear in the risk assessment</span>
+                <p>
+                  <input type="checkbox"  ng-model="typesOfRa.questionRequired" id="test0" />
+                  <label for="test0">Risks and Mitigation</label>
+                </p>
+                <p>
+                  <input type="checkbox" ng-model="typesOfRa.supplierRequired" id="test1" />
+                  <label for="test1">Supplier Information</label>
+                </p>
+                <p>
+                  <input type="checkbox" ng-model="typesOfRa.communicationRequired" id="test2" />
+                  <label for="test2">Communications</label>
+                </p>
+                <p>
+                  <input type="checkbox"  ng-model="typesOfRa.contingenciesRequired" id="test3" />
+                  <label for="test3">Contingencies</label>
+                </p>
+              </div>
+              </div>
+              <div class="form-group col-sm-8">
+                <!--<div class="form-group col-sm-6">
+                                    <div class="pull-right box-tools" style="margin-right: -167px;" >
+                                        <button ng-disabled="raForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="reset(typesOfRa);">Reset</button>
+                                    </div>
+                                </div>-->
+                <div class="form-group col-sm-11">
+                  <div class="pull-right box-tools" style="margin-right: 14px;">
+                    <button ng-disabled="raForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="createGenericRa(typesOfRa);">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</section>
+             
+<style>
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1.25em; height: 1.25em;
+  border: 2px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: .1em; left: .3em;
+  font-size: 1.3em;
+  line-height: 0.8;
+  color: #00BC8C;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 2px dotted #4778d9;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 2px solid #4778d9!important;
+}
+</style>

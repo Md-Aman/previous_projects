@@ -1,0 +1,124 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getAllCountries();getAllSectors();getDepartmentList()">
+  <h1>
+        Client
+    </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </li>
+    <li class="active">Client</li>
+  </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <div class="row">
+    <section class="col-lg-12">
+    <form role="form" name="newsAgenciesForm" novalidate class="form-horizontal">
+      <div class="box box-primary">
+        <div class="box-header">
+        <h3 class="box-title"><i class="fa fa-user"></i> Add Client</h3>
+        </div>
+          <div class="box-body">
+            <div class="row">
+              <div ng-if="showLoader" class="col-lg-2 pull-right" style="margin-right: 500px;">
+                <div loader-css="ball-pulse"></div>
+              </div>
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Company name</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Enter Company Name" required ng-model="news_agencies.company_name" autocomplete="off" maxlength="50" />
+                    <span class="text-danger" ng-show="newsAgenciesForm.companyName.$dirty &&  newsAgenciesForm.companyName.$error.required">Company name is required</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Country</label>
+                  <div class="col-sm-12">
+                    <select class="form-control" name="country" id="country" ng-model="news_agencies.country" required>
+                      <option ng-selected="true">Select Country</option>
+                      <option ng-repeat="option in countryArr" value="{{option.name}}">{{option.name}}</option>
+                    </select>
+                    <span class="text-danger" ng-show="newsAgenciesForm.country.$dirty &&  newsAgenciesForm.country.$error.required">Country is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-4 text-left">Type Of Client</label>
+                  
+                    <div class="col-sm-4">
+                      <label>Basic Client</label>
+                      <input type="radio" ng-value="'basic'" ng-model="news_agencies.type_of_client">
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Enhanced Client</label>
+                      <input type="radio" ng-value="'enhanced'" ng-model="news_agencies.type_of_client">
+                  
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Sector</label>
+                  <div class="col-sm-12">
+                    <select class="form-control" name="sector" id="sector" ng-model="news_agencies.sector" required>
+                      <option ng-selected="true">Select Sector</option>
+                      <option ng-repeat="option in sectorArr" value="{{option}}">{{option.sectorName}}</option>
+                    </select>
+                    <span class="text-danger" ng-show="newsAgenciesForm.sector.$dirty &&  newsAgenciesForm.sector.$error.required">Sector is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Number of travellers</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="no_of_traveller_account" name="no_of_traveller_account" placeholder="Enter Number of Traveller profile" required ng-model="news_agencies.no_of_traveller_account" ng-pattern="/^[0-9]*$/" autocomplete="off" maxlength="20" />
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_traveller_account.$dirty &&  newsAgenciesForm.no_of_traveller_account.$error.required">Number of travellers is required</span>
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_traveller_account.$dirty &&  newsAgenciesForm.no_of_traveller_account.$error.pattern">Number of travellers should be a valid number</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Number of approving managers</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="no_of_approving_manager_account" name="no_of_approving_manager_account" placeholder="Enter Number of Approving Manager profile" required ng-model="news_agencies.no_of_approving_manager_account" ng-pattern="/^[0-9]*$/" autocomplete="off" maxlength="20" />
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_approving_manager_account.$dirty &&  newsAgenciesForm.no_of_approving_manager_account.$error.required">Number of approving managers is required</span>
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_approving_manager_account.$dirty &&  newsAgenciesForm.no_of_approving_manager_account.$error.pattern">Number of approving managers should be a valid number</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left">Number of administrators</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="no_of_co_admin_account" name="no_of_co_admin_account" placeholder="Enter Number of Co-admin profile" required ng-model="news_agencies.no_of_co_admin_account" ng-pattern="/^[0-9]*$/" autocomplete="off" maxlength="20" />
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_co_admin_account.$dirty &&  newsAgenciesForm.no_of_co_admin_account.$error.required">Number of administrators is required</span>
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_co_admin_account.$dirty &&  newsAgenciesForm.no_of_co_admin_account.$error.pattern">Number of administrators should be a valid number</span>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label class="col-sm-12 text-left"> Number of super administrators</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="no_of_client_admin_account" name="no_of_client_admin_account" placeholder="Enter Number of client super admin profile" required ng-model="news_agencies.no_of_client_admin_account" ng-pattern="/^[0-9]*$/" autocomplete="off" maxlength="20" />
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_client_admin_account.$dirty &&  newsAgenciesForm.no_of_client_admin_account.$error.required">Number of super administrators is required</span>
+                    <span class="text-danger" ng-show="newsAgenciesForm.no_of_client_admin_account.$dirty &&  newsAgenciesForm.no_of_client_admin_account.$error.pattern">Number of super administrators should be a valid number</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+          </div>
+           
+            <div class="box-footer text-center" >
+                  <button  ng-disabled="newsAgenciesForm.$invalid" type="button" class="btn btn-primary" ng-click="saveNewClient(news_agencies);">Create Client</button>
+            </div>
+        </form>
+      </div>
+   </section>
+

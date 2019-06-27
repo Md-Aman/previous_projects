@@ -1,0 +1,156 @@
+<section class="content-header" ng-init="getCategoriesList();getSupplierForCountry()">
+<form>
+   <div style="margin-top: 44px;" class="input-group input-group-sm col-lg-3 pull-right box-tools">
+   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by country name" ng-model="keyword"
+     autocomplete="false" >
+     <div class="input-group-btn">
+           <button class="btn btn-default" ng-click="filter(keyword)"><i class="fa fa-search"></i></button>
+       </div>
+ </div>
+ </form>
+  <div align="center">
+    <span class="filter" ng-repeat="letter in alphabet track by $index " ng-click="activateLetter(letter)" ng-class="{'active':letter==activeLetter}">{{letter}}</span>
+  </div>
+  <h1>
+        {{country.name}}<span ng-if="country.name">({{country.code}})</span> 
+        <small></small>
+    </h1>
+  <h4>
+       Specific Information :-{{specificinfo ?specificinfo :"NA" | capitalize}}
+  </h4>
+  <ol class="breadcrumb">
+    <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </li>
+    <li class="active">Country Page</li>
+  </ol>
+</section>
+<section class="content" >
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">
+            <span >  </span>
+         </h3>
+    </div>
+    <div ng-if="showLoader" class="col-lg-7 pull-right">
+      <div loader-css="ball-pulse"></div>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="form-group">
+            <table>
+              <tr>
+                <th>CountryName</th>
+                <th>Classification</th>
+                <th>Specific Information</th>
+              </tr>
+              <tr>
+                <td>{{country.name}}({{country.code}})</td>
+                <td ng-style="country.color === 'amber'? {'background-color':'#ffc200' }:country.color === 'red' ? { 'background-color': 'red' } : country.color == 'green' ? { 'background-color': 'green' }:{ 'background-color': 'gray' }">{{(country.color == "amber")? 'Amber':(country.color == "red")?'Red':(country.color == "green"? 'Green':'Is not set yet')}}</td>
+                <td>{{country.specific_info?country.specific_info:'No information'}}</td>
+              </tr>
+            </table>
+            <div class="chart chart-responsive">
+              <div class="col-lg-6" style="width: 70%">
+                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-colours="colors" chart-series="series">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4" ng-if="country.name">
+        <label><h4>Suppliers from {{country.name}}</h4></label>
+          <div class="form-group" ng-if="supplierdata.length>0" >
+            <ul class="sub-menu">
+              <li ng-repeat="supplier in supplierdata">
+                <a ui-sref="main.update_supplier({supplier_id:supplier._id})">
+                 {{supplier.supplier_name | capitalize}}
+             </a>
+              </li>
+            </ul>
+          </div>
+          <div ng-if="supplierdata.length<1">
+           <p> Currently there is no suppliers from {{country.name}} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="box box-primary" ng-if="country.country_info">
+    <div class="box-header with-border">
+      <h3 class="box-title"><span>Country information by RiskPal</span></h3>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+          <label for="relevant_info"><h4></h4></label>
+          <span><p style="font-family: arial, sans-serif;font-size: 18px" disabled ng-bind-html="country.country_info" id="relevant_info" ></p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+   <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title"><span>The threat summary below is sourced from a third party risk information provider. The information is generally consistent with government travel advice. For in depth information about country threat levels and bespoke risk assessment, contact <a style="color:#85baf9" href="mailto:info@hpriskmanagement.com">info@hpriskmanagement.com</a>
+    </span></h3>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+          <label ng-if="countryDescriptionarray" for="relevant_info"><h4>Overview</h4></label>
+          <span><p style="font-family: arial, sans-serif;font-size: 18px" disabled ng-bind-html="countryDescriptionarray"  id="relevant_info" ></p></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label ng-if="countrySecurityarray" for="supporting_docs"><h4>Information</h4></label>
+            <span><p style="font-family: arial, sans-serif;font-size: 18px"> {{countrySecurityarray}}</p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+  </div>
+</section>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.active {
+  color: red;
+}
+.filter:hover { 
+    background-color: red;
+}
+.filter {
+  display: inline;
+  cursor: pointer;
+  padding: 5px;
+  list-style-type: none;
+}
+
+.latter {
+
+}
+
+</style>

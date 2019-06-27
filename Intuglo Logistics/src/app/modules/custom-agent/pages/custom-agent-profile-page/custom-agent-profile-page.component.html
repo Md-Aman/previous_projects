@@ -1,0 +1,19 @@
+<!-- <p>
+  custom-agent-profile-page works!
+</p>
+<h1 style="text-align: center"> This is the custom-agent-profile page and It is working </h1>
+<div class="col-md-12 text-center"> 
+    <button [routerLink]="'/customagent/dashboard'" class="btn btn-danger">Go to Dashboard!</button> 
+</div> -->
+<custom-agent-navbar [customAgentName]="isCustomAgentName" [Logo]="LogoBool" (controlSideBar)="receiveDataFromHeader($event)"></custom-agent-navbar>
+<ng-sidebar-container class="ng-container bg-color">
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <custom-agent-left-menu [sideBar]="isSideBarOpen"></custom-agent-left-menu>
+    </ng-sidebar>
+    <div class="dashboard-layout" ng-sidebar-content>
+        <div class="content-area"> 
+          <profile-logo-uploader (shareLogoToCustomAgentNavbar)="recieveLogoFromProfileLogoUploader($event)"></profile-logo-uploader>
+          <custom-agent-profile (shareCustomAgentNameToCustomAgentNavbar)="getCustomAgentNameFromCustomAgentProfile($event)"></custom-agent-profile>
+        </div>
+    </div>
+</ng-sidebar-container>

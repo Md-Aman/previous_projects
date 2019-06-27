@@ -1,0 +1,16 @@
+<div class="custom-pagination subSet" role="toolbar">
+  <div class="left relative">
+    <span class="left prev" [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}" 
+      (click)="prevPage()"></span>
+
+    <p class="left info">Container {{currentIndex}} of {{pageNumber}}</p>
+    <span class="left next" [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}" 
+      (click)="nextPage()"></span>
+  </div>
+  <div class="left">
+    <p class="info">{{containerId}}</p>
+  </div>
+  <div class="left">
+    <p class="info"># of people sharing {{peopleShare}}</p>
+  </div>
+</div>

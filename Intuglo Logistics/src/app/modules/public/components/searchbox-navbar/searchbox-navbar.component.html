@@ -1,0 +1,95 @@
+<div id="shippingform">
+  <form role="form" class="form-horizoontal" [formGroup]="form">
+    <div id="cargocontainer" class="get-qoute-panel">
+      <div class="centered90">
+        <div class="row">
+          <div class="col-md-2" [ngClass]="displayFieldCss('etd')">
+            <label class="help-block font-color">ETD</label>
+            <div>
+              <span>
+                  <my-date-picker [options]="myStartDateOptions"
+                  [(ngModel)]="departDate" formControlName="etd" (dateChanged)="onStartDateChanged($event)" placeholder="Departure Date" required></my-date-picker>
+                <!-- <input type="date" formControlName="etd" class="form-control" [(ngModel)]="etd" [ngModel]="todayDate | date:'yyyy-MM-dd'"> -->
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2" [ngClass]="displayFieldCss('eta')">
+            <label class="help-block font-color ">ETA</label>
+            <div>
+              <span>
+                  <my-date-picker [options]="myEndDateOptions"
+                  [(ngModel)]="arrivalDate" formControlName="eta" (dateChanged)="onEndDateChanged($event)" placeholder="Arrival Date" required></my-date-picker>
+                <!-- <input type="date" formControlName="eta" class="form-control" [(ngModel)]="eta" [ngModel]="todayDate | date:'yyyy-MM-dd'"> -->
+              </span>
+            </div>
+          </div>
+          <div class="col-md-3" [ngClass]="displayFieldCss('depart')" style="margin-left:20px;">
+            <label class="help-block font-color">Departure Port/Terminal </label>
+              <input  ng2-auto-complete formControlName="depart" [source]="portsValues" [list-formatter]="autocomplePortListFormatter"
+              value-property-name="port_id" display-property-name="port_name" placeholder="MYPKG, Port Klang, Malaysia"
+              class="form-control" min-chars="1" [accept-user-input]="false" tab-to-select="true"
+              [(ngModel)]="selectedDeparturePort">
+          </div>
+          <div class="col-md-3" [ngClass]="displayFieldCss('arrive')">
+            <label class="help-block font-color">Arrival Port/Terminal</label>
+              <input  ng2-auto-complete formControlName="arrive" [source]="portsValues" [list-formatter]="autocomplePortListFormatter"
+              value-property-name="port_id" display-property-name="port_name" placeholder="CNSZX, Shenzhen Port, China"
+              class="form-control" min-chars="1" [accept-user-input]="false" tab-to-select="true" [(ngModel)]="selectedArrivalPort">
+          </div>
+          <div class="col-md-1">
+            <label class="help-block">&nbsp;</label>
+            <button class="btn-check-rate" (click)="onSubmit()">Check Rate</button>
+          </div>
+        </div>
+
+        <div class="row subSet">
+          <div class="col-custom" [ngClass]="displayFieldCss('cbm')">
+            <label>CBM</label>
+            <input formControlName="cbm" type="number" placeholder="0" maxlength="3" class="form-control mini" [(ngModel)]="CBM"
+            oninput="this.value = Math.abs(this.value)">
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('weight')">
+            <label>Weight (KG)</label>
+            <input formControlName="weight" type="number" min="0" step="0.1" placeholder="1.0" class="form-control mini" [(ngModel)]="estimatedWeight"
+            oninput="this.value = Math.abs(this.value)">
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('hs')">
+              <label>6 Digit HS Code</label>
+                <input  ng2-auto-complete formControlName="hs" [source]="hsCodeValues" [list-formatter]="autocompleListFormatter"
+                value-property-name="hs_code" display-property-name="hs_code" placeholder="2701.23" max-num-list=10
+                class="form-control" min-chars="2" [accept-user-input]="false" tab-to-select="true" [(ngModel)]="sixDigitHSCode">
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('merchandise')">
+              <label class="help-block font-color">Merchandise Value</label>
+              <input formControlName="merchandise" type="number" placeholder="0" class="form-control" [(ngModel)]="merchandiseValue"
+              oninput="this.value = Math.abs(this.value)">
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('container')" style="margin-left: 20px;">
+            <!-- <label class="help-block font-color">Container Type</label> -->
+            <select type="number" class="form-control _upd with" formControlName="container" [(ngModel)]="selectedContainerType">
+              <option *ngFor="let containerType of containerTypeValues" [ngValue]="containerType.container_id" >{{containerType.container_type}}</option>
+            </select>
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('halalNonhalalStatus')">
+            <!-- <label class="help-block font-color">Halal/Non Halal</label> -->
+            <select type="number" class="form-control _upd with" formControlName="halalNonhalalStatus" [(ngModel)]="selectedHalalNonhalalStatus">
+              <option *ngFor="let halalStatus of halalNonhalastatus" [ngValue]="halalStatus">{{halalStatus}}</option>
+            </select>
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('transport')">
+            <!-- <label class="help-block font-color">Transport Type</label> -->
+            <select type="number" class="form-control _upd with" formControlName="transport" [(ngModel)]="selectedTransportType">
+              <option *ngFor="let selectedTransport of transportType" [value]="selectedTransport.id">{{selectedTransport.type}}</option>
+            </select>
+          </div>
+          <div class="col-custom" [ngClass]="displayFieldCss('shipper')">
+            <!-- <label class="help-block font-color">Shipper Type</label> -->
+            <select type="number" class="form-control _upd with" formControlName="shipper" [(ngModel)]="selectedShipperType">
+              <option *ngFor="let selectedShipper of shipperType" [ngValue]="selectedShipper">{{selectedShipper}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

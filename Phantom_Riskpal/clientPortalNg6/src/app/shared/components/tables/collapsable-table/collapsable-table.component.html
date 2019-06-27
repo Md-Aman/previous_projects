@@ -1,0 +1,196 @@
+<div [class.puff]="isModal">
+<div [class.modalSupplier]="raTemplateStepSupplier">
+<div [class.supplierTable]="supplierTable">
+<ngx-datatable
+#myTable
+        class='material expandable'
+        [rows]='rows'
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="page.count"
+        [offset]="page.offset"
+        [limit]="page.pageSize"
+        (page)="onPage($event)"
+        [columnMode]="columnMode"
+        [messages]="messages"
+      >
+        <!-- Row Detail Template -->
+        <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+            
+              <div class="collapseTable" *ngIf="riskMitigationTable == true">
+                  <table width="100%">
+                      <thead>
+                        <tr>
+                          <th>{{row.bestPractice}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><div class="best-practice-explan" [innerHTML]="row.best_practice_advice"></div></td>  
+                        </tr>
+                      </tbody>
+                    </table>
+             </div>
+             <div class="collapseTable" *ngIf="riskMitigationTableRa == true || dataFromSearch == true">
+                <table width="100%">
+                    <thead>
+                      <tr>
+                        <th width="60%">{{row.bestPractice}}</th>
+                        <th *ngIf="row.ticked == true && dataFromSearch != true" width="40%">Specific Information</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="best-practice-explan" [innerHTML]="row.best_practice_advice"></div></td>  
+                        <td *ngIf="row.ticked == true && dataFromSearch != true"><textarea class="form-control padding-text-area" rows="10" (blur)="sendTypedValue($event, row)">{{row.specific_mitigation}}</textarea></td>
+                      </tr>
+                    </tbody>
+                  </table>
+               <!-- <div class="row">
+               <div class="col-md-6">
+                  <div><strong class="best-practice">{{row.bestPractice}}</strong></div>
+                  <div class="best-practice-explan" [innerHTML]="row.best_practice_advice"></div>
+               </div>
+               <div class="col-md-5">
+                  <textarea class="form-control padding-text-area" rows="10" (blur)="sendTypedValue($event, row)">{{row.specific_mitigation}}</textarea>
+               </div>
+              </div> -->
+             </div>
+            <div class="collapseTable" *ngIf="supplierTable == true || supplierTableBody == true || raTemplateStepSupplier == true">
+              <table  [ngClass]="supplierTable ? 'width140' : 'width100'" >
+                <thead>
+                  <tr>
+                    <th>Address</th>
+                    <th>Website</th>
+                    <th>Phone number</th>
+                    <th>Currency</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{row.address}}</td>  
+                    <td>{{row.website}}</td>
+                    <td>{{row.number}}</td> 
+                    <td>{{row.currency}}</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th>Sourced by</th>
+                    <th>Departments</th>
+                    <th>Last updated</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr> 
+                    <td>{{row.sourced_by}}</td>
+                    <td>{{row.department}}</td>
+                    <td>{{row.updatedAt}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th colspan="4">description</th>
+                  </tr>
+                  <tr>
+                    <td colspan="4">{{row.description}}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </ng-template>
+        </ngx-datatable-row-detail>
+        <!-- Column Templates -->
+         <ngx-datatable-column
+          [width]="50"
+          [resizeable]="false"
+          [sortable]="false"
+          [draggable]="false"
+          [canAutoResize]="false"
+          headerClass="bg-blue"
+         >
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <a class="expansion-icon"
+              href="javascript:void(0)"
+              [class.datatable-icon-down]="!expanded"
+              [class.datatable-icon-up]="expanded"
+              title="Expand/Collapse Row"
+              (click)="toggleExpandRow(row)">
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- width="840" -->
+        <ngx-datatable-column *ngFor="let col of columns" headerClass="bg-blue" [flexGrow]="col.size || 1" [name]="col.name" [sortable]="true" 
+        [canAutoResize]="true" [draggable]="false" [resizeable]="true">
+      <ng-template  ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()">{{col.prop ? col.prop: col.name}}</span>
+      </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column     [width]="150" *ngIf="riskMitigationTable == true || raTemplateStepSupplier == true" headerClass="bg-blue"  name="{{columnAssignUnassign}}" sortable="false" prop="_id">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" headerClass="center" let-value="value" ngx-datatable-cell-template>
+          <span class="answer" *ngIf="!row.assign" (click)="shareDatatoParent(row._id, 'assign')"> Assign</span>
+          <span class="answer-unassign" *ngIf="row.assign == true" (click)="shareDatatoParent(row._id, 'unassign')">{{displayedText}}</span>
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column     [width]="150" *ngIf="dataFromSearch == true" headerClass="bg-blue"  name="SELECT ANSWER" sortable="false" prop="_id">
+  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+      {{column.name}}
+  </ng-template>
+  <ng-template let-row="row" headerClass="center" let-value="value" ngx-datatable-cell-template>
+        <span class="answer" *ngIf="!row.assign" (click)="shareDatatoParent(row, 'assign')"> Assign</span>
+        <span class="answer-unassign" *ngIf="row.assign == true" (click)="shareDatatoParent(row, 'unassign')">Remove </span>
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column *ngIf="riskMitigationTableRa" headerClass="bg-blue"  name="ASSIGN QUESTION" sortable="false" prop="_id">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" headerClass="center" let-value="value" ngx-datatable-cell-template>
+          <span class="answer" *ngIf="!row.ticked"  (click)="shareDatatoParent(row, 'yes')">Assign</span>
+          <span class="answer ticked" *ngIf="row.ticked"  (click)="shareDatatoParent(row, 'no')">Remove</span>
+    </ng-template>
+</ngx-datatable-column>
+
+<!-- commented until youtrack ticket 242 & 211 are resolved -->
+
+<!-- <ngx-datatable-column *ngIf="supplierTable == true" headerClass="bg-blue" name="Reviews" sortable="false" prop="_id">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <div class="tool-container">
+         <span class="btn btn-warning btn-sm comments" (click)="tooltip(row.reviews)">
+          {{row.reviews.length}} comments </span>
+          </div>
+    </ng-template>
+</ngx-datatable-column> -->
+
+<!-- <ng-template #popTemplate> <div [innerHtml]="html"></div> </ng-template> -->
+
+<ngx-datatable-column *ngIf="supplierTable == true || supplierTableBody == true" headerClass="bg-blue" name="Actions" sortable="false" prop="_id">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+         <span class="mg-rt-5" *ngIf="supplierTable == true || supplierTableBody == true">
+          <span (click)="confirmDialog(row._id, 'delete')" class="_delete left" tooltip="Remove"></span>
+         </span>
+         
+         <span class="mg-rt-5" *ngIf="supplierTable == true || supplierTableBody == false">
+              <span (click)="shareDatatoParent(row._id, 'edit')" class="_edit left" tooltip="Edit"></span>
+          </span>
+    </ng-template>
+</ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>

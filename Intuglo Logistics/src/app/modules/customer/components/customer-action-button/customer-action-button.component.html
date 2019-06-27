@@ -1,0 +1,234 @@
+<div [ngSwitch]="step" class="card-action-button">
+    <div *ngIf="formatedBinary">
+        <div *ngSwitchCase="'booking'">
+            <button class="btnDisplayed" (click)="clickViewBooking()" type="button">View Booking </button>
+            <button class="btnDisplayed" (click)="buttonDownloadPDF();DownloadBookingForm.open()" type="button">Download Booking Form</button>
+            <button class="btnDisplayed" *ngIf="formatedBinary[22]==1" (click)="changeStatusToCancel();Cancel.open()" type="button">Cancel Booking</button>
+            <!-- <button (click)="submitPackingList()" type="button" class=" btnDisplayed">Submit Packing List</button> -->
+        </div>
+        <div *ngSwitchCase="'cargo'">
+            <!-- underconstruction <button class="btnDisplayed" *ngIf="formatedBinary[23]==1" (click)="PrintTrackingLabel.open()" type="button">Print Tracking Label</button> -->
+            <button class="btnDisplayed" *ngIf="formatedBinary[21]==1" (click)="changeStatusToCargoSent();CargoSent.open()" type="button">Cargo Sent</button>
+            <button class="btnDisplayed" *ngIf="formatedBinary[20]==1" (click)="changeStatusToCargoReadyforPickup();CargoreadyforPickup.open()"
+                type="button">Cargo ready for Pick up</button>
+            <button class="btnDisplayed btn-link" *ngIf="formatedBinary[16]==1" (click)="changeStatusToShipmentCompleted();ShipmentCompleted.open()"
+                type="button">Shipment Completed</button>
+        </div>
+        <div class="display-in-block" *ngSwitchCase="'payment'">
+            <ng-container *ngIf="payaplButtonShow && paymentStatusCode != 'CREDITBLOCKED'">
+                <ngx-paypal class="paypal-btn pull-left" [config]="payPalConfig"></ngx-paypal>
+                <button class="btnDisplayed btn-link pull-left"
+                            type="button" (click)="approveCreditBlockDetails(false)">Cancel Payment</button>
+                
+            </ng-container>
+            
+            <ngx-loading [show]="loadingPaypal"></ngx-loading>
+            <button [attr.disabled]="orderStatusCode != 'ORDERPLACED' || paymentStatusCode == 'CREDITBLOCKED' ? true: null" class="btnDisplayed" 
+            *ngIf="formatedBinary[19]==1 && !payaplButtonShow" 
+            (click)="approveCreditBlockDetails(true)" 
+            type="button">Approve Credit Block</button>
+            
+            <!-- <button class="btnDisplayed" *ngIf="formatedBinary[19]==1 && !payaplButtonShow" 
+            (click)="approveCreditBlock();ApproveCreditBlock.open()" 
+            type="button">Approve Credit Block</button> -->
+        </div>
+        <div *ngSwitchCase="'custom'">
+            <button class="btnDisplayed" *ngIf="formatedBinary[18]==1" (click)="manageDocument();ManageDocument.open()" type="button">Manage Document</button>
+            <!-- <button class="btnDisplayed" *ngIf="formatedBinary[17]==1" (click)="PayDutiesTaxes.open()" type="button">Pay Duties and Taxes</button> -->
+        </div>
+    </div>
+</div>
+
+<!-- Download Booking form -->
+<modal #DownloadBookingForm [hideCloseButton]="true" [closeOnOutsideClick]="false">
+
+    <modal-header>
+
+        <h3>Download Booking Form</h3>
+    </modal-header>
+    <modal-content>
+        <p>Please wait, Your booking form is downloading...</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();DownloadBookingForm.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();DownloadBookingForm.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();DownloadBookingForm.close()">No</button>
+    </modal-footer>
+
+</modal>
+<!-- <div class="loading-container">
+        <ngx-loading [show]="loading"></ngx-loading>
+</div> -->
+
+
+<!-- Change Booking Status to Cancel -->
+<modal #Cancel [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Cancel Booking</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();Cancel.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();Cancel.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();Cancel.close()">No</button>
+    </modal-footer>
+</modal>
+
+<modal #PrintTrackingLabel [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Print Tracking Label</h2>
+    </modal-header>
+    <modal-content>
+        <h3 style="text-align:center">Under Development</h3>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="closePopup();PrintTrackingLabel.close()">Close</button>
+    </modal-footer>
+</modal>
+
+<!-- Change Booking Status to Crago Sent -->
+<modal #CargoSent [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Cargo Sent</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();CargoSent.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();CargoSent.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();CargoSent.close()">No</button>
+    </modal-footer>
+</modal>
+
+<!-- Change Booking Status to Cargo Reday for Pick up -->
+<modal #CargoreadyforPickup [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Cargo Ready for Pick up</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();CargoreadyforPickup.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();CargoreadyforPickup.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();CargoreadyforPickup.close()">No</button>
+    </modal-footer>
+</modal>
+
+<modal #ShipmentCompleted [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Shipment Completed</h3>
+    </modal-header>
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+    <modal-footer>
+        <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();ShipmentCompleted.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();ShipmentCompleted.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();ShipmentCompleted.close()">No</button>
+    </modal-footer>
+</modal>
+
+
+<modal #ApproveCreditBlock [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Approve Credit Block</h3>
+    </modal-header>
+
+    <modal-content class="centered">
+        <p class="popup-body">{{message}}</p>
+    </modal-content>
+
+    <modal-footer>
+        
+
+
+        <button *ngIf="!isPopup" class="btn-primary-style" 
+            (click)="closePopup();ApproveCreditBlock.close()">Close</button>
+        <button *ngIf="isPopup" class="btn-primary-style" 
+            (click)="openLoginAgainModal();ApproveCreditBlock.close()">Yes</button>
+        <button *ngIf="isPopup" class="btn-primary-style" 
+            (click)="destroyAllSession();ApproveCreditBlock.close()">No</button>
+    </modal-footer>
+</modal>
+
+
+<modal #ManageDocument [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h3 class="centered popup-header">Manage Document</h3>
+    </modal-header>
+    <modal-content>
+        <p *ngIf="isPopup" class="popup-body">{{session_expired}}</p>
+        <div *ngIf="!isPopup">
+            <form class="subSet" role="form" [formGroup]="form" (ngSubmit)="uploadDocument()">
+                <div class="">
+                    <div class="form-group inputfile-box">
+                        <input type="file" id="documentUploader" accept=".pdf,.png" class="inputfile" (change)="onFileChange($event)" formControlName="documentUpload">
+                        <label for="documentUploader" class="fileSection">
+                            <span id="documentName" class="truncate upd"></span>
+                            <span class="upload">Browse</span>
+                        </label>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <button type="submit" class="btn-primary-style">Upload</button>
+                        <ng4-loading-spinner> </ng4-loading-spinner>
+                        <button type="reset" #documentName (click)="onFileReset()" class="btn-secondary-style">Reset</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="list-doc" *ngIf="documentLength">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="10%" scope="col">#</th>
+                            <th width="80%">File Name</th>
+                            <th width="10%">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let document of documents; let i=index">
+                            <td scope="row">{{i+1}}</td>
+                            <td>{{document.file_name}}</td>
+                            <td>
+                                <button type="button" (click)="deleteDocument(document.custom_documents_id)" class="btn btn-xs btn-default">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </modal-content>
+    <modal-footer>
+        <div>
+            <button *ngIf="!isPopup" class="btn-primary-style" (click)="closePopup();ManageDocument.close();resetInputField()">Close</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="openLoginAgainModal();ManageDocument.close()">Yes</button>
+            <button *ngIf="isPopup" class="btn-primary-style" (click)="destroyAllSession();ManageDocument.close()">No</button>
+        </div>
+    </modal-footer>
+</modal>
+
+
+
+<modal #PayDutiesTaxes [hideCloseButton]="true" [closeOnOutsideClick]="false">
+    <modal-header>
+        <h2 style="text-align:center">Pay Duties and Taxes</h2>
+    </modal-header>
+    <modal-content>
+        <h3 style="text-align:center">Under Development</h3>
+    </modal-content>
+    <modal-footer>
+        <button class="btn-primary-style" (click)="closePopup();PayDutiesTaxes.close()">Close</button>
+    </modal-footer>
+</modal>

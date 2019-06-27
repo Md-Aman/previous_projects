@@ -1,0 +1,42 @@
+'use strict';
+
+angular.module('superadmin.modules', [
+    'main',
+    'dashboard',
+    'DashboardService',
+    'login',
+    'LoginService',
+    'news_agencies',
+    'NewsAgenciesService',
+    'country_risk_level',
+    'CountryRiskLevelService',
+    'category',
+    'CategoryService',
+    'question',
+    'QuestionService',
+    'business_travel_ra',
+    'BusinessTravelRaService',
+    'typeOfRa',
+    'TypeOfRaService',
+    'sector',
+    'SectorService',
+    'profile',
+    'MasterAdminProfileService',
+    'usergroup',
+    'UsergroupService',
+    'user',
+    'UserService',
+    'department',
+    'DepartmentService',
+    'risk_assessment',
+    'RiskAssessmentService',
+    'supplier',
+    'SupplierService',
+    'country',
+    'CountryService',
+    'news_ra',
+    'NewsRaService',
+    
+    
+
+]);

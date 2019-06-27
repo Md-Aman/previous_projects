@@ -1,0 +1,4 @@
+ .cust-noti { margin: 30px 30px 0 30px; }
+ .cust-noti .img-circle { width: 120px; height: 120px; cursor: pointer; border-radius: 50%; margin-right: 10px;}
+ .primary-button { background: #F58220; color: #fff; padding: 0 10px; min-width: 120px; line-height: 34px; border:1px solid #F58220; display: inline-block; font-size: 14px; text-transform: uppercase; cursor: pointer; text-align: center; vertical-align: bottom; font-weight: 100; margin: 0 5px 0 0;}
+ .secondary-button { background: transparent; color: #F58220; padding: 0 10px; min-width: 120px; line-height: 34px; border:1px solid #F58220; display: inline-block; font-size: 14px; text-transform: uppercase; cursor: pointer; text-align: center; vertical-align: bottom;}

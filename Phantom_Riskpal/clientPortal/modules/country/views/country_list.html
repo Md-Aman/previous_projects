@@ -1,0 +1,114 @@
+<section class="content-header">
+    <h1>
+        Country
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Country list</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="getCountryList();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <!-- tools box -->
+
+                    <!-- /. tools -->
+                    <i class="fa fa-tags"></i>
+                    <h3 class="box-title">Country Risk Level </h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by country name" ng-model="keyword"
+                            autocomplete="false" ng-change="filterCountry(keyword)">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <!--<th rowspan="2">Country Name</th>-->
+                                <!--<th rowspan="2">Action</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="country in countryArr |  itemsPerPage:10" >
+                                <!--ng-style="myObject.value === 'ok' ? { 'width':'100%', color:'green' } : { 'width': '0%' }"-->
+                                <td ng-style="country.length == 1 ? { 'font-size':'22px', color:'green' } : { 'font-size':'15px' }">{{country.length == 1 ? country : ""}}<a ui-sref="main.view_country({country_id:country._id})">{{country.length == 1 ? "" : country.display_name}}</a></td>
+
+                                <!--<td> <a ng-if="country.name" class="btn btn-xs btn-info" ui-sref="main.view_country({country_id:country._id})">
+                                    View
+                                </a></td>-->
+                            </tr>
+                            <tr ng-if="countryArr.length == 0">
+                                <td colspan="12" align="center">No Record Found!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+</section>
+<!-- /.content -->
+
+
+<!--<section class="content-header">
+    <h1>
+        Country
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Country list</li>
+    </ol>
+</section>
+<section class="content" ng-init="getCountryList();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <i class="fa fa-tags"></i>
+                    <h3 class="box-title">Country list</h3>
+                    <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="keyword" autocomplete="false"
+                            ng-change="getCountryList(keyword)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered" ng-table="tableParams">
+                        <tr ng-repeat="countryArr in $data">
+                            <td data-title="'Country Name'" sortable="''">{{countryArr.name}}</td>
+
+                            <td data-title="'Action'" align="center" class="actions">
+                                <a class="btn btn-xs btn-info" ui-sref="main.view_country({country_id:countryArr._id})">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="countryArr.length == 0">
+                            <td colspan="6" align="center">No Record Found!</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>-->

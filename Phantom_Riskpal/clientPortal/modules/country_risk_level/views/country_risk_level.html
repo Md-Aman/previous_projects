@@ -1,0 +1,107 @@
+<style>
+    thead {
+        background-color: #5c6d81;
+        color: white;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Country
+        <small>Risk Level </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Country Risk Level </li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" ng-init="countryRiskLevelForAllAgencies();">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            
+                <div class="box">
+                    <div class="box-header">
+                        <!-- tools box -->
+
+                        <!-- /. tools -->
+                        <i class="fa fa-tags"></i>
+                        <h3 class="box-title">Country Risk Level </h3>
+
+                        <div class="input-group input-group-sm col-lg-3 pull-right box-tools">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search by country name" ng-model="keyword"
+                                autocomplete="false" ng-change="filterCountry(keyword)">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                        </div>
+                    </div>
+                    <form role="form" name="postJobForm" novalidate>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead ng-if="!showLoader">
+                                <tr>
+                                    <th class="text-center" rowspan="2">Country Name</th>
+                                    <th class="text-center" colspan="3">Rate</th>
+                                    <th class="text-center" rowspan="2">Specific Information</th>
+                                    <th class="text-center" rowspan="2">Action</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">RED</th>
+                                    <th class="text-center">AMBER</th>
+                                    <th class="text-center">GREEN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" dir-paginate="country in countryArr |  itemsPerPage:10 ">
+                                    <div ng-if="showLoader" class="col-lg-6 pull-right" style="margin-top:131px;">
+                                        <div loader-css="ball-pulse"></div>
+                                    </div>
+                                    <td>{{country.name}}</td>
+                                    <td>
+                                        <input  type="checkbox" ng-model="country.color" checked="{{country.color ? country.color == " 'red' " : false }}" ng-true-value="red"
+                                            ng-change="saveCountryColorForAllNewsAgency(country)"></td>
+                                    <td>
+                                        <input type="checkbox" ng-model="country.color" checked="{{country.color ? country.color  == " 'amber' " : false}}" ng-true-value="amber"
+                                            ng-change="saveCountryColorForAllNewsAgency(country)"></td>
+                                    <td>
+                                        <input type="checkbox" ng-model="country.color" checked=" {{country.color ? country.color == " 'green' " : false}} " ng-true-value="green"
+                                            ng-change="saveCountryColorForAllNewsAgency(country)"></td>
+                                    <td>
+                                        <input class="form-control" type="text" ng-model="country.specific_info" placeholder="Enter Specific Information" ng-if="editing && countryId == country._id">
+                                        <span ng-if="!editing || countryId != country._id">{{country.specific_info}}</span>
+
+                                    </td>
+                                    <td><button class="btn btn-xs btn-primary" ng-click="editCountry(country)" ng-if="!editing || countryId != country._id">Edit</button>
+                                        <button ng-if="editing && countryId == country._id" class="btn btn-xs btn-success" ng-click="countrySpecificInfoForAllAgency(country)">Save</button></td>
+                                </tr>
+                                <tr ng-if="countryArr.length == 0">
+                                    <td colspan="12" align="center">No Record Found!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" ng-if="!showLoader">
+                        <div class="col-md-12">
+                            <!--<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                            </dir-pagination-controls>-->
+
+                             <dir-pagination-controls max-size="5" direction-links="true" ng-modal="test" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                            </dir-pagination-controls>
+
+                            <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>-->
+                        </div>
+                    </div>
+                     </form>
+                </div>
+                <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+   
+    </section>
+    </div>
+</section>
+<!-- /.content -->

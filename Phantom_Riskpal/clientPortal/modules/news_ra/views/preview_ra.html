@@ -1,0 +1,1007 @@
+
+<section class="content"  ng-init="getRaPreviewData();getDepartmentList();">
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+  <div class="box box-primary" >
+    <div class="box-header with-border">
+      <h3 class="box-title"><u>Section 1: RA Details</u></h3>
+    </div>
+    <div class="box-body" >
+      <div ng-if="showLoader" class="col-lg-7 pull-right">
+        <div loader-css="ball-pulse"></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Project Name">Project Name</label>
+            <input class="form-control" id="Project Name" title="Project Name" type="text" class="form-control" ng-model="raData.project_name"
+              disabled placeholder="Project Name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Department">Department</label>
+            <input class="form-control" id="Department" title="Department" type="text" class="form-control" ng-model="raData.department[0].department_name" disabled
+              placeholder="Department">
+          </div>
+        </div>
+      </div>
+
+
+        
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <input class="form-control" id="StartDate" title="Start Date" type="text" class="form-control" ng-model="startdate" disabled
+              placeholder="Date of RA">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="enddate">End Date</label>
+            <input class="form-control" id="enddate" title="End Date" type="text" class="form-control" ng-model="enddate" disabled placeholder="End Date">
+          </div>
+        </div>
+        <!-- <div class="col-xs-3">
+          <div class="form-group">
+            <label for="Country">Country</label>
+            <input class="form-control" id="Country" title="Country" type="text" class="form-control" ng-model="raData.countryArr" disabled
+              placeholder="Country">
+          </div>
+        </div> -->
+        <!-- <div class="col-xs-3">
+          <div class="form-group">
+            <label for="Classification">Classification</label>
+            <input class="form-control" id="Classification" style="text-transform:capitalize" ng-style="raData.countrycolor == 'amber'? {'background-color':'#ffc200' }:raData.countrycolor =='red' ? { 'background-color': 'red' } : raData.countrycolor == 'green' ? { 'background-color': 'green' }:{ 'background-color': 'gray' }"
+              title="Classification" type="text" class="form-control" ng-model="raData.countrycolor" disabled placeholder="Classification">
+          </div>
+        </div> -->
+      </div>
+      <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label for="Classification">Approving Manager</label>
+          <input class="form-control" id="Classification" 
+            title="Classification" type="text" class="form-control" ng-model="appName" disabled placeholder="Classification">
+        </div>
+      </div>
+
+      <div class="col-xs-6" ng-show="raData.authorcheck ==1">
+        <div class="form-group">
+          <label for="Classification">Author of RA</label>
+          <input class="form-control" id="Classification" 
+            title="Classification" type="text" class="form-control" ng-model="authorName" disabled placeholder="Classification">
+        </div>
+      </div>
+    </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="TaskDescription">Task Description</label>
+            <textarea title="Task Description" id="TaskDescription" class="form-control" ng-model="raData.description_of_task" disabled
+              placeholder="Task Description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="TaskDescription">Itinerary Description</label>
+            <textarea title="Task Description" id="TaskDescription" class="form-control" ng-model="raData.itineary_description" disabled
+              placeholder="Task Description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-hide="raData.types_of_ra_id.countryrequired == false">
+        <div class="col-xs-12">
+
+          <label for="TaskDescription">Country Risk Overview</label>
+
+          <!-- <div class="chart chart-responsive">
+
+            <div class="col-lg-12" style="width: 70%">
+              <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-colours="colors" chart-series="series">
+              </canvas>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="row" ng-if="raData.types_of_ra_id.countryrequired">
+        
+        <div ng-repeat="(key, threat) in countryThreat">
+            <div class="col-xs-12"><h1> {{threat.country_id.name}} </h1></div>
+            <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="des">Classification</label>
+                    <input class="form-control" id="Classification" style="text-transform:capitalize" 
+                      ng-style="threat.country_id.color == 'amber'? {'background-color':'#ffc200' }:
+                      threat.country_id.color =='red' ? { 'background-color': 'red' } : threat.country_id.color == 'green' ? 
+                      { 'background-color': 'green' }:{ 'background-color': 'gray' }"
+                      title="Classification" type="text" class="form-control" ng-model="threat.country_id.color" 
+                      disabled placeholder="Classification">
+             
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                  <div class="chart chart-responsive">
+                    <div class="col-lg-6" style="width: 70%">
+                      <canvas id="bar-{{key}}" class="chart chart-bar" chart-data="threat.graphData" chart-labels="labelss" 
+                         chart-colours="threat.colors" chart-series="series">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="des">Description</label>
+                  <textarea style="font-family: Arial, Helvetica, sans-serif;word-spacing: 3px;overflow:auto" 
+                    class="form-control" rows="8"
+                    cols="50" id="des" title="Country Description" type="text" class="form-control" 
+                      ng-model="threat.description" disabled
+                    placeholder="Country Description"></textarea>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="sec">Security</label>
+                    <textarea style="font-family: Arial, Helvetica, sans-serif;word-spacing: 3px;overflow:auto" 
+                      class="form-control" rows="8"
+                      cols="50" id="sec" title="Country Security" type="text" class="form-control" 
+                      ng-model="threat.security" disabled placeholder="Country Security"></textarea>
+                  </div>
+                </div>
+        </div> 
+        
+      </div>
+      
+    </div>
+    </div>
+    <div class="box box-primary" >
+      <div class="box-header with-border">
+        <h3 class="box-title"><u>Section 2: Traveller Details </u></h3>
+      </div>
+      <div class="box-body">
+        <div>
+        <div class="row">
+          <div class="col-xs-2">
+            <div class="form-group">
+              <label for="travellerFirstName">First Name</label>
+              <input class="form-control" id="travellerFirstName" title="Traveller's First Name" type="text" class="form-control" ng-model="raData.traveller_id.firstname"
+                disabled placeholder="Traveller's First Name">
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="form-group">
+              <label for="LastName">Last Name</label>
+              <input class="form-control" id="LastName" title="Traveller's Last Name" type="text" class="form-control" ng-model="raData.traveller_id.lastname"
+                disabled placeholder="Last Name">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="Email">Email</label>
+              <input class="form-control" id="Email" title="Traveller's Email'" type="text" class="form-control" ng-model="raData.traveller_id.email"
+                disabled placeholder="Email">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="MobileNumber">Mobile Number</label>
+              <input class="form-control" id="MobileNumber" title="Mobile Number" type="text" class="form-control" ng-model="raData.traveller_id.mobile_number"
+                disabled placeholder="Mobile Number">
+            </div>
+          </div>
+        </div>
+        
+        <!-- <div class="row" ng-repeat="passportObj in raData.traveller_id.passport_data track by $index">
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Nationality">Nationality</label>
+              <input class="form-control" id="Nationality" title="Nationality" type="text" class="form-control" ng-model="passportObj.nationality"
+                disabled placeholder="Nationality">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Passport Number</label>
+              <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.passport_number"
+                disabled placeholder="Passport Number">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Valid From</label>
+              <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.issuedate"
+                disabled placeholder="Passport Number">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Expiry</label>
+              <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.expirydate"
+                disabled placeholder="Passport Number">
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="row">
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="emergency">Emergency Contact Name</label>
+              <input class="form-control" id="emergency" title="emergency" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.full_name"
+                disabled placeholder="Name">
+            </div>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Email</label>
+              <input class="form-control" id="DateofBirth" title="Passport Number" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.email"
+                disabled placeholder="Email">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Mobile</label>
+              <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.mobile_number"
+                disabled placeholder="Contact">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Relationship">Relationship to You</label>
+              <input class="form-control" id="Relationship" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.relationship_to_you"
+                disabled placeholder="Relationship">
+            </div>
+          </div>
+
+
+        </div> -->
+
+        <!-- <div class="row">
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="emergency">Alternative Contact Name</label>
+              <input class="form-control" id="emergency" title="emergency" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.alternative_full_name"
+                disabled placeholder="Name">
+            </div>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Email</label>
+              <input class="form-control" id="DateofBirth" title="Passport Number" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.alternative_email"
+                disabled placeholder="Email">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="DateofBirth">Mobile</label>
+              <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.alternative_mobile_number"
+                disabled placeholder="Contact">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Relationship">Relationship to You</label>
+              <input class="form-control" id="Relationship" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="raData.traveller_id.passport_details.emergency_contact.alternative_relationship_to_you"
+                disabled placeholder="Relationship">
+            </div>
+          </div>
+
+
+        </div> -->
+      </div>
+      
+
+      <div  ng-repeat="othertraveller in raData.travellerTeamArr track by $index">
+        <h4>Other Traveller ( {{$index+1}} )</h4>
+          <div class="row">
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label for="travellerFirstName">First Name</label>
+                <input class="form-control" id="travellerFirstName" title="Traveller's First Name" type="text" class="form-control" ng-model="othertraveller.firstname"
+                  disabled placeholder="Traveller's First Name">
+              </div>
+            </div>
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label for="LastName">Last Name</label>
+                <input class="form-control" id="LastName" title="Traveller's Last Name" type="text" class="form-control" ng-model="othertraveller.lastname"
+                  disabled placeholder="Last Name">
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="Email">Email</label>
+                <input class="form-control" id="Email" title="Traveller's Email'" type="text" class="form-control" ng-model="othertraveller.email"
+                  disabled placeholder="Email">
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="MobileNumber">Mobile Number</label>
+                <input class="form-control" id="MobileNumber" title="Mobile Number" type="text" class="form-control" ng-model="othertraveller.mobile_number"
+                  disabled placeholder="Mobile Number">
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="row" ng-repeat="passportObj in othertraveller.passport_data track by $index">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="Nationality">Nationality</label>
+                <input class="form-control" id="Nationality" title="Nationality" type="text" class="form-control" ng-model="passportObj.nationality"
+                  disabled placeholder="Nationality">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Passport Number</label>
+                <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.passport_number"
+                  disabled placeholder="Passport Number">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Valid From</label>
+                <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.issuedate"
+                  disabled placeholder="Valid From">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Expiry</label>
+                <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="passportObj.expirydate"
+                  disabled placeholder="Expiry">
+              </div>
+            </div>
+          </div> -->
+  
+          <!-- <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="emergency">Emergency Contact Name</label>
+                <input class="form-control" id="emergency" title="emergency" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.full_name"
+                  disabled placeholder="Name">
+              </div>
+            </div>
+  
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Email</label>
+                <input class="form-control" id="DateofBirth" title="Passport Number" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.email"
+                  disabled placeholder="Email">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Mobile</label>
+                <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.mobile_number"
+                  disabled placeholder="Contact">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="Relationship">Relationship to You</label>
+                <input class="form-control" id="Relationship" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.relationship_to_you"
+                  disabled placeholder="Relationship">
+              </div>
+            </div>
+  
+  
+          </div> -->
+  
+          <!-- <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="emergency">Alternative Contact Name</label>
+                <input class="form-control" id="emergency" title="emergency" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.alternative_full_name"
+                  disabled placeholder="Name">
+              </div>
+            </div>
+  
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Email</label>
+                <input class="form-control" id="DateofBirth" title="Passport Number" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.alternative_email"
+                  disabled placeholder="Email">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="DateofBirth">Mobile</label>
+                <input class="form-control" id="DateofBirth" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.alternative_mobile_number"
+                  disabled placeholder="Contact">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="Relationship">Relationship to You</label>
+                <input class="form-control" id="Relationship" title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="othertraveller.passport_details.emergency_contact.alternative_relationship_to_you"
+                  disabled placeholder="Relationship">
+              </div>
+            </div>
+  
+  
+          </div> -->
+        </div>
+        </div>
+        </div>
+    </div>
+    
+    
+    <div class="box box-primary"  ng-if="raData.types_of_ra_id.supplierRequired">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+            <u>Section {{(raData.types_of_ra_id.supplierRequired)?3:3}}: Logistics </u>
+          </h3>
+      </div>
+      <div class="box-body">
+        <div class="row" ng-repeat="supplier in supplier" >
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="sName">{{supplier.service_provided}}</label>
+              <input class="form-control" id="sName" type="text" placeholder="Name" disabled ng-model="supplier.supplier_name" title="Name">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="sCountry">Country</label>
+              <input class="form-control" id="sCountry" type="text" placeholder="Country" disabled ng-model="supplier.country" title="Country">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="sCost">Cost</label>
+              <input class="form-control" id="sCost" type="text" placeholder="Cost" disabled title="Cost" ng-model="supplier.cost">
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="sCurrency">Currency</label>
+              <input class="form-control" id="sCurrency" type="text" placeholder="Currency" disabled title="Currency" ng-model="supplier.currency">
+            </div>
+          </div>
+
+              <!-- <div class="col-xs-6">
+                <div class="form-group">
+                  <label for="ServiceProvided">Service Provided</label>
+                  <input class="form-control" id="ServiceProvided" type="text" placeholder="Service Provided" disabled title="Service Provided"
+                    ng-model="supplier.service_provided">
+                </div>
+              </div> -->
+              <div class="col-xs-6">
+                  <div class="form-group">
+                    <label for="ContactNumber">Email</label>
+      
+                    <input class="form-control" type="text" id="ContactNumber" placeholder="Email" disabled title="Contact Number" ng-model="supplier.email"
+                    />
+      
+                  </div>
+                </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label for="ContactNumber">Contact Number</label>
+    
+                  <input class="form-control" type="text" id="ContactNumber" placeholder="Contact Number" disabled title="Contact Number" ng-model="supplier.number"
+                  />
+
+                </div>
+              </div>
+              <div class="col-xs-6" ng-if="supplier.sourcing =='other' || supplier.sourcing =='Has someone recommended it' || supplier.sourcing =='Sourced without recommendation' || supplier.sourcing =='Have you stayed at location before'">
+                  <div class="form-group">
+                    <label for="ContactNumber">Sourcing</label>
+      
+                    <input class="form-control" type="text" id="ContactNumber" placeholder="Contact Number" disabled title="Contact Number"  ng-model="supplier.sourcing"
+                    />
+  
+                  </div>
+                </div>
+                <div class="col-xs-6" ng-if="supplier.sourcing =='other'">
+                    <div class="form-group">
+                      <label for="ContactNumber">Other Information</label>
+        
+                      <input class="form-control" type="text" id="ContactNumber" placeholder="Contact Number" disabled title="Contact Number"  ng-model="supplier.more_info"
+                      />
+    
+                    </div>
+                  </div>
+                  <div class="col-xs-6" ng-if="supplier.sourcing =='Has someone recommended it'">
+                      <div class="form-group">
+                        <label for="ContactNumber"> Recommended By</label>
+          
+                        <input class="form-control" type="text" id="ContactNumber" placeholder="Contact Number" disabled title="Contact Number"  ng-model="supplier.who_recommended"
+                        />
+      
+                      </div>
+                    </div>
+                    <div class="col-xs-6" ng-if="supplier.sourced_by">
+                        <div class="form-group">
+                          <label for="ContactNumber"> Recommended By</label>
+            
+                          <input class="form-control" type="text" id="ContactNumber" placeholder="Contact Number" disabled title="Contact Number"  ng-model="supplier.sourced_by"
+                          />
+        
+                        </div>
+                      </div>
+              <div class="form-group col-sm-12">
+                  <div class="col-sm-12">
+                      <hr style="margin-top: 20px;
+                      margin-bottom: 20px;
+                      border: 0;
+                      border-top: 4px solid #f39c12;">
+                  </div>
+              
+              </div>
+            </div>
+        </div>
+        
+      </div>
+    <div class="box box-primary" ng-if="raData.types_of_ra_id.communicationRequired">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+            <u>Section {{(raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired)?4:3}}: Communications </u>
+        </h3>
+      </div>
+      <div class="box-body">
+        <div ng-repeat="communication in communication">
+        <div class="row" >
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="t01">Team contacts</label>
+              <table id="t01" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Local number</th>
+                    <th>IMEI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="details in communication.details_of_team">
+                    <td>{{details.name?details.name:"NA"}}</td>
+                    <td>{{details.local_number?details.local_number:"NA"}}</td>
+                    <td>{{details.imei?details.imei:"NA"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="t01">Emergency Contact</label>
+              <table id="t01" class="table table-bordered">
+                <thead>
+                  <tr>
+                     <th>Name</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>Role</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="emergency in communication.emergency_contact">
+                    <td>{{emergency.name?emergency.name:"NA"}}</td>
+                    <td>{{emergency.email?emergency.email:"NA"}}</td>
+                    <td>{{emergency.number?emergency.number:"NA"}}</td>
+                    <td>{{emergency.role?emergency.role:"NA"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+       
+                   <div class="row">
+
+                <!--call in schedule-->
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-8 ">Check In Schedule</label>
+                    </div>
+    
+             
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 ">No.Of Check-ins</label>
+                        <div class="col-sm-6"> 
+                            <select name="no_of_checkin" id="no_of_checkin" class="js-states form-control" ng-model="communication.no_of_checkin" disabled
+                                ng-selected="communication.no_of_checkin == option" ng-change="timebox(communication.no_of_checkin)">
+                                <option value="" selected disabled hidden>select </option>
+                                <option value="0">0</option>
+    
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-8"  ng-if="communication.no_of_checkin > 0">
+                        <label class="col-sm-4 "> Time Zone for Check-in </label>
+                        <div class="col-sm-6">
+                            <select name="timezone" id="timezone" class="js-states form-control" ng-model="communication.timezone" ng-selected="communication.timezone == option" disabled>
+                                <option value="" disabled selected="selected">Select Your Time Zone</option>
+    
+                                <option value="-12:00 Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</option>
+                                <option value="-11:00 Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</option>
+                                <option value="-10:00 Hawaii">(GMT -10:00) Hawaii</option>
+                                <option value="-09:30 Taiohae">(GMT -9:30) Taiohae</option>
+                                <option value="-09:00 Alaska">(GMT -9:00) Alaska</option>
+                                <option value="-08:00 Pacific Time">(GMT -8:00) Pacific Time (US & Canada)</option>
+                                <option value="-07:00 Mountain Time">(GMT -7:00) Mountain Time (US & Canada)</option>
+                                <option value="-06:00 Central Time">(GMT -6:00) Central Time (US & Canada), Mexico City</option>
+                                <option value="-05:00 Eastern Time">(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima</option>
+                                <option value="-04:30 Caracas">(GMT -4:30) Caracas</option>
+                                <option value="-04:00 Atlantic Time">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                                <option value="-03:30 Newfoundland<">(GMT -3:30) Newfoundland</option>
+                                <option value="-03:00 Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                                <option value="-02:00 Mid-Atlantic">(GMT -2:00) Mid-Atlantic</option>
+                                <option value="-01:00 Azores, Cape Verde Islands">(GMT -1:00) Azores, Cape Verde Islands</option>
+                                <option value="+00:00 Western Europe Time, London, Lisbon, Casablanca">(GMT +0:00) Western Europe Time, London, Lisbon, Casablanca</option>
+                                <option value="+01:00 Brussels, Copenhagen, Madrid, Paris">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+                                <option value="+02:00 Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</option>
+                                <option value="+03:00 Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                                <option value="+03:30 Tehran">(GMT +3:30) Tehran</option>
+                                <option value="+04:00 Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                                <option value="+04:30 Kabul">(GMT +4:30) Kabul</option>
+                                <option value="+05:00 Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                                <option value="+05:30 Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                                <option value="+05:45 Kathmandu, Pokhara">(GMT +5:45) Kathmandu, Pokhara</option>
+                                <option value="+06:00 Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                                <option value="+06:30 Yangon, Mandalay">(GMT +6:30) Yangon, Mandalay</option>
+                                <option value="+07:00 Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                                <option value="+08:00 Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                                <option value="+08:45 Eucla">(GMT +8:45) Eucla</option>
+                                <option value="+09:00 Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                                <option value="+09:30 Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</option>
+                                <option value="+10:00 Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                                <option value="+10:30 Lord Howe Island">(GMT +10:30) Lord Howe Island</option>
+                                <option value="+11:00 Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                                <option value="+11:30 Norfolk Island">(GMT +11:30) Norfolk Island</option>
+                                <option value="+12:00 Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                                <option value="+12:45 Chatham Islands">(GMT +12:45) Chatham Islands</option>
+                                <option value="+13:00 Apia, Nukualofa">(GMT +13:00) Apia, Nukualofa</option>
+                                <option value="+14:00 Line Islands, Tokelau">(GMT +14:00) Line Islands, Tokelau</option>
+    
+    
+                            </select>
+                        </div>
+                    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+                
+                <div ng-if="communication.no_of_checkin > 0" > 
+                        <div class="form-group col-sm-12">
+                                <label class="col-sm-6">Check In Times</label>
+                                
+                            </div>
+                </div>
+    
+    
+                <div class="form-group col-sm-12" > 
+    
+                        <div class="form-group col-sm-3" ng-repeat="call_in_schedule in communication.call_intime track by $index">
+                                <div class="col-sm-3">
+                        <input  disabled name="call_in_time" ng-model="communication.call_intime[$index].call_in_time" type="text" placeholder="call in time" value>
+                    </div>
+                </div>
+                </div>
+                <div  ng-if="communication.no_of_checkin > 0">
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 ">Point Of Contact</label>
+                        <div class="col-sm-8">
+                            <input disabled class="form-control" autocomplete="off" name="point_of_contact" ng-model="communication.point_of_contact" type="text"
+                                placeholder="Point Of Contact" required>
+                            <span class="text-danger" ng-show="communicationForm.point_of_contact.$dirty &&  communicationForm.point_of_contact.$error.required">Point of contact is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 ">Number</label>
+                        <div class="col-sm-8">
+                            <input disabled  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" maxlength="15" id="number" class="form-control"
+                                autocomplete="off" name="number" type="tel" international-phone-number ng-model="communication.number">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 ">Email</label>
+                        <div class="col-sm-8">
+                            <input disabled class="form-control" autocomplete="off" name="email1" ng-model="communication.email" type="text" placeholder="Email"
+                                 ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                            <span class="text-danger" ng-show="communicationForm.email1.$dirty &&  communicationForm.email1.$error.required">Email is required</span>
+                            <span class="text-danger" ng-show="communicationForm.email1.$dirty &&  communicationForm.email1.$error.pattern">Email is not valid</span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-xs-12">
+                    <div class="form-group">
+                      <label for="Detailanoverdueprocedure">Overdue procedure (minutes/hours before concern; telephone cascade plan)</label>
+                      <textarea title="Overdue procedure" type="text" id="Detailanoverdueprocedure" class="form-control" ng-model="communication.detail_an_overdue_procedure"
+                        disabled placeholder="Detail an overdue procedure"></textarea>
+                    </div>
+                  </div>
+            
+          </div>
+        
+       
+        </div>
+      </div>
+    </div>
+    <div class="box box-primary" ng-if="raData.types_of_ra_id.contingenciesRequired">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+            <u>Section {{(raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired)?5:
+                (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired)?4 : 
+                (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired)?4  :3
+
+            }}: Contingencies </u>
+        </h3>
+      </div>
+      <div class="box-body">
+        <div  ng-repeat="contingency in contingency">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="MedicalProvision">Medical Provision</label>
+              <input class="form-control" id="MedicalProvision" type="text" disabled ng-model="contingency.medical_provision" title="Medical Provision"
+                placeholder="Medical Provision">
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="Evacuation">Method Of Evacuation</label>
+              <input class="form-control" id="Evacuation" type="text" placeholder="Method Of Evacuation" disabled ng-model="contingency.method_of_evacuation"
+                title="Method Of Evacuation">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="NearestHospital">Detail Nearest Hospital</label>
+              <input class="form-control" id="NearestHospital" type="text" placeholder="Detail Nearest Hospital" disabled ng-model="contingency.detail_nearest_hospital"
+                title="Detail Nearest Hospital">
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="Medevac">Medical Company</label>
+              <input class="form-control" id="Medevac" type="text" placeholder="Medical Company" disabled ng-model="contingency.medevac_company"
+                title="Medevac Company">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="NearestHospital">First Aid Kit</label>
+              <input type="checkbox" disabled ng-model="contingency.first_aid_kit" id="test1" />
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Medevac">Personal Protective Equipment</label>
+              <input type="checkbox" disabled ng-model="contingency.personal_protective_equipment" id="test2" />
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Medevac">Satelite Phone</label>
+              <span>
+                <input type="text" disabled ng-model="contingency.no_of_satellite_phone" id="test3" />
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="Medevac">Tracker ID</label>
+              <span>
+                <input type="text" disabled ng-model="contingency.no_of_tracker" id="test4" />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-primary" ng-if="raData.types_of_ra_id.questionRequired">
+        <div class="box-header with-border">
+          <h3 class="box-title">
+              <u>Section {{(raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?6:
+                  (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?5 : 
+                  (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?5  :
+                  (raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?5  :
+                  (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?4  :
+                  (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?4  :
+                  (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?4  :
+                  (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired)?4  :3
+
+
+  
+              }}: Risk & Mitigation </u>
+
+          </h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                     
+                    
+                    <table id="t01" class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Question</th>
+                          <th>Best Practice Advice</th>
+                          <th>Specific Mitigation</th>
+                          <th>Marked as</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="que in questions" ng-if="que.ticked">
+                          <td ng-bind-html="que.question"></td>
+                          <td ng-bind-html="que.best_practice_advice "></td>
+                          <td ng-bind-html="que.specific_mitigation "></td>
+                          <td>{{que.ticked ? 'Applicable' : 'Not Applicable'}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          </div>
+
+
+    <div class="box box-primary" >
+      <div class="box-header with-border">
+        <h3 class="box-title">
+            <u>Section {{(raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?7:
+                (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?6:
+                (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?6:
+                (raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?6:
+                (raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?6:
+                (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?5:
+                (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && raData.types_of_ra_id.questionRequired )?5:
+                (raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired && !raData.types_of_ra_id.questionRequired )?5:
+                (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?5:
+                (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired &&  raData.types_of_ra_id.questionRequired )?5:
+                (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?5:
+
+                (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired &&  raData.types_of_ra_id.questionRequired )?4:
+                (raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?4:
+                (!raData.types_of_ra_id.supplierRequired && raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?4:
+                (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && raData.types_of_ra_id.contingenciesRequired &&  !raData.types_of_ra_id.questionRequired )?4:
+                (!raData.types_of_ra_id.supplierRequired && !raData.types_of_ra_id.communicationRequired && !raData.types_of_ra_id.contingenciesRequired &&  raData.types_of_ra_id.questionRequired )?4:
+
+
+
+
+
+
+
+
+
+            3}}: Any Other Information </u>
+        </h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="relevant_info">Relevant Info</label>
+              <span>
+                <p disabled ng-bind-html="raData.relevant_info" id="relevant_info"></p>
+              </span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="risk_detailed">Risk Detailed</label>
+              <span>
+                  <p disabled ng-bind-html="raData.risk_detailed" id="risk_detailed"></p>
+                </span>
+            
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="supporting_docs">Supporting Docs</label>
+              <span ng-repeat="docs in raData.supporting_docs">
+                <p>{{docs}}</p>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="box-footer " ng-if="!newsRaData.is_approve && !newsRaData.is_reject && !newsRaData.is_more_info ">
+      <button type="button " class="btn btn-sm btn-primary " ng-click="goToAddAnyOtherInfo() ">
+        <i class="fa fa-chevron-left " aria-hidden="true "></i> Back</button>
+      <button type="button " class="btn btn-sm btn-primary "  ng-click="submitRAToManager(); ">Submit</button>
+        
+    </div>
+    
+</section>
+
+<style>
+  html{
+    background: #fff !important;
+}
+  table {
+    width: 100%;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  table#t01 tr:nth-child(even) {
+    background-color: #eee;
+  }
+
+  table#t01 tr:nth-child(odd) {
+    background-color: #fff;
+  }
+
+  table#t01 th {
+    background-color: #3c8dbc;
+    color: white;
+  }
+</style>
+

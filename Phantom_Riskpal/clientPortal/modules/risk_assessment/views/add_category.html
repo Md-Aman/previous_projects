@@ -1,0 +1,42 @@
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Add Risk Label
+                    </h3>
+
+                    <div class="pull-right box-tools">
+
+                    </div>
+
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="categoryForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-7">
+                                <label class="col-sm-4 control-label">Risk Label</label>
+                                <div class="col-sm-8">
+                                <!-- ng-pattern="/^[a-zA-Z]+[a-zA-Z' ]*$/" -->
+                                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Risk Label" required
+                                        ng-model="category.categoryName" maxlength="50" 
+                                        autocomplete="off" />
+                                    <span class="text-danger" ng-show="categoryForm.category_name.$dirty &&  categoryForm.category_name.$error.required">Risk Label is required</span>
+                                   <!--  <span class="text-danger" ng-show="categoryForm.category_name.$dirty &&  categoryForm.category_name.$error.pattern">Risk Label is not valid </span> -->
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-7">
+
+                                <div class="pull-right box-tools">
+                                    <button ng-disabled="categoryForm.$invalid" type="button" class="btn btn-sm btn-primary" style="margin-right: 16px;" ng-click="addCategoryByClient(category);">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                </div>
+        </section>
+        </div>
+</section>

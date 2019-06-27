@@ -1,0 +1,29 @@
+<div class="btn-toolbar" role="toolbar" style="margin-right: 0;" *ngIf="show">
+</div>
+
+  <div class="btn-toolbar" role="toolbar" style="margin-right: 0;" *ngIf="!show">
+    <div class="row">
+      <div class="btn-group pull-left">
+      <ul class="pagination">
+        <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}">
+          <a (click)="prevPage()">&lt;</a>
+        </li>
+        <li class="btn-group page">
+            Quotation {{currentIndex}} of {{pageNumber}}
+        </li>
+        <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}">
+          <a (click)="nextPage()">&gt;</a>
+        </li>
+      </ul>
+    </div>
+    <div class="pagination">
+      <p class="quotation-holder">{{quotationId}}</p>
+    </div>
+    <div class="pagination">
+      <p class="share"># of people sharing 
+        
+        {{peopleShare}}
+      </p>
+    </div>
+  </div>
+  </div>

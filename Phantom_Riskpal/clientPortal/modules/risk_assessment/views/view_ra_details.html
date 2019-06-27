@@ -1,0 +1,144 @@
+<!-- Content Header (Page header) -->
+<section class="content-header" ng-init="getRadetailsForAdmin();">
+    <h1>
+        Ra details
+        <!-- <small>New Contact</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Ra details</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-search"></i>Ra details
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" name="newsRaForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Project Name" type="text" class="form-control" ng-model="newsRaData.project_name" disabled placeholder="Project Name"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <p ng-repeat="depart in newsRaData.department">
+                                        {{depart.department_name}}
+                                    </p>
+                                    <!--<input title="Department" type="text" class="form-control" ng-model="newsRaData.department" disabled placeholder="Department" />-->
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <!-- <input title=" Date of RA" type="text" class="form-control" ng-model="newsRaData.date_of_ra" disabled placeholder="Date of RA"
+                                    /> -->
+                                    <input date-range-picker class="form-control date-picker" type="text" ng-model="newsRaData.date_of_ra" disabled placeholder="Date of RA" required/>
+                                </div>
+                                <div class="col-sm-5">
+                                    <!--<input title=" Country" type="text" class="form-control" ng-model="newsRaData.countryArr" disabled placeholder="Country"
+                                    />-->
+                                    Country
+                                    <div ng-repeat="countryObj in newsRaData.country">{{countryObj.name}}</div>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-10">
+                                    <textarea title="Task Description" style="height: 150px" class="form-control" ng-model="newsRaData.description_of_task" disabled
+                                        placeholder="Task Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <h4 style="margin-left: 16px"> Traveller's details</h4>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's First Name'" type="text" class="form-control" ng-model="newsRaData.traveller_id.firstname" disabled
+                                        placeholder="First Name" />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Last Name'" type="text" class="form-control" ng-model="newsRaData.traveller_id.lastname" disabled
+                                        placeholder="Last Name" />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Email'" type="text" class="form-control" ng-model="newsRaData.traveller_id.email" disabled placeholder="Email"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Date Of Birth'" type="text" class="form-control" ng-model="newsRaData.traveller_id.dob" disabled
+                                        placeholder="Date of Birth" />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <input title="Traveller's Gender'" type="text" class="form-control" ng-model="newsRaData.traveller_id.gender" disabled placeholder="Gender"
+                                    />
+                                </div>
+                                <div class="col-sm-5">
+                                    Mobile Numbers
+                                    <p ng-repeat="mobileObj in newsRaData.traveller_id.mobile_number">
+                                        {{mobileObj.mobile_number}}
+                                    </p>
+                                    <!--<input title="Traveller's Mobile Number'" type="text" class="form-control" ng-model="newsRaData.traveller_id.mobile_number"
+                                        disabled placeholder="Mobile Number" />-->
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <p ng-repeat="passportObj in newsRaData.traveller_id.passport_data">
+                                        Nationality &nbsp;&nbsp;&nbsp;&nbsp; {{passportObj.nationality}} &nbsp;&nbsp;&nbsp;&nbsp; Passport Number &nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{passportObj.passport_number}}
+                                    </p>
+                                </div>
+                             <!--<div class="col-sm-5">
+                                    <input title="Traveller's Nationality'" type="text" class="form-control" ng-model="newsRaData.traveller_id.nationality" disabled
+                                        placeholder="Nationality" />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input title="Passport Number" type="text" class="form-control" ng-model="newsRaData.traveller_id.passport_details.passport_number"
+                                        disabled placeholder="Passport Number" />
+                             </div>-->
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <h4 style="margin-left: 16px"> Note for approving manager</h4>
+                                <div class="col-sm-10">
+                                    <div ng-bind-html="newsRaData.traveller_id.notes_for_approving_manager"></div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Best Practice Advice</th>
+                                            <th>Specific Mitigation</th>
+                                            <th>Marked as</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="questionnaire in questionnaires">
+                                            <td ng-bind-html="questionnaire.question"></td>
+                                            <td ng-bind-html="questionnaire.best_practice_advice"></td>
+                                            <td ng-bind-html="questionnaire.specific_mitigation"></td>
+                                            <td>{{questionnaire.ticked ? 'Applicable' : 'Not Applicable'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                </form>
+                </div>
+        </section>
+        </div>
+</section>

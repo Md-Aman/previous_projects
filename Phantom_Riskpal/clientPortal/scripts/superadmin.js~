@@ -1,0 +1,25 @@
+'use strict';
+
+angular.module('superadmin', ['ngAnimate',
+    'ngCookies',
+    'ngTouch',
+    'ngSanitize',
+    'ngAnimate',
+    'restangular',
+    'mgcrea.ngStrap',
+    'ui.router',
+    'ui.footable',
+    'ui.select',
+    'ngTable',
+    'toaster',
+    'ngFileUpload',
+    'underscore',
+ //   'ngMap',
+    'isteven-multi-select',
+    'superadmin.modules'
+])
+    .config(function($stateProvider, $urlRouterProvider, $locationProvider, uiSelectConfig) {
+        $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(false);
+        uiSelectConfig.theme = 'bootstrap';
+    });

@@ -1,0 +1,40 @@
+image: 'node:latest'
+cache:
+  paths:
+    - node_modules/
+stages:
+  - build
+  - deploy
+build-dev:
+  stage: build
+  tags:
+    - develop
+  script:
+    - node -v
+    - npm install
+  only:
+    - develop
+build-master:
+  stage: build
+  tags:
+    - prod-server
+  script:
+    - npm install
+  only:
+    - master
+deploy-dev:
+  tags:
+    - develop
+  only:
+    - develop
+  stage: deploy
+  script:
+    - sudo pm2 restart 0
+deploy-master:
+  tags:
+    - prod-server
+  only:
+    - master
+  stage: deploy
+  script:
+    - sudo pm2 restart 0

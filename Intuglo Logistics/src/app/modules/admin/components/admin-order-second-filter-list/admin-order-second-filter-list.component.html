@@ -1,0 +1,29 @@
+<div class="card">
+  <!-- <div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <label class="label-control">Vessel/Flight</label>
+        <select class="form-control">
+          <option value="0">Please Select Vessel</option>
+          <option value="1">Vessel 1</option>
+          <option value="2">Vessel 2</option>
+        </select>
+      </div>
+      <div class="col-md-6 ">
+          <label class="label-control">Shipping Agent</label>
+          <select class="form-control">
+              <option value="0">Please Select Agent</option>
+              <option value="1">Agent 1</option>
+              <option value="2">Agent 2</option>
+            </select>
+        </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-6 half">
+      <label class="label-control">Order ID</label>
+      <input type="string" placeholder="e.g. AU000001MY_abc123_0718" class="form-control with" [(ngModel)]="orderID" value={{orderID}}>
+      <button type="submit" class="primary-btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+</div>

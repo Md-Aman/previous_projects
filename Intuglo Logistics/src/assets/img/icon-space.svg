@@ -1,0 +1,14 @@
+<svg id="Group_1062" data-name="Group 1062" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #666;
+      }
+    </style>
+  </defs>
+  <path id="Path_329" data-name="Path 329" class="cls-1" d="M1,1H4V0H0V4H1Z"/>
+  <path id="Path_330" data-name="Path 330" class="cls-1" d="M11,0H8V1h3V4h1V0Z"/>
+  <path id="Path_331" data-name="Path 331" class="cls-1" d="M1,5H0V9H4V8H1Z"/>
+  <path id="Path_332" data-name="Path 332" class="cls-1" d="M11,8H8V9h4V5H11Z"/>
+  <rect id="Rectangle_1713" data-name="Rectangle 1713" class="cls-1" width="8" height="5" transform="translate(2 2)"/>
+</svg>

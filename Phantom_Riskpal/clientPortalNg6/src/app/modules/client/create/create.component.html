@@ -1,0 +1,91 @@
+<div class="centeredLayout">
+    <div class="subSet ">
+
+        <h2>Client</h2>
+        <p>Fill out Client details below:</p>
+    </div>
+
+    <form [formGroup]="userFormGroup" (submit)="submit(userFormGroup.value)">
+      <div class="accord relative ">
+        <span>Client Information</span>
+        <i class="arrowUp"></i>
+      </div>
+      <div class="accord-content checkboxArea">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label>Company Name</label>
+              <input type="text" formControlName="company_name" class="form-control">
+            </div>
+            <div class="form-group col-md-4 _custom-horizontal-radio">
+              <label>Type of Client</label>
+              <div class="">
+                  <span>
+                    <input type="radio" id="test1" formControlName="type_of_client" value="basic" name="type_of_client" >
+                    <label for="test1"><span>Basic Client</span></label>
+                  </span>
+                  <span>
+                      <input type="radio" id="test2" formControlName="type_of_client" value="enhanced" name="type_of_client" >
+                      <label for="test2"><span>Enhanced Client</span></label>
+                  </span>
+              </div>
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Countries</label>
+              <ng-select
+                  [items]="countries"
+                  [multiple]="false"
+                  [closeOnSelect]="false"
+                  bindValue="_id"
+                  bindLabel="name"
+                  [searchFn]="customSearchFn"
+                  formControlName="country">
+                </ng-select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Sector</label>
+                <ng-select
+                    [items]="sectors"
+                    [multiple]="false"
+                    [closeOnSelect]="false"
+                    bindValue="_id"
+                    bindLabel="sectorName"
+                    formControlName="sector">
+                  </ng-select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Number of travellers</label>
+              <input type="text" formControlName="no_of_traveller_account" class="form-control">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Number of approving managers</label>
+              <input type="text" formControlName="no_of_approving_manager_account" class="form-control">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Number of administrators</label>
+              <input type="text" formControlName="no_of_co_admin_account" class="form-control">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Number of super administrators</label>
+              <input type="text" formControlName="no_of_client_admin_account" class="form-control">
+            </div>
+        </div>
+      </div>
+
+
+      <div class="subSet">
+          <div class="right _btn fixed">
+              <a class="prev" routerLink="/secure/client">Previous</a>
+              <button type="submit" class="cont">Save</button>
+            </div>
+      </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+
+  </div>

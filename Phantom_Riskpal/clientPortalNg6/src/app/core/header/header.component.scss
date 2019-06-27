@@ -1,0 +1,23 @@
+@import "styles.scss";
+
+._header {
+    border-bottom: 1px solid #D3D3D3;
+    height: 70px;
+    padding:0 50px;
+    cursor: pointer;
+    
+    ._breadcrumb {
+        margin-top:30px;
+        font-size: 14px;
+        
+        span { color: #5B636F;}
+        ._n { font-weight: normal; color: $primaryColor;}
+        ._b { font-weight: bold; color: $secondryColor;}
+    }
+}
+.action { margin-top: 22px;
+    ._upd { border-right: 1px solid #CED2D6; padding-right: 10px;}
+    ._dashboard { background: url(../../../assets/images/icon-dashboard-1.svg) center center no-repeat; width: 23px; height: 22px; display: block; cursor: pointer; margin-right: 10px;}
+    ._user { background: url(../../../assets/images/icon-user.svg) center center no-repeat; width: 22px; height: 22px; display: block; cursor: pointer;}
+}
+.logout { font-size: 14px; font-weight:bold; margin-left: 10px; display: inline-block; margin-top: 6px;}

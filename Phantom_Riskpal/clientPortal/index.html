@@ -1,0 +1,173 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="superadmin">
+
+
+<head>
+        <meta charset="utf-8">
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+        <title>Riskpal</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        
+        
+        <link rel="stylesheet" href="styles/vendor.css">
+        <link rel="stylesheet" href="styles/main.css">
+      
+          <link href="styles/daterangepicker.css" rel="stylesheet" />
+          <link href="styles/ng-table.min.css" rel="stylesheet">
+          <link href="styles/toaster.css" rel="stylesheet" />
+          <link href="styles/sweetalert.min.css" rel="stylesheet" />
+          <link href="styles/trix.css" rel="stylesheet">
+          <link href="styles/isteven-multi-select.css" rel="stylesheet">
+          <link rel="stylesheet" href="styles/loaders.min.css" />
+          <link rel="stylesheet" href="bower_components/intl-tel-input/build/css/intlTelInput.css" />
+          <!-- endbuild -->
+          <link href="styles/kendo.common.min.css" rel="stylesheet" />
+          <link href="styles/kendo.default.min.css" rel="stylesheet" />
+          <script src="bower_components/modernizr/modernizr.js"></script>
+
+         
+
+      </head>
+
+<body class="skin-black" >
+   
+    <div ui-view></div>
+
+
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">-->
+
+    <script src="https://rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- added  -->
+    <script src="scripts/moment.min.js"></script>
+    <script src="scripts/daterangepicker.js"></script>
+    <script src="scripts/angular-daterangepicker.js"></script>
+    <script src="scripts/ui-bootstrap-tpls-0.12.1.js"></script>
+
+    <script src="scripts/ng-file-upload-shim.js" type="text/javascript"></script>
+    <script src="scripts/ng-file-upload.js"></script>
+    <script src="scripts/ng-table.min.js"></script>
+    <script src="scripts/angular-loaders.js"></script>
+    <script src="https://rawgit.com/esvit/ng-table-resizable-columns/master/ng-table-resizable-columns.src.js"></script>
+    <script src="scripts/dirPagination.js"></script>
+    <script src="scripts/toaster.js"></script>
+    <script src="scripts/isteven-multi-select.js"></script>
+    <script src="scripts/trix.js"></script>
+    <script src="scripts/angular-trix.min.js"></script>
+    <script src="scripts/Chart.min.js"></script>
+    <script src="scripts/angular-chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" type="text/javascript"></script>
+    <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+    <script src="bower_components/intl-tel-input/build/js/intlTelInput.js"></script>
+    <script src="bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"></script>
+    <script src="bower_components/international-phone-number/releases/international-phone-number.js"></script>
+
+    <script src="scripts/kendo.all.min.js"></script>
+    <script src="scripts/angular-kendo.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- <script src="scripts/icheck.min.js"></script> -->
+    <script src="bower_components/footable/js/footable.js"></script>
+    <script src="bower_components/angular-footable/dist/angular-footable.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
+    <script type="text/javascript" src="bower_components/tinymce/tinymce.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+
+    <!-- endbower -->
+    <script src="bower_components/footable/js/footable.sort.js"></script>
+    <script src="bower_components/footable/js/footable.paginate.js"></script>
+    <script src="scripts/idle.js"></script>
+   
+    <!-- endbuild -->
+    <!-- Services URI Constants -->
+    <script src="config/ServicesUriContant.js"></script>
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/adminlte.js"></script>
+    <script src="scripts/superadmin.js"></script>
+    <script src="scripts/superAdminCustomModule.js"></script>
+    
+
+    <!--super admin controller-->
+    <script src="modules/main/main.js"></script>
+    <script src="modules/login/controller/login.js"></script>
+    <script src="modules/dashboard/controller/dashboard.js"></script>
+    <script src="modules/news_agencies/controller/news_agencies.js"></script>
+    <script src="modules/country_risk_level/controller/country_risk_level.js"></script>
+    <script src="modules/categories/controller/categories.js"></script>
+    <script src="modules/questionnaire/controller/question.js"></script>
+    <script src="modules/business_travel_ra/controller/business_travel_ra.js"></script>
+    <script src="modules/type_of_ra/controller/type_of_ra.js"></script>
+    <script src="modules/sector/controller/sector.js"></script>
+    <script src="modules/profile/controller/profile.js"></script>
+    <script src="modules/usergroup/controller/usergroup.js"></script>
+    <script src="modules/user/controller/user.js"></script>
+    <script src="modules/department/controller/department.js"></script>
+    <script src="modules/country/controller/country.js"></script>
+    <script src="modules/risk_assessment/controller/risk_assessment.js"></script>
+    <script src="modules/supplier/controller/supplier.js"></script>
+    <script src="modules/country/controller/country.js"></script>
+    <script src="modules/news_ra/controller/news_ra.js"></script>
+    <!--super admin service-->
+    <script src="modules/login/service/service.js"></script>
+    <script src="modules/news_agencies/service/service.js"></script>
+    <script src="modules/country_risk_level/service/service.js"></script>
+    <script src="modules/categories/service/service.js"></script>
+    <script src="modules/dashboard/service/service.js"></script>
+    <script src="modules/questionnaire/service/service.js"></script>
+    <script src="modules/business_travel_ra/service/service.js"></script>
+    <script src="modules/type_of_ra/service/service.js"></script>
+    <script src="modules/sector/service/service.js"></script>
+    <script src="modules/profile/service/service.js"></script>
+    <script src="modules/usergroup/service/service.js"></script>
+    <script src="modules/user/service/service.js"></script>
+    <script src="modules/department/service/service.js"></script>
+    <script src="modules/country/service/service.js"></script>
+    <script src="modules/risk_assessment/service/service.js"></script>
+    <script src="modules/supplier/service/service.js"></script>
+    <script src="modules/country/service/service.js"></script>
+    <script src="modules/news_ra/service/service.js"></script>
+
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automaticaly converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+<!-- start of not supported popup code for ie 11 and less-->
+<script>
+    if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+        // MSIE
+        $('body').addClass('iebody');
+        var msg = 'RiskPal does not operate in Internet Explorer 11. Please upgrade to Microsoft Edge or open in the Google Chrome, Safari or alternative browsers.';
+        // document.body.innerHTML = '<div id="overlay"><div id="text">' + msg + '</div></div>';
+        setTimeout(function() { alert(msg) }, 1000); 
+        //added timeout
+    } else {
+       // $('body').addClass('body-color');
+    }
+</script>
+<!-- end of ie11 not supported popup -->
+</body>
+
+</html>
+

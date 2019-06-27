@@ -1,0 +1,158 @@
+<!--<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Preview Of Risk Assessment
+                    </h3>
+                </div>
+                <form role="form" name="typesOfRaForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6" ng-if="typesOfRa.ra_name">
+                                    <label class="col-sm-4 control-label">RA Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" placeholder="Enter RA Name" ng-model="typesOfRa.ra_name" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-if="category.categoryName">
+                                    <label class="col-sm-4 control-label">Category Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name" ng-model="category.categoryName"
+                                            disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12" ng-if="questionnaire">
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Question</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="question" name="question" placeholder="Enter Question" ng-model="questionnaire.question"
+                                            disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="col-sm-4 control-label">Select Category</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" placeholder="Category Name" ng-model="questionnaire.catArr" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12" ng-if="questionnaire.best_practice_advice">
+                                <div class="form-group col-sm-12">
+                                    <label class="col-sm-2 control-label">Best Practice Advice</label>
+                                    <div class="col-sm-10">
+                                        <div ng-bind-html="questionnaire.best_practice_advice"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-11" ng-if="typesOfRa.ra_name && category && questionnaire">
+                                <div class="pull-right box-tools">
+                                    <button ng-disabled="typesOfRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="submitForm();">Submit</button>
+                                </div>
+                            </div>
+
+                            <div class="text-center col-sm-11" ng-if="!typesOfRa.ra_name && !category && !questionnaire">
+                                <p>No data found for preview</p>
+                            </div>
+
+                        </div>
+                </form>
+                </div>
+        </section>
+        </div>
+</section>-->
+
+
+<section class="content">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-tags"></i> Preview Of Risk Assessment
+                    </h3>
+                </div>
+
+                <form role="form" name="typesOfRaForm" novalidate class="form-horizontal">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="box-header" ng-if="raData.ra_name">
+                                <h3 class="box-title" style="font-size: 15px;"><i class="fa fa-tags"></i> RA Name
+                                </h3>
+                            </div>
+
+                            <div class="form-group col-sm-12" ng-if="raData.ra_name">
+                                <div class="form-group col-sm-6">
+                                    <!--<label class="col-sm-4 control-label">RA Name</label>-->
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" ng-model="raData.ra_name" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-header" ng-if="categoryData.length > 0">
+                                <h3 class="box-title" style="font-size: 15px;"><i class="fa fa-tags"></i> Category Name
+                                </h3>
+                            </div>
+
+                            <div class="form-group col-lg-12" ng-if="categoryData.length > 0">
+                                <!--<label class="col-sm-4 control-label">Category Name</label>-->
+                                <div class="form-group col-sm-6" ng-repeat="catObj in categoryData">
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name" ng-model="catObj.categoryName"
+                                            disabled/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-header" ng-if="questions.length > 0">
+                                <h3 class="box-title" style="font-size: 15px;"><i class="fa fa-tags"></i> Question Details
+                                </h3>
+                            </div>
+                            <div class="form-group col-lg-12" ng-if="questions.length > 0">
+                                <!--<label class="col-sm-4 control-label">Category Name</label>-->
+                                <div class="form-group col-sm-12" ng-repeat="que in questions">
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="que" name="que" ng-model="que.question" disabled title="Question"/>
+                                    </div>
+                                    <div class="form-group col-sm-12">
+
+                                        <div class="col-sm-10">
+                                            <div ng-bind-html="que.best_practice_advice" title="Best Practice Advice"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="que" name="que" ng-model="que.catArr" disabled title="Category Associated"/>
+                                    </div>
+                                   
+                                   
+                                </div>
+                                 <br>
+                                 <br>
+                                 <hr>
+
+                            </div>
+
+                            <div class="form-group col-sm-11" ng-if="raData">
+                                <div class="pull-right box-tools">
+                                    <button ng-disabled="typesOfRaForm.$invalid" type="button" class="btn btn-sm btn-primary" ng-click="submitForm();">Submit</button>
+                                </div>
+                            </div>
+
+                            <div class="text-center col-sm-11" ng-if="!raData && !categoryData && !questions">
+                                <p>No data found for preview</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+    </div>
+</section>

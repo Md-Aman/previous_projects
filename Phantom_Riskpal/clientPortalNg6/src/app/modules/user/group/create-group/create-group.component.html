@@ -1,0 +1,464 @@
+<span class="_close-mat" (click)="closeDialog();"></span>
+<div class="centeredLayout material-popup">
+  <div class="subSet ">
+
+      <h2>User Group Information</h2>
+      <p>Fill out user group details below:</p>
+  </div>
+
+  <form [formGroup]="userFormGroup" (submit)="submit(userFormGroup.value)">
+    <!-- <div class="accord relative ">
+      <span>User Group Information</span>
+      <i class="arrowUp"></i>
+    </div> -->
+    <div class="accord-content checkboxArea">
+      <div class="row">
+          <div class="form-group col-md-4">
+            <label>Group Name</label>
+            <input type="text" formControlName="groupname" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Group Type</label>
+            <div class="col-md-8">
+                <ng-select
+                [items]="groupTypeArray" 
+                [multiple]="false" 
+                [closeOnSelect]="false" 
+                labelForId="typeof_group"
+                bindValue="type"
+                bindLabel="type" 
+                formControlName="typeof_group">
+              </ng-select>
+                <!-- <span *ngIf="currentUser.super_admin">
+                  <input type="radio" id="test1" formControlName="typeof_group" value="default" name="typeof_group" >
+                  <label for="test1">Default</label>
+                </span>
+                <span>
+                    <input type="radio" id="test2" formControlName="typeof_group" value="client" name="typeof_group" >
+                    <label for="test2">Client</label>
+                </span> -->
+            </div>
+            
+          </div>
+       
+          <div class="form-group col-md-4" *ngIf="userFormGroup.get('typeof_group').value == 'client' && currentUser.super_admin">
+            <label>Client</label>
+            <ng-select
+                [items]="clients" 
+                [multiple]="false" 
+                [closeOnSelect]="false" 
+                labelForId="clients"
+                bindValue="_id"
+                bindLabel="company_name" 
+                formControlName="clients">
+                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    <span>{{item.company_name}}</span>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item">
+                    <div>{{item.company_name}}</div>
+                </ng-template>
+              </ng-select>
+          </div>
+      </div>
+    </div>
+    
+    <!-- permissions -->
+    <!-- <div class="accord relative">
+        <span>User Group Permission</span>
+        <i class="arrowUp"></i>
+      </div> -->
+      <div class="accord-content checkboxArea _custom-checkbox">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label >Menu Permissions</label>
+            </div>
+          </div>
+        <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                  <input #mytravel (click)="autoSelectCheckbox($event.target.checked , 'mytravel', 'child')" 
+                  class="_customCheckbox" formControlName="mytravel" value="1" type="checkbox">
+                  <label><span>My Travel</span></label>
+              </div>
+              <!-- <label>My Travel</label> -->
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')"  class="_customCheckbox" formControlName="riskassessment" value="1" type="checkbox">
+                  <label><span>Risk Assessment</span></label>
+                </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="riskassessmentothers" value="1" type="checkbox">
+                    <label><span>Risk Assessment for Others</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="checkinlog" value="1" type="checkbox">
+                    <label><span>Check In</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="contact" value="1" type="checkbox">
+                    <label><span>Contact</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="accidents" value="1" type="checkbox">
+                    <label><span>Accidents</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="countrylist" value="1" type="checkbox">
+                    <label><span>Country List</span></label>
+                  </div>
+              </div>
+              
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="suppliers" value="1" type="checkbox">
+                    <label><span>Supplier</span></label>
+                  </div>
+              </div>
+              
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !mytravel.checked}">
+                  <input [attr.disabled]="mytravel.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'mytravel')" class="_customCheckbox" formControlName="reports" value="1" type="checkbox">
+                    <label><span>Reports</span></label>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+
+        <!-- Track and Connect -->
+        <div class="row">
+          <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                  <input #trackmanage (click)="autoSelectCheckbox($event.target.checked , 'trackmanage', 'child')" 
+                    class="_customCheckbox" formControlName="trackmanage" value="1" type="checkbox">
+                  <label><span>Track & Connect</span></label>
+              </div>
+          </div>
+          <div class="form-group col-md-12  checkboxCells">
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')"  class="_customCheckbox" formControlName="currenttravel" value="1" type="checkbox">
+                <label><span>View Live Travel</span></label>
+              </div>
+            </div>
+
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')" class="_customCheckbox" formControlName="riskassessments" value="1" type="checkbox">
+                  <label><span>Risk Assessment Pending</span></label>
+                </div>
+            </div>
+
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')" class="_customCheckbox" formControlName="riskassessmentsoverride" value="1" type="checkbox">
+                  <label><span>Risk Assessment Override</span></label>
+                </div>
+            </div>
+
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')" class="_customCheckbox" formControlName="communicate" value="1" type="checkbox">
+                  <label><span>Communicate</span></label>
+                </div>
+            </div>
+
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')" class="_customCheckbox" formControlName="taccidents" value="1" type="checkbox">
+                  <label><span>Accident/Incident</span></label>
+                </div>
+            </div>
+
+            <div class="checkboxBlock">
+              <div class="relative" [ngClass]="{'disable': !trackmanage.checked}">
+                <input [attr.disabled]="trackmanage.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'trackmanage')" class="_customCheckbox" formControlName="medical" value="1" type="checkbox">
+                  <label><span>Medical</span></label>
+                </div>
+            </div>
+            
+          </div>
+      </div>
+        <!-- End Track And Connect -->
+        <!-- user information start -->
+        <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                  <input #userinfo (click)="autoSelectCheckbox($event.target.checked , 'userinfo', 'child')" 
+                    class="_customCheckbox" formControlName="userinfo" value="1" type="checkbox">
+                  <label><span>User Information</span></label>
+                </div>
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !userinfo.checked}">
+                  <input [attr.disabled]="userinfo.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'userinfo')"
+                     class="_customCheckbox" formControlName="createusers" value="1" type="checkbox">
+                  <label><span>Create & Edit User</span></label>
+                </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !userinfo.checked}">
+                  <input [attr.disabled]="userinfo.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'userinfo')" class="_customCheckbox" formControlName="editusergroup" value="1" type="checkbox">
+                    <label><span>Create & Edit User Group</span></label>
+                  </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !userinfo.checked}">
+                  <input [attr.disabled]="userinfo.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'userinfo')" class="_customCheckbox" formControlName="bulkupload" value="1" type="checkbox">
+                    <label><span>Bulk Upload User Base</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !userinfo.checked}">
+                  <input [attr.disabled]="userinfo.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'userinfo')" class="_customCheckbox" formControlName="emergencyRecordApproval" value="1" type="checkbox">
+                    <label><span>Emergency Records Approval</span></label>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+        <!-- end user information -->
+
+        <!-- Manage ra template or Customise -->
+        <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                  <input #managesystem (click)="autoSelectCheckbox($event.target.checked , 'managesystem', 'child')"
+                     class="_customCheckbox" formControlName="managesystem" value="1" type="checkbox">
+                  <label><span>Manage Risk Template / Customise</span></label>
+                </div>
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="departments" value="1" type="checkbox">
+                  <label><span>Departments</span></label>
+                </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="riskassessmenttemplates" value="1" type="checkbox">
+                    <label><span>Risk Assessment Templates</span></label>
+                  </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="labels" value="1" type="checkbox">
+                    <label><span>Risk Labels/Questions</span></label>
+                  </div>
+              </div>
+
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="csuppliers" value="1" type="checkbox">
+                    <label><span>Suppliers</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                  
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="countryinfo" value="1" type="checkbox">
+                    <label><span>Country Information</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="countrythreatcategories" value="1" type="checkbox">
+                    <label><span>Country Threat Ratings</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                  
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="emailtemplates" value="1" type="checkbox">
+                    <label><span>Email Templates</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !managesystem.checked}">
+                  <input [attr.disabled]="managesystem.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'managesystem')" class="_customCheckbox" formControlName="editcontent" value="1" type="checkbox">
+                    <label><span>Edit Content</span></label>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+        <!-- end Customise or manage ra template -->
+
+         <!-- Analytics -->
+         <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                <input #analytics (click)="autoSelectCheckbox($event.target.checked , 'analytics', 'child')"
+                   class="_customCheckbox" formControlName="analytics" value="1" type="checkbox">
+                <label><span>Analytics</span></label>
+              </div>
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true"  (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="traveldata" value="1" type="checkbox">
+                  <label><span>Travel Data</span></label>
+                </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="supplierdata" value="1" type="checkbox">
+                    <label><span>Supplier Data</span></label>
+                  </div>
+              </div>
+  
+              <div class="checkboxBlock">
+                  
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="accidentdata" value="1" type="checkbox">
+                    <label><span>Accident Data</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="managementdata" value="1" type="checkbox">
+                    <label><span>Management data</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="analyticsresoucre" value="1" type="checkbox">
+                    <label><span>Resource Library</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="training" value="1" type="checkbox">
+                    <label><span>Training & Medical</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="appusage" value="1" type="checkbox">
+                    <label><span>App Usage</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !analytics.checked}">
+                  <input [attr.disabled]="analytics.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'analytics')" class="_customCheckbox" formControlName="userdata" value="1" type="checkbox">
+                    <label><span>User Data</span></label>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+        <!-- end Analytics -->
+        <!-- Resource Library start -->
+        <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                <input #resourcelib (click)="autoSelectCheckbox($event.target.checked , 'resourcelib', 'child')" 
+                  class="_customCheckbox" formControlName="resourcelib" value="1" type="checkbox">
+                <label><span>Resource Library</span></label>
+              </div>
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !resourcelib.checked}">
+                  <input [attr.disabled]="resourcelib.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'resourcelib')"  class="_customCheckbox" formControlName="resourcelibview" value="1" type="checkbox">
+                  <label><span>View</span></label>
+                </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !resourcelib.checked}">
+                  <input [attr.disabled]="resourcelib.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'resourcelib')" class="_customCheckbox" formControlName="resourcelibedit" value="1" type="checkbox">
+                    <label><span>Edit Library</span></label>
+                  </div>
+              </div>
+
+            </div>
+        </div>
+        <!-- end Resource Library -->
+
+         <!-- My Profile start -->
+         <div class="row">
+            <div class="checkboxBlock form-group col-md-12">
+              <div class="relative">
+                  <input #myprofile (click)="autoSelectCheckbox($event.target.checked , 'myprofile', 'child')"
+                     class="_customCheckbox" formControlName="myprofile" value="1" type="checkbox">
+                  <label><span>My Profile</span></label>
+                </div>
+            </div>
+            <div class="form-group col-md-12  checkboxCells">
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !myprofile.checked}">
+                  <input [attr.disabled]="myprofile.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'myprofile')" class="_customCheckbox" formControlName="myprofileemrgncy" value="1" type="checkbox">
+                  <label><span>Emergency Details</span></label>
+                </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !myprofile.checked}">
+                  <input [attr.disabled]="myprofile.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , 'myprofile')" class="_customCheckbox" formControlName="myprofilemedical" value="1" type="checkbox">
+                    <label><span>Medical Information</span></label>
+                  </div>
+              </div>
+
+              <div class="checkboxBlock">
+                <div class="relative" [ngClass]="{'disable': !myprofile.checked}">
+                  <input [attr.disabled]="myprofile.checked ? null : true" (click)="autoSelectCheckbox($event.target.checked , ['myprofile'])" class="_customCheckbox" formControlName="myprofiletraining" value="1" type="checkbox">
+                    <label><span>Training Records</span></label>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+        <!-- end My Profile -->
+
+      </div>
+      <!-- end permission -->   
+  
+        <div class="subSet">
+            <div class="right _btn">
+                <a class="prev" (click)="closeDialog();" routerLink="/secure/user/group">Previous</a>
+                <button type="submit" class="cont">Save</button>
+              </div>
+        </div>
+  </form>
+  <ngx-loading [show]="loading" [config]="{ primaryColour: 'red', secondaryColour: 'blue', tertiaryColour: 'red' }"></ngx-loading>
+    
+</div>

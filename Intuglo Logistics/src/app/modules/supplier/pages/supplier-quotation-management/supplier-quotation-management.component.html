@@ -1,0 +1,47 @@
+<supplier-navbar (controlSideBar)="receiveDataFromHeader($event)"></supplier-navbar>
+
+<ng-sidebar-container class="ng-container bg-color">
+    <ng-sidebar class="animate-sidebar" [(opened)]="isSideBarOpen" mode="push" position="left" autoCollapseWidth="800" animate="true">
+        <supplier-left-menu [sideBar]="isSideBarOpen" [fromQuotation]='isOpen'></supplier-left-menu>
+    </ng-sidebar>
+    <div class="dashboard-layout" ng-sidebar-content>
+        <h2>Quotation</h2>
+        <div class="content-area">
+            <div>
+                <!-- <supplier-quotation-country-filter (shareToggleValueToDashboard)="receiveToggleValue($toggle)" (shareDataToSupplierQuotation)="receiveCountryId($event)" (shareCountryTabToQuotationManagement)="receiveCountryTabFromSupplierQuotationCountryFilter($event)"></supplier-quotation-country-filter> -->
+                <!-- (shareDataToSupplierQuotation)="receiveDataFromCountryFilter($event)" -->
+                <supplier-quotation-country-filter 
+                    (getQuotationsCountryList)="getQuotationsCountryList();" 
+                    (shareDataToSupplierQuotation)="receiveCountryId($event)" 
+                    (shareCountryTabToQuotationManagement)="receiveCountryTabFromSupplierQuotationCountryFilter($event)">
+                </supplier-quotation-country-filter>
+            </div>
+            <div class="padding-top-15">
+                <supplier-quotation-list-filter 
+                    (shareVesselInfoToQuotationTable)="receiveVesselInfo($event)" 
+                    [countryId] = "countryId">
+                </supplier-quotation-list-filter>
+                <!-- [selectedCountry]="selectedCountry" -->
+            </div>
+            <div class="padding-top-15">
+                <supplier-quotation-top-menu (shareDataToParent)="receiveDataFromChild($event)">
+
+                </supplier-quotation-top-menu>
+            </div>
+            <div>
+                <supplier-quotation-action-button [quotationStatus]="quotationStatus"  
+                    (getQuotationsCountryList)="getQuotationsCountryList();" 
+                    [hidden]="!isCheckedBooking" [quotationId]="quotationId" 
+                    [step]="step">
+                </supplier-quotation-action-button>
+            </div>
+            <div class="padding-top-15">
+                <supplier-quotation-list (shareQuotationStatus)="getQuotationStatus($event)" 
+                    (shareCheckBoxBooleanValueToQuotationDashboard)="receiveCheckBoxBooleanValueFromSupplierQuotationBooking($event)" 
+                    (shareQuotationIdToQuotationDashboard)="receiveQuotationId($event)" 
+                    [filterVesselFromQuotation]="filterVesselFromQuotation">
+                </supplier-quotation-list>
+            </div>            
+        </div>
+    </div>
+</ng-sidebar-container>

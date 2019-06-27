@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">
+        <strong>My Dashboard</strong>
+        <br>
+        <small>{{user_name}}</small>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-info btn-block" (click)="downloadCSVfile()"> Download CSV file </button>
+    </div>
+  </div>
+  
+  <br>
+  <div class="panel panel-default">
+    <table>
+      <tr>
+        <th class="text-center">Gentlemen</th>
+        <th class="text-center">Disclosed Amount</th>
+        <th class="text-center">Expenses</th>
+      </tr>
+      <tr *ngFor="let user of user_individual_details;">
+        <th class="view-history" (click)="getUser(user.user_id)">
+          <b>{{user.user_name}}</b>
+        </th>
+        <th class="text-right">{{(user.user_total - (total_price/5)) | number : '1.2-2' }}</th>
+
+        <th class="text-right">{{user.user_total | number : '1.2-2'}}</th>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-center bg-color">Total Expenditure of {{currentMonth}}</th>
+        <th class="text-right total bg-color">{{total_price | number : '1.2-2'}}</th>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-center">Average Expenditure of {{currentMonth}}</th>
+        <th class="text-right">{{total_price/5 | number : '1.2-2'}}</th>
+      </tr>
+
+    </table>
+
+    <br>
+    <br>
+
+    <!-- <ul class="list-inline text-center">
+      <li class="list-inline-item user-name btn btn-outline-info text-center" (click)="getUser(user.user_id)" *ngFor="let user of user_data | async;">{{ user.name }}</li>
+    </ul> -->
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button>
+  </div>
+</div>
+
+
+
+<!-- <ul class="list-inline text-center">
+    <li class="list-inline-item user-name" (click)="getUser(user.user_id)" *ngFor="let user of user_individual_details;">{{ user.user_name }}{{ user.user_total }}</li>
+  </ul> -->
