@@ -56,7 +56,7 @@
     "ngx-loading": "^2.0.1",
     "ngx-modal": "0.0.29",
     "ngx-pagination": "^3.0.3",
-    "ngx-papaparse": "^2.1.4",
+    "ngx-papaparse": "^6.0.2",
     "ngx-paypal": "^3.2.1",
     "ngx-toastr": "^8.8.0",
     "open-iconic": "^1.1.1",
